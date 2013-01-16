@@ -6,7 +6,7 @@ using Thyme, DataFrames, Calendar, UTF16
 
 export ema,
        sma, 
-       @testoil
+       @oil
 
 include(joinpath(julia_pkgdir(), "Oil", "src", "movingaverages.jl"))
 include(joinpath(julia_pkgdir(), "Oil", "src", "testoil.jl"))
