@@ -1,14 +1,15 @@
-using Thyme 
+using Thyme, DataFrames, Calendar, UTF16
 
 module Oil  
 
-using Thyme
+using Thyme, DataFrames, Calendar, UTF16
 
 export ema,
        sma, 
-       @testit
+       @testoil
 
 include(joinpath(julia_pkgdir(), "Oil", "src", "movingaverages.jl"))
-include(joinpath(julia_pkgdir(), "Thyme", "src", "testit.jl"))
+include(joinpath(julia_pkgdir(), "Oil", "src", "testoil.jl"))
+
 
 end 
