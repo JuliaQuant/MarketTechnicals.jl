@@ -1,17 +1,13 @@
-function sma(x,n)
-  [mean(x[i:i+(n-1)]) for i=1:length(x)-(n-1)]
-end
+df = read_stock("test/data/spx.csv");
 
-function ema(dv::DataArray, n::Int64)
-  k = 2/(n+1)
-  m = sma(dv, n) 
+dv1 = df["Open"];
+dv2 = df["Close"];
+dv3 = df["Adj Close"];
 
-  if n == 1
-    [dv[i] = dv[i] for i=1:length(dv)]
-  else
-    dv[n] = m[1] 
-    [dv[i] = dv[i]*k + dv[i-1]*(1-k) for i=(n+1):length(dv)]
-  end
-  dv[n:length(dv)]
-end
+e1  = ema(dv1,1)
+e2  = ema(dv2,2)
+e13 = ema(dv3,13)
 
+@assert e1[507]  == dv1[507]
+@assert e2[506]  == 102.01237121462606  # R's TTR::EMA returns 102.01237 (rounded)
+@assert e13[495] == 100.62558587207887  # R's TTR::EMA returns 100.62559 (rounded)
