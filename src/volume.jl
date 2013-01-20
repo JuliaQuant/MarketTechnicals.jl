@@ -10,7 +10,7 @@ function advance_decline(x)
   #code here
 end
 
-function mcclellean_summation(x)
+function mcclellan_summation(x)
   #code here
 end
 
