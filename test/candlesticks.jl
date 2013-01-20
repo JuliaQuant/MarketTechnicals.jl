@@ -1,0 +1,10 @@
+# doji
+# hammer
+# inverted_hammer
+# hanging_man
+# mirabosu
+# shooting_star
+# spinning_top
+# three_white_soldiers
+# three_black_crows
+# morning_star

@@ -1,2 +1,0 @@
-function macd()
-end
