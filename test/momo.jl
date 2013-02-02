@@ -1,4 +1,4 @@
 # macd
 # rsi 
 # cci 
-# williams_perent_r 
+# williams_percent_r 
