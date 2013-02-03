@@ -24,7 +24,7 @@ function atr(df::DataFrame, n::Int)
 
   df_new = df[2:end, :] # remove nasty first row NA
   df_new["TR"]    = max(df_new["Range"], df_new["Hilag"], df_new["Lowlag"])
-  df_new["ATR"]   = ema(df_new["TR"], n)
+  df_new["ATR"]   = padNA(ema_unpadded(df_new["TR"], n), n-1, 0)
   df_new
 
 end
