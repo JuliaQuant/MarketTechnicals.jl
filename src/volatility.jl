@@ -15,8 +15,16 @@ end
 bollinger_bands(df::DataFrame) = bollinger_bands(df::DataFrame, "Close", 20, 2.0)
 
 
-function atr(x)
-  #code here
+function atr(df::DataFrame, n::Int)
+
+  df = copy(df)
+  df["Range"]  = df["High"] - df["Low"]
+  df["Hilag"]  = abs(df["High"] - lag(df["Close"]))
+  df["Lowlag"] = abs(df["Low"] - lag(df["Close"]))
+  df["TR"]    = max(df["Range"], df["Hilag"], df["Lowlag"])
+  df["ATR"]   = padNA(ema(df["TR"], n), n-1, 0)
+  df
+
 end
 
 function keltner_bands(x)

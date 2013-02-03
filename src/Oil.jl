@@ -7,6 +7,7 @@ using Thyme, DataFrames, Calendar, UTF16
 export ema,
        sma, 
        bollinger_bands, 
+       atr, 
        @oil
 
 include("movingaverages.jl")
