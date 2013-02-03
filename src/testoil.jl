@@ -1,4 +1,4 @@
 macro oil()
   println("")
-  reload("run_tests.jl")
+  reload(Pkg.dir("Oil", "run_tests.jl"))
 end

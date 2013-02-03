@@ -1,13 +1,11 @@
-df = read_stock("test/data/spx.csv");
+df     = read_yahoo(Pkg.dir("Oil", "test", "data"), "spx.csv")
 
-dv1 = df["Open"];
-dv2 = df["Close"];
-dv3 = df["Adj Close"];
+dv = df["Close"]
 
-e1  = ema(dv1,1)
-e2  = ema(dv2,2)
-e13 = ema(dv3,13)
+e1  = ema(dv, 1)
+e2  = ema(dv, 2)
+e10 = ema(dv, 10)
 
-@assert e1[507]  == dv1[507]
-@assert e2[506]  == 102.01237121462606  # R's TTR::EMA returns 102.01237 (rounded)
-@assert e13[495] == 100.62558587207887  # R's TTR::EMA returns 100.62559 (rounded)
+@assert e1[507]  == dv[507]
+@assert e2[507]  == 102.01237121462606 # R's TTR::EMA returns 102.01237 (rounded)
+@assert e10[507] == 101.10189950870759 # R's TTR::EMA returns 101.10190 (rounded)

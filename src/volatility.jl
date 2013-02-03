@@ -21,9 +21,11 @@ function atr(df::DataFrame, n::Int)
   df["Range"]  = df["High"] - df["Low"]
   df["Hilag"]  = abs(df["High"] - lag(df["Close"]))
   df["Lowlag"] = abs(df["Low"] - lag(df["Close"]))
-  df["TR"]    = max(df["Range"], df["Hilag"], df["Lowlag"])
-  df["ATR"]   = padNA(ema(df["TR"], n), n-1, 0)
-  df
+
+  df_new = df[2:end, :] # remove nasty first row NA
+  df_new["TR"]    = max(df_new["Range"], df_new["Hilag"], df_new["Lowlag"])
+  df_new["ATR"]   = ema(df_new["TR"], n)
+  df_new
 
 end
 
