@@ -14,10 +14,10 @@ end
 
 bollinger_bands(df::DataFrame) = bollinger_bands(df::DataFrame, "Close", 20, 2.0)
 
-
-function atr(df::DataFrame, n::Int)
-
-  df = copy(df)
+function true_range(df::DataFrame)
+  ndf = ncol(df)
+  nex = ndf + 4  # spacer for TR column
+  df  = copy(df)
 
   within!(df, quote
     Range = High - Low
@@ -29,13 +29,25 @@ function atr(df::DataFrame, n::Int)
 
   within!(df_new, quote
     TR  = float(max(Range, Hilag, Lolag))
-    ATR = $ema(TR, $n) 
     end)
-  df_new
+
+  df_out = df_new[:, [1:ndf, nex]]
 
 end
 
-atr(df::DataFrame) = atr(df::DataFrame, 20)
+function atr(df::DataFrame, n::Int)
+  ndf = ncol(df)
+  nex = ndf + 2  # spacer for ATR column
+  df  = copy(df)
+  tr  = true_range(df)
+
+  within!(tr, quote
+    ATR = $ema(TR, $n) 
+    end)
+  df_out = tr[:, [1:ndf, nex]]
+end
+
+atr(df::DataFrame) = atr(df::DataFrame, 14)
 
 function keltner_bands(x)
   #code here

@@ -8,6 +8,7 @@ export ema,
        ema_unpadded,
        sma, 
        bollinger_bands, 
+       true_range, 
        atr, 
        @oil
 
