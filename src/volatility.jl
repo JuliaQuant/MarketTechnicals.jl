@@ -29,6 +29,8 @@ function atr(df::DataFrame, n::Int)
 
 end
 
+atr(df::DataFrame) = atr(df::DataFrame, 20)
+
 function keltner_bands(x)
   #code here
 end
