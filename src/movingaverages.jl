@@ -20,6 +20,7 @@ end
 
 function ema_unpadded(dv::DataArray, n::Int64)
   k = 2/(n+1)
+  #m = sma_reg(dv, n) 
   m = sma(dv, n) 
 
   if n == 1

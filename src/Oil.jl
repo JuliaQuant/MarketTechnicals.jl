@@ -5,6 +5,7 @@ module Oil
 using Thyme, DataFrames, Calendar, UTF16
 
 export ema,
+       ema_unpadded,
        sma, 
        bollinger_bands, 
        atr, 

@@ -18,13 +18,19 @@ bollinger_bands(df::DataFrame) = bollinger_bands(df::DataFrame, "Close", 20, 2.0
 function atr(df::DataFrame, n::Int)
 
   df = copy(df)
-  df["Range"]  = df["High"] - df["Low"]
-  df["Hilag"]  = abs(df["High"] - lag(df["Close"]))
-  df["Lowlag"] = abs(df["Low"] - lag(df["Close"]))
+
+  within!(df, quote
+    Range = High - Low
+    Hilag = abs(High - $lag(Close))
+    Lolag = abs(Low - $lag(Close))
+    end)
 
   df_new = df[2:end, :] # remove nasty first row NA
-  df_new["TR"]    = max(df_new["Range"], df_new["Hilag"], df_new["Lowlag"])
-  df_new["ATR"]   = padNA(ema_unpadded(df_new["TR"], n), n-1, 0)
+
+  within!(df_new, quote
+    #TR  = DataArray(max(Range, Hilag, Lolag))
+    ATR = $ema(Range, $n) #stubbed to Range until TR returns a Float64 DataArray
+    end)
   df_new
 
 end
