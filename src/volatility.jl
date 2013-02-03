@@ -28,8 +28,8 @@ function atr(df::DataFrame, n::Int)
   df_new = df[2:end, :] # remove nasty first row NA
 
   within!(df_new, quote
-    #TR  = DataArray(max(Range, Hilag, Lolag))
-    ATR = $ema(Range, $n) #stubbed to Range until TR returns a Float64 DataArray
+    TR  = float(max(Range, Hilag, Lolag))
+    ATR = $ema(TR, $n) 
     end)
   df_new
 
