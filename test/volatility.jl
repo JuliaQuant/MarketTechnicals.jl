@@ -12,23 +12,16 @@ bb_df  = bollinger_bands(df)
 
 atr_df  = atr(df)
 
-#@assert 17.0466 == atr_df["Range"]
-#@assert 1518.08 == atr_df["Hilag"]
-#@assert 1449.89 == atr_df["Lolag"]
-#@assert 1449.89 == atr_df["TR"]
-#@assert 1449.89 == atr_df["ATR"]
-#
-#
+@assert 1.6550129536793454 == atr_df[400, 8] # needs confirmation
+
 ## keltner_bands
-#
-#kel_df  = keltner_bands(df)
-#
-#@assert 17.0466 == kel_df["Range"]
-#@assert 1518.08 == kel_df["Hilag"]
-#@assert 1449.89 == kel_df["Lolag"]
-#@assert 1449.89 == kel_df["TR"]
-#@assert 1449.89 == kel_df["ATR"]
-#
+
+kel_df  = keltner_bands(df)
+
+@assert 98.10133333333333 == kel_df[400, 8]  # needs confirmation 
+@assert 98.91883333333332 == kel_df[400, 9]  # needs confirmation 
+@assert 97.28383333333333 == kel_df[400, 10] # needs confirmation  
+
 ## chaikin_volatility
 #
 #chk_df  = chaikin_volatility(df)

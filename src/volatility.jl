@@ -50,18 +50,19 @@ end
 atr(df::DataFrame) = atr(df::DataFrame, 14)
 
 function keltner_bands(df::DataFrame, n::Int)
-
+  ndf = ncol(df)
+  nex = ndf + 4  # spacer for Keltner columns
   df = copy(df)
 
   within!(df, quote
     HLC3  = (High + Low + Close) ./3
     Range = High - Low 
-    kma   = $moving(HLC3, mean, $n)
     rma   = $moving(Range, mean, $n)
+    kma   = $moving(HLC3, mean, $n)
     up    = kma + rma/2 
     dn    = kma - rma/2 
     end)
-  df
+  df_out = df[:, [1:ndf, nex:end]]
 end
   
 
