@@ -1,14 +1,24 @@
 function obv(df::DataFrame)
-  df = copy(df)
-  simple_return!(df, "Close")
+  df  = copy(df)
+  dv  = zeros(nrow(df))
+  ret = simple_return(df["Close"])
+  
+  for i=1:nrow(df)
+    if ret[i] >= 0
+      dv[i] += df[i, 6]
+    else
+      dv[i] -= df[i, 6]
+    end
+   end
 
   within!(df, quote
-    sgn = integer(sign(Close_RET))
-#    obv = cumsum(Volume * integer(sign(Close_RET)))
+    obv = cumsum($dv)
     end)
   df
+
 end
 
+#function vwap(df::Union(DataFrame, SubDataFrame))
 function vwap(df::DataFrame)
   df = copy(df)
 
