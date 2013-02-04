@@ -65,10 +65,7 @@ function keltner_bands(df::DataFrame, n::Int)
   df_out = df[:, [1:ndf, nex:end]]
 end
   
-
 keltner_bands(df::DataFrame) = keltner_bands(df::DataFrame, 10)
-
-
 
 #    20 ema
 #    10 period ATR +/-
@@ -77,8 +74,6 @@ keltner_bands(df::DataFrame) = keltner_bands(df::DataFrame, 10)
 #   10 sma range
 #   upper 10 sma typical price + 1/2 10 sma range
 #   lower 10 sma typical price - 1/2 10 sma range
-
-
 
 function chaikin_volatility(x)
   #code here

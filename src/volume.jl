@@ -1,5 +1,15 @@
-function obv(x)
-  #code here
+function obv(df::DataFrame)
+  df = copy(df)
+  simple_return!(df, "Close")
+  
+
+
+
+  within!(df, quote
+    sgn = integer(sign(Close_RET))
+#    obv = cumsum(Volume * integer(sign(Close_RET)))
+    end)
+  df
 end
 
 function vwap(x)

@@ -11,10 +11,12 @@ export ema,
        true_range, 
        atr, 
        keltner_bands, 
+       obv, 
        @oil
 
 include("movingaverages.jl")
 include("volatility.jl")
+include("volume.jl")
 include("testoil.jl")
 
 
