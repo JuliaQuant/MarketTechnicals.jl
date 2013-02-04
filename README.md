@@ -40,4 +40,7 @@ Running tests:
 The current test suite passes silently and stops completely if an error is detected. Expect improvements to 
 this interface in the future. 
 
+## Important near-term goals
 
+Since TA functions can be implemented in different ways, a github web page is planned to document how the 
+implementations in `Oil` are handled. This will include references and credits as appropriate. 
