@@ -12,6 +12,7 @@ export ema,
        atr, 
        keltner_bands, 
        obv, 
+       vwap, 
        doji, 
        @oil
 
