@@ -1,4 +1,23 @@
+df     = read_yahoo(Pkg.dir("Oil", "test", "data"), "spx.csv")
+
 # doji
+
+dojidf  = doji(df)
+dojiday = subset(d, :(Date .== $ymd(1970, 3, 31)))
+
+@assert "doji" == dojiday[1, "doji"]
+
+
+
+
+
+
+
+
+
+
+
+
 # hammer
 # inverted_hammer
 # hanging_man

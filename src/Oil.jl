@@ -12,8 +12,10 @@ export ema,
        atr, 
        keltner_bands, 
        obv, 
+       doji, 
        @oil
 
+include("candlesticks.jl")
 include("movingaverages.jl")
 include("volatility.jl")
 include("volume.jl")
