@@ -10,6 +10,7 @@ export ema,
        bollinger_bands, 
        true_range, 
        atr, 
+       keltner_bands, 
        @oil
 
 include("movingaverages.jl")

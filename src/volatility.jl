@@ -49,7 +49,28 @@ end
 
 atr(df::DataFrame) = atr(df::DataFrame, 14)
 
-function keltner_bands(x)
+function keltner_bands(df::DataFrame, n::Int)
+
+  df = copy(df)
+
+  within!(df, quote
+    HLC3  = (High + Low + Close) ./3
+    Range = High - Low 
+    kma   = $moving(HLC3, mean, $n)
+    rma   = $moving(Range, mean, $n)
+    up    = kma + rma/2 
+    dn    = kma - rma/2 
+    end)
+  df
+end
+  
+
+keltner_bands(df::DataFrame) = keltner_bands(df::DataFrame, 10)
+
+
+
+#    20 ema
+#    10 period ATR +/-
 
 #   10 sma typical price
 #   10 sma range
@@ -57,8 +78,6 @@ function keltner_bands(x)
 #   lower 10 sma typical price - 1/2 10 sma range
 
 
-  #code here
-end
 
 function chaikin_volatility(x)
   #code here
