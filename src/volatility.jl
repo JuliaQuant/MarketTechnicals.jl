@@ -50,6 +50,13 @@ end
 atr(df::DataFrame) = atr(df::DataFrame, 14)
 
 function keltner_bands(x)
+
+#   10 sma typical price
+#   10 sma range
+#   upper 10 sma typical price + 1/2 10 sma range
+#   lower 10 sma typical price - 1/2 10 sma range
+
+
   #code here
 end
 
