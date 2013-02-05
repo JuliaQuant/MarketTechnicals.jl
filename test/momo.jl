@@ -4,7 +4,7 @@ df     = read_yahoo(Pkg.dir("Oil", "test", "data"), "spx.csv")
 
 rsi_df = rsi(df)
 
-@assert 72.151530 == rsi_df[507,1]
+@assert 73.80060302291837 == rsi_df[507,8]
 
 # macd
 

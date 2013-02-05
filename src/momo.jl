@@ -1,6 +1,6 @@
 function rsi(df::DataFrame, n::Int)
 
-  df = copy(df)
+  df  = copy(df)
   ret = diff(df["Close"])
   ret = [0; ret]
   ups = zeros(nrow(df))
