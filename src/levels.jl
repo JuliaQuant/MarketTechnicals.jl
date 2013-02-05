@@ -1,12 +1,22 @@
-function floor_pivots(x)
-  #code here  
-  ## R3 = (P - S1) + R2
-  ## R2 = (P - S1) + R1
-  ## R1 = (2*P) - L
-  ## PP = (H + L + C)/3
-  ## S1 = (2*P) – H
-  ## S2 = P - (R1 - S1)
-  ## S3 = P - (R2 - S1)
+function floor_pivots(df::DataFrame)
+
+  df = copy(df)
+
+   P  = with(df, :(($lag(High) .+ $lag(Low) .+ $lag(Close))./3))
+   S1 = with(df, :(2.* $P .- High))
+   R1 = with(df, :(2.* $P .- Low))
+   S2 = with(df, :($P .- $R1 .+ $S1))
+   R2 = with(df, :($P .- $S1 .+ $R1))
+
+  within!(df, quote
+   S3 = $P .- $R2 .+ $S1
+   S2 = $S2
+   S1 = $S1
+   typical = $P
+   R1 = $R1
+   R2 = $R2
+   R3 = $P .- $S1 .+ R2
+  end)
 end
 
 function woodies_pivots(x)
