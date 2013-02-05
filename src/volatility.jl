@@ -14,27 +14,6 @@ end
 
 bollinger_bands(df::DataFrame) = bollinger_bands(df::DataFrame, "Close", 20, 2.0)
 
-#function true_range(df::DataFrame)
-#  ndf = ncol(df)
-#  nex = ndf + 4  # spacer for TR column
-#  df  = copy(df)
-#
-#  within!(df, quote
-#    Range = High - Low
-#    Hilag = abs(High - $lag(Close))
-#    Lolag = abs(Low - $lag(Close))
-#    end)
-#
-#  df_new = df[2:end, :] # remove nasty first row NA
-#
-#  within!(df_new, quote
-#    TR  = float(max(Range, Hilag, Lolag))
-#    end)
-#
-#  df_out = df_new[:, [1:ndf, nex]]
-#
-#end
-
 function true_range(df::DataFrame)
   df  = copy(df)
 
@@ -51,16 +30,17 @@ function true_range(df::DataFrame)
   df
 
 end
-function atr(df::DataFrame, n::Int)
-  ndf = ncol(df)
-  nex = ndf + 2  # spacer for ATR column
-  df  = copy(df)
-  tr  = true_range(df)
 
-  within!(tr, quote
-    ATR = $ema(TR, $n) 
+function atr(df::DataFrame, n::Int)
+
+  df = copy(df)
+  tr = true_range(df)
+  TR = tr[:,"TR"]
+
+  within!(df, quote
+    ATR = $ema($TR, $n) 
     end)
-  df_out = tr[:, [1:ndf, nex]]
+  df
 end
 
 atr(df::DataFrame) = atr(df::DataFrame, 14)
