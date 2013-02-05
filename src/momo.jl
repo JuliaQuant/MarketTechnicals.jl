@@ -26,9 +26,21 @@ end
 
 rsi(df::DataFrame) = rsi(df::DataFrame, 14)
 
-function macd(x)
-  #code here
+function macd(df::DataFrame, fast::Int, slow::Int, signal::Int)
+
+  df  = copy(df)
+
+   fast_ma = with(df, :($ema(Close, $fast)))
+   slow_ma = with(df, :($ema(Close, $slow)))
+
+  within!(df, quote
+    macd   = $fast_ma .- $slow_ma
+#    signal = $ema(removeNA(macd), 9)
+    end)
+  df
 end
+
+macd(df::DataFrame) = macd(df::DataFrame, 12, 26, 9)
 
 function cci(x)
   #code here
