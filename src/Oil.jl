@@ -14,6 +14,7 @@ export ema,
        obv, 
        vwap, 
        doji, 
+       rsi, 
        @oil
 
 include("candlesticks.jl")
