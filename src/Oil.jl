@@ -6,6 +6,7 @@ using Thyme, DataFrames, Calendar, UTF16
 
 export ema,
        ema_unpadded,
+       ema_wilder,
        sma, 
        bollinger_bands, 
        true_range, 
@@ -19,6 +20,7 @@ export ema,
 
 include("candlesticks.jl")
 include("movingaverages.jl")
+include("momo.jl")
 include("volatility.jl")
 include("volume.jl")
 include("testoil.jl")
