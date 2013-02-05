@@ -14,11 +14,12 @@ function rsi(df::DataFrame, n::Int)
     end
    end
 
-  upsemaw = ema_wilder(DataArray(ups), n)
-  dnsemaw = abs(ema_wilder(DataArray(dns), n))
   upsema  = ema(DataArray(ups), n)
   dnsema  = abs(ema(DataArray(dns), n))
   RS      = upsema ./ dnsema  
+
+  upsemaw = ema_wilder(DataArray(ups), n)
+  dnsemaw = abs(ema_wilder(DataArray(dns), n))
   RSw     = upsemaw ./ dnsemaw  
 
   within!(df, quote
