@@ -1,8 +1,8 @@
-function sma(x,n)
+function sma(x,n::Int)
   [mean(x[i:i+(n-1)]) for i=1:length(x)-(n-1)]
 end
 
-function ema(dv::DataArray, n::Int64)
+function ema(dv::DataArray, n::Int)
 
   dv = copy(dv)
 
@@ -18,7 +18,7 @@ function ema(dv::DataArray, n::Int64)
   padNA(dv[n:length(dv)], n-1, 0)
 end
 
-function ema_unpadded(dv::DataArray, n::Int64)
+function ema_unpadded(dv::DataArray, n::Int)
   k = 2/(n+1)
   #m = sma_reg(dv, n) 
   m = sma(dv, n) 
