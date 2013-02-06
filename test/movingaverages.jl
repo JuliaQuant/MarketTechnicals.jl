@@ -1,7 +1,7 @@
 df     = read_yahoo(Pkg.dir("Oil", "test", "data"), "spx.csv")
 
-dv = df["Close"]
-
+#ema
+dv  = df["Close"]
 e1  = ema(dv, 1)
 e2  = ema(dv, 2)
 e10 = ema(dv, 10)

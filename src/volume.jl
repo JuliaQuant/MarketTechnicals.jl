@@ -9,29 +9,33 @@ function obv(df::DataFrame)
     else
       dv[i] -= df[i, 6]
     end
-   end
+  end
+
+  obvval = cumsum(dv)
 
   within!(df, quote
-    obv = cumsum($dv)
+    obv = $obvval
     end)
   df
 
 end
 
-#function vwap(df::Union(DataFrame, SubDataFrame))
-function vwap(df::DataFrame)
+function vwap(df::DataFrame, n::Int)
   df = copy(df)
 
   typical = with(df, :((High + Low + Close)/3))
   VP      = with(df, :($typical .* Volume))
-  sumVP   = with(df, :(cumsum($VP)))
-  sumV    = with(df, :(cumsum(Volume)))
+  sumVP   = moving(VP, sum, 10)
+  sumV    = moving(df["Volume"], sum, 10)
+  vwapval = sumVP ./ sumV
 
   within!(df, quote
-    vwap    = $sumVP ./ $sumV
+    vwap = $vwapval
     end)
   df
 end
+
+vwap(df::DataFrame) = vwap(df::DataFrame, 10)
 
 function advance_decline(x)
   #code here

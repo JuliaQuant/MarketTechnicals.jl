@@ -81,13 +81,10 @@ function cci(df::DataFrame, n::Int, c::Float64)
   typical = with(df, :(+(High, Low, Close) ./3))
   sma_typ = moving(typical, mean, n)
   mad_typ = moving(typical, mad, n)
-  cci     = ($ypical - sma_typ) / (mad_typ * c)
+  ccival  = (typical - sma_typ) ./ (mad_typ * c)
 
   within!(df, quote
-  cci     = $cci
-  typical = $typical 
-  sma_typ = $sma_typ
-  mad_typ = $mad_typ
+    cci = $ccival
     end)
   df 
 end
