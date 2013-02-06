@@ -11,14 +11,17 @@ export ema,
        bollinger_bands, 
        true_range, 
        atr, 
+       atr_wilder, 
        keltner_bands, 
        obv, 
        vwap, 
        doji, 
        rsi, 
+       floor_pivots,
        @oil
 
 include("candlesticks.jl")
+include("levels.jl")
 include("movingaverages.jl")
 include("momo.jl")
 include("volatility.jl")

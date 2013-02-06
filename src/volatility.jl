@@ -15,6 +15,7 @@ end
 bollinger_bands(df::DataFrame) = bollinger_bands(df::DataFrame, "Close", 20, 2.0)
 
 function true_range(df::DataFrame)
+
   df  = copy(df)
 
   Range = with(df, :(High - Low))
@@ -45,22 +46,35 @@ end
 
 atr(df::DataFrame) = atr(df::DataFrame, 14)
 
-function keltner_bands(df::DataFrame, n::Int)
-  ndf = ncol(df)
-  nex = ndf + 4  # spacer for Keltner columns
+function atr_wilder(df::DataFrame, n::Int)
+
   df = copy(df)
+  tr = true_range(df)
+  TR = tr[:,"TR"]
 
   within!(df, quote
-    HLC3  = (High + Low + Close) ./3
-    Range = High - Low 
-    rma   = $moving(Range, mean, $n)
-    kma   = $moving(HLC3, mean, $n)
-    up    = kma + rma/2 
-    dn    = kma - rma/2 
+    ATR = $ema_wilder($TR, $n) 
     end)
-  df_out = df[:, [1:ndf, nex:end]]
+  df
 end
-  
+
+atr_wilder(df::DataFrame) = atr_wilder(df::DataFrame, 14)
+
+function keltner_bands(df::DataFrame, n::Int)
+
+  df      =  copy(df)
+  typical = with(df, :((High .+ Low .+ Close) ./3))
+  rng     = with(df, :(High .- Low)) 
+  rma     = with(df, :($moving($rng, mean, $n)))
+
+  within!(df, quote
+    kma   = $moving($typical, mean, $n)
+    up    = kma + $rma/2 
+    dn    = kma - $rma/2 
+    end)
+  df
+end
+
 keltner_bands(df::DataFrame) = keltner_bands(df::DataFrame, 10)
 
 #    20 ema

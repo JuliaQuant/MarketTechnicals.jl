@@ -18,7 +18,14 @@ trg_df  = true_range(df)
 
 atr_df  = atr(df)
 
-@assert 1.6727072542453973 == atr_df[399, 8] # 1971-07-30 0.65 0.7011091  from TTR's ATR # from Julia  1971-07-30   1.67271
+@assert 1.6727072542453973 == atr_df[400, 8] # 1971-07-30 0.65 0.7011091  
+
+# atr_wilder
+#
+#atw_df  = atr_wilder(df)
+#
+#@assert 1.6727072542453973 == atr_df[400, 8] 
+
 ## keltner_bands
 
 kel_df  = keltner_bands(df)
