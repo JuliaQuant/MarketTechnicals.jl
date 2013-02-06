@@ -5,17 +5,19 @@ function floor_pivots(df::DataFrame)
    P  = with(df, :(($lag(High) .+ $lag(Low) .+ $lag(Close))./3))
    S1 = with(df, :(2.* $P .- $lag(High)))
    R1 = with(df, :(2.* $P .- $lag(Low)))
-   S2 = with(df, :($P .- ($R1 .- $S1)))
-   R2 = with(df, :(($P .- $S1) .+ $R1))
+   S2 = P - (R1 - S1)
+   R2 = (P - S1) + R1
+   S3 = P - (R2 - S1)
+   R3 = (P - S1) + R2
 
   within!(df, quote
-   S3 = $P .- ($R2 .- $S1)
+   S3 = $S3
    S2 = $S2
    S1 = $S1
    typical = $P
    R1 = $R1
    R2 = $R2
-   R3 = ($P .- $S1) .+ R2
+   R3 = $R3
   end)
 end
 
