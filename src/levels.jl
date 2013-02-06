@@ -11,13 +11,13 @@ function floor_pivots(df::DataFrame)
    R3 = (P - S1) + R2
 
   within!(df, quote
-   S3 = $S3
-   S2 = $S2
-   S1 = $S1
-   typical = $P
-   R1 = $R1
-   R2 = $R2
-   R3 = $R3
+   S3    = $S3
+   S2    = $S2
+   S1    = $S1
+   pivot = $P
+   R1    = $R1
+   R2    = $R2
+   R3    = $R3
   end)
 end
 
