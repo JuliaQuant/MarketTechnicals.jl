@@ -47,9 +47,21 @@ end
 
 macd(df::DataFrame) = macd(df::DataFrame, 12, 26, 9)
 
-function cci(x)
-  #code here
+function cci(df::DataFrame, n::Int)
+
+  df = copy(df)
+
+  typical = with(df, :((High .+ Low .+ Close) ./3))
+  sma_typ = moving(typical, mean, n)
+  mad_typ = moving(typical, mad, n)
+
+  within!(df, quote
+    cci = (1/0.015) .* ($typical .- $sma_typ) ./ $mad_typ
+    end)
+  df 
 end
+
+cci(df::DataFrame) = cci(df::DataFrame, 20)
 
 function williams_percent_r(x)
   #code here

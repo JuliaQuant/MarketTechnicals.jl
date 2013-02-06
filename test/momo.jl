@@ -10,4 +10,10 @@ rsi_df = rsi(df)
 # macd
 
 # cci 
+
+cci_df = cci(df)
+
+
+@assert  87.48854585 == cci_df[507,8]  # TTR::CCI value is  87.48854585
+
 # williams_percent_r 

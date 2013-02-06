@@ -17,6 +17,7 @@ export ema,
        vwap, 
        doji, 
        rsi, 
+       cci, 
        floor_pivots,
        @oil
 
