@@ -58,13 +58,17 @@ function macd(df::DataFrame, fast::Int, slow::Int, signal::Int)
 
   df  = copy(df)
 
-   fast_ma = with(df, :($ema(Close, $fast)))
-   slow_ma = with(df, :($ema(Close, $slow)))
+  fast_ma = with(df, :($ema(Close, $fast)))
+  slow_ma = with(df, :($ema(Close, $slow)))
+  macdval = fast_ma - slow_ma
+  tempema = ema(macdval[slow:end], signal)
+  signal  = padNA(tempema, slow-1, 0)
 
   within!(df, quote
-    macd   = $fast_ma .- $slow_ma
-#    signal = $ema(removeNA(macd), 9)
+    macd   = $macdval
+    signal = $signal
     end)
+
   df
 end
 
@@ -77,9 +81,10 @@ function cci(df::DataFrame, n::Int, c::Float64)
   typical = with(df, :(+(High, Low, Close) ./3))
   sma_typ = moving(typical, mean, n)
   mad_typ = moving(typical, mad, n)
+  cci     = ($ypical - sma_typ) / (mad_typ * c)
 
   within!(df, quote
-    cci = ($typical .- $sma_typ) ./ ($mad_typ * $c)
+  cci     = $cci
   typical = $typical 
   sma_typ = $sma_typ
   mad_typ = $mad_typ

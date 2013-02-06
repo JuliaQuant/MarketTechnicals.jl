@@ -18,6 +18,7 @@ export ema,
        doji, 
        rsi, 
        rsi_wilder, 
+       macd, 
        cci, 
        floor_pivots,
        @oil
