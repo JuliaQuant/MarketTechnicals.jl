@@ -74,17 +74,21 @@ function cci(df::DataFrame, n::Int, c::Float64)
 
   df = copy(df)
 
-  typical = with(df, :((High .+ Low .+ Close) ./3))
+  typical = with(df, :(+(High, Low, Close) ./3))
   sma_typ = moving(typical, mean, n)
   mad_typ = moving(typical, mad, n)
 
   within!(df, quote
-    cci = abs(($typical .- $sma_typ)) ./ ($mad_typ * $c)
+    cci = ($typical .- $sma_typ) ./ ($mad_typ * $c)
+  typical = $typical 
+  sma_typ = $sma_typ
+  mad_typ = $mad_typ
     end)
   df 
 end
 
 cci(df::DataFrame) = cci(df::DataFrame, 20, 0.015)
+cci(df::DataFrame, n::Int) = cci(df::DataFrame, n::Int, 0.015)
 
 function williams_percent_r(x)
   #code here
