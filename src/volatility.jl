@@ -1,8 +1,8 @@
 function bollinger_bands(df::DataFrame, col::String, ma::Int, width::Float64)
 
   df = copy(df) #preserve the original DataFrame
-  ma_col = strcat("mean_", ma)
-  sd_col = strcat("std_", ma)
+  ma_col = string("mean_", ma)
+  sd_col = string("std_", ma)
   df_ma  = moving!(df, col, mean, ma)
   df_new = df_ma[ma:end, :] 
 
