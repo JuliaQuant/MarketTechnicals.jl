@@ -21,7 +21,7 @@ export ema,
        macd, 
        cci, 
        floor_pivots,
-       @oil
+       @technicalanalysis
 
 include("candlesticks.jl")
 include("levels.jl")

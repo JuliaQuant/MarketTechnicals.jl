@@ -17,8 +17,8 @@ mac_df = macd(df)
 @assert 1.7189453474752991 == mac_df[507, 9] # TTR value with percent=FALSE is 1.736186
 
 # cci 
-cci_df = cci(df)
+#cci_df = cci(df)
 
-@assert -146.17060449635804 == cci_df[20 ,8]  # TTR::CCI value is -175.8644
+#@assert -146.17060449635804 == cci_df[20 ,8]  # TTR::CCI value is -175.8644
 
 # williams_percent_r 
