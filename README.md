@@ -4,7 +4,7 @@ Functions include a range of popular studies in TA including candlesticks, price
 momentum indicators, moving averages, volatility studies and volume analysis. 
 
 ````julia
-julia> Pkg.add("Oil")
+julia> Pkg.add("TechnicalAnalysis")
 ````
 
 This is a work in progress and the API is not fixed. The current plan is to implement the semantics
@@ -27,7 +27,7 @@ a few general files such as `candlesticks.jl`, etc.
 You can run the entire test suite from within Julia:
 
 ````julia
-julia> @oil
+julia> @technicalanalysis
 Running tests: 
 **   test/candlesticks.jl
 **   test/levels.jl
@@ -43,4 +43,4 @@ this interface in the future.
 ## Important near-term goals
 
 Since TA functions can be implemented in different ways, a github web page is planned to document how the 
-implementations in `Oil` are handled. This will include references and credits as appropriate. 
+implementations in `TechnicalAnalysis` are handled. This will include references and credits as appropriate. 

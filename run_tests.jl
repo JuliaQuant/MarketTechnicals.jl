@@ -1,4 +1,4 @@
-using Oil
+using TechnicalAnalysis
 
 my_tests = ["test/candlesticks.jl", 
             "test/levels.jl",  

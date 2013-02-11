@@ -1,8 +1,8 @@
-using Thyme, DataFrames, Calendar, UTF16
+using TimeSeries, DataFrames, Calendar, UTF16
 
-module Oil  
+module TechnicalAnalysis
 
-using Thyme, DataFrames, Calendar, UTF16
+using TimeSeries, DataFrames, Calendar, UTF16
 
 export ema,
        ema_unpadded,
@@ -29,7 +29,7 @@ include("movingaverages.jl")
 include("momo.jl")
 include("volatility.jl")
 include("volume.jl")
-include("testoil.jl")
+include("testtechnicalanalysis.jl")
 
 
 end 

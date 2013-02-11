@@ -1,4 +1,4 @@
-df     = read_yahoo(Pkg.dir("Oil", "test", "data"), "spx.csv")
+df     = read_yahoo(Pkg.dir("TechnicalAnalysis", "test", "data"), "spx.csv")
 
 # rsi 
 rsi_df = rsi(df)
