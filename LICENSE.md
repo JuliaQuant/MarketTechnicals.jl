@@ -1,5 +1,5 @@
 
-TechnicalAnalysis.jl is licensed under the MIT License:
+MarketTechnicals.jl is licensed under the MIT License:
 
 > Copyright (c) 2013: Algorithm Alpha, LLC  and other contributors.
 >

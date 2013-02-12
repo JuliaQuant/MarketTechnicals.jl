@@ -1,8 +1,8 @@
-using TimeSeries, DataFrames, Calendar, UTF16
+using TimeSeries, DataFrames, Calendar, UTF16, Stats
 
-module TechnicalAnalysis
+module MarketTechnicals
 
-using TimeSeries, DataFrames, Calendar, UTF16
+using TimeSeries, DataFrames, Calendar, UTF16, Stats
 
 export ema,
        ema_unpadded,
@@ -21,7 +21,7 @@ export ema,
        macd, 
        cci, 
        floor_pivots,
-       @technicalanalysis
+       @markettechnicals
 
 include("candlesticks.jl")
 include("levels.jl")
@@ -29,7 +29,7 @@ include("movingaverages.jl")
 include("momo.jl")
 include("volatility.jl")
 include("volume.jl")
-include("testtechnicalanalysis.jl")
+include("testmarkettechnicals.jl")
 
 
 end 

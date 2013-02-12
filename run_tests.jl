@@ -1,4 +1,4 @@
-using TechnicalAnalysis
+using MarketTechnicals
 
 my_tests = ["test/candlesticks.jl", 
             "test/levels.jl",  

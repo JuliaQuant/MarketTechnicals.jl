@@ -1,4 +1,4 @@
-df     = read_yahoo(Pkg.dir("TechnicalAnalysis", "test", "data"), "spx.csv")
+df     = read_yahoo(Pkg.dir("MarketTechnicals", "test", "data"), "spx.csv")
 
 # obv
 obv_df = obv(df)
