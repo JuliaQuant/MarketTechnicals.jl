@@ -1,4 +1,4 @@
-df     = read_yahoo(Pkg.dir("MarketTechnicals", "test", "data"), "spx.csv")
+df     = read_asset(Pkg.dir("MarketTechnicals", "test", "data", "spx.csv"))
 
 # bollinger_bands
 bb_df  = bollinger_bands(df)

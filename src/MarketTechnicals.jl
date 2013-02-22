@@ -1,4 +1,4 @@
-using TimeSeries, DataFrames, Calendar, UTF16, Stats
+using TimeSeries, DataFrames, Calendar, UTF16, Stats, TradingInstrument
 
 module MarketTechnicals
 
