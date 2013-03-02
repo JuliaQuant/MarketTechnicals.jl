@@ -1,4 +1,4 @@
-function sma(x,n::Int)
+function sma(x, n::Int)
   [mean(x[i:i+(n-1)]) for i=1:length(x)-(n-1)]
 end
 
