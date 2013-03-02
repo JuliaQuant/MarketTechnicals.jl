@@ -1,7 +1,7 @@
-function rsi(df::DataFrame, n::Int)
+function rsi(df::DataFrame, col::String, n::Int)
 
   df  = copy(df)
-  ret = diff(df["Close"])
+  ret = diff(df[col])
   ret = [0; ret]
   ups = zeros(nrow(df))
   dns = zeros(nrow(df))
@@ -24,12 +24,13 @@ function rsi(df::DataFrame, n::Int)
   df 
 end
 
-rsi(df::DataFrame) = rsi(df::DataFrame, 14)
+rsi(df::DataFrame, col::String) = rsi(df::DataFrame, col::String, 14)
+rsi(df::DataFrame) = rsi(df::DataFrame, "Close", 14)
 
-function rsi_wilder(df::DataFrame, n::Int)
+function rsi_wilder(df::DataFrame, col::String,  n::Int)
 
   df  = copy(df)
-  ret = diff(df["Close"])
+  ret = diff(df[col])
   ret = [0; ret]
   ups = zeros(nrow(df))
   dns = zeros(nrow(df))
@@ -52,14 +53,15 @@ function rsi_wilder(df::DataFrame, n::Int)
   df 
 end
 
-rsi_wilder(df::DataFrame) = rsi_wilder(df::DataFrame, 14)
+rsi_wilder(df::DataFrame, col::String) = rsi_wilder(df::DataFrame, col::String, 14)
+rsi_wilder(df::DataFrame) = rsi_wilder(df::DataFrame, "Close", 14)
 
-function macd(df::DataFrame, fast::Int, slow::Int, signal::Int)
+function macd(df::DataFrame, col::String, fast::Int, slow::Int, signal::Int)
 
   df  = copy(df)
 
-  fast_ma = with(df, :($ema(Close, $fast)))
-  slow_ma = with(df, :($ema(Close, $slow)))
+  fast_ma = with(df, :($ema($df[$col], $fast)))
+  slow_ma = with(df, :($ema($df[$col], $slow)))
   macdval = fast_ma - slow_ma
   tempema = ema(macdval[slow:end], signal)
   signal  = padNA(tempema, slow-1, 0)
@@ -72,7 +74,8 @@ function macd(df::DataFrame, fast::Int, slow::Int, signal::Int)
   df
 end
 
-macd(df::DataFrame) = macd(df::DataFrame, 12, 26, 9)
+macd(df::DataFrame, col::String) = macd(df::DataFrame, col::String, 12, 26, 9)
+macd(df::DataFrame) = macd(df::DataFrame, "Close", 12, 26, 9)
 
 function cci(df::DataFrame, n::Int, c::Float64)
 
