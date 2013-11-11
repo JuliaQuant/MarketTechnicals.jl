@@ -1,4 +1,4 @@
-df     = read_asset(Pkg.dir("MarketTechnicals", "test", "data", "spx.csv"))
+df     = readtime(Pkg.dir("MarketTechnicals/test/data/spx.csv"))
 
 #ema
 dv  = df["Close"]

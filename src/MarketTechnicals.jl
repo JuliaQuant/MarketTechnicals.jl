@@ -1,8 +1,8 @@
-using TimeSeries, DataFrames, Calendar, UTF16, Stats, TradingInstrument
+using TimeSeries, DataFrames, Datetime
 
 module MarketTechnicals
 
-using TimeSeries, DataFrames, Calendar, UTF16, Stats
+using TimeSeries, DataFrames, Datetime
 
 export ema,
        ema_unpadded,

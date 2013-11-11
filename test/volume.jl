@@ -1,4 +1,4 @@
-df     = read_asset(Pkg.dir("MarketTechnicals", "test", "data", "spx.csv"))
+df     = readtime(Pkg.dir("MarketTechnicals/test/data/spx.csv"))
 
 # obv
 obv_df = obv(df)
@@ -9,9 +9,6 @@ obv_df = obv(df)
 vwp_df = vwap(df)
 
 @assert 101.44708763647094 == vwp_df[507,8] # TTR value 101.44709
-
-
-
 
 # advance_decline
 # mcclellan_summation
