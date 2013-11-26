@@ -1,12 +1,13 @@
 function bollinger_bands(df::DataFrame, col::String, ma::Int, width::Float64)
 
   df = copy(df) #preserve the original DataFrame
-  ma_col = string("mean_", int(ma))
-  sd_col = string("std_", width)
+  ma_col = string("mean_", ma)
+  sd_col = string("std_", ma)
   df_ma  = moving!(df, col, mean, ma)
   df_new = df_ma[ma:end, :] 
 
-  moving!(df_new, ma_col, std, 20) 
+  #moving!(df_new, ma_col, std, 20) 
+  moving!(df_new, ma_col, std, ma) 
   df_new["up_bband"] = df_new[ma_col] + df_new[sd_col] * width
   df_new["dn_bband"] = df_new[ma_col] - df_new[sd_col] * width
   df_new
