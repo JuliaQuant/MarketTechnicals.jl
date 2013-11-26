@@ -1,9 +1,9 @@
-function bollinger_bands(df::DataFrame, col::String, ma::Float64, width::Float64)
+function bollinger_bands(df::DataFrame, col::String, ma::Int, width::Float64)
 
   df = copy(df) #preserve the original DataFrame
   ma_col = string("mean_", int(ma))
-  sd_col = string("std_", int(ma))
-  df_ma  = moving!(df, col, mean, int(ma))
+  sd_col = string("std_", width)
+  df_ma  = moving!(df, col, mean, ma)
   df_new = df_ma[ma:end, :] 
 
   moving!(df_new, ma_col, std, 20) 
@@ -12,7 +12,7 @@ function bollinger_bands(df::DataFrame, col::String, ma::Float64, width::Float64
   df_new
 end
 
-bollinger_bands(df::DataFrame) = bollinger_bands(df::DataFrame, "Close", 20., 2.0)
+bollinger_bands(df::DataFrame) = bollinger_bands(df::DataFrame, "Close", 20, 2.0)
 
 function true_range(df::DataFrame)
 
