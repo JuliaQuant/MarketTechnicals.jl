@@ -1,8 +1,8 @@
-using TimeSeries, DataFrames, Datetime
+using TimeSeries, DataFrames, DataArrays, Datetime
 
 module MarketTechnicals
 
-using TimeSeries, DataFrames, Datetime
+using TimeSeries, DataFrames, DataArrays, Datetime
 
 export ema,
        ema_unpadded,
