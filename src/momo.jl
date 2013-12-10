@@ -64,7 +64,7 @@ function macd(df::DataFrame, col::String, fast::Int, slow::Int, signal::Int)
   slow_ma = with(df, :($ema($df[$col], $slow)))
   macdval = fast_ma - slow_ma
   tempema = ema(macdval[slow:end], signal)
-  signal  = padNA(tempema, slow-1, 0)
+  signal  = pad(tempema, slow-1, 0, NA)
 
   within!(df, quote
     macd   = $macdval
