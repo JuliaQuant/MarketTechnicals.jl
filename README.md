@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/JuliaStats/MarketTechnicals.jl.png)](https://travis-ci.org/JuliaStats/MarketTechnicals.jl)
+[![Build Status](https://travis-ci.org/JuliaQuant/MarketTechnicals.jl.png)](https://travis-ci.org/JuliaQuant/MarketTechnicals.jl)
 
 #### A toolkit for technical analysis of financial time series in Julia
 
