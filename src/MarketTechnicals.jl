@@ -29,7 +29,7 @@ include("movingaverages.jl")
 include("momo.jl")
 include("volatility.jl")
 include("volume.jl")
-include("testmarkettechnicals.jl")
+include("test/testmacro.jl")
 
 
 end 
