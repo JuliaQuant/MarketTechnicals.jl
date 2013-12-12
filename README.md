@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/JuliaStats/MarketTechnicals.jl.png)](https://travis-ci.org/JuliaStats/MarketTechnicals.jl)
+
 #### A toolkit for technical analysis of financial time series in Julia
 
 Functions include a range of popular studies in TA including candlesticks, price levels,

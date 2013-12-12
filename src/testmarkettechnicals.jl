@@ -1,4 +1,4 @@
 macro markettechnicals()
   println("")
-  reload(Pkg.dir("MarketTechnicals", "run_tests.jl"))
+  reload(Pkg.dir("MarketTechnicals/test/runtests.jl"))
 end
