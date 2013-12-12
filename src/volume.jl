@@ -1,9 +1,9 @@
 function obv(df::DataFrame)
   df  = copy(df)
-  dv  = zeros(nrow(df))
+  dv  = zeros(size(df, 1))
   ret = simple_return(df["Close"])
   
-  for i=1:nrow(df)
+  for i=1:size(df, 1)
     if ret[i] >= 0
       dv[i] += df[i, 6]
     else

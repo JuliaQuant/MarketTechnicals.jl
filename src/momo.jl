@@ -3,10 +3,10 @@ function rsi(df::DataFrame, col::String, n::Int)
   df  = copy(df)
   ret = diff(df[col])
   ret = [0; ret]
-  ups = zeros(nrow(df))
-  dns = zeros(nrow(df))
+  ups = zeros(size(df, 1))
+  dns = zeros(size(df, 1))
 
-  for i=1:nrow(df)
+  for i=1:size(df, 1)
     if ret[i] >= 0
       ups[i] += ret[i]
     else
@@ -32,10 +32,10 @@ function rsi_wilder(df::DataFrame, col::String,  n::Int)
   df  = copy(df)
   ret = diff(df[col])
   ret = [0; ret]
-  ups = zeros(nrow(df))
-  dns = zeros(nrow(df))
+  ups = zeros(size(df, 1))
+  dns = zeros(size(df, 1))
 
-  for i=1:nrow(df)
+  for i=1:size(df, 1)
     if ret[i] >= 0
       ups[i] += ret[i]
     else
