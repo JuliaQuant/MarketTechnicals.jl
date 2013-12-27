@@ -3,10 +3,7 @@ function doji{T,V}(op::Array{SeriesPair{T,V},1},
                    lo::Array{SeriesPair{T,V},1},
                    cl::Array{SeriesPair{T,V},1})
 
-  ba = float64([abs(value(op) - value(cl)) ./ (value(hi) - value(lo)) .< .01])
-  SeriesArray(index(op), ba)
-
-  # SeriesArray(index(op), [abs(value(op) - value(cl)) ./ (value(hi) - value(lo)) .< .01])
+   SeriesArray(index(op), [abs(value(op) - value(cl)) ./ (value(hi) - value(lo)) .< .01])
 end
 
 function hammer(x)
