@@ -7,12 +7,13 @@ momentum indicators, moving averages, volatility studies and volume analysis.
 
 ````julia
 julia> Pkg.add("MarketTechnicals")
+julia> Pkg.checkout("MarketTechnicals", "series")
 ````
 
-This is a work in progress and the API is not fixed. The current plan is to implement the semantics
+This is a work in progress and the API is not fixed.~~ The current plan is to implement the semantics
 that the function name (e.g. `bollinger_bands`) will produce a copy of the `DataFrame` passed into it.
 This will require the user to assign a variable to the "new" DataFrame. The semantics of the function 
-bang version (e.g. `bollinger_bands!`) will modify the `DataFrame` being passed into it and return it.
+bang version (e.g. `bollinger_bands!`) will modify the `DataFrame` being passed into it and return it.~~
 
 There are two functions for whom the semantics will be unique and those include `ema` and `sma`. The 
 reasoning is that these functions are called in many of the technical studies and serve a special 

@@ -1,22 +1,22 @@
-df     = readtime(Pkg.dir("MarketTechnicals/test/data/spx.csv"))
+module TestCandlesticks
+  
+  using Base.Test
+  using Series
+  using Datetime
+  using MarketTechnicals
 
-# doji
-dojidf   = doji(df)
-dojiday1 = subset(dojidf, :(Date .== $datetime(1970, 3, 31)))
-dojiday2 = subset(dojidf, :(Date .== $datetime(1970, 8, 5)))
+  op  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=2)
+  hi  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=3)
+  lo  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=4)
+  cl  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=5)
+  
+  # doji
+  dojisa   = doji(op,hi,lo,cl)
+  
+  @test index(dojisa[value(dojisa) .== 1])[1] == date(1970, 3, 31)
+  @test index(dojisa[value(dojisa) .== 1])[13] == date(1971, 11, 12)
 
-@assert "doji" == dojiday1[1, "doji"]
-@assert "doji" == dojiday2[1, "doji"]
-
-
-
-
-
-
-
-
-
-
+end
 
 
 # hammer
