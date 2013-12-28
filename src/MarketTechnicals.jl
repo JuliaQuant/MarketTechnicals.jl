@@ -9,11 +9,11 @@ export                 # ema, # ema_unpadded, # ema_wilder, # sma,
                        # obv, # vwap, 
        doji, 
                        # rsi, # rsi_wilder, # macd, # cci, 
-                       # floor_pivots,
+       floorpivots, woodiespivots, 
        @markettechnicals
 
 include("candlesticks.jl")
-# include("levels.jl")
+include("levels.jl")
 # include("movingaverages.jl")
 # include("momo.jl")
 # include("volatility.jl")

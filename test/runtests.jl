@@ -1,7 +1,7 @@
 using MarketTechnicals
 
-my_tests = ["candlesticks.jl"] 
-#            "levels.jl",  
+my_tests = ["candlesticks.jl",  
+            "levels.jl"]  
 #            "momo.jl",  
 #            "movingaverages.jl",  
 #            "volatility.jl",  
