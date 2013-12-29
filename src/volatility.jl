@@ -1,9 +1,9 @@
 # function bollingerbands{T,V}(sa::Array{SeriesPair{T,V},1}, ma::Int, width::Float64)
 
 #   df_ma  = moving!(df, col, mean, ma) #delete
-#   sama  = sma(sa, ma)
-#   df_new["up_bband"] = df_new[ma_col] + df_new[sd_col] * width
-#   df_new["dn_bband"] = df_new[ma_col] - df_new[sd_col] * width
+#   sama   = sma(sa, ma)
+    upband = df_new[ma_col] + df_new[sd_col] * width
+    dnband = df_new[ma_col] - df_new[sd_col] * width
 #   df_new
 end
 
