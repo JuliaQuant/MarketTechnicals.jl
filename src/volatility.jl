@@ -1,3 +1,4 @@
+function bollingerbands{T,V}(sa::Array{SeriesPair{T,V},1}, ma::Int, width::Float64)
 function bollinger_bands(df::DataFrame, col::String, ma::Int, width::Float64)
 
   df = copy(df) #preserve the original DataFrame
@@ -31,6 +32,30 @@ function true_range(df::DataFrame)
     end)
   df
 
+end
+
+
+function atr{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
+  if method == "simple"
+    k   = 2/(n+1)
+    m   = sma(sa, n) 
+    res = SeriesPair{T,V}[]
+    push!(res, SeriesPair(index(sa)[n], m[1].value)) # first one is always simple 
+
+    for i = n+1:length(sa)
+      sp = SeriesPair(sa[i].index, (sa[i].value * k + res[i-n].value * (1-k)))
+      push!(res, sp)
+    end
+    res
+
+  elseif method == "wilder"
+    println("")
+    print_with_color(:blue, "support for  wilder method is planned.")
+    println("")
+
+  else
+    error("method is not supported.")
+  end
 end
 
 function atr(df::DataFrame, n::Int)

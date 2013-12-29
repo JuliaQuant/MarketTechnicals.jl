@@ -1,7 +1,24 @@
 function rsi{T,V}(op::Array{SeriesPair{T,V},1},
                   hi::Array{SeriesPair{T,V},1},
                   lo::Array{SeriesPair{T,V},1},
-                  cl::Array{SeriesPair{T,V},1})
+                  cl::Array{SeriesPair{T,V},1}; method="simple")
+
+  if method == "simple"
+    res = SeriesPair{T,V}[]
+
+    for i = n+1:length(sa)
+    end
+    res
+
+  elseif method == "wilder"
+    println("")
+    print_with_color(:blue, "support for  wilder method is planned.")
+    println("")
+
+  else
+    error("method is not supported.")
+  end
+end
 
 function rsi(df::DataFrame, col::String, n::Int)
 
