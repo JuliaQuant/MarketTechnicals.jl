@@ -1,3 +1,8 @@
+function rsi{T,V}(op::Array{SeriesPair{T,V},1},
+                  hi::Array{SeriesPair{T,V},1},
+                  lo::Array{SeriesPair{T,V},1},
+                  cl::Array{SeriesPair{T,V},1})
+
 function rsi(df::DataFrame, col::String, n::Int)
 
   df  = copy(df)
