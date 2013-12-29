@@ -4,7 +4,7 @@ module MarketTechnicals
 
 using Series, Datetime
 
-export ema,            # ema_unpadded, # ema_wilder, # sma, 
+export sma, ema,             # ema_wilder,
                        # bollinger_bands, # true_range, # atr, # atr_wilder, # keltner_bands, 
                        # obv, # vwap, 
        doji, 
