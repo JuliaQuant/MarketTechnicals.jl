@@ -1,30 +1,21 @@
-# function bollingerbands{T,V}(sa::Array{SeriesPair{T,V},1}, ma::Int, width::Float64)
+function bollingerbands{T,V}(sa::Array{SeriesPair{T,V},1}, ma::Int, width::Float64)
 
-#   df_ma  = moving!(df, col, mean, ma) #delete
-#   sama   = sma(sa, ma)
-    upband = df_new[ma_col] + df_new[sd_col] * width
-    dnband = df_new[ma_col] - df_new[sd_col] * width
-#   df_new
+  sama   = sma(sa, ma)
+  sastd  = removenan(moving(sa, std, ma))
+  upband = value(sama) + value(sastd) * width
+  dnband = value(sama) - value(sastd) * width
+  sama, SeriesArray(index(sama), upband) , SeriesArray(index(sama), dnband) 
 end
-
-# bollinger_bands(df::DataFrame) = bollinger_bands(df::DataFrame, "Close", 20, 2.0)
 
 function truerange{T,V}(hi::Array{SeriesPair{T,V},1},
                         lo::Array{SeriesPair{T,V},1},
                         cl::Array{SeriesPair{T,V},1})
 
-#   Range = with(df, :(High - Low))
-#   Hilag = with(df, :(abs(High - $lag(Close))))
-#   Lolag = with(df, :(abs(Low - $lag(Close))))
-# 
-#   Hilag = replaceNA(Hilag, 0)
-#   Lolag = replaceNA(Lolag, 0)
-# 
-#   within!(df, quote
-#     TR  = float(max($Range, $Hilag, $Lolag))
-#     end)
-#   df
-# 
+  rng   = value(hi) .- value(lo) 
+  hilag = abs(value(hi) .- value(lag(cl)))
+  lolag = abs(value(lo) .- value(lag(cl)))
+  trv   = maximum(rng, hilag, lolag)
+  SeriesArray(index(rng), trv)
 end
 
 function atr{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
@@ -57,9 +48,6 @@ end
 #   within!(df, quote
 #     ATR = $ema($TR, $n) 
 #     end)
-#   df
-# end
-end
  
 # atr(df::DataFrame) = atr(df::DataFrame, 14)
  
