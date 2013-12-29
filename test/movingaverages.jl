@@ -1,11 +1,21 @@
-df     = readtime(Pkg.dir("MarketTechnicals/test/data/spx.csv"))
+module TestMovingAverages
+  
+  using Base.Test
+  using Series
+  using Datetime
+  using MarketTechnicals
 
-#ema
-dv  = df["Close"]
-e1  = ema(dv, 1)
-e2  = ema(dv, 2)
-e10 = ema(dv, 10)
+  op  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=2)
+  hi  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=3)
+  lo  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=4)
+  cl  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=5)
+  
+  # sma
+  
+  # ema
+  emasa = ema(cl, 10) 
+  
+  @test value(emasa)[1] == 92.394
+  @test_approx_eq value(emasa)[end] 101.10189950870759
 
-@assert e1[507]  == dv[507]
-@assert e2[507]  == 102.01237121462606 # R's TTR::EMA returns 102.01237 (rounded)
-@assert e10[507] == 101.10189950870759 # R's TTR::EMA returns 101.10190 (rounded)
+end

@@ -4,7 +4,7 @@ module MarketTechnicals
 
 using Series, Datetime
 
-export                 # ema, # ema_unpadded, # ema_wilder, # sma, 
+export ema,            # ema_unpadded, # ema_wilder, # sma, 
                        # bollinger_bands, # true_range, # atr, # atr_wilder, # keltner_bands, 
                        # obv, # vwap, 
        doji, 
@@ -14,7 +14,7 @@ export                 # ema, # ema_unpadded, # ema_wilder, # sma,
 
 include("candlesticks.jl")
 include("levels.jl")
-# include("movingaverages.jl")
+include("movingaverages.jl")
 # include("momo.jl")
 # include("volatility.jl")
 # include("volume.jl")

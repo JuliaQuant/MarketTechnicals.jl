@@ -1,9 +1,9 @@
 using MarketTechnicals
 
 my_tests = ["candlesticks.jl",  
+            "movingaverages.jl",  
             "levels.jl"]  
 #            "momo.jl",  
-#            "movingaverages.jl",  
 #            "volatility.jl",  
 #            "volume.jl"]
 
