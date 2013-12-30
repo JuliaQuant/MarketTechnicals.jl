@@ -12,14 +12,20 @@ module TestMovingAverages
   
   # sma
   smasa = sma(cl, 10) 
+  smaa  = sma(value(cl), 10) 
 
   @test_approx_eq value(smasa)[1] 92.394
+  @test_approx_eq smaa[1] 92.394
   @test_approx_eq value(smasa)[end] 101.45100000000001
+  @test_approx_eq smaa[end] 101.45100000000001
   
   # ema
   emasa = ema(cl, 10) 
+  emaa  = ema(value(cl), 10) 
   
   @test value(emasa)[1] == 92.394
+  @test emaa[1] == 92.394
   @test_approx_eq value(emasa)[end] 101.10189950870759
+  @test_approx_eq emaa[end] 101.10189950870759
 
 end
