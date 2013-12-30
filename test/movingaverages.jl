@@ -21,11 +21,14 @@ module TestMovingAverages
   
   # ema
   emasa = ema(cl, 10) 
+  emaw  = ema(cl, 10, wilder=false) 
+  #emaw  = ema(cl, 10, method="wilder") 
   emaa  = ema(value(cl), 10) 
   
   @test value(emasa)[1] == 92.394
   @test emaa[1] == 92.394
   @test_approx_eq value(emasa)[end] 101.10189950870759
+  @test_approx_eq value(emaw)[end] 99.72706080954146   # TTR  99.72706
   @test_approx_eq emaa[end] 101.10189950870759
 
 end

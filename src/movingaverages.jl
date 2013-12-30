@@ -16,13 +16,14 @@ function sma{T}(a::Array{T,1}, n::Int)
   res
 end
 
-function ema{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
-  if method == "simple"
-    k   = 2/(n+1)
-  elseif method == "wilder"
-    k   = 1/n
+function ema{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; wilder=false)
+
+#  wilder ?  eval(:(k  = 1/$n)) : eval(:(k = 2/($n+1)))
+
+  if  wilder 
+    k  = 1/n 
   else
-    error("method is not supported.")
+    k = 2/(n+1)
   end
 
   m   = sma(sa, n) 
@@ -36,13 +37,12 @@ function ema{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
   res
 end
 
-function ema{T}(a::Array{T,1}, n::Int; method="simple")
-  if method == "simple"
-    k   = 2/(n+1)
-  elseif method == "wilder"
-    k   = 1/n
+function ema{T}(a::Array{T,1}, n::Int; wilder=false)
+
+  if  wilder 
+    k  = 1/n 
   else
-    error("method is not supported.")
+    k = 2/(n+1)
   end
  
   m   = sma(a, n) 
@@ -54,6 +54,4 @@ function ema{T}(a::Array{T,1}, n::Int; method="simple")
     push!(res, val)
   end
   res
-
-
 end
