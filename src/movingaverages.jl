@@ -7,6 +7,15 @@ function sma{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int)
   res
 end
 
+function sma{T}(a::Array{T,1}, n::Int)
+  res = Float64[]
+  for i in 1:size(a, 1) - (n-1)
+    val = mean(a[i:i+(n-1)])
+    push!(res, val)
+  end
+  res
+end
+
 function ema{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
   if method == "simple"
     k   = 2/(n+1)
@@ -17,6 +26,29 @@ function ema{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
     for i = n+1:length(sa)
       sp = SeriesPair(sa[i].index, (sa[i].value * k + res[i-n].value * (1-k)))
       push!(res, sp)
+    end
+    res
+
+  elseif method == "wilder"
+    println("")
+    print_with_color(:blue, "support for  wilder method is planned.")
+    println("")
+
+  else
+    error("method is not supported.")
+  end
+end
+
+function ema{T}(a::Array{T,1}, n::Int; method="simple")
+  if method == "simple"
+    k   = 2/(n+1)
+    m   = sma(a, n) 
+    res = Float64[]
+    push!(res, m[1]) # first one is always simple 
+
+    for i = n+1:size(a, 1)
+      val = a[i] * k + res[i-n] * (1-k)
+      push!(res, val)
     end
     res
 

@@ -1,3 +1,5 @@
+# an idea: create one method named pivots with kwargs
+
 function floorpivots{T,V}(hi::Array{SeriesPair{T,V},1},
                           lo::Array{SeriesPair{T,V},1},
                           cl::Array{SeriesPair{T,V},1})
@@ -49,8 +51,7 @@ function woodiespivots{T,V}(op::Array{SeriesPair{T,V},1},
   # SeriesArray(index(op), s4, "s4")
 end
 
-function camarillapivots{T,V}(op::Array{SeriesPair{T,V},1},
-                              hi::Array{SeriesPair{T,V},1},
+function camarillapivots{T,V}(hi::Array{SeriesPair{T,V},1},
                               lo::Array{SeriesPair{T,V},1},
                               cl::Array{SeriesPair{T,V},1})
   #code here
