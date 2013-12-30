@@ -21,8 +21,7 @@ module TestMovingAverages
   
   # ema
   emasa = ema(cl, 10) 
-  emaw  = ema(cl, 10, wilder=false) 
-  #emaw  = ema(cl, 10, method="wilder") 
+  emaw  = ema(cl, 10, wilder=true) 
   emaa  = ema(value(cl), 10) 
   
   @test value(emasa)[1] == 92.394
