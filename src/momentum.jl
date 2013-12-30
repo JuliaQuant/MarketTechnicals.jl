@@ -1,7 +1,6 @@
-function rsi{T,V}(sa::Array{SeriesPair{T,V},1}; method="simple")
+function rsi{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
 
-  ret = diff(value(sa))
-  ret = [0; ret]
+  ret = [0; diff(value(sa))]
   ups = zeros(size(sa, 1))
   dns = zeros(size(sa, 1))
 
@@ -17,14 +16,13 @@ function rsi{T,V}(sa::Array{SeriesPair{T,V},1}; method="simple")
 
     upsema  = ema(ups, n)
     dnsema  = abs(ema(dns, n))
-    RS      = upsema ./ dnsema  
-
+    rs      = upsema ./ dnsema  
 
   elseif method == "wilder"
   
 #    upsema = ema(ups, n, method="wilder")
 #    dnsema = abs(ema(dns, n, method="wilder"))
-#    RS     = upsema ./ dnsema  
+#    rs     = upsema ./ dnsema  
     println("")
     print_with_color(:blue, "support for  wilder method is planned.")
     println("")
@@ -33,7 +31,8 @@ function rsi{T,V}(sa::Array{SeriesPair{T,V},1}; method="simple")
     error("method is not supported.")
   end
 
-    res  = 100 .- (100./(1 .+ RS))
+    res  = 100 .- (100./(1 .+ rs))
+    SeriesArray(index(sa)[n:end], res)
 end
 
 
