@@ -8,7 +8,7 @@ export sma, ema,
        bollingerbands, # truerange, # atr, # keltnerbands, 
                        # obv, # vwap, 
        doji, 
-       rsi,  # macd, # cci, 
+       rsi, macd, # cci, 
        floorpivots, woodiespivots, 
        @markettechnicals
 

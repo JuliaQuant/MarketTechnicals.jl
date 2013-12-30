@@ -35,26 +35,24 @@ function rsi{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
     SeriesArray(index(sa)[n:end], res)
 end
 
-
-#rsi_wilder(df::DataFrame) = rsi_wilder(df::DataFrame, "Close", 14)
+rsi{T,V}(sa::Array{SeriesPair{T,V},1}) = rsi(sa, 14)
 
 function macd{T,V}(sa::Array{SeriesPair{T,V},1}, fast::Int, slow::Int, signal::Int)
  
+  fastma = ema(value(sa), fast)[slow-fast+1:end] # match dimensions with shorter slow array
+  slowma = ema(value(sa), slow)
+  mcdval = (fastma - slowma)[signal:end]
+  sigval = ema(mcdval, signal)
  
-   fastma = ema(value(sa), fast)[slow-fast+1:end] # match dimensions with shorter slow array
-   slowma = ema(value(sa), slow)
-   mcdval = (fastma - slowma)
-   sigval = ema(macdval, signal)
- 
-#     mcd   = $macdval
-#     signal = $signal
+  idx = index(sa)[size(sa,1) - size(sigval,1) + 1:end]
+  mcd = SeriesArray(idx, mcdval)
+  sig = SeriesArray(idx, sigval)
  
   mcd, sig
 end
 
+macd(sa) = macd(sa, 12, 26, 9)
  
-# #macd(df::DataFrame, col::String) = macd(df::DataFrame, col::String, 12, 26, 9)
-# 
 # function cci(df::DataFrame, n::Int, c::Float64)
 # 
 #   df = copy(df)

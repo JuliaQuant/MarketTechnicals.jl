@@ -20,12 +20,12 @@ module TestMomentum
 #   
 #   @test_approx_eq 72.15153048735719 rsw[end].value # from TTR 1971-12-31 72.151530
 #   
-#   # macd
-#   macsa = macd(sa)
-#   
-#   @test_approx_eq 1.8694463607370295 macsa[end].value  # TTR value with percent=FALSE is 1.900959 
-#   @test_approx_eq 1.7189453474752991 macsa[end].value  # TTR value with percent=FALSE is 1.736186
-#   
+  # macd
+  mcd, val = macd(cl)
+  
+#  @test_approx_eq 1.8694463607370295 mcd[end].value  # TTR value with percent=FALSE is 1.900959 
+  @test_approx_eq 1.7189453474752991 val[end].value  # TTR value with percent=FALSE is 1.736186
+   
 #   # cci 
 #   ccisa = cci(sa)
 #   
