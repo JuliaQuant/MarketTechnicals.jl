@@ -2,9 +2,9 @@ using MarketTechnicals
 
 my_tests = ["candlesticks.jl",  
             "movingaverages.jl",  
+            "volatility.jl",  
             "levels.jl"]  
-#            "momo.jl",  
-#            "volatility.jl",  
+#            "momentum.jl",  
 #            "volume.jl"]
 
 print_with_color(:cyan, "Running tests: ") 
