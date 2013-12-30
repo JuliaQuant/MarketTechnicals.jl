@@ -38,24 +38,21 @@ end
 
 #rsi_wilder(df::DataFrame) = rsi_wilder(df::DataFrame, "Close", 14)
 
-# function macd(df::DataFrame, col::String, fast::Int, slow::Int, signal::Int)
-# 
-#   df  = copy(df)
-# 
-#   fast_ma = with(df, :($ema($df[$col], $fast)))
-#   slow_ma = with(df, :($ema($df[$col], $slow)))
-#   macdval = fast_ma - slow_ma
-#   tempema = ema(macdval[slow:end], signal)
-#   signal  = pad(tempema, slow-1, 0, NA)
-# 
-#   within!(df, quote
-#     macd   = $macdval
+function macd{T,V}(sa::Array{SeriesPair{T,V},1}, fast::Int, slow::Int, signal::Int)
+ 
+ 
+   fastma = ema(value(sa), fast)[slow-fast+1:end] # match dimensions with shorter slow array
+   slowma = ema(value(sa), slow)
+   mcdval = (fastma - slowma)
+   sigval = ema(macdval, signal)
+ 
+#     mcd   = $macdval
 #     signal = $signal
-#     end)
-# 
-#   df
-# end
-# 
+ 
+  mcd, sig
+end
+
+ 
 # #macd(df::DataFrame, col::String) = macd(df::DataFrame, col::String, 12, 26, 9)
 # 
 # function cci(df::DataFrame, n::Int, c::Float64)
