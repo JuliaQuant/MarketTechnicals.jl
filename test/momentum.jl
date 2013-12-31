@@ -12,18 +12,15 @@ module TestMomentum
   
   # rsi 
   rsisa = rsi(cl, 14)
+  rsiw  = rsi(cl, 14, wilder=true)
   
   @test_approx_eq 73.80060302291837 rsisa[end].value
+  @test_approx_eq 72.15153048735719 rsiw[end].value # from TTR 1971-12-31 72.151530
   
-#   # rsi method = wilder 
-#   rsw = rsi(cl, method="wilder")
-#   
-#   @test_approx_eq 72.15153048735719 rsw[end].value # from TTR 1971-12-31 72.151530
-#   
   # macd
   mcd, val = macd(cl)
   
-#  @test_approx_eq 1.8694463607370295 mcd[end].value  # TTR value with percent=FALSE is 1.900959 
+  @test_approx_eq 1.8694463607370295 mcd[end].value  # TTR value with percent=FALSE is 1.900959 
   @test_approx_eq 1.7189453474752991 val[end].value  # TTR value with percent=FALSE is 1.736186
    
 #   # cci 
@@ -31,6 +28,3 @@ module TestMomentum
 #   
 #   @test_approx_eq -146.17060449635804 ccisa[end].value  # TTR::CCI value is -175.8644
 end
-
-
-

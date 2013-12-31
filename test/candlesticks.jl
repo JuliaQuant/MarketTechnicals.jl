@@ -13,18 +13,8 @@ module TestCandlesticks
   # doji
   dojisa   = doji(op,hi,lo,cl)
   
-  @test index(dojisa[value(dojisa) .== 1])[1] == date(1970, 3, 31)
+  @test index(dojisa[value(dojisa) .== 1])[1]  == date(1970, 3, 31)
   @test index(dojisa[value(dojisa) .== 1])[13] == date(1971, 11, 12)
+  @test index(dojisa)[end]                     == date(1971, 12, 31)
 
 end
-
-
-# hammer
-# inverted_hammer
-# hanging_man
-# mirabosu
-# shooting_star
-# spinning_top
-# three_white_soldiers
-# three_black_crows
-# morning_star

@@ -1,7 +1,7 @@
 function sma{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int)
   res = SeriesPair{T,V}[]
   for i in 1:length(sa) - (n-1)
-    sp = SeriesPair(sa[i].index, mean(value(sa[i:i+(n-1)])))
+    sp = SeriesPair(sa[i+(n-1)].index, mean(value(sa[i:i+(n-1)])))
     push!(res, sp)
   end
   res

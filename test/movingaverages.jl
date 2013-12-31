@@ -18,6 +18,7 @@ module TestMovingAverages
   @test_approx_eq smaa[1] 92.394
   @test_approx_eq value(smasa)[end] 101.45100000000001
   @test_approx_eq smaa[end] 101.45100000000001
+  @test index(smasa)[end] == date(1971, 12, 31)
   
   # ema
   emasa = ema(cl, 10) 
@@ -29,5 +30,6 @@ module TestMovingAverages
   @test_approx_eq value(emasa)[end] 101.10189950870759
   @test_approx_eq value(emaw)[end] 99.72706080954146   # TTR  99.72706
   @test_approx_eq emaa[end] 101.10189950870759
+  @test index(emasa)[end] == date(1971, 12, 31)
 
 end
