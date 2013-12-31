@@ -7,15 +7,22 @@ function bollingerbands{T,V}(sa::Array{SeriesPair{T,V},1}, ma::Int, width::Float
   sama, SeriesArray(index(sama), upband) , SeriesArray(index(sama), dnband) 
 end
 
+bollingerbands{T,V}(sa::Array{SeriesPair{T,V},1}) = bollingerbands(sa, 20, 2.0)
+
 function truerange{T,V}(hi::Array{SeriesPair{T,V},1},
                         lo::Array{SeriesPair{T,V},1},
                         cl::Array{SeriesPair{T,V},1})
 
-  rng   = value(hi) .- value(lo) 
-  hilag = abs(value(hi) .- value(lag(cl)))
-  lolag = abs(value(lo) .- value(lag(cl)))
-  trv   = maximum(rng, hilag, lolag)
-  SeriesArray(index(rng), trv)
+  rng   = value(hi) - value(lo) 
+  hilag = abs(value(hi) - value(lag(cl)))
+  lolag = abs(value(lo) - value(lag(cl)))
+  
+  trv = [rng[1]] # because the other two have NaN values in the first row
+  for i in 2:size(rng,1)
+    push!(trv, maximum([rng[i], hilag[i], lolag[i]]))
+  end
+
+  SeriesArray(index(hi), trv)
 end
 
 function atr{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
