@@ -5,7 +5,7 @@ module MarketTechnicals
 using Series, Datetime
 
 export sma, ema,             
-       bollingerbands, truerange, # atr, # keltnerbands, 
+       bollingerbands, truerange, atr, keltnerbands, 
                        # obv, # vwap, 
        doji, 
        rsi, macd, # cci, 

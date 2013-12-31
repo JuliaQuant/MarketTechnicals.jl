@@ -12,10 +12,10 @@ module TestMomentum
   
   # rsi 
   rsisa = rsi(cl, 14)
-#  rsiw  = rsi(cl, 14, wilder=true)
+  rsiw  = rsi(cl, 14, wilder=true)
   
   @test_approx_eq 73.80060302291837 rsisa[end].value
-#  @test_approx_eq 72.15153048735719 rsiw[end].value # from TTR 1971-12-31 72.151530
+  @test_approx_eq 72.15153048735719 rsiw[end].value # from TTR 1971-12-31 72.151530
   @test index(rsisa)[end] == date(1971, 12, 31)
   
   # macd

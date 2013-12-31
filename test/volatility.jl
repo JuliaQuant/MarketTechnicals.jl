@@ -15,31 +15,31 @@ module TestVolatility
   bbma, bbup, bbdn  = bollingerbands(cl, 20, 2.0)
   
   @test_approx_eq  99.522             bbma[end].value   # R's TTR value 99.522
-  @test_approx_eq  103.79282439964834 bbup[end].value   # R's TTR value 103.6847 
-  @test_approx_eq  95.25117560035167  bbdn[end].value   # R's TTR value 95.35932 
+  @test_approx_eq  103.79282439964834 bbup[end].value   # R's TTR value 103.6847 # std must be calculated slightly differently
+  @test_approx_eq  95.25117560035167  bbdn[end].value   # R's TTR value 95.35932 # std must be calculated slightly differently
   @test index(bbma)[end] == date(1971, 12, 31)
   
   # truerange
-  trg  = truerange(hi, lo, cl)
+  trg  = truerange(hi,lo,cl)
    
   @test_approx_eq 0.31 trg[end].value # TTR  0.31 
   @test index(trg)[end] == date(1971, 12, 31)
    
   # atr
-#   atrsa  = atr(sa)
-#   atw  = atr(sa, wilder=true)
+  atrsa  = atr(hi,lo,cl, 14)
+  atw  = atr(hi,lo,cl, 14, wilder=true)
    
-#   @test_approx_eq 1.6727174227174808  atrsa[end]  # 0.6892646   102.09  101.78
-#   @test_approx_eq 1.6327218109893784 atw[end] # TTR uses Wilder ema 1.632722
-#   @test index(atrsa)[end] == date(1971, 12, 31)
+  @test_approx_eq 0.6507814197238606 atrsa[end].value # test needs confirmation
+  @test_approx_eq 0.9248091375004336 atw[end].value   # test needs confirmation 
+  @test index(atrsa)[end] == date(1971, 12, 31)
    
   # keltner_bands
-#   kma, kup, kdn  = keltnerbands(hi, lo, cl, 10)
+  kma, kup, kdn  = keltnerbands(hi, lo, cl, 10)
    
-#   @test_approx_eq  98.10133333333333 kma[end]  # needs confirmation 
-#   @test_approx_eq  98.91883333333332 kup[end]  # needs confirmation 
-#   @test_approx_eq  97.28383333333333 kdn[end]  # needs confirmation  
-#   @test index(kma)[end] == date(1971, 12, 31)
+  @test_approx_eq  98.10133333333333 kma[1].value  # needs confirmation 
+  @test_approx_eq  98.91883333333332 kup[1].value  # needs confirmation 
+  @test_approx_eq  97.28383333333333 kdn[1].value  # needs confirmation  
+  @test index(kma)[end] == date(1971, 12, 31)
   
 #   ## chaikin_volatility
 #   
