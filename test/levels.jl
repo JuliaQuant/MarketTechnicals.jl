@@ -21,6 +21,7 @@ module TestLevels
   @test  92.01333333333336 == value(s1)[2] 
   @test  91.02666666666669 == value(s2)[2] 
   @test  90.26333333333336 == value(s3)[2] 
+  @test index(s1)[end] == date(1971, 12, 31)
 
   # woodiespivots 
   #wr4, wr3, wr2, wr1, p, ws1, ws2, ws3, ws4 = woodiespivots(op, hi, lo)
@@ -35,6 +36,7 @@ module TestLevels
   @test_approx_eq   91.08250000000001 value(ws2)[2]  # 91.08  
   @test_approx_eq   90.37500000000001 value(ws3)[2]  # 90.38  
 #  @test_approx_eq   88.62500000000001 value(ws4)[2]  # 87.58
+  @test index(p)[end]               == date(1971, 12, 31)
 end
 
 # camarilla_pivots 

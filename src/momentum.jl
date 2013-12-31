@@ -1,4 +1,4 @@
-function rsi{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
+function rsi{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; wilder=false)
 
   ret = [0; diff(value(sa))]
   ups = zeros(size(sa, 1))
@@ -12,27 +12,20 @@ function rsi{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; method="simple")
     end
    end
 
-  if method == "simple"
 
+  if  wilder 
+    upsema = ema(ups, n, wilder=true)
+    dnsema = abs(ema(dns, n, wilder=true))
+    rs     = upsema ./ dnsema  
+
+  else
     upsema  = ema(ups, n)
     dnsema  = abs(ema(dns, n))
     rs      = upsema ./ dnsema  
-
-  elseif method == "wilder"
-  
-#    upsema = ema(ups, n, method="wilder")
-#    dnsema = abs(ema(dns, n, method="wilder"))
-#    rs     = upsema ./ dnsema  
-    println("")
-    print_with_color(:blue, "support for  wilder method is planned.")
-    println("")
-
-  else
-    error("method is not supported.")
   end
 
-    res  = 100 .- (100./(1 .+ rs))
-    SeriesArray(index(sa)[n:end], res)
+  res  = 100 .- (100./(1 .+ rs))
+  SeriesArray(index(sa)[n:end], res)
 end
 
 rsi{T,V}(sa::Array{SeriesPair{T,V},1}) = rsi(sa, 14)
@@ -51,7 +44,7 @@ function macd{T,V}(sa::Array{SeriesPair{T,V},1}, fast::Int, slow::Int, signal::I
   mcd, sig
 end
 
-macd(sa) = macd(sa, 12, 26, 9)
+macd{T,V}(sa::Array{SeriesPair{T,V},1}) = macd(sa, 12, 26, 9)
  
 # function cci(df::DataFrame, n::Int, c::Float64)
 # 
@@ -68,8 +61,4 @@ macd(sa) = macd(sa, 12, 26, 9)
 #   df 
 # end
 # 
-# #cci(df::DataFrame) = cci(df::DataFrame, 20, 0.015)
-# 
-# function williamspercentr(x)
-#   #code here
-# end
+# #cci(df::DataFrame) = cci(sa, 20, 0.015)
