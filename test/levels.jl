@@ -1,4 +1,4 @@
-using MarketData, FactCheck 
+using MarketTechnicals, MarketData, FactCheck 
 
 fr3, fr2, fr1, fp, fs1, fs2, fs3 = floorpivots(hi, lo, cl)
 wr3, wr2, wr1, wp, ws1, ws2, ws3 = woodiespivots(op, hi, lo)
@@ -16,10 +16,8 @@ facts("Levels") do
   end                               
 
   context("woodiespivots") do
- 
     #  @fact_approx_eq  97.37500000000001 value(wr4)[2]   # values NEED to be verified with online calculators 
     #  @fact_approx_eq   88.62500000000001 value(ws4)[2]  
- 
     @fact  109.450 => roughly(value(wr3)[2])  
     @fact  107.765 => roughly(value(wr2)[2])  
     @fact  106.630 => roughly(value(wr1)[2])  
@@ -29,4 +27,5 @@ facts("Levels") do
     @fact  100.990 => roughly(value(ws3)[2])  
     @fact index(wp)[end]               => lastday
   end
+
 end

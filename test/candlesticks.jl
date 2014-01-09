@@ -1,4 +1,4 @@
-using MarketData, FactCheck  
+using MarketTechnicals, MarketData, FactCheck  
   
 sa   = doji(op,hi,lo,cl)
 

@@ -1,33 +1,24 @@
-module TestMomentum
-  
-  using Base.Test
-  using Series
-  using Datetime
-  using MarketTechnicals
+using MarketTechnicals, MarketData, FactCheck 
 
-  op  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=2)
-  hi  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=3)
-  lo  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=4)
-  cl  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=5)
+mcd, val = macd(cl)
+
+facts("Momentum") do
   
-  # rsi 
-  rsisa = rsi(cl, 14)
-  rsiw  = rsi(cl, 14, wilder=true)
+  context("rsi") do
+    @fact rsi(cl, 14)[end].value              => 73.80060302291837 
+    @fact rsi(cl, 14, wilder=true)[end].value => 72.15153048735719  # from TTR 1971-12-31 72.151530
+    @fact index(rsi(cl, 14))[end] => lastday
+  end
   
-  @test_approx_eq 73.80060302291837 rsisa[end].value
-  @test_approx_eq 72.15153048735719 rsiw[end].value # from TTR 1971-12-31 72.151530
-  @test index(rsisa)[end] == date(1971, 12, 31)
-  
-  # macd
-  mcd, val = macd(cl)
-   
-#   @test_approx_eq 1.8694463607370295 mcd[end].value  # TTR value with percent=FALSE is 1.900959 
-#   @test_approx_eq 1.7189453474752991 val[end].value  # TTR value with percent=FALSE is 1.736186
-  @test index(mcd)[end] == date(1971, 12, 31)
+  context("macd") do 
+    @fact  mcd[end].value => 1.8694463607370295  # TTR value with percent=FALSE is 1.900959 
+    @fact  val[end].value => 1.7189453474752991  # TTR value with percent=FALSE is 1.736186
+    @fact index(mcd)[end] => lastday
+  end
     
-  # cci 
-#   ccisa = cci(sa)
-#    
-#   @test_approx_eq -146.17060449635804 ccisa[end].value  # TTR::CCI value is -175.8644
-#   @test index(ccisa)[end] == date(1971, 12, 31)
+  context("cci") do 
+#   @fact cci(cl)[end].value  => -146.17060449635804   # TTR::CCI value is -175.8644
+#   @fact index(cci(cl))[end] => lastday
+  end
+
 end
