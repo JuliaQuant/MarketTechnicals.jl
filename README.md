@@ -7,7 +7,7 @@ momentum indicators, moving averages, volatility studies and volume analysis.
 
 ````julia
 julia> Pkg.add("MarketTechnicals")
-julia> Pkg.checkout("MarketTechnicals", "series")
+julia> Pkg.checkout("MarketTechnicals", "dataframes") # package defaults to support for Series
 ````
 
 This is a work in progress and the API is not fixed.~~ The current plan is to implement the semantics
