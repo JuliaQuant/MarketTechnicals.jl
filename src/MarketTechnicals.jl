@@ -9,8 +9,7 @@ export sma, ema,
                        # obv, # vwap, 
        doji, 
        rsi, macd, # cci, 
-       floorpivots, woodiespivots, 
-       @markettechnicals
+       floorpivots, woodiespivots 
 
 include("candlesticks.jl")
 include("levels.jl")
@@ -18,6 +17,5 @@ include("movingaverages.jl")
 include("momentum.jl")
 include("volatility.jl")
 # include("volume.jl")
-include("../test/testmacro.jl")
 
 end 
