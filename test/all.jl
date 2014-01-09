@@ -1,3 +1,5 @@
+using MarketTechnicals
+
 include("candlesticks.jl")  
 include("levels.jl")  
 #include("movingaverages.jl")  

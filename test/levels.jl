@@ -27,6 +27,6 @@ facts("Levels") do
     @fact  103.810 => roughly(value(ws1)[2])  
     @fact  102.125 => roughly(value(ws2)[2])  
     @fact  100.990 => roughly(value(ws3)[2])  
-    @fact index(p)[end]               => lastday
+    @fact index(wp)[end]               => lastday
   end
 end
