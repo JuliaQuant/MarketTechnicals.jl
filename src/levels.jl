@@ -1,40 +1,59 @@
-function floor_pivots(df::DataFrame)
+# an idea: create one method named pivots with kwargs
 
-  df = copy(df)
+function floorpivots{T,V}(hi::Array{SeriesPair{T,V},1},
+                          lo::Array{SeriesPair{T,V},1},
+                          cl::Array{SeriesPair{T,V},1})
 
-   P  = with(df, :(($lag(High) .+ $lag(Low) .+ $lag(Close))./3))
-   S1 = with(df, :(2.* $P .- $lag(High)))
-   R1 = with(df, :(2.* $P .- $lag(Low)))
-   S2 = P - (R1 - S1)
-   R2 = (P - S1) + R1
-   S3 = P - (R2 - S1)
-   R3 = (P - S1) + R2
 
-  within!(df, quote
-   S3    = $S3
-   S2    = $S2
-   S1    = $S1
-   pivot = $P
-   R1    = $R1
-   R2    = $R2
-   R3    = $R3
-  end)
+  p  = (value(lag(hi)) + value(lag(lo)) + value(lag(cl))) ./ 3
+  s1 = 2p - value(lag(hi))
+  r1 = 2p - value(lag(lo))
+  s2 = p - (r1 - s1)
+  r2 = (p - s1) + r1
+  s3 = p - (r2 - s1)
+  r3 = (p - s1) + r2
+  
+  SeriesArray(index(hi), r3, "r3"),
+  SeriesArray(index(hi), r2, "r2"),
+  SeriesArray(index(hi), r1, "r1"),
+  SeriesArray(index(hi), p , "pivot"),
+  SeriesArray(index(hi), s1, "s1"),
+  SeriesArray(index(hi), s2, "s2"),
+  SeriesArray(index(hi), s3, "s3")
+
 end
 
-function woodies_pivots(x)
-  #code here
-  ##  R4 = R3 + (H - L)
-  ##  R3 = H + 2 * (PP - L) 
-  ##  R2 = PP + (H - L)
-  ##  R1 = (2 * PP) - LOW
-  ##  PP = (HIGH + LOW + (OPEN * 2)) / 4
-  ##  S1 = (2 * PP) - HIGH
-  ##  S2 = PP - (H - L)
-  ##  S3 = L - 2 * (H - PP) 
-  ##  S4 = S3 - (H - L)
+function woodiespivots{T,V}(op::Array{SeriesPair{T,V},1},
+                            hi::Array{SeriesPair{T,V},1},
+                            lo::Array{SeriesPair{T,V},1})
+
+  range = value(lag(hi)) - value(lag(lo))
+
+  p  = ((value(lag(hi)) + value(lag(lo)) + 2value(op))) / 4
+  s1 = 2p - value(lag(hi))
+  r1 = 2p - value(lag(lo))
+  s2 = p - range
+  r2 = p + range
+  s3 = s1 - range
+  r3 = r1 + range
+  # s4 = s3 - range # can't get an answer that matches online calculators
+  # r4 = r3 + range
+
+
+  # SeriesArray(index(op), r4, "r4"),
+  SeriesArray(index(op), r3, "r3"),
+  SeriesArray(index(op), r2, "r2"),
+  SeriesArray(index(op), r1, "r1"),
+  SeriesArray(index(op), p , "pivot"),
+  SeriesArray(index(op), s1, "s1"),
+  SeriesArray(index(op), s2, "s2"),
+  SeriesArray(index(op), s3, "s3")
+  # SeriesArray(index(op), s4, "s4")
 end
 
-function camarilla_pivots(x)
+function camarillapivots{T,V}(hi::Array{SeriesPair{T,V},1},
+                              lo::Array{SeriesPair{T,V},1},
+                              cl::Array{SeriesPair{T,V},1})
   #code here
   ##  R4 = (H - L) * 1.1/2 + C 
   ##  R3 = (H - L) * 1.1/4 + C
@@ -46,7 +65,10 @@ function camarilla_pivots(x)
   ##  S4 = C - (H - L) * 1.1/2
 end
 
-function demark_pivots(x)
+function demarkpivots{T,V}(op::Array{SeriesPair{T,V},1},
+                           hi::Array{SeriesPair{T,V},1},
+                           lo::Array{SeriesPair{T,V},1},
+                           cl::Array{SeriesPair{T,V},1})
   #code here
   ## If Close < Open then X = (H + (L * 2) + C) 
   ## If Close > Open then X = ((H * 2) + L + C) 

@@ -1,4 +1,3 @@
-TimeSeries
-DataFrames
-DataArrays
+julia 0.2-
+Series
 Datetime

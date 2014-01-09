@@ -1,11 +1,11 @@
 using MarketTechnicals
 
-my_tests = ["candlesticks.jl", 
-            "levels.jl",  
-            "momo.jl",  
+my_tests = ["candlesticks.jl",  
             "movingaverages.jl",  
+            "momentum.jl",  
             "volatility.jl",  
-            "volume.jl"]
+#            "volume.jl",
+            "levels.jl"]  
 
 print_with_color(:cyan, "Running tests: ") 
 println("")

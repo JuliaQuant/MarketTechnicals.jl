@@ -1,20 +1,10 @@
-function doji(df::DataFrame)
+function doji{T,V}(op::Array{SeriesPair{T,V},1},
+                   hi::Array{SeriesPair{T,V},1},
+                   lo::Array{SeriesPair{T,V},1},
+                   cl::Array{SeriesPair{T,V},1})
 
-  df = copy(df)
-
-# boolean for abs diff between Open and Close / range is less than 1%
-  dj = with(df, :((abs(Open - Close)) ./ (High - Low) .< .01))
-
-  within!(df, quote
-    doji = map(x -> x == true? "doji": false, $dj)
-    end)
-  df
-
-# to get only the doji values from the result use:
-# subset(df, :(doji .== "doji"))
+   SeriesArray(index(op), [abs(value(op) - value(cl)) ./ (value(hi) - value(lo)) .< .01])
 end
-
-
 
 function hammer(x)
   #code here

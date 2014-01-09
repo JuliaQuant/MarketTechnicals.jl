@@ -1,38 +1,49 @@
-df     = readtime(Pkg.dir("MarketTechnicals/test/data/spx.csv"))
+module TestVolatility
+  
+  using Base.Test
+  using Series
+  using Datetime
+  using MarketTechnicals
 
-# bollinger_bands
-bb_df  = bollinger_bands(df)
+  op = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=2)
+  hi = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=3)
+  lo = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=4)
+  cl = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=5)
+  tp = SeriesArray(index(hi), ((value(hi) + value(lo) + value(cl)) ./ 3))
 
-@assert 2.2299598195282666 == bb_df[488, 9]   
-@assert 103.98191963905654 == bb_df[488, 10]  # R's TTR value 103.6847 (uses typical price instead of close for std)
-@assert  95.06208036094347 == bb_df[488, 11]  # R's TTR value 95.35932 (uses typical price instead of close for std)
-
-# true_range
-trg_df  = true_range(df)
-
-@assert 0.4299999999999926 == trg_df[506,8]
-
-# atr
-atr_df  = atr(df)
-
-#@assert 1.6727072542453973 == atr_df[400, 8] 
-@assert 1.6727174227174808  == atr_df[400, 8] 
-
-# atr_wilder
-atw_df  = atr_wilder(df)
- 
-#@assert 1.6325232053525351 == atw_df[400, 8] # TTR uses Wilder ema 1.632722
-@assert 1.6327218109893784  == atw_df[400, 8] # TTR uses Wilder ema 1.632722
-
-# keltner_bands
-kel_df  = keltner_bands(df)
-
-@assert 98.10133333333333 == kel_df[400, 8]  # needs confirmation 
-@assert 98.91883333333332 == kel_df[400, 9]  # needs confirmation 
-@assert 97.28383333333333 == kel_df[400, 10] # needs confirmation  
-
-## chaikin_volatility
-
-#chk_df  = chaikin_volatility(df)
-
-#@assert 17.0466 == chk_df["Range"]
+  # bollinger_bands
+  bbma, bbup, bbdn  = bollingerbands(cl, 20, 2.0)
+  
+  @test_approx_eq  99.522             bbma[end].value   # R's TTR value 99.522
+  @test_approx_eq  103.79282439964834 bbup[end].value   # R's TTR value 103.6847 # std must be calculated slightly differently
+  @test_approx_eq  95.25117560035167  bbdn[end].value   # R's TTR value 95.35932 # std must be calculated slightly differently
+  @test index(bbma)[end] == date(1971, 12, 31)
+  
+  # truerange
+  trg  = truerange(hi,lo,cl)
+   
+  @test_approx_eq 0.31 trg[end].value # TTR  0.31 
+  @test index(trg)[end] == date(1971, 12, 31)
+   
+  # atr
+  atrsa  = atr(hi,lo,cl, 14)
+  atw  = atr(hi,lo,cl, 14, wilder=true)
+   
+  @test_approx_eq 0.6507814197238606 atrsa[end].value # test needs confirmation
+  @test_approx_eq 0.9248091375004336 atw[end].value   # test needs confirmation 
+  @test index(atrsa)[end] == date(1971, 12, 31)
+   
+  # keltner_bands
+  kma, kup, kdn  = keltnerbands(hi, lo, cl, 10)
+   
+  @test_approx_eq  98.10133333333333 kma[1].value  # needs confirmation 
+  @test_approx_eq  98.91883333333332 kup[1].value  # needs confirmation 
+  @test_approx_eq  97.28383333333333 kdn[1].value  # needs confirmation  
+  @test index(kma)[end] == date(1971, 12, 31)
+  
+#   ## chaikin_volatility
+#   
+#   #chk  = chaikinvolatility(sa)
+#   
+#   #@test_approx_eq 17.0466 == chk
+end 
