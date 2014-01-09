@@ -3,19 +3,19 @@ using MarketTechnicals, MarketData, FactCheck
 facts("Moving Averages") do
 
   context("sma") do  
-    @fact value(sma(cl, 10))[1]   => 92.394
-    @fact sma(value(cl), 10)[1]   => 92.394
-    @fact value(sma(cl, 10))[end] => 101.45100000000001
-    @fact sma(value(cl), 10)[end] => 101.45100000000001
+    @fact value(sma(cl, 10))[1]   => roughly(108.893)
+    @fact sma(value(cl), 10)[1]   => roughly(108.893)
+    @fact value(sma(cl, 10))[end] => roughly(122.698)
+    @fact sma(value(cl), 10)[end] => roughly(122.698)
     @fact index(sma(cl, 10))[end] => lastday
   end
   
   context("ema") do 
-    @fact value(ema(cl, 10))[1]                => 92.394
-    @fact ema(value(cl), 10)[1]                => 92.394
-    @fact value(ema(cl, 10))[end]              => 101.10189950870759
-    @fact value(ema(cl, 10, wilder=true))[end] => 99.72706080954146   # TTR  99.72706
-    @fact ema(value(cl), 10)[end]              => 101.10189950870759
+    @fact value(ema(cl, 10))[1]                => roughly(108.893)
+    @fact ema(value(cl), 10)[1]                => roughly(108.893)
+    @fact value(ema(cl, 10))[end]              => roughly(122.675)
+    @fact ema(value(cl), 10)[end]              => roughly(122.675)
+    @fact value(ema(cl, 10, wilder=true))[end] => roughly(123.021) # TTR  99.72706
     @fact index(ema(cl, 10))[end]              => lastday
   end
 
