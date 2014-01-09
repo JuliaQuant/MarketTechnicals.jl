@@ -1,20 +1,13 @@
-module TestCandlesticks
+using MarketData, FactCheck  
   
-  using Base.Test
-  using Series
-  using Datetime
-  using MarketTechnicals
+sa   = doji(op,hi,lo,cl)
 
-  op  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=2)
-  hi  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=3)
-  lo  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=4)
-  cl  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=5)
-  
-  # doji
-  dojisa   = doji(op,hi,lo,cl)
-  
-  @test index(dojisa[value(dojisa) .== 1])[1]  == date(1970, 3, 31)
-  @test index(dojisa[value(dojisa) .== 1])[13] == date(1971, 11, 12)
-  @test index(dojisa)[end]                     == date(1971, 12, 31)
+facts("Candlesticks") do
+
+  context("doji") do
+    @fact index(sa[value(sa) .== 1])[1] => date(1980, 10, 14)
+    @fact index(sa[value(sa) .== 1])[2] => date(1981, 4, 7)
+    @fact index(sa[value(sa) .== 1])[3] => date(1981, 5, 8)
+  end
 
 end
