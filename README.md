@@ -5,9 +5,12 @@
 Functions include a range of popular studies in TA including candlesticks, price levels,
 momentum indicators, moving averages, volatility studies and volume analysis. 
 
+The master branch depends on the un-registered `Series.jl` data structure, but DataFrame is still supported in the `dataframes`
+branch, which can be called this way:
+
 ````julia
 julia> Pkg.add("MarketTechnicals")
-julia> Pkg.checkout("MarketTechnicals", "series")
+julia> Pkg.checkout("MarketTechnicals", "dataframes")
 ````
 
 This is a work in progress and the API is not fixed.~~ The current plan is to implement the semantics
@@ -27,21 +30,7 @@ new function. Also, include some test assertions that provide users with some co
 implementation is correct. Test suites are stored in the `/test` directory and are grouped into
 a few general files such as `candlesticks.jl`, etc.
 
-You can run the entire test suite from within Julia:
-
-````julia
-julia> @markettechnicals
-Running tests: 
-**   test/candlesticks.jl
-**   test/levels.jl
-**   test/momo.jl
-**   test/movingaverages.jl
-**   test/volatility.jl
-**   test/volume.jl
-````
-
-The current test suite passes silently and stops completely if an error is detected. Expect improvements to 
-this interface in the future. 
+Tests are currently being written with the `FactCheck` testing package. 
 
 ## Important near-term goals
 
