@@ -1,35 +1,22 @@
-module TestMovingAverages
+using MarketTechnicals, MarketData, FactCheck 
   
-  using Base.Test
-  using Series
-  using Datetime
-  using MarketTechnicals
+facts("Moving Averages") do
 
-  op  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=2)
-  hi  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=3)
-  lo  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=4)
-  cl  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=5)
+  context("sma") do  
+    @fact value(sma(cl, 10))[1]   => roughly(108.893)
+    @fact sma(value(cl), 10)[1]   => roughly(108.893)
+    @fact value(sma(cl, 10))[end] => roughly(122.698)
+    @fact sma(value(cl), 10)[end] => roughly(122.698)
+    @fact index(sma(cl, 10))[end] => lastday
+  end
   
-  # sma
-  smasa = sma(cl, 10) 
-  smaa  = sma(value(cl), 10) 
-
-  @test_approx_eq value(smasa)[1] 92.394
-  @test_approx_eq smaa[1] 92.394
-  @test_approx_eq value(smasa)[end] 101.45100000000001
-  @test_approx_eq smaa[end] 101.45100000000001
-  @test index(smasa)[end] == date(1971, 12, 31)
-  
-  # ema
-  emasa = ema(cl, 10) 
-  emaw  = ema(cl, 10, wilder=true) 
-  emaa  = ema(value(cl), 10) 
-  
-  @test value(emasa)[1] == 92.394
-  @test emaa[1] == 92.394
-  @test_approx_eq value(emasa)[end] 101.10189950870759
-  @test_approx_eq value(emaw)[end] 99.72706080954146   # TTR  99.72706
-  @test_approx_eq emaa[end] 101.10189950870759
-  @test index(emasa)[end] == date(1971, 12, 31)
+  context("ema") do 
+    @fact value(ema(cl, 10))[1]                => roughly(108.893)
+    @fact ema(value(cl), 10)[1]                => roughly(108.893)
+    @fact value(ema(cl, 10))[end]              => roughly(122.675)
+    @fact ema(value(cl), 10)[end]              => roughly(122.675)
+    @fact value(ema(cl, 10, wilder=true))[end] => roughly(123.021) # TTR  99.72706
+    @fact index(ema(cl, 10))[end]              => lastday
+  end
 
 end

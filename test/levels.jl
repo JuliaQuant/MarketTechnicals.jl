@@ -1,44 +1,32 @@
-module TestLevels
+using MarketTechnicals, MarketData, FactCheck 
+
+fr3, fr2, fr1, fp, fs1, fs2, fs3 = floorpivots(hi, lo, cl)
+wr3, wr2, wr1, wp, ws1, ws2, ws3 = woodiespivots(op, hi, lo)
   
-  using Base.Test
-  using Series
-  using Datetime
-  using MarketTechnicals
+facts("Levels") do
 
-  op  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=2)
-  hi  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=3)
-  lo  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=4)
-  cl  = readseries(Pkg.dir("MarketTechnicals/test/data/spx.csv"), value=5)
-  
+  context("floor pivots") do
+    @fact value(fr3)[2]  => roughly(108.900)              # values NEED to be verified by various website calculators
+    @fact value(fr2)[2]  => roughly(107.673) 
+    @fact value(fr1)[2]  => roughly(106.447) 
+    @fact value(fp)[2]   => roughly(104.853) 
+    @fact value(fs1)[2]  => roughly(103.627) 
+    @fact value(fs2)[2]  => roughly(102.033) 
+    @fact value(fs3)[2]  => roughly(100.807) 
+    @fact index(fp)[end] => lastday
+  end                               
 
-  # floor_pivots
-  r3, r2, r1, p, s1, s2, s3 = floorpivots(hi, lo, cl)
+  context("woodiespivots") do
+    #  @fact_approx_eq  97.37500000000001 value(wr4)[2]   # values NEED to be verified with online calculators 
+    #  @fact_approx_eq   88.62500000000001 value(ws4)[2]  
+    @fact value(wr3)[2]  => roughly(109.450)  
+    @fact value(wr2)[2]  => roughly(107.765)  
+    @fact value(wr1)[2]  => roughly(106.630)  
+    @fact value(wp)[2]   => roughly(104.945)    
+    @fact value(ws1)[2]  => roughly(103.810)  
+    @fact value(ws2)[2]  => roughly(102.125)  
+    @fact value(ws3)[2]  => roughly(100.990)  
+    @fact index(wp)[end] => lastday
+  end
 
-  @test  95.29             == value(r3)[2] # values verified by various website calculators
-  @test  94.52666666666669 == value(r2)[2] 
-  @test  93.76333333333336 == value(r1)[2] 
-  @test  92.77666666666669 == value(p)[2] 
-  @test  92.01333333333336 == value(s1)[2] 
-  @test  91.02666666666669 == value(s2)[2] 
-  @test  90.26333333333336 == value(s3)[2] 
-  @test index(s1)[end] == date(1971, 12, 31)
-
-  # woodiespivots 
-  #wr4, wr3, wr2, wr1, p, ws1, ws2, ws3, ws4 = woodiespivots(op, hi, lo)
-  wr3, wr2, wr1, p, ws1, ws2, ws3 = woodiespivots(op, hi, lo)
-
-#  @test_approx_eq  97.37500000000001 value(wr4)[2]  # 98.08  verified with online calculators 
-  @test_approx_eq   95.62500000000001 value(wr3)[2]  # 95.63  
-  @test_approx_eq   94.58250000000001 value(wr2)[2]  # 94.58  
-  @test_approx_eq   93.87500000000001 value(wr1)[2]  # 93.88  
-  @test_approx_eq   92.83250000000001 value(p)[2]    # 92.83 
-  @test_approx_eq   92.12500000000001 value(ws1)[2]  # 92.13  
-  @test_approx_eq   91.08250000000001 value(ws2)[2]  # 91.08  
-  @test_approx_eq   90.37500000000001 value(ws3)[2]  # 90.38  
-#  @test_approx_eq   88.62500000000001 value(ws4)[2]  # 87.58
-  @test index(p)[end]               == date(1971, 12, 31)
 end
-
-# camarilla_pivots 
-# demark_pivots 
-# market_profile
