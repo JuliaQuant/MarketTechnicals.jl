@@ -11,8 +11,8 @@ facts("Momentum") do
   end
   
   context("macd") do 
-    @fact  mcd[end].value => 0.30288417471292917   # TTR value with percent=FALSE is 1.900959 
-    @fact  val[end].value => -0.02004125066740741  # TTR value with percent=FALSE is 1.736186
+    @fact  mcd[end].value => roughly(0.302884)  # TTR value with percent=FALSE is 1.900959 
+    @fact  val[end].value => roughly(-0.02004125) # TTR value with percent=FALSE is 1.736186
     @fact index(mcd)[end] => lastday
   end
     
