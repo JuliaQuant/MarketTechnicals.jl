@@ -19,8 +19,8 @@ facts("Volatility") do
   end
    
   context("atr") do
-    @fact atr(hi,lo,cl,14)[end].value               => 1.9552324565407484   # test needs confirmation
-    @fact atr(hi,lo,cl, 14, wilder=true)[end].value => 2.0850987451432186   # test needs confirmation 
+    @fact atr(hi,lo,cl,14)[end].value               => roughly(1.95523)   # test needs confirmation
+    @fact atr(hi,lo,cl, 14, wilder=true)[end].value => roughly(2.08509)   # test needs confirmation 
     @fact index(atr(hi,lo,cl,14))[end]              => lastday
   end
    
