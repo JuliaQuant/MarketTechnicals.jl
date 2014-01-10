@@ -6,7 +6,7 @@ using Series, Datetime
 
 export sma, ema,             
        bollingerbands, truerange, atr, keltnerbands, 
-                       # obv, # vwap, 
+       obv, vwap, 
        doji, 
        rsi, macd, # cci, 
        floorpivots, woodiespivots 
@@ -16,6 +16,6 @@ include("levels.jl")
 include("movingaverages.jl")
 include("momentum.jl")
 include("volatility.jl")
-# include("volume.jl")
+include("volume.jl")
 
 end 

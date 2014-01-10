@@ -1,41 +1,36 @@
-function obv(df::DataFrame)
-  df  = copy(df)
-  dv  = zeros(size(df, 1))
-  ret = simple_return(df["Close"])
+function obv{T,V}(sa::Array{SeriesPair{T,V},1})
+
+  vol = zeros(size(sa, 1))
+  ret = percentchange(sa)
   
-  for i=1:size(df, 1)
-    if ret[i] >= 0
-      dv[i] += df[i, 6]
+  for i=1:size(sa, 1)
+    if ret[i].value >= 0
+      vol[i] += sa[i].value
     else
-      dv[i] -= df[i, 6]
+      vol[i] -= sa[i].value
     end
   end
 
-  obvval = cumsum(dv)
-
-  within!(df, quote
-    obv = $obvval
-    end)
-  df
-
+  SeriesArray(index(sa),  cumsum(vol))
 end
 
-function vwap(df::DataFrame, n::Int)
-  df = copy(df)
-
-  typical = with(df, :((High + Low + Close)/3))
-  VP      = with(df, :($typical .* Volume))
-  sumVP   = moving(VP, sum, 10)
-  sumV    = moving(df["Volume"], sum, 10)
+function vwap{T,V}(hi::Array{SeriesPair{T,V},1},
+                   lo::Array{SeriesPair{T,V},1},
+                   cl::Array{SeriesPair{T,V},1}, 
+                   vm::Array{SeriesPair{T,V},1}, n::Int)
+ 
+  typ     = (hi + lo + cl) ./ 3
+  vp      = typ  .*  vm
+  sumVP   = moving(vp, sum, 10)
+  sumV    = moving(vm, sum, 10)
   vwapval = sumVP ./ sumV
 
-  within!(df, quote
-    vwap = $vwapval
-    end)
-  df
 end
 
-vwap(df::DataFrame) = vwap(df::DataFrame, 10)
+vwap{T,V}(hi::Array{SeriesPair{T,V},1},
+          lo::Array{SeriesPair{T,V},1},
+          cl::Array{SeriesPair{T,V},1}, 
+          vm::Array{SeriesPair{T,V},1}) =  vwap(hi, lo, cl, vm,  10)
 
 function advance_decline(x)
   #code here
