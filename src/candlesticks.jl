@@ -1,9 +1,6 @@
-function doji{T,V}(op::Array{SeriesPair{T,V},1},
-                   hi::Array{SeriesPair{T,V},1},
-                   lo::Array{SeriesPair{T,V},1},
-                   cl::Array{SeriesPair{T,V},1})
-
-   SeriesArray(index(op), [abs(value(op) - value(cl)) ./ (value(hi) - value(lo)) .< .01])
+function doji{T,N}(ohlc::TimeArray{T,N}; op="Open", hi="High", lo="Low", cl="Close")
+    
+  TimeArray(index(op), [abs(value(op) - value(cl)) ./ (value(hi) - value(lo)) .< .01])
 end
 
 function hammer(x)

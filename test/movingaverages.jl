@@ -1,5 +1,3 @@
-using MarketTechnicals, MarketData, FactCheck 
-  
 facts("Moving Averages") do
 
   context("sma") do  
@@ -18,5 +16,4 @@ facts("Moving Averages") do
     @fact value(ema(cl, 10, wilder=true))[end] => roughly(123.021) # TTR  99.72706
     @fact index(ema(cl, 10))[end]              => lastday
   end
-
 end

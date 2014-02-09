@@ -9,12 +9,14 @@ export sma, ema,
        obv, vwap, 
        doji, 
        rsi, macd, # cci, 
-       floorpivots, woodiespivots 
+       floorpivots, woodiespivots,
+       abs
 
 include("candlesticks.jl")
 include("levels.jl")
 include("movingaverages.jl")
 include("momentum.jl")
+include("utilities.jl")
 include("volatility.jl")
 include("volume.jl")
 
