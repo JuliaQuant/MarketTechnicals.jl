@@ -1,8 +1,8 @@
-using Series, Datetime
+using TimeSeries
 
 module MarketTechnicals
 
-using Series, Datetime
+using TimeSeries
 
 export sma, ema,             
        bollingerbands, truerange, atr, keltnerbands, 
@@ -13,11 +13,11 @@ export sma, ema,
        abs
 
 include("candlesticks.jl")
-include("levels.jl")
-include("movingaverages.jl")
-include("momentum.jl")
+#include("levels.jl")
+#include("movingaverages.jl")
+#include("momentum.jl")
 include("utilities.jl")
-include("volatility.jl")
-include("volume.jl")
+#include("volatility.jl")
+#include("volume.jl")
 
 end 

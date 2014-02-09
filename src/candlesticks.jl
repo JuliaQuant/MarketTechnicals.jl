@@ -1,6 +1,6 @@
 function doji{T,N}(ohlc::TimeArray{T,N}; op="Open", hi="High", lo="Low", cl="Close")
-    
-  TimeArray(index(op), [abs(value(op) - value(cl)) ./ (value(hi) - value(lo)) .< .01])
+  dojita = abs((ohlc[op] .- ohlc[cl])) ./ (ohlc[hi] .- ohlc[lo]) .< .01
+  TimeArray(dojita.timestamp, dojita.values, ["doji"])
 end
 
 function hammer(x)
