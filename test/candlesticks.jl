@@ -1,3 +1,5 @@
+using MarketData
+
 facts("Candlesticks") do
 
   context("doji") do

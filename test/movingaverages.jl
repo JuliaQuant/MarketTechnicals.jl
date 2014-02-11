@@ -1,3 +1,5 @@
+using MarketData
+
 facts("Moving Averages") do
 
   context("sma") do  
