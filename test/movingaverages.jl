@@ -1,19 +1,29 @@
 facts("Moving Averages") do
 
   context("sma") do  
-    @fact value(sma(cl, 10))[1]   => roughly(108.893)
-    @fact sma(value(cl), 10)[1]   => roughly(108.893)
-    @fact value(sma(cl, 10))[end] => roughly(122.698)
-    @fact sma(value(cl), 10)[end] => roughly(122.698)
-    @fact index(sma(cl, 10))[end] => lastday
-  end
+    @fact sma(cl, 10).values[1]      => roughly(108.893)  # TTR value
+    @fact sma(cl, 10).values[2]      => roughly(109.441)  # TTR value
+    @fact sma(cl, 10).values[3]      => roughly(109.896)  # TTR value
+    @fact sma(cl, 10).values[495]    => roughly(122.685)  # TTR value
+    @fact sma(cl, 10).values[496]    => roughly(122.698)  # TTR value
+    @fact sma(cl, 10).timestamp[496] => lastday
+  end 
   
   context("ema") do 
-    @fact value(ema(cl, 10))[1]                => roughly(108.893)
-    @fact ema(value(cl), 10)[1]                => roughly(108.893)
-    @fact value(ema(cl, 10))[end]              => roughly(122.675)
-    @fact ema(value(cl), 10)[end]              => roughly(122.675)
-    @fact value(ema(cl, 10, wilder=true))[end] => roughly(123.021) # TTR  99.72706
-    @fact index(ema(cl, 10))[end]              => lastday
+    @fact ema(cl, 10).values[1]      => roughly(108.893)   # TTR value
+    @fact ema(cl, 10).values[2]      => roughly(109.2215)  # TTR value
+    @fact ema(cl, 10).values[3]      => roughly(109.5576)  # TTR value
+    @fact ema(cl, 10).values[495]    => roughly(122.7024)  # TTR value
+    @fact ema(cl, 10).values[496]    => roughly(122.6747)  # TTR value
+    @fact ema(cl, 10).timestamp[496] => lastday
+  end
+
+  context("ema wilder true") do 
+    @fact ema(cl, 10, wilder=true).values[1]      => roughly(108.893)   # TTR value
+    @fact ema(cl, 10, wilder=true).values[2]      => roughly(109.0737)  # TTR value
+    @fact ema(cl, 10, wilder=true).values[3]      => roughly(109.2733)  # TTR value
+    @fact ema(cl, 10, wilder=true).values[495]    => roughly(123.0738)  # TTR value
+    @fact ema(cl, 10, wilder=true).values[496]    => roughly(123.0214)  # TTR value
+    @fact ema(cl, 10, wilder=true).timestamp[496] => lastday
   end
 end
