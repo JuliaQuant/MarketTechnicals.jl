@@ -24,3 +24,30 @@ function ema{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)
   end
   TimeArray(tstamps, vals[n:length(ta)], ta.colnames)
 end
+
+# Array dispatch for use by ta algorithms
+
+function sma(a::Array{Float64,1}, n::Int)
+  vals    = zeros(length(a) - (n-1))
+  for i in 1:length(a) - (n-1)
+    vals[i] =  mean(a[i:i+(n-1)])
+  end
+  vals
+end
+
+function ema(a::Array{Float64,1}, n::Int; wilder=false)
+
+  if  wilder 
+    k  = 1/n 
+  else
+    k = 2/(n+1)
+  end
+
+  vals    = ones(length(a))
+  vals[n] = sma(a, n)[1] # seed with first value an sma value
+ 
+  for i = n+1:length(a)
+    vals[i] =  a[i] * k + vals[i-1] * (1-k)
+  end
+  vals[n:end]
+end

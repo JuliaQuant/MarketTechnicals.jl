@@ -1,10 +1,10 @@
-function rsi{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; wilder=false)
+function rsi{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)
 
-  ret = [0; diff(value(sa))]
-  ups = zeros(size(sa, 1))
-  dns = zeros(size(sa, 1))
+  ret = [0; diff(ta.values)]
+  ups = zeros(length(ta))
+  dns = zeros(length(ta))
 
-  for i=1:size(sa, 1)
+  for i=1:length(ta)
     if ret[i] >= 0
       ups[i] += ret[i]
     else
@@ -25,12 +25,12 @@ function rsi{T,V}(sa::Array{SeriesPair{T,V},1}, n::Int; wilder=false)
   end
 
   res  = 100 .- (100./(1 .+ rs))
-  SeriesArray(index(sa)[n:end], res)
+  TimeArray(ta.timestamp[n:end], res, ["rsi"])
 end
 
-rsi{T,V}(sa::Array{SeriesPair{T,V},1}) = rsi(sa, 14)
+rsi{T,N}(sa::TimeArray{T,N}) = rsi(sa, 14)
 
-function macd{T,V}(sa::Array{SeriesPair{T,V},1}, fast::Int, slow::Int, signal::Int)
+function macd{T,N}(sa::TimeArray{T,N}, fast::Int, slow::Int, signal::Int)
  
   fastma = ema(value(sa), fast)[slow-fast+1:end] # match dimensions with shorter slow array
   slowma = ema(value(sa), slow)
@@ -38,13 +38,13 @@ function macd{T,V}(sa::Array{SeriesPair{T,V},1}, fast::Int, slow::Int, signal::I
   sigval = ema(mcdval, signal)
  
   idx = index(sa)[size(sa,1) - size(sigval,1) + 1:end]
-  mcd = SeriesArray(idx, mcdval)
-  sig = SeriesArray(idx, sigval)
+  mcd = SeriesTimeArray(idx, mcdval)
+  sig = SeriesTimeArray(idx, sigval)
  
   mcd, sig
 end
 
-macd{T,V}(sa::Array{SeriesPair{T,V},1}) = macd(sa, 12, 26, 9)
+macd{T,N}(sa::TimeArray{T,N}) = macd(sa, 12, 26, 9)
  
 # function cci(df::DataFrame, n::Int, c::Float64)
 # 

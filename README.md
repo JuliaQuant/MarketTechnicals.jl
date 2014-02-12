@@ -7,8 +7,8 @@ momentum indicators, moving averages, volatility studies and volume analysis.
 
 ## Notice of change to API 
 
-MarketTechnicals will support the TimeArray data structure found in the TimeSeries package. The data structure is lightweight and is
-suited for technical analysis algorithms. 
+MarketTechnicals supports the TimeArray data structure found in the TimeSeries package. The data structure is lightweight and is
+well-suited for technical analysis algorithms. 
 
 ## Installation
 
