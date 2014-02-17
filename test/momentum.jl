@@ -1,19 +1,18 @@
 using MarketTechnicals, MarketData, FactCheck 
 
-mcd, val = macd(cl)
 
 facts("Momentum") do
   
   context("rsi") do
-    @fact rsi(cl, 14)[end].value              => roughly(45.452)
-    @fact rsi(cl, 14, wilder=true)[end].value => roughly(47.050)         # from TTR 1971-12-31 72.151530
-    @fact index(rsi(cl, 14))[end] => lastday
+    @fact rsi(cl, 14).values[end]              => roughly(45.452)
+    @fact rsi(cl, 14, wilder=true).values[end] => roughly(47.050)         # from TTR 1971-12-31 72.151530
+    @fact rsi(cl, 14).timestamp[end]           => lastday
   end
   
   context("macd") do 
-    @fact  mcd[end].value => roughly(0.302884)  # TTR value with percent=FALSE is 1.900959 
-    @fact  val[end].value => roughly(-0.02004125) # TTR value with percent=FALSE is 1.736186
-    @fact index(mcd)[end] => lastday
+    @fact macd(cl).values[end, 1] => roughly(0.302884)  # TTR value with percent=FALSE is 1.900959 
+    @fact macd(cl).values[end, 2] => roughly(-0.02004125) # TTR value with percent=FALSE is 1.736186
+    @fact macd(cl).timestamp[end] => lastday
   end
     
   context("cci") do 

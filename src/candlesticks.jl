@@ -38,7 +38,3 @@ end
 function morning_star(x)
   #code here
 end
-
-
-
-

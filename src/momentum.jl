@@ -28,23 +28,21 @@ function rsi{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)
   TimeArray(ta.timestamp[n:end], res, ["rsi"])
 end
 
-rsi{T,N}(sa::TimeArray{T,N}) = rsi(sa, 14)
+rsi{T,N}(ta::TimeArray{T,N}) = rsi(ta, 14)
 
-function macd{T,N}(sa::TimeArray{T,N}, fast::Int, slow::Int, signal::Int)
+function macd{T,N}(ta::TimeArray{T,N}, fast::Int, slow::Int, signal::Int)
  
-  fastma = ema(value(sa), fast)[slow-fast+1:end] # match dimensions with shorter slow array
-  slowma = ema(value(sa), slow)
+  fastma = ema(ta.values, fast)[slow-fast+1:end] # match dimensions with shorter slow array
+  slowma = ema(ta.values, slow)
   mcdval = (fastma - slowma)[signal:end]
   sigval = ema(mcdval, signal)
+  tstamp = ta.timestamp[length(ta) - size(sigval,1) + 1:end]
  
-  idx = index(sa)[size(sa,1) - size(sigval,1) + 1:end]
-  mcd = SeriesTimeArray(idx, mcdval)
-  sig = SeriesTimeArray(idx, sigval)
+  TimeArray(tstamp, [sigval mcdval[signal:end]], ["sig", "macd"])
  
-  mcd, sig
 end
 
-macd{T,N}(sa::TimeArray{T,N}) = macd(sa, 12, 26, 9)
+macd{T,N}(ta::TimeArray{T,N}) = macd(ta, 12, 26, 9)
  
 # function cci(df::DataFrame, n::Int, c::Float64)
 # 
