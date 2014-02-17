@@ -30,19 +30,17 @@ end
 
 rsi{T,N}(ta::TimeArray{T,N}) = rsi(ta, 14)
 
-function macd{T,N}(ta::TimeArray{T,N}, fast::Int, slow::Int, signal::Int)
+function macd{T}(ta::TimeArray{T,1}, fast::Int, slow::Int, signal::Int)
  
-  fastma = ema(ta.values, fast)[slow-fast+1:end] # match dimensions with shorter slow array
-  slowma = ema(ta.values, slow)
-  mcdval = (fastma - slowma)[signal:end]
+  fastma = ema(ta, fast)
+  slowma = ema(ta, slow)
+  mcdval = fastma - slowma
   sigval = ema(mcdval, signal)
-  tstamp = ta.timestamp[length(ta) - size(sigval,1) + 1:end]
- 
-  TimeArray(tstamp, [sigval mcdval[signal:end]], ["sig", "macd"])
- 
+
+  merge(mcdval, sigval, ["macd", "signal"])
 end
 
-macd{T,N}(ta::TimeArray{T,N}) = macd(ta, 12, 26, 9)
+macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
  
 # function cci(df::DataFrame, n::Int, c::Float64)
 # 
