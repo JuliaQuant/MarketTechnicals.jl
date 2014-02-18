@@ -17,7 +17,7 @@ include("candlesticks.jl")
 include("movingaverages.jl")
 include("momentum.jl")
 include("utilities.jl")
-#include("volatility.jl")
+include("volatility.jl")
 #include("volume.jl")
 
 end 
