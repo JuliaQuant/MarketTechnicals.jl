@@ -3,16 +3,17 @@ using MarketData
 facts("Volatility") do
 
   context("bollinger_bands") do
-    @fact bollingerbands(cl)["up"].values[1]     => roughly(123.634)      # TTR value 126.3771 
-    @fact bollingerbands(cl)["down"].values[1]   => roughly(126.448)      # TTR value 120.8909 
-    @fact bollingerbands(cl)["mvg"].values[1]    => roughly(120.820)      # TTR value 123.6340
+    @fact bollingerbands(cl)["up"].values[1]   => roughly(116.3501)      # TTR value 116.3501
+    @fact bollingerbands(cl)["down"].values[1] => roughly(105.5679)      # TTR value 105.5679
+    @fact bollingerbands(cl)["mean"].values[1] => roughly(110.96)      # TTR value 110.959
+    @fact bollingerbands(cl).timestamp[1]      => date(1980,1,30) 
 #    @fact bollingerbands(cl)["bwidth"].values[1] => roughly(120.820)      # TTR value 0.30241094 
-    @fact bollingerbands(cl).timestmp[end]       => lastday
+    @fact bollingerbands(cl).timestamp[end]    => lastday
   end
   
    context("truerange") do
-#     @fact truerange(hi,lo,cl)[end].value  => roughly(1.850)       # TTR  0.31 
-#     @fact index(truerange(hi,lo,cl))[end] => lastday
+     @fact truerange(ohlc).values[end]    => roughly(1.85)       # TTR  1.85
+     @fact truerange(ohlc).timestamp[end] => lastday
    end
    
   context("atr") do

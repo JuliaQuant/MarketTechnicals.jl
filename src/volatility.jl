@@ -1,46 +1,30 @@
 function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Int, width::Float64)
     tama   = sma(ta, ma)
-    upband = tama + moving(ta, std, ma) * width
-    dnband = tama - moving(ta, std, ma) * width
+    upband = tama .+ moving(ta, std, ma) .* width
+    dnband = tama .- moving(ta, std, ma) .* width
     bands  =  merge(upband, dnband) 
     merge(bands, tama, colnames=["up", "down", "mean"])
 end
 
 bollingerbands{T,N}(ta::TimeArray{T,N}) = bollingerbands(ta, 20, 2.0)
 
-# function truerange{T,N}(hi::Array{SeriesPair{T,N},1},
-#                         lo::Array{SeriesPair{T,N},1},
-#                         cl::Array{SeriesPair{T,N},1})
-# 
-#   rng   = value(hi) - value(lo) 
-#   hilag = abs(value(hi) - value(lag(cl)))
-#   lolag = abs(value(lo) - value(lag(cl)))
-#   
-#   trv = [rng[1]] # because the other two have NaN values in the first row
-#   for i in 2:size(rng,1)
-#     push!(trv, maximum([rng[i], hilag[i], lolag[i]]))
-#   end
-# 
-#   SeriesArray(index(hi), trv)
-# end
-# 
-# function atr{T,N}(hi::Array{SeriesPair{T,N},1},
-#                   lo::Array{SeriesPair{T,N},1},
-#                   cl::Array{SeriesPair{T,N},1} , n::Int; wilder=false)
-# 
-#   tr = truerange(hi,lo,cl)
-# 
-#   if  wilder
-#     res = ema(tr, n, wilder=true)
-#   else
-#     res = ema(tr, n)
-#   end
-#   res 
-# end
-#  
-# #atr{T,N}(hi::Array{SeriesPair{T,N},1}, lo::Array{SeriesPair{T,N},1}, cl::Array{SeriesPair{T,N},1}) = atr(hi,lo,cl,14, wilder=false)
-# 
-#  
+function truerange{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
+    highs    = merge(ohlc[h], lag(ohlc[c]))
+    lows     = merge(ohlc[l], lag(ohlc[c]))
+    truehigh = TimeArray(highs.timestamp, maximum(highs.values, 2), ["hi"])
+    truelow  = TimeArray(lows.timestamp,  minimum(lows.values, 2),  ["lo"])
+    truehigh .- truelow
+end
+
+function atr{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close", wilder=true)
+    if wilder
+      res = ema(truerange(ohlc), n, wilder=true)
+    else 
+      res = ema(truerange(ohlc), n)
+    end
+    TimeArray(res.timestamp, res.values, ["atr"])
+end
+  
 # function keltnerbands{T,N}(hi::Array{SeriesPair{T,N},1},
 #                            lo::Array{SeriesPair{T,N},1},
 #                            cl::Array{SeriesPair{T,N},1}, n::Int)
@@ -56,9 +40,9 @@ bollingerbands{T,N}(ta::TimeArray{T,N}) = bollingerbands(ta, 20, 2.0)
 #   
 #   SeriesArray(idx, kma), SeriesArray(idx, kup), SeriesArray(idx, kdn)
 # end
-#  
+  
 # # keltner_bands(df::DataFrame) = keltner_bands(df::DataFrame, 10)
-# 
+ 
 # # function chaikinvolatility{T,N}(ta::TimeArray{T,N}, n::Int)
 # #   #code here
 # # end
