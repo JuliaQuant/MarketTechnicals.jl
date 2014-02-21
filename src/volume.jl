@@ -1,10 +1,11 @@
 function obv{T,N}(ohlc::TimeArray{T,N}; price="Close", v="Volume")
 
-  vol = zeros(length(ohlc))
-  ret = percentchange(ohlc[price])
+  ret    = percentchange(ohlc[price])
+  vol    = zeros(length(ohlc))
+  vol[1] = ohlc[v].values[1]
   
-  for i=1:length(ohlc) -1
-    if ret.values[i] >= 0
+  for i=2:length(ohlc) 
+    if ret.values[i-1] >= 0
       vol[i] += ohlc[v].values[i]
     else
       vol[i] -= ohlc[v].values[i]
