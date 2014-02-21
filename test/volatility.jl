@@ -3,9 +3,9 @@ using MarketData
 facts("Volatility") do
 
   context("bollinger_bands") do
-    @fact bollingerbands(cl)["up"].values[1]   => roughly(116.3501)      # TTR value 116.3501
-    @fact bollingerbands(cl)["down"].values[1] => roughly(105.5679)      # TTR value 105.5679
-    @fact bollingerbands(cl)["mean"].values[1] => roughly(110.96)      # TTR value 110.959
+    @fact bollingerbands(cl)["up"].values[1]   => roughly(116.49)      # TTR default uses sample=FALSE and value 116.350, otherwise 116.49  
+    @fact bollingerbands(cl)["down"].values[1] => roughly(105.43)      # TTR default uses sample=FALSE and value 105.567, otherwise 105.43
+    @fact bollingerbands(cl)["mean"].values[1] => roughly(110.96)      # TTR 110.959 
     @fact bollingerbands(cl).timestamp[1]      => date(1980,1,30) 
 #    @fact bollingerbands(cl)["bwidth"].values[1] => roughly(120.820)      # TTR value 0.30241094 
     @fact bollingerbands(cl).timestamp[end]    => lastday
@@ -17,9 +17,9 @@ facts("Volatility") do
    end
    
   context("atr") do
-#     @fact atr(hi,lo,cl,14)[end].value               => roughly(1.95523)   # test needs confirmation
-#     @fact atr(hi,lo,cl, 14, wilder=true)[end].value => roughly(2.08509)   # test needs confirmation 
-#     @fact index(atr(hi,lo,cl,14))[end]              => lastday
+     @fact atr(ohlc).values[1]    => roughly(2.350714)   # TTR value 2.350714 
+     @fact atr(ohlc).values[end]  => roughly(2.085099)  # TTR value 2.085099
+     @fact atr(ohlc).timestamp[1] => date(1980,1,23)
   end
    
   context("keltner_bands") do

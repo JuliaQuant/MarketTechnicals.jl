@@ -16,15 +16,14 @@ function truerange{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
     truehigh .- truelow
 end
 
-function atr{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close", wilder=true)
-    if wilder
-      res = ema(truerange(ohlc), n, wilder=true)
-    else 
-      res = ema(truerange(ohlc), n)
-    end
+function atr{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close")
+    # atr was inveted by Wilder, so only his ema is supported
+    res = ema(truerange(ohlc), n, wilder=true)
     TimeArray(res.timestamp, res.values, ["atr"])
 end
   
+atr{T,N}(ta::TimeArray{T,N}) = atr(ta, 14)
+
 # function keltnerbands{T,N}(hi::Array{SeriesPair{T,N},1},
 #                            lo::Array{SeriesPair{T,N},1},
 #                            cl::Array{SeriesPair{T,N},1}, n::Int)
