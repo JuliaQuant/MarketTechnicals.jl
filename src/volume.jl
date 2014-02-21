@@ -1,37 +1,34 @@
-function obv{T,V}(sa::Array{SeriesPair{T,V},1})
+function obv{T,N}(ohlc::TimeArray{T,N}; price="Close", v="Volume")
 
-  vol = zeros(size(sa, 1))
-  ret = percentchange(sa)
+  vol = zeros(length(ohlc))
+  ret = percentchange(ohlc[price])
   
-  for i=1:size(sa, 1)
-    if ret[i].value >= 0
-      vol[i] += sa[i].value
+  for i=1:length(ohlc) -1
+    if ret.values[i] >= 0
+      vol[i] += ohlc[v].values[i]
     else
-      vol[i] -= sa[i].value
+      vol[i] -= ohlc[v].values[i]
     end
   end
 
-  SeriesArray(index(sa),  cumsum(vol))
+  TimeArray(ohlc.timestamp,  cumsum(vol), ["obv"])
 end
-
-function vwap{T,V}(hi::Array{SeriesPair{T,V},1},
-                   lo::Array{SeriesPair{T,V},1},
-                   cl::Array{SeriesPair{T,V},1}, 
-                   vm::Array{SeriesPair{T,V},1}, n::Int)
- 
-  typ     = (hi + lo + cl) ./ 3
-  vp      = typ  .*  vm
-  sumVP   = moving(vp, sum, 10)
-  sumV    = moving(vm, sum, 10)
-  vwapval = sumVP ./ sumV
-
-end
-
-vwap{T,V}(hi::Array{SeriesPair{T,V},1},
-          lo::Array{SeriesPair{T,V},1},
-          cl::Array{SeriesPair{T,V},1}, 
-          vm::Array{SeriesPair{T,V},1}) =  vwap(hi, lo, cl, vm,  10)
-
+# 
+# function vwap{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close", v="Volume")
+#  
+#   typ     = (hi + lo + cl) ./ 3
+#   vp      = typ  .*  vm
+#   sumVP   = moving(vp, sum, 10)
+#   sumV    = moving(vm, sum, 10)
+#   vwapval = sumVP ./ sumV
+# 
+# end
+# 
+# vwap{T,V}(hi::Array{SeriesPair{T,V},1},
+#           lo::Array{SeriesPair{T,V},1},
+#           cl::Array{SeriesPair{T,V},1}, 
+#           vm::Array{SeriesPair{T,V},1}) =  vwap(hi, lo, cl, vm,  10)
+# 
 function advance_decline(x)
   #code here
 end

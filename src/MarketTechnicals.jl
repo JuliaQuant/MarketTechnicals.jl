@@ -18,6 +18,6 @@ include("movingaverages.jl")
 include("momentum.jl")
 include("utilities.jl")
 include("volatility.jl")
-#include("volume.jl")
+include("volume.jl")
 
 end 
