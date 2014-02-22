@@ -19,7 +19,7 @@ function woodiespivots{T,N}(ohlc::TimeArray{T,N})
  
     rng = lag(ohlc["High"]) .- lag(ohlc["Low"])
  
-    p  = (lag(ohlc["High"])) .+ (lag(ohlc["Low"]) .+ 2ohlc["Open"]) ./ 4
+    p  = (lag(ohlc["High"]) .+ lag(ohlc["Low"]) .+ 2ohlc["Open"]) ./ 4
     s1 = 2p .- lag(ohlc["High"])
     r1 = 2p .- lag(ohlc["Low"])
     s2 = p .- rng
