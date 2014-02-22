@@ -14,22 +14,20 @@ function obv{T,N}(ohlc::TimeArray{T,N}; price="Close", v="Volume")
 
   TimeArray(ohlc.timestamp,  cumsum(vol), ["obv"])
 end
-# 
-# function vwap{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close", v="Volume")
-#  
-#   typ     = (hi + lo + cl) ./ 3
-#   vp      = typ  .*  vm
-#   sumVP   = moving(vp, sum, 10)
-#   sumV    = moving(vm, sum, 10)
-#   vwapval = sumVP ./ sumV
-# 
-# end
-# 
-# vwap{T,V}(hi::Array{SeriesPair{T,V},1},
-#           lo::Array{SeriesPair{T,V},1},
-#           cl::Array{SeriesPair{T,V},1}, 
-#           vm::Array{SeriesPair{T,V},1}) =  vwap(hi, lo, cl, vm,  10)
-# 
+ 
+function vwap{T,N}(ohlc::TimeArray{T,N}, n::Int; price="Close", v="Volume")
+  
+    p   = ohlc[price]
+    q   = ohlc[v]
+    ∑PQ = moving(p.*q, sum, n)
+    ∑Q  = moving(q, sum, n)
+    val = ∑PQ ./ ∑Q
+ 
+    TimeArray(val.timestamp, val.values, ["vwap"])
+end
+ 
+vwap{T,N}(ohlc::TimeArray{T,N}) = vwap(ohlc, 10)
+ 
 function advance_decline(x)
   #code here
 end

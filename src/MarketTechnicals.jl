@@ -10,7 +10,7 @@ export sma, ema,
        doji, 
        rsi, macd, # cci, 
        floorpivots, woodiespivots,
-       abs, maxi, mini
+       abs, µprice 
 
 include("candlesticks.jl")
 #include("levels.jl")
