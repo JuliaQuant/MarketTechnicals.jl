@@ -15,33 +15,23 @@ function floorpivots{T,N}(ohlc::TimeArray{T,N})
   
 end
 
-# function woodiespivots{T,V}(op::Array{SeriesPair{T,V},1},
-#                             hi::Array{SeriesPair{T,V},1},
-#                             lo::Array{SeriesPair{T,V},1})
-# 
-#   range = value(lag(hi)) - value(lag(lo))
-# 
-#   p  = ((value(lag(hi)) + value(lag(lo)) + 2value(op))) / 4
-#   s1 = 2p - value(lag(hi))
-#   r1 = 2p - value(lag(lo))
-#   s2 = p - range
-#   r2 = p + range
-#   s3 = s1 - range
-#   r3 = r1 + range
-#   # s4 = s3 - range # can't get an answer that matches online calculators
-#   # r4 = r3 + range
-# 
-# 
-#   # SeriesArray(index(op), r4, "r4"),
-#   SeriesArray(index(op), r3, "r3"),
-#   SeriesArray(index(op), r2, "r2"),
-#   SeriesArray(index(op), r1, "r1"),
-#   SeriesArray(index(op), p , "pivot"),
-#   SeriesArray(index(op), s1, "s1"),
-#   SeriesArray(index(op), s2, "s2"),
-#   SeriesArray(index(op), s3, "s3")
-#   # SeriesArray(index(op), s4, "s4")
-# end
+function woodiespivots{T,N}(ohlc::TimeArray{T,N})
+ 
+    rng = lag(ohlc["High"]) .- lag(ohlc["Low"])
+ 
+    p  = (lag(ohlc["High"])) .+ (lag(ohlc["Low"]) .+ 2ohlc["Open"]) ./ 4
+    s1 = 2p .- lag(ohlc["High"])
+    r1 = 2p .- lag(ohlc["Low"])
+    s2 = p .- rng
+    r2 = p .+ rng
+    s3 = s1 .- rng
+    r3 = r1 .+ rng
+    # s4 = s3 - range # can't get an answer that matches online calculators
+    # r4 = r3 + range
+ 
+    TimeArray(s1.timestamp, [s3.values s2.values s1.values p.values r1.values r2.values r3.values],
+              ["s3", "s2", "s1", "pivot", "r1", "r2", "r3"])
+end
 # 
 # function camarillapivots{T,V}(hi::Array{SeriesPair{T,V},1},
 #                               lo::Array{SeriesPair{T,V},1},
