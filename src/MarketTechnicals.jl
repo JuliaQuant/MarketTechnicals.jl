@@ -5,7 +5,7 @@ module MarketTechnicals
 using TimeSeries
 
 export sma, ema,             
-       bollingerbands, truerange, atr, keltnerbands, 
+       bollingerbands, truerange, atr, # keltnerbands, 
        obv, vwap, 
        doji, 
        rsi, macd, # cci, 
@@ -13,7 +13,7 @@ export sma, ema,
        abs, µprice 
 
 include("candlesticks.jl")
-#include("levels.jl")
+include("levels.jl")
 include("movingaverages.jl")
 include("momentum.jl")
 include("utilities.jl")
