@@ -1,3 +1,5 @@
+## TODO implement std version without Bessel correction, for historic reasons
+
 function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Int, width::Float64)
     tama   = sma(ta, ma)
     upband = tama .+ moving(ta, std, ma) .* width

@@ -19,5 +19,4 @@ facts("Momentum") do
 #   @fact cci(cl)[end].value  => -146.17060449635804   # TTR::CCI value is -175.8644
 #   @fact index(cci(cl))[end] => lastday
   end
-
 end
