@@ -1,9 +1,7 @@
-## TODO implement std version without Bessel correction, for historic reasons
-
 function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Int, width::Float64)
     tama   = sma(ta, ma)
-    upband = tama .+ moving(ta, std, ma) .* width
-    dnband = tama .- moving(ta, std, ma) .* width
+    upband = tama .+ moving(ta, std, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm
+    dnband = tama .- moving(ta, std, ma) .* width .* sqrt((ma-1)/ma)
     bands  =  merge(upband, dnband) 
     merge(bands, tama, colnames=["up", "down", "mean"])
 end
