@@ -15,4 +15,4 @@ script:
     - julia -e 'Pkg.clone("git://github.com/JuliaQuant/MarketTechnicals.jl.git"); Pkg.add("TimeSeries"); Pkg.add("FactCheck"); Pkg.clone("git://github.com/JuliaQuant/MarketData.jl.git")'
     - mkdir -p ~/.julia/MarketTechnicals
     - cp -R ./* ~/.julia/MarketTechnicals/
-    - julia ./test/travis.jl
+    - julia ./test/tests.jl
