@@ -1,4 +1,4 @@
-using FactCheck
+using FactCheck, MarketTechnicals
 
 include("candlesticks.jl")  
 include("levels.jl")  
