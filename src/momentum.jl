@@ -41,7 +41,7 @@ function cci{T,N}(ohlc::TimeArray{T,N}, n::Int)
 	#
 	# http://en.wikipedia.org/wiki/Commodity_channel_index
 	#
-	price = (ohlc["High"] + ohlc["Low"] + ohlc["Low"])/3
+	price = (ohlc["High"] + ohlc["Low"] + ohlc["Close"])/3
 	psma = sma(price, n)
 	avepdev = sma((price-psma), n)
 	
