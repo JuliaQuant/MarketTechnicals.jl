@@ -37,6 +37,22 @@ end
 
 macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
  
+function cci{T,N}(ohlc::TimeArray{T,N}, n::Int)
+	#
+	# http://en.wikipedia.org/wiki/Commodity_channel_index
+	#
+	price = (ohlc["High"] + ohlc["Low"] + ohlc["Low"])/3
+	psma = sma(price, n)
+	avepdev = sma((price-psma), n)
+	
+	cci = (price - psma) / avepdev / 0.015
+  	tstamps = cci.timestamp[1:end]
+  	
+	TimeArray(tstamps, cci.values, ["cci"])
+end
+
+cci{T}(ta::TimeArray{T,1}) = cci(ta, 20)
+
 # function cci(df::DataFrame, n::Int, c::Float64)
 # 
 #   df = copy(df)
