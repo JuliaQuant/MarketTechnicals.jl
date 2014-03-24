@@ -1,10 +1,11 @@
 function sma{T,N}(ta::TimeArray{T,N}, n::Int)
   tstamps = ta.timestamp[n:end]
   vals    = zeros(length(ta) - (n-1))
+  cname   = ["sma$n"]
   for i in 1:length(ta) - (n-1)
     vals[i] =  mean(ta.values[i:i+(n-1)])
   end
-  TimeArray(tstamps, vals, ta.colnames) 
+  TimeArray(tstamps, vals, cname) 
 end
 
 function ema{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)
@@ -18,11 +19,11 @@ function ema{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)
   tstamps = ta.timestamp[n:end]
   vals    = ones(length(ta))
   vals[n] = sma(ta, n).values[1] # seed with first value an sma value
- 
   for i = n+1:length(ta)
     vals[i] =  ta.values[i] * k + vals[i-1] * (1-k)
   end
-  TimeArray(tstamps, vals[n:length(ta)], ta.colnames)
+  cname   = ["ema$n"]
+  TimeArray(tstamps, vals[n:length(ta)], cname)
 end
 
 # Array dispatch for use by ta algorithms
