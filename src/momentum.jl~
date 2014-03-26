@@ -38,6 +38,9 @@ end
 macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
  
 function cci{T,N}(ohlc::TimeArray{T,N}, n::Int)
+	#
+	# http://en.wikipedia.org/wiki/Commodity_channel_index
+	#
 	price = (ohlc["High"] + ohlc["Low"] + ohlc["Close"])/3
 	psma = sma(price, n)
 	avepdev = sma((price-psma), n)
