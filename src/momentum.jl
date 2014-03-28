@@ -43,9 +43,8 @@ function cci{T,N}(ohlc::TimeArray{T,N}, n::Int)
 	avepdev = sma((price-psma), n)
 	
 	vals = (price - psma) / avepdev / 0.015
-  	tstamps = vals.timestamp[1:end]
-  	
-	TimeArray(tstamps, vals.values, ["cci"])
+
+	TimeArray(vals.timestamp, vals.values, ["cci"])
 end
 
 cci{T,N}(ohlc::TimeArray{T,N}, n::Int) = cci(ohlc, 20)
