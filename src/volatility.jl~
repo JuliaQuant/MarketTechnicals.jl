@@ -24,6 +24,18 @@ end
   
 atr{T,N}(ta::TimeArray{T,N}) = atr(ta, 14)
 
+function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close")
+	hi = ohlc[h]; lo = ohlc[l]; cl = ohlc[c]
+	typ = (hi + lo + cl)/3
+	rma = sma(hi-lo, n) 
+
+	kma = sma(typ, n) 
+	TimeArray(kma.timestamp, hcat(kma.values, (kma+rma).values, (kma-rma).values), 
+		["kma", "kup", "kdn"])
+end
+  
+keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Int) = keltnerbands(ohlc, 10)
+
 # function keltnerbands{T,N}(hi::Array{SeriesPair{T,N},1},
 #                            lo::Array{SeriesPair{T,N},1},
 #                            cl::Array{SeriesPair{T,N},1}, n::Int)

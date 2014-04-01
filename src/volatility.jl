@@ -3,7 +3,7 @@ function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Int, width::Float64)
     upband = tama .+ moving(ta, std, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm
     dnband = tama .- moving(ta, std, ma) .* width .* sqrt((ma-1)/ma)
     bands  =  merge(upband, dnband) 
-    merge(bands, tama, colnames=["up", "down", "mean"])
+    merge(bands, tama, ["up", "down", "mean"])
 end
 
 bollingerbands{T,N}(ta::TimeArray{T,N}) = bollingerbands(ta, 20, 2.0)
@@ -24,23 +24,71 @@ end
   
 atr{T,N}(ta::TimeArray{T,N}) = atr(ta, 14)
 
-function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Int)
- 	hi = ohlc["High"]; lo = ohlc["Low"]; cl = ohlc["Close"]
+function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close")
+	hi = ohlc[h]; lo = ohlc[l]; cl = ohlc[c]
 	typ = (hi + lo + cl)/3
-	rng = hi - lo
-	rma = sma(rng, n) 
+	rma = sma(hi-lo, n) 
 
 	kma = sma(typ, n) 
-	tstamps = kma.timestamp[1:end]
-	
-	kma = TimeArray(tstamps, kma.values, ["kma"])
-	kup = TimeArray(tstamps, (kma+rma).values, ["kup"])
-	kdn = TimeArray(tstamps, (kma-rma).values, ["kdn"])
-
-	merge(kma, merge(kup, kdn))
+	TimeArray(kma.timestamp, hcat(kma.values, (kma+rma).values, (kma-rma).values), 
+		["kma", "kup", "kdn"])
 end
   
 keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Int) = keltnerbands(ohlc, 10)
+
+function NBarHighest(a::Array{Float64,1}, n::Int)
+	highest = zeros(length(a))
+	ih = 0
+	for i in n:length(a)
+		highest[i] = -Inf
+		if ih<i-n+1 
+			for j in i-n+1:i
+				if a[j]>highest[i]
+					highest[i] = a[j]
+					ih = j
+				end
+			end
+		else
+			highest[i] = highest[i-1]
+			if a[i] > highest[i-1]
+				highest[i] = a[i]
+				ih = i
+			end
+		end
+	end
+	highest
+end
+
+function NBarLowest(a::Array{Float64,1}, n::Int)
+	lowest = zeros(length(a))
+	il = 0
+	for i in n:length(a)
+		lowest[i] = Inf
+		if il<i-n+1 
+			for j in i-n+1:i
+				if a[j]<lowest[i]
+					lowest[i] = a[j]
+					il = j
+				end
+			end
+		else
+			lowest[i] = lowest[i-1]
+			if a[i] < lowest[i-1]
+				lowest[i] = a[i]
+				il = i
+			end
+		end
+	end
+	lowest
+end
+
+function DonchianChannel{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low")
+	lowest = NBarLowest(ohlc[l].values, n)
+	highest = NBarHighest(ohlc[h].values, n)
+	TimeArray(ohlc.timestamp, hcat(highest, lowest), ["up", "down"])
+end
+
+DonchianChannel{T,N}(ohlc::TimeArray{T,N}, n::Int) = DonchianChannel(ohlc, 10)
 
 # function keltnerbands{T,N}(hi::Array{SeriesPair{T,N},1},
 #                            lo::Array{SeriesPair{T,N},1},
