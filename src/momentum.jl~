@@ -37,12 +37,12 @@ end
 
 macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
  
-function cci{T,N}(ohlc::TimeArray{T,N}, n::Int)
-	price = (ohlc["High"] + ohlc["Low"] + ohlc["Close"])/3
+function cci{T,N}(ohlc::TimeArray{T,N}, n::Int; cciconst=0.015, h="High", l="Low", c="Close")
+	price = (ohlc[h] + ohlc[l] + ohlc[c])/3
 	psma = sma(price, n)
 	avepdev = sma((price-psma), n)
 	
-	cci = (price - psma) / avepdev / 0.015
+	cci = (price - psma) / avepdev / cciconst
   	tstamps = cci.timestamp[1:end]
   	
 	TimeArray(tstamps, cci.values, ["cci"])
