@@ -6,7 +6,7 @@ using TimeSeries
 
 export sma, ema,             
        bollingerbands, truerange, atr, keltnerbands, 
-       NBarHighest, NBarLowest, DonchianChannel
+       NBarHighest, NBarLowest, DonchianChannel,
        obv, vwap, 
        doji, 
        rsi, macd, cci, 
