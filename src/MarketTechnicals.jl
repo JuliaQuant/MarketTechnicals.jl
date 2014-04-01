@@ -5,7 +5,7 @@ module MarketTechnicals
 using TimeSeries
 
 export sma, ema,             
-       bollingerbands, truerange, atr, keltnerbands, 
+       bollingerbands, truerange, atr, keltnerbands,
        NBarHighest, NBarLowest, DonchianChannel,
        obv, vwap, 
        doji, 

@@ -66,6 +66,8 @@ function stochasticOsc{T,N}(ohlc::TimeArray{T,N}; nk=14, nd=3, h="High", l="Low"
     TimeArray(ohlc.timestamp, hcat(percentK, percentD), ["%K", "%D"])
 end
 
+stochasticOsc{T,N}(ohlc::TimeArray{T,N}) = stochasticOsc(ohlc)
+
 # function cci(df::DataFrame, n::Int, c::Float64)
 # 
 #   df = copy(df)
