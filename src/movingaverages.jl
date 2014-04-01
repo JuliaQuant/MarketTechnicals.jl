@@ -28,11 +28,11 @@ end
 # Array dispatch for use by ta algorithms
 
 function sma(a::Array{Float64,1}, n::Int)
-  vals    = zeros(length(a) - (n-1))
-  for i in 1:length(a) - (n-1)
-    vals[i] =  mean(a[i:i+(n-1)])
-  end
-  vals
+    vals    = zeros(length(a))
+    for i in n:length(a)
+        vals[i] =  mean(a[i-(n-1):i])
+    end
+    vals
 end
 
 function ema(a::Array{Float64,1}, n::Int; wilder=false)
