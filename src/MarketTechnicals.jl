@@ -9,7 +9,7 @@ export sma, ema,
        NBarHighest, NBarLowest, DonchianChannel,
        obv, vwap, 
        doji, 
-       rsi, macd, cci, stochasticOsc
+       rsi, macd, cci, stochasticOsc,
        floorpivots, woodiespivots,
        abs, µprice 
 
