@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/JuliaQuant/MarketTechnicals.jl.png)](https://travis-ci.org/JuliaQuant/MarketTechnicals.jl)
+[![Package Evaluator](http://iainnz.github.io/packages.julialang.org/badges/MarketTechnicals_0.3.svg)](http://iainnz.github.io/packages.julialang.org/?pkg=MarketTechnicals&ver=0.3)
 
 #### A toolkit for technical analysis of financial time series in Julia
 
