@@ -17,7 +17,7 @@ function truerange{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
 end
 
 function atr{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close")
-    # atr was inveted by Wilder, so only his ema is supported
+    # atr was inveted by Wilder, so only his ema is currently supported
     res = ema(truerange(ohlc), n, wilder=true)
     TimeArray(res.timestamp, res.values, ["atr"])
 end
