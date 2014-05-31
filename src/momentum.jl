@@ -37,6 +37,37 @@ end
 
 macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
  
+function cci{T,N}(ohlc::TimeArray{T,N}, n::Int; cciconst=0.015, h="High", l="Low", c="Close")
+	price = (ohlc[h] + ohlc[l] + ohlc[c])/3
+	psma = sma(price, n)
+	avepdev = sma((price-psma), n)
+	
+	cci = (price - psma) / avepdev / cciconst
+  	tstamps = cci.timestamp[1:end]
+  	
+	TimeArray(tstamps, cci.values, ["cci"])
+end
+
+cci{T,N}(ohlc::TimeArray{T,N}, n::Int) = cci(ohlc, 20)
+
+function stochasticOsc{T,N}(ohlc::TimeArray{T,N}; nk=14, nd=3, h="High", l="Low", c="Close")
+	cl = ohlc[c]
+	lowest = NBarLowest(ohlc[l].values, nk)
+	highest = NBarHighest(ohlc[h].values, nk)
+
+    percentK = zeros(length(ohlc))
+    
+    for i in 1:length(ohlc)
+        percentK[i] = 100 * ((cl[i].values - lowest[i]) / (highest[i] - lowest[i]))
+    end
+    
+    percentD = sma(percentK, nd);
+    
+    TimeArray(ohlc.timestamp, hcat(percentK, percentD), ["%K", "%D"])
+end
+
+stochasticOsc{T,N}(ohlc::TimeArray{T,N}) = stochasticOsc(ohlc)
+
 # function cci(df::DataFrame, n::Int, c::Float64)
 # 
 #   df = copy(df)
