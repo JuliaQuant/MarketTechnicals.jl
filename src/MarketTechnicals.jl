@@ -5,10 +5,10 @@ module MarketTechnicals
 using TimeSeries
 
 export sma, ema,             
-       bollingerbands, truerange, atr, # keltnerbands, 
+       bollingerbands, truerange, atr, keltnerbands, 
        obv, vwap, 
        doji, 
-       rsi, macd, # cci, 
+       rsi, macd, cci, 
        floorpivots, woodiespivots,
        abs, µprice 
 

@@ -37,6 +37,18 @@ end
 
 macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
  
+function cci{T,N}(ohlc::TimeArray{T,N}, n::Int)
+	price = (ohlc["High"] + ohlc["Low"] + ohlc["Close"])/3
+	psma = sma(price, n)
+	avepdev = sma((price-psma), n)
+	
+	vals = (price - psma) / avepdev / 0.015
+
+	TimeArray(vals.timestamp, vals.values, ["cci"])
+end
+
+cci{T,N}(ohlc::TimeArray{T,N}, n::Int) = cci(ohlc, 20)
+
 # function cci(df::DataFrame, n::Int, c::Float64)
 # 
 #   df = copy(df)
