@@ -23,10 +23,10 @@ facts("Volatility") do
 #   end
    
   context("keltner_bands") do
-#    @fact kma[1].value    => roughly(108.798)  # needs confirmation 
-#    @fact kup[1].value    => roughly(110.011)  # needs confirmation 
-#    @fact kdn[1].value    => roughly(107.586)  # needs confirmation  
-#    @fact index(kma)[end] => lastday
+#    @fact keltnerbands(ohlc)["kma"].values[end] => roughly(21.42)  # needs confirmation 
+#    @fact keltnerbandb(ohlc)["kup"].values[end] => roughly(22.32)  # needs confirmation 
+#    @fact keltnerbands(ohlc)["kdn"].values[end] => roughly(20.52)  # needs confirmation  
+#    @fact keltnerbands(ohlc).timestamp[1]       => date(2000,1,14)
   end
   
   context("chaikin_volatility") do

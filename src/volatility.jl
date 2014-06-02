@@ -24,21 +24,20 @@ end
   
 atr{T,N}(ta::TimeArray{T,N}) = atr(ta, 14)
 
-function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Int)
- 	hi = ohlc["High"]; lo = ohlc["Low"]; cl = ohlc["Close"]
-	typ = (hi .+ lo .+ cl) ./ 3
-	rng = hi .- lo
-	rma = sma(rng, n) 
-
-	kma = sma(typ, n) 
-	tstamps = kma.timestamp[1:end]
-	
-	kma = TimeArray(tstamps, kma.values, ["kma"])
-	kup = TimeArray(tstamps, (kma.+rma).values, ["kup"])
-	kdn = TimeArray(tstamps, (kma.-rma).values, ["kdn"])
-
-	merge(kma, merge(kup, kdn))
-end
+# function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Int)
+# 	typ = typical(ohlc)
+# 	rng = ohlc["High"] .- ohlc["Low"]
+# 	rma = sma(rng, n) 
+# 
+# 	kma     = sma(typ, n) 
+# 	tstamps = kma.timestamp
+# 	
+# 	kma = TimeArray(tstamps, kma.values, ["kma"])
+# 	kup = TimeArray(tstamps, (kma.+rma).values, ["kup"])
+# 	kdn = TimeArray(tstamps, (kma.-rma).values, ["kdn"])
+# 
+# 	merge(kma, merge(kup, kdn))
+# end
   
 keltnerbands{T,N}(ohlc::TimeArray{T,N}) = keltnerbands(ohlc, 10)
  
