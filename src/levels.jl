@@ -2,7 +2,7 @@
 
 function floorpivots{T,N}(ohlc::TimeArray{T,N})
   
-    p  = lag(µprice(ohlc))
+    p  = lag(typical(ohlc))
     s1 = 2.*p .- lag(ohlc["High"])
     r1 = 2.*p .- lag(ohlc["Low"])
     s2 = p .- (r1 .- s1)
