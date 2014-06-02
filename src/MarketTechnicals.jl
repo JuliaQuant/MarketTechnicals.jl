@@ -1,16 +1,16 @@
-using TimeSeries
+using TimeSeries, StatsBase
 
 module MarketTechnicals
 
-using TimeSeries
+using TimeSeries, StatsBase
 
 export sma, ema,             
        bollingerbands, truerange, atr, keltnerbands, 
        obv, vwap, 
        doji, 
-       rsi, macd, cci, 
+       rsi, macd, #cci, 
        floorpivots, woodiespivots,
-       abs, µprice 
+       abs, typical
 
 include("candlesticks.jl")
 include("levels.jl")

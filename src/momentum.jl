@@ -37,31 +37,14 @@ end
 
 macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
  
-function cci{T,N}(ohlc::TimeArray{T,N}, n::Int)
-	price = (ohlc["High"] + ohlc["Low"] + ohlc["Close"])/3
-	psma = sma(price, n)
-	avepdev = sma((price-psma), n)
-	
-	vals = (price - psma) / avepdev / 0.015
-
-	TimeArray(vals.timestamp, vals.values, ["cci"])
-end
-
-cci{T,N}(ohlc::TimeArray{T,N}, n::Int) = cci(ohlc, 20)
-
-# function cci(df::DataFrame, n::Int, c::Float64)
-# 
-#   df = copy(df)
-# 
-#   typical = with(df, :(+(High, Low, Close) ./3))
-#   sma_typ = moving(typical, mean, n)
-#   mad_typ = moving(typical, mad, n)
-#   ccival  = (typical - sma_typ) ./ (mad_typ * c)
-# 
-#   within!(df, quote
-#     cci = $ccival
-#     end)
-#   df 
+# function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int, c::Float64)
+#   	typ     = typical(ohlc)
+#     sma_typ = sma(typ, ma)
+#     diff    = typ .- sma_typ
+#     mov_mad = moving(typ, mad, ma)
+#     divisor = mov_mad .* c
+#     vals    = diff ./ divisor
+#   	TimeArray(diff.timestamp, vals.values, ["cci"])
 # end
-# 
-# #cci(df::DataFrame) = cci(sa, 20, 0.015)
+
+# cci{T,N}(ohlc::TimeArray{T,N}) = cci(ohlc, 20, .015)

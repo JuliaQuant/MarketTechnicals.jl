@@ -2,7 +2,7 @@ function Base.abs{T,N}(ta::TimeArray{T,N})
     TimeArray(ta.timestamp, abs(ta.values), ta.colnames)
 end
 
-function µprice{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
+function typical{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
     val = (ohlc[h] .+ ohlc[l] .+ ohlc[c]) ./3
     TimeArray(val.timestamp, val.values, ["typical"])
 end
