@@ -7,6 +7,18 @@ function typical{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
     TimeArray(val.timestamp, val.values, ["typical"])
 end
 
+function mad1{T}(ta::TimeArray{T,1})
+    rollmean = upto(ta, mean)
+    diff     = abs(ta .- rollmean)
+    res      = upto(diff, mean)
+end
+
+function mad1{T}(a::Array{T,1})
+    rollmean = upto(ta, mean)
+    diff     = abs(ta .- rollmean)
+    res      = upto(diff, mean)
+end
+
 # #function Base.min{T,N}(ta::TimeArray{T,N})
 # function mini{T}(ta::TimeArray{T,2})
 #     vals =  min(ta.values[:,1], ta.values[:,2])
