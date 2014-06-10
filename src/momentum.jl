@@ -41,10 +41,11 @@ macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
 #   	typ     = typical(ohlc)
 #     sma_typ = sma(typ, ma)
 #     diff    = typ .- sma_typ
-#     mov_mad = moving(typ, mad, ma)
-#     divisor = mov_mad .* c
+#     #mead   = mad1(typ)
+#     mead    = moving(typ, mad1, 20)
+#     divisor = mead .* c
 #     vals    = diff ./ divisor
 #   	TimeArray(diff.timestamp, vals.values, ["cci"])
 # end
-
+# 
 # cci{T,N}(ohlc::TimeArray{T,N}) = cci(ohlc, 20, .015)
