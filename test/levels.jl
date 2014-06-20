@@ -10,7 +10,7 @@ facts("Levels") do
     @fact floorpivots(ohlc)["s1"].values[1]    => roughly(104.92) 
     @fact floorpivots(ohlc)["s2"].values[1]    => roughly(97.900) 
     @fact floorpivots(ohlc)["s3"].values[1]    => roughly(94.110) 
-    @fact floorpivots(ohlc).timestamp[end]     => date(2001,12,31)
+    @fact floorpivots(ohlc).timestamp[end]     => Date(2001,12,31)
   end                               
 
   context("woodiespivots") do
@@ -23,6 +23,6 @@ facts("Levels") do
     @fact woodiespivots(ohlc)["s1"].values[1]    => roughly(102.845)  
     @fact woodiespivots(ohlc)["s2"].values[1]    => roughly(96.8625)  
     @fact woodiespivots(ohlc)["s3"].values[1]    => roughly(92.035)  
-    @fact woodiespivots(ohlc).timestamp[end]     => date(2001,12,31)
+    @fact woodiespivots(ohlc).timestamp[end]     => Date(2001,12,31)
   end
 end
