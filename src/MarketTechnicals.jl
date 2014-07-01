@@ -1,6 +1,6 @@
 module MarketTechnicals
 
-using Reexport, StatsBase, Dates
+using TimeSeries, StatsBase, Reexport
 @reexport using TimeSeries
 
 export sma, ema,             
