@@ -1,4 +1,3 @@
 julia 0.3-
 TimeSeries
 StatsBase
-Reexport
