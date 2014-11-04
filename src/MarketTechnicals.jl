@@ -1,15 +1,15 @@
 if VERSION < v"0.4-"
-    using Dates, StatsBase
+    using Dates, TimeSeries, StatsBase
 else
-    using Base.Dates, StatsBase
+    using Base.Dates, TimeSeries, StatsBase
 end
 
 module MarketTechnicals
 
 if VERSION < v"0.4-"
-    using Dates, StatsBase
+    using Dates, TimeSeries, StatsBase
 else
-    using Base.Dates, StatsBase
+    using Base.Dates, TimeSeries, StatsBase
 end
 
 export sma, ema,             
