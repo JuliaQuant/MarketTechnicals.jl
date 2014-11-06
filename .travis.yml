@@ -14,6 +14,7 @@ before_install:
     - sudo apt-get install libpcre3-dev julia -y
     - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
 script:
+    - ! git grep ' $' -- \*.jl \*.scm \*.c \*.cpp \*.h > /dev/null || { echo "trailing whitespace found in source file"; exit 1; }
     - julia -e 'Pkg.init(); Pkg.clone(pwd())'
     - julia -e 'Pkg.test("MarketTechnicals",coverage=true)'
 after_success:

@@ -21,14 +21,14 @@ facts("Volatility") do
         @fact atr(ohlc).timestamp[1] => Date(2000,1,24)
     end
    
-  context("keltner_bands") do
-#    @fact keltnerbands(ohlc)["kma"].values[end] => roughly(21.42)  # needs confirmation 
-#    @fact keltnerbandb(ohlc)["kup"].values[end] => roughly(22.32)  # needs confirmation 
-#    @fact keltnerbands(ohlc)["kdn"].values[end] => roughly(20.52)  # needs confirmation  
-#    @fact keltnerbands(ohlc).timestamp[1]       => Date(2000,1,14)
-  end
+    context("keltner_bands") do
+        @pending keltnerbands(ohlc)["kma"].values[end] => roughly(21.42)  # needs confirmation 
+        @pending keltnerbandb(ohlc)["kup"].values[end] => roughly(22.32)  # needs confirmation 
+        @pending keltnerbands(ohlc)["kdn"].values[end] => roughly(20.52)  # needs confirmation  
+        @pending keltnerbands(ohlc).timestamp[1]       => Date(2000,1,14)
+    end
   
-  context("chaikin_volatility") do
-#   @fact chk => 17.0466 
-  end
+    context("chaikin_volatility") do
+       @pending chk => 17.0466 
+    end
 end 
