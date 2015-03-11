@@ -12,7 +12,7 @@ function obv{T,N}(ohlc::TimeArray{T,N}; price="Close", v="Volume")
     end
   end
 
-  TimeArray(ohlc.timestamp,  cumsum(vol), ["obv"])
+  TimeArray(ohlc.timestamp,  cumsum(vol), ["obv"], ohlc.meta)
 end
  
 function vwap{T,N}(ohlc::TimeArray{T,N}, n::Int; price="Close", v="Volume")
@@ -23,7 +23,7 @@ function vwap{T,N}(ohlc::TimeArray{T,N}, n::Int; price="Close", v="Volume")
     ∑Q  = moving(q, sum, n)
     val = ∑PQ ./ ∑Q
  
-    TimeArray(val.timestamp, val.values, ["vwap"])
+    TimeArray(val.timestamp, val.values, ["vwap"], ohlc.meta)
 end
  
 vwap{T,N}(ohlc::TimeArray{T,N}) = vwap(ohlc, 10)

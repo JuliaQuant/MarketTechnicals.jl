@@ -11,7 +11,7 @@ function floorpivots{T,N}(ohlc::TimeArray{T,N})
     r3 = (p .- s1) .+ r2
     
     TimeArray(s1.timestamp, [s3.values s2.values s1.values p.values r1.values r2.values r3.values],
-              ["s3", "s2", "s1", "pivot", "r1", "r2", "r3"])
+              ["s3", "s2", "s1", "pivot", "r1", "r2", "r3"], ohlc.meta)
   
 end
 
@@ -30,7 +30,7 @@ function woodiespivots{T,N}(ohlc::TimeArray{T,N})
     # r4 = r3 + range
  
     TimeArray(s1.timestamp, [s3.values s2.values s1.values p.values r1.values r2.values r3.values],
-              ["s3", "s2", "s1", "pivot", "r1", "r2", "r3"])
+              ["s3", "s2", "s1", "pivot", "r1", "r2", "r3"], ohlc.meta)
 end
 # 
 # function camarillapivots{T,V}(hi::Array{SeriesPair{T,V},1},

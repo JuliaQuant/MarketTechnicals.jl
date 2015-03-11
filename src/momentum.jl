@@ -24,7 +24,7 @@ function rsi{T}(ta::TimeArray{T,1}, n::Int; wilder=false)
   end
 
   res  = 100 .- (100./(1 .+ rs))
-  TimeArray(ta.timestamp[n:end], res, ["rsi"])
+  TimeArray(ta.timestamp[n:end], res, ["rsi"], ta.meta)
 end
 
 rsi{T}(ta::TimeArray{T,1}) = rsi(ta, 14)
@@ -32,12 +32,12 @@ rsi{T}(ta::TimeArray{T,1}) = rsi(ta, 14)
 function macd{T}(ta::TimeArray{T,1}, fast::Int, slow::Int, signal::Int)
     mcd = ema(ta, fast) .- ema(ta, slow)
     sig = ema(mcd, signal)
-    merge(mcd, sig, colnames=["macd", "signal"])
+    merge(mcd, sig, col_names=["macd", "signal"])
 end
 
 macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
  
-# function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int, c::Float64)
+# function cci{T,N,M}(ohlc::TimeArray{T,N,M}, ma::Int, c::Float64)
 #   	typ     = typical(ohlc)
 #     sma_typ = sma(typ, ma)
 #     diff    = typ .- sma_typ
@@ -48,4 +48,4 @@ macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
 #   	TimeArray(diff.timestamp, vals.values, ["cci"])
 # end
 # 
-# cci{T,N}(ohlc::TimeArray{T,N}) = cci(ohlc, 20, .015)
+# cci{T,N,M}(ohlc::TimeArray{T,N,M}) = cci(ohlc, 20, .015)
