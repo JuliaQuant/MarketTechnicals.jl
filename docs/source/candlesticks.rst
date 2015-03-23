@@ -15,3 +15,15 @@ Doji
 
 The doji pattern is identified with a very small candle body, where the open and closing price are nearly identical. It suggests some ambivalence in the market
 about what the fair value of the underlying asset is.
+
+::
+
+    julia> using MarketTechnicals, MarketData
+
+    julia> findwhen(doji(ohlc))
+    5-element Array{Date{ISOCalendar},1}:
+     1980-10-14
+     1981-04-07
+     1981-05-08
+     1981-06-08
+     1981-07-14
