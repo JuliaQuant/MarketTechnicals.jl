@@ -1,15 +1,16 @@
 using MarketData
 
 facts("Volume") do
+
     context("obv") do
-        @fact obv(ohlc).values[1]      => 50480000.00      # TTR value is 50480000
-        @fact obv(ohlc).values[end]    => 1145460000.00    # TTR value is 1145460000 
-        @fact obv(ohlc).timestamp[end] => Date(2001,12,31)
+        @fact obv(ohlcv).values[1]     => 4783900 # TTR value is 4783900
+        @fact obv(ohlcv).values[12]    => 9390200 # TTR value is 2000-01-19   9390200
+        @fact obv(ohlcv).timestamp[12] => Date(2000,1,19)
     end 
-  
+
     context("vwap") do
-        @fact vwap(ohlc).values[1]      => roughly(109.0703)  # TTR value 109.0703
-        @fact vwap(ohlc).values[end]    => roughly(122.7716)  # TTR value 122.7716
-        @fact vwap(ohlc).timestamp[end] => Date(2001,12,31)
+       @fact vwap(ohlcv).values[1]    => roughly(97.9215)  # TTR value 2000-01-14 97.92154
+       @fact vwap(ohlcv).values[end]  => roughly(21.4446)  # TTR value  21.44458
+       @fact vwap(ohlcv).timestamp[1] => Date(2000,1,14)
     end
 end
