@@ -1,7 +1,8 @@
+using TimeSeries, StatsBase
+
 module MarketTechnicals
 
-using TimeSeries, StatsBase, Reexport
-@reexport using TimeSeries
+using TimeSeries, StatsBase
 
 export sma, ema,             
        bollingerbands, truerange, atr, #keltnerbands, 

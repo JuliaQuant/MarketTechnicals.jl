@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/JuliaQuant/MarketTechnicals.jl.png)](https://travis-ci.org/JuliaQuant/MarketTechnicals.jl)
-[![Package Evaluator](http://iainnz.github.io/packages.julialang.org/badges/MarketTechnicals_0.3.svg)](http://iainnz.github.io/packages.julialang.org/?pkg=MarketTechnicals&ver=0.3)
+[![Build Status](https://travis-ci.org/JuliaQuant/MarketTechnicals.jl.svg?branch=master)](https://travis-ci.org/JuliaQuant/MarketTechnicals.jl)
+[![Coverage Status](https://coveralls.io/repos/JuliaQuant/MarketTechnicals.jl/badge.svg?branch=master)](https://coveralls.io/r/JuliaQuant/MarketTechnicals.jl?branch=master)
+[![MarketTechnicals](http://pkg.julialang.org/badges/MarketTechnicals_0.3.svg)](http://pkg.julialang.org/?pkg=MarketTechnicals&ver=0.3)
 
 #### A toolkit for technical analysis of financial time series in Julia
 
@@ -14,11 +15,11 @@ well-suited for technical analysis algorithms.
 ````julia
 julia> Pkg.add("MarketTechnicals")
 ````
-The un-registered MarketData package provides `const` objects of price series data based on the TimeArray structure. The package is used in 
+The MarketData package provides `const` objects of price series data based on the TimeArray structure. The package is used in 
 testing and benchmarking, but may also be useful prototyping trading signals. 
 
 ````julia
-julia> Pkg.clone("git://github.com/JuliaQuant/MarketData.jl.git")
+julia> Pkg.add("MarketData")
 ````
 
 ## A quick tour of the API 

@@ -1,30 +1,30 @@
 function rsi{T}(ta::TimeArray{T,1}, n::Int; wilder=false)
 
-  ret = [0; diff(ta.values)]
-  ups = zeros(length(ta))
-  dns = zeros(length(ta))
-
-  for i=1:length(ta)
-    if ret[i] >= 0
-      ups[i] += ret[i]
+    ret = [0; diff(ta.values)]
+    ups = zeros(length(ta))
+    dns = zeros(length(ta))
+  
+    for i=1:length(ta)
+        if ret[i] >= 0
+            ups[i] += ret[i]
+        else
+            dns[i] += ret[i]
+        end
+     end
+  
+    if  wilder 
+        upsema = ema(ups, n, wilder=true)
+        dnsema = abs(ema(dns, n, wilder=true))
+        rs     = upsema ./ dnsema  
+  
     else
-      dns[i] += ret[i]
+        upsema  = ema(ups, n)
+        dnsema  = abs(ema(dns, n))
+        rs      = upsema ./ dnsema  
     end
-   end
-
-  if  wilder 
-    upsema = ema(ups, n, wilder=true)
-    dnsema = abs(ema(dns, n, wilder=true))
-    rs     = upsema ./ dnsema  
-
-  else
-    upsema  = ema(ups, n)
-    dnsema  = abs(ema(dns, n))
-    rs      = upsema ./ dnsema  
-  end
-
-  res  = 100 .- (100./(1 .+ rs))
-  TimeArray(ta.timestamp[n:end], res, ["rsi"])
+  
+    res  = 100 .- (100./(1 .+ rs))
+    TimeArray(ta.timestamp[n:end], res, ["rsi"])
 end
 
 rsi{T}(ta::TimeArray{T,1}) = rsi(ta, 14)
@@ -32,7 +32,7 @@ rsi{T}(ta::TimeArray{T,1}) = rsi(ta, 14)
 function macd{T}(ta::TimeArray{T,1}, fast::Int, slow::Int, signal::Int)
     mcd = ema(ta, fast) .- ema(ta, slow)
     sig = ema(mcd, signal)
-    merge(mcd, sig, colnames=["macd", "signal"])
+    merge(mcd, sig, col_names=["macd", "signal"])
 end
 
 macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)

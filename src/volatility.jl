@@ -3,7 +3,7 @@ function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Int, width::Float64)
     upband = tama .+ moving(ta, std, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm
     dnband = tama .- moving(ta, std, ma) .* width .* sqrt((ma-1)/ma)
     bands  =  merge(upband, dnband) 
-    merge(bands, tama, colnames=["up", "down", "mean"])
+    merge(bands, tama, col_names=["up", "down", "mean"])
 end
 
 bollingerbands{T,N}(ta::TimeArray{T,N}) = bollingerbands(ta, 20, 2.0)
