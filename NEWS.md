@@ -1,3 +1,7 @@
+### 0.4.0
+
+* first version to support Julia 0.4 only
+
 ### 0.3.5
 
 * limit support for Julia 0.3 only
