@@ -1,16 +1,8 @@
-if VERSION < v"0.4-"
-    using Dates, TimeSeries, StatsBase
-else
-    using Base.Dates, TimeSeries, StatsBase
-end
+using TimeSeries, StatsBase
 
 module MarketTechnicals
 
-if VERSION < v"0.4-"
-    using Dates, TimeSeries, StatsBase
-else
-    using Base.Dates, TimeSeries, StatsBase
-end
+using TimeSeries, StatsBase
 
 export sma, ema,             
        bollingerbands, truerange, atr, #keltnerbands, 

@@ -1,21 +1,11 @@
-language: cpp
-compiler:
-    - clang 
+language: julia
+os:
+  - linux
+julia:
+  - 0.3
 notifications:
-    email: false
-env:
-  matrix:
-    - JULIAVERSION="juliareleases"
-    - JULIAVERSION="julianightlies"
-before_install:
-    - sudo add-apt-repository ppa:staticfloat/julia-deps -y
-    - sudo add-apt-repository ppa:staticfloat/${JULIAVERSION} -y
-    - sudo apt-get update -qq -y
-    - sudo apt-get install libpcre3-dev julia -y
-    - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  email: false
+sudo: false
 script:
-    - ! git grep ' $' -- \*.jl \*.scm \*.c \*.cpp \*.h > /dev/null || { echo "trailing whitespace found in source file"; exit 1; }
-    - julia -e 'Pkg.init(); Pkg.clone(pwd())'
-    - julia -e 'Pkg.test("MarketTechnicals",coverage=true)'
-after_success:
-    - julia -e 'cd(Pkg.dir("MarketTechnicals")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'Pkg.clone(pwd()); Pkg.build("MarketTechnicals"); Pkg.test("MarketTechnicals")'
