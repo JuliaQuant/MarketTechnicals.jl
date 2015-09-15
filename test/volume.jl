@@ -9,8 +9,8 @@ facts("Volume") do
     end 
 
     context("vwap") do
-       @fact vwap(ohlcv).values[1]    => roughly(97.9215)  # TTR value 2000-01-14 97.92154
-       @fact vwap(ohlcv).values[end]  => roughly(21.4446)  # TTR value  21.44458
+       @fact vwap(ohlcv).values[1]    => roughly(97.9215, atol=.01)  # TTR value 2000-01-14 97.92154
+       @fact vwap(ohlcv).values[end]  => roughly(21.4446, atol=.01)  # TTR value  21.44458
        @fact vwap(ohlcv).timestamp[1] => Date(2000,1,14)
     end
 end
