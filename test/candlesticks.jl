@@ -1,4 +1,4 @@
-using MarketData
+using MarketData, TimeSeries
 
 facts("Candlesticks") do
 

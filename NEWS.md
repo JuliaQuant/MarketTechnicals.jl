@@ -1,3 +1,7 @@
+### 0.4.1
+
+* precompilation code added
+
 ### 0.4.0
 
 * first version to support Julia 0.4 only
