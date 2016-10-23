@@ -3,7 +3,7 @@ function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Int, width::Float64)
     upband = tama .+ moving(ta, std, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm
     dnband = tama .- moving(ta, std, ma) .* width .* sqrt((ma-1)/ma)
     bands  =  merge(upband, dnband) 
-    merge(bands, tama, col_names = ["up", "down", "mean"])
+    merge(bands, tama, colnames = ["up", "down", "mean"])
 end
 
 bollingerbands{T,N}(ta::TimeArray{T,N}) = bollingerbands(ta, 20, 2.0)
@@ -17,7 +17,7 @@ function truerange{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
 end
 
 function atr{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close")
-    # atr was inveted by Wilder, so only his ema is currently supported
+    # atr was invented by Wilder, so only his ema is currently supported
     res = ema(truerange(ohlc), n, wilder=true)
     TimeArray(res.timestamp, res.values, ["atr"], ohlc.meta)
 end

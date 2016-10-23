@@ -1,3 +1,7 @@
+### 0.5.0
+
+* support floor of julia 0.5.0
+
 ### 0.4.1
 
 * precompilation code added

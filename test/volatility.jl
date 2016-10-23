@@ -2,13 +2,13 @@ using MarketData
 
 facts("Volatility") do
 
-    context("bollinger_bands") do
-        @fact bollingerbands(cl)["up"].values[1]   --> roughly(117.3251, atol=.01)      # TTR default uses sample=FALSE and value 117.3251
-        @fact bollingerbands(cl)["down"].values[1] --> roughly(89.39392, atol=.01)      # TTR default uses sample=FALSE and value 89.39392
-        @fact bollingerbands(cl)["mean"].values[1] --> roughly(103.3595, atol=.01)      # TTR 103.3595 
-        @fact bollingerbands(cl).timestamp[1]      --> Date(2000,1,31) 
-        @fact bollingerbands(cl).timestamp[end]    --> Date(2001,12,31)
-    end
+     context("bollinger_bands") do
+         @fact bollingerbands(cl)["up"].values[1]   --> roughly(117.3251, atol=.01)      # TTR default uses sample=FALSE and value 117.3251
+         @fact bollingerbands(cl)["down"].values[1] --> roughly(89.39392, atol=.01)      # TTR default uses sample=FALSE and value 89.39392
+         @fact bollingerbands(cl)["mean"].values[1] --> roughly(103.3595, atol=.01)      # TTR 103.3595 
+         @fact bollingerbands(cl).timestamp[1]      --> Date(2000,1,31) 
+         @fact bollingerbands(cl).timestamp[end]    --> Date(2001,12,31)
+     end
   
     context("truerange") do
         @fact truerange(ohlc).values[end]    --> roughly(0.83, atol=.01)       # TTR 0.83

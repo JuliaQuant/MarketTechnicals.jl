@@ -33,7 +33,7 @@ rsi{T}(ta::TimeArray{T,1}) = rsi(ta, 14)
 function macd{T}(ta::TimeArray{T,1}, fast::Int, slow::Int, signal::Int)
     mcd = ema(ta, fast) .- ema(ta, slow)
     sig = ema(mcd, signal)
-    merge(mcd, sig, col_names=["macd", "signal"])
+    merge(mcd, sig, colnames=["macd", "signal"])
 end
 
 macd{T}(ta::TimeArray{T,1}) = macd(ta, 12, 26, 9)
