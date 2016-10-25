@@ -1,4 +1,6 @@
-function rsi{T}(ta::TimeArray{T,1}, n::Int; wilder=false)
+#function rsi{T}(ta::TimeArray{T,1}, n::Int; wilder=false)
+
+function rsi{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)
 
     ret = [0; diff(ta.values)]
     ups = zeros(length(ta))
@@ -25,7 +27,13 @@ function rsi{T}(ta::TimeArray{T,1}, n::Int; wilder=false)
 
     res  = 100 .- (100./(1 .+ rs))
 
-    TimeArray(ta.timestamp[n:end], res, ["rsi"], ta.meta)
+    cname   = String[]
+    cols    = colnames(ta)
+    for c in 1:length(cols)
+        push!(cname, string(cols[c], "_rsi_", n))
+    end
+
+    TimeArray(ta.timestamp[n:end], res, cname, ta.meta)
 end
 
 rsi{T}(ta::TimeArray{T,1}) = rsi(ta, 14)
