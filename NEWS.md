@@ -1,3 +1,7 @@
+### 0.5.1
+
+* fixes issue #53 and runs indicator along multiple columns where appropriate
+
 ### 0.5.0
 
 * support floor of julia 0.5.0
