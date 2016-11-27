@@ -1,6 +1,6 @@
-using MarketData
+using MarketData, Base.Dates
 
-facts("Moving averages on TimeArrays") do
+facts("Moving averages on TimeArrays vectors") do
 
     context("sma") do  
         @fact sma(cl, 10).values[1]        --> roughly(98.782, atol=.01)  # TTR value 98.782
@@ -88,5 +88,22 @@ facts("Moving averages on arrays") do
         @fact ema(ohlc.values, 10, wilder=true)[3,:]   --> roughly([101.213, 104.64, 97.138, 100.024], atol=.01)  # TTR value 100.0240
         @fact ema(ohlc.values, 10, wilder=true)[490,:] --> roughly([21.184, 21.776, 20.847, 21.345], atol=.01)  # TTR value 21.34556
         @fact ema(ohlc.values, 10, wilder=true)[491,:] --> roughly([21.317, 21.865, 20.945, 21.401], atol=.01)  # TTR value 21.40100
+    end
+end
+
+facts("Moving averages on now") do
+
+    dt     = Date(2001,12,31)
+    bad_dt = Date(2000,12,31)
+    
+    context("Vector dispatch on sma") do 
+        @fact sma(cl, 10, dt) --> roughly(21.323, atol=.01)
+        @fact_throws sma(cl, 10, bad_dt)
+    end 
+    
+    context("Vector dispatch on ema") do 
+    end
+
+    context("Vector dispatch on ema wilder true") do 
     end
 end
