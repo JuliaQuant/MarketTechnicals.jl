@@ -3,7 +3,7 @@ function rsi{T,N}(ta::TimeArray{T,N}, n::Int=14; wilder=false)
     ret = vcat(zeros(length(colnames(ta)))', diff(ta.values))
     ups = zeros(size(ta.values,1), size(ta.values,2))
     dns = zeros(size(ta.values,1), size(ta.values,2))
-  
+
     for i in 1:size(ta.values,1)
         for j in 1:size(ta.values,2)
             if ret[i,j] >= 0
@@ -13,16 +13,16 @@ function rsi{T,N}(ta::TimeArray{T,N}, n::Int=14; wilder=false)
             end
         end
     end
-  
-    if  wilder 
+
+    if  wilder
         upsema = ema(ups, n, wilder=true)
         dnsema = abs(ema(dns, n, wilder=true))
-        rs     = upsema ./ dnsema  
-  
+        rs     = upsema ./ dnsema
+
     else
         upsema  = ema(ups, n)
         dnsema  = abs(ema(dns, n))
-        rs      = upsema ./ dnsema  
+        rs      = upsema ./ dnsema
     end
 
     res  = 100 .- (100./(1 .+ rs))
