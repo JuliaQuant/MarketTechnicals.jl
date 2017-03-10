@@ -8,5 +8,7 @@ makedocs(
     pages = [
         "index.md",
         "getting_started.md",
+        "ma.md",
+        "levels.md",
     ]
 )
