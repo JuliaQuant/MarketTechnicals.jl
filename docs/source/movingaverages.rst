@@ -1,13 +1,17 @@
 Moving averages
 ===============
 
+.. highlight:: julia
+
 simple moving average
 ---------------------
 
 
 exponential moving average
 --------------------------
+
 ::
+
     julia> ema(cl, 10, wilder=true)
     496x1 TimeArray{Float64,1} 1980-01-16 to 1981-12-31
 
