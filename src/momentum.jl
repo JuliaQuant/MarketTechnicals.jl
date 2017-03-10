@@ -51,6 +51,19 @@ function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int=20, c::Float64=0.015)
     rename(res, "cci")
 end
 
+doc"""
+    macd(ta, fast=12, slow=26, signal=9)
+
+Moving Average Convergence / Divergence
+
+```math
+    \begin{align}
+        MACD Bar & = DIF - DEM \\
+        DIF & = EMA(P_{close}, fast) - EMA(P_{close}, slow) \\
+        DEM & = EMA(DIF, 9)
+    \end{align}
+```
+"""
 function macd{T}(ta::TimeArray{T,1}, fast::Int=12, slow::Int=26, signal::Int=9)
     mcd = ema(ta, fast) .- ema(ta, slow)
     sig = ema(mcd, signal)

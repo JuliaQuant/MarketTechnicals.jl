@@ -8,4 +8,8 @@ rsi
 
 ## MACD
 
+```@docs
+macd
+```
+
 ## CCI
