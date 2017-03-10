@@ -12,5 +12,6 @@ makedocs(
         "levels.md",
         "momentum.md",
         "volatility.md",
+        "volume.md",
     ]
 )
