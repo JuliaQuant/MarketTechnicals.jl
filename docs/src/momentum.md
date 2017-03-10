@@ -13,3 +13,7 @@ macd
 ```
 
 ## CCI
+
+```@docs
+cci
+```

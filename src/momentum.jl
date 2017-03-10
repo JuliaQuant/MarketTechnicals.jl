@@ -46,6 +46,15 @@ function rsi{T,N}(ta::TimeArray{T,N}, n::Int=14; wilder=false)
     TimeArray(ta.timestamp[n:end], res, cname, ta.meta)
 end
 
+doc"""
+    cci(ohlc, ma=20, c=0.015)
+
+Commodity Channel Index
+
+```math
+    CCI = \frac{P_{typical} - SMA(P_{typical})}{c \times \sigma(P_{typical})}
+```
+"""
 function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int=20, c::Float64=0.015)
     res = moving(typical(ohlc), mean_abs_dev, ma) ./ c
     rename(res, "cci")
