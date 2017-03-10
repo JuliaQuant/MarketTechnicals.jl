@@ -2,6 +2,10 @@
 
 ## RSI
 
+```@docs
+rsi
+```
+
 ## MACD
 
 ## CCI

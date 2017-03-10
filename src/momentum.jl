@@ -1,5 +1,15 @@
+doc"""
+    rsi(ta, n=14; wilder=false)
+
+Relative Strength Index
+
+```math
+    RSI = \frac{EMA(Up, n)}{EMA(Up, n) + EMA(Dn, n)}
+```
+"""
 function rsi{T,N}(ta::TimeArray{T,N}, n::Int=14; wilder=false)
-    # for the record I'm not happy about transposing zeros here since it's difficult to see why
+    # for the record I'm not happy about transposing zeros here
+    # since it's difficult to see why
     ret = vcat(zeros(length(colnames(ta)))', diff(ta.values))
     ups = zeros(size(ta.values,1), size(ta.values,2))
     dns = zeros(size(ta.values,1), size(ta.values,2))
