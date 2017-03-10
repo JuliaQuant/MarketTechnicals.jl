@@ -13,5 +13,6 @@ makedocs(
         "momentum.md",
         "volatility.md",
         "volume.md",
+        "candlesticks.md",
     ]
 )
