@@ -84,6 +84,8 @@ function ema{T,N}(a::Array{T,N}, n::Int; wilder=false)
 end
 
 doc"""
+    sma(arr, n)
+
 Simple Moving Average
 
 ```math
@@ -91,3 +93,23 @@ SMA = \frac{\sum^n{P_i}}{n}
 ```
 """
 sma
+
+doc"""
+    ema(arr, n, wilder=false)
+
+Exponemtial Moving Average
+
+A.k.a. exponentially weighted moving average (EWMA)
+
+```math
+    \text{Let } k \text{denote the degree of weighting decrease}
+```
+
+If parameter `wilder` is `true`, ``k = \frac{1}{n}``,
+else ``k = \frac{2}{n + 1}``.
+
+```math
+    EMA_t = k \times P_t + (1 - k) \times EMA_{t - 1}
+```
+"""
+ema

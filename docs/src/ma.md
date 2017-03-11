@@ -8,6 +8,10 @@ sma
 
 ## Exponential Moving Average
 
+```@docs
+ema
+```
+
 ```julia
   julia> ema(cl, 10, wilder=true)
   496x1 TimeArray{Float64,1} 1980-01-16 to 1981-12-31
