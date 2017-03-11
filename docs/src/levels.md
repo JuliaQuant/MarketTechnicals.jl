@@ -2,6 +2,10 @@
 
 ## Floor Trader Pivots
 
+```@docs
+floorpivots
+```
+
 ## Woodies Pivots
 
 ```julia

@@ -1,5 +1,25 @@
 # an idea: create one method named pivots with kwargs
 
+doc"""
+    floorpivots(ohlc)
+
+Floor Trader Pivots
+
+```math
+\begin{align*}
+
+    R3 & = Pivot_t + (R2 - S1) \\
+    R2 & = Pivot_t + (R1 - S1) \\
+    R1 & = 2 Pivot_t - P^{low}_{t-1} \\
+    Pivot_t & = Price^{typical}_{t-1} =
+        \frac{P^{high}_{t-1} + P^{low}_{t-1} + P^{close}_{t-1}}{3} \\
+    S1 & = 2 Pivot_t - P^{high}_{t-1} \\
+    S2 & = Pivot_t - (R1 - S1) \\
+    S3 & = Pivot_t - (R2 - S1)
+
+\end{align*}
+```
+"""
 function floorpivots{T,N}(ohlc::TimeArray{T,N})
 
     p  = lag(typical(ohlc))
