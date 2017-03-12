@@ -2,7 +2,7 @@ function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Int, width::Float64)
     tama   = sma(ta, ma)
     upband = tama .+ moving(ta, std, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm
     dnband = tama .- moving(ta, std, ma) .* width .* sqrt((ma-1)/ma)
-    bands  =  merge(upband, dnband) 
+    bands  =  merge(upband, dnband)
     merge(bands, tama, colnames = ["up", "down", "mean"])
 end
 
@@ -21,26 +21,26 @@ function atr{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close")
     res = ema(truerange(ohlc), n, wilder=true)
     TimeArray(res.timestamp, res.values, ["atr"], ohlc.meta)
 end
-  
+
 atr{T,N}(ta::TimeArray{T,N}) = atr(ta, 14)
 
 # function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Int)
 # 	typ = typical(ohlc)
 # 	rng = ohlc["High"] .- ohlc["Low"]
-# 	rma = sma(rng, n) 
-# 
-# 	kma     = sma(typ, n) 
+# 	rma = sma(rng, n)
+#
+# 	kma     = sma(typ, n)
 # 	tstamps = kma.timestamp
-# 	
+#
 # 	kma = TimeArray(tstamps, kma.values, ["kma"])
 # 	kup = TimeArray(tstamps, (kma.+rma).values, ["kup"])
 # 	kdn = TimeArray(tstamps, (kma.-rma).values, ["kdn"])
-# 
+#
 # 	merge(kma, merge(kup, kdn))
 # end
-  
+
 keltnerbands{T,N}(ohlc::TimeArray{T,N}) = keltnerbands(ohlc, 10)
- 
+
 # # function chaikinvolatility{T,N}(ta::TimeArray{T,N}, n::Int)
 # #   #code here
 # # end
