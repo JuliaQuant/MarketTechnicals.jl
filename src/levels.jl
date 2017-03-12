@@ -37,6 +37,30 @@ function floorpivots{T,N}(ohlc::TimeArray{T,N})
 
 end
 
+doc"""
+    woodiespivots(ohlc)
+
+Woodie's Pivot
+
+```math
+\begin{align*}
+
+    Range & = Price^{high}_{t-1} - Price^{low}_{t-1} \\
+
+    R4 & = S4 + Range \tag{not implemented} \\
+    R3 & = R1 + Range \\
+    R2 & = Pivot_t + Range \\
+    R1 & = 2 Pivot_t - Price^{low}_{t-1} \\
+    Pivot_t & =
+        \frac{Price^{high}_{t-1} + Price^{low}_{t-1} + 2 Price^{open}_t}{4} \\
+    S1 & = 2 Pivot_t - Price^{high}_{t-1} \\
+    S2 & = Pivot_t - Range \\
+    S3 & = S1 - Range \\
+    S4 & = S3 - Range \tag{not implemented}
+
+\end{align*}
+```
+"""
 function woodiespivots{T,N}(ohlc::TimeArray{T,N})
 
     rng = lag(ohlc["High"]) .- lag(ohlc["Low"])

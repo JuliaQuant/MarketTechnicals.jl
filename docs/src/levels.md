@@ -8,6 +8,10 @@ floorpivots
 
 ## Woodies Pivots
 
+```@docs
+woodiespivots
+```
+
 ```julia
   julia> woodiespivots(ohlc)
   504x7 TimeArray{Float64,2} 1980-01-04 to 1981-12-31
