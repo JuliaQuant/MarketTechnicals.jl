@@ -1,3 +1,18 @@
+doc"""
+    bollingerbands(ta, ma=20, width=2.0)
+
+Bollinger Bands
+
+```math
+\begin{align*}
+
+    Up & = SMA + width \times \sigma \\
+    Mean & = SMA \\
+    Down & = SMA - width \times \sigma
+
+\end{align*}
+```
+"""
 function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Int, width::Float64)
     tama   = sma(ta, ma)
     upband = tama .+ moving(ta, std, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm

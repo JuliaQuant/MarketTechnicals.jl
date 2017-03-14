@@ -2,6 +2,10 @@
 
 ## Bollinger Bands
 
+```@docs
+bollingerbands
+```
+
 ## True Range
 
 ## Average True Range
