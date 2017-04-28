@@ -23,6 +23,16 @@ end
 
 bollingerbands{T,N}(ta::TimeArray{T,N}) = bollingerbands(ta, 20, 2.0)
 
+doc"""
+    truerange(ohlc; h="High", l="Low", c="Close")
+
+True Range
+
+```math
+    TR = \max (H_t, C_{t-1}) - \min (L_t, C{t-1})
+```
+
+"""
 function truerange{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
     highs    = merge(ohlc[h], lag(ohlc[c]))
     lows     = merge(ohlc[l], lag(ohlc[c]))

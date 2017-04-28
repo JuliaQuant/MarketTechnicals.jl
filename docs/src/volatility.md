@@ -8,6 +8,10 @@ bollingerbands
 
 ## True Range
 
+```@docs
+truerange
+```
+
 ## Average True Range
 
 ## Keltner Bands
