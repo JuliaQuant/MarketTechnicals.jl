@@ -14,4 +14,10 @@ truerange
 
 ## Average True Range
 
+```@docs
+atr
+```
+
 ## Keltner Bands
+
+*Not Implemented*

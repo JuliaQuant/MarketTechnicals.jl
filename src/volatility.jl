@@ -41,6 +41,18 @@ function truerange{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
     truehigh .- truelow
 end
 
+doc"""
+    atr(ohlc, n=14; h="High", l="Low", c="Close")
+
+Average True Range
+
+It's the exponential moving average of [`truerange`](@ref)
+
+```math
+    ATR = EMA(TR, n)
+```
+
+"""
 function atr{T,N}(ohlc::TimeArray{T,N}, n::Int; h="High", l="Low", c="Close")
     # atr was invented by Wilder, so only his ema is currently supported
     res = ema(truerange(ohlc), n, wilder=true)
