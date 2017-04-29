@@ -30,6 +30,16 @@ function obv{T,N}(ohlcv::TimeArray{T,N}; price="Close", v="Volume")
     TimeArray(ohlcv.timestamp, cumsum(vol), ["obv"], ohlcv.meta)
 end
 
+doc"""
+    vwap(ohlcv, n; price="Close", v="Volume")
+
+Volume Weight-Adjusted Price
+
+```math
+    P = \frac{\sum_j P_j Q_j}{\sum_j Q_j} \ ,\text{where Q is the volume}
+```
+
+"""
 function vwap{T,N}(ohlcv::TimeArray{T,N}, n::Int; price="Close", v="Volume")
 
     p   = ohlcv[price]
