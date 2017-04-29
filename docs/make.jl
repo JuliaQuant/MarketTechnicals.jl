@@ -16,3 +16,12 @@ makedocs(
         "candlesticks.md",
     ]
 )
+
+deploydocs(
+    repo = "github.com/APCLab/MarketTechnicals.jl.git",
+    julia  = "0.5",
+    latest = "master",
+    target = "build",
+    deps = nothing,  # we use the `format = :html`, without `mkdocs`
+    make = nothing,  # we use the `format = :html`, without `mkdocs`
+)
