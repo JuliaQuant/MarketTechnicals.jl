@@ -1,3 +1,18 @@
+doc"""
+    obv(ohlcv; price="Close", v="Volume")
+
+On Balance Volume
+
+```math
+    OBV_t = OBV_{t - 1} +
+        \begin{cases}
+            volume  & \text{if} \ close_t > close_{t-1} \\
+            0       & \text{if} \ close_t = close_{t-1} \\
+            -volume & \text{if} \ close_t < close_{t-1}
+        \end{cases}
+```
+
+"""
 function obv{T,N}(ohlcv::TimeArray{T,N}; price="Close", v="Volume")
 
     ret    = percentchange(ohlcv[price])
