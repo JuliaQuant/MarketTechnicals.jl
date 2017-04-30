@@ -66,11 +66,11 @@ doc"""
 Moving Average Convergence / Divergence
 
 ```math
-    \begin{align}
+    \begin{align*}
         MACD Bar & = DIF - DEM \\
         DIF & = EMA(P_{close}, fast) - EMA(P_{close}, slow) \\
-        DEM & = EMA(DIF, 9)
-    \end{align}
+        DEM & = EMA(DIF, 9) \tag{signal}
+    \end{align*}
 ```
 """
 function macd{T}(ta::TimeArray{T,1}, fast::Int=12, slow::Int=26, signal::Int=9)
