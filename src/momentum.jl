@@ -74,7 +74,8 @@ Moving Average Convergence / Divergence
 ```
 """
 function macd{T}(ta::TimeArray{T,1}, fast::Int=12, slow::Int=26, signal::Int=9)
-    mcd = ema(ta, fast) .- ema(ta, slow)
-    sig = ema(mcd, signal)
-    merge(mcd, sig, colnames=["macd", "signal"])
+    dif = ema(ta, fast) .- ema(ta, slow)
+    sig = ema(dif, signal)
+    osc = dif .- sig
+    merge(merge(osc, dif), sig, colnames=["macd", "dif", "signal"])
 end
