@@ -21,8 +21,9 @@ facts("Momentum") do
     end
 
     context("macd") do
-        @fact macd(cl).values[end, 1] --> roughly(0.421, atol=.01) # TTR value with percent=FALSE is 0.421175152
-        @fact macd(cl).values[end, 2] --> roughly(0.441, atol=.01) # TTR value with percent=FALSE is 0.4414275
+        @fact macd(cl).values[end, 1] --> roughly(-0.020, atol=.01)
+        @fact macd(cl).values[end, 2] --> roughly(0.421, atol=.01) # TTR value with percent=FALSE is 0.421175152
+        @fact macd(cl).values[end, 3] --> roughly(0.441, atol=.01) # TTR value with percent=FALSE is 0.4414275
         @fact macd(cl).timestamp[end] --> Date(2001,12,31)
     end
 
