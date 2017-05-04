@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Trade levels · MarketTechnicals.jl</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Ubuntu+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="assets/documenter.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script></head><body><nav class="toc"><h1>MarketTechnicals.jl</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" action="search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="index.html">MarketTechnicals Overview</a></li><li><a class="toctext" href="getting_started.html">Getting Started</a></li><li><a class="toctext" href="ma.html">Moving Averages</a></li><li class="current"><a class="toctext" href="levels.html">Trade levels</a><ul class="internal"><li><a class="toctext" href="#Floor-Trader-Pivots-1">Floor Trader Pivots</a></li><li><a class="toctext" href="#Woodies-Pivots-1">Woodies Pivots</a></li></ul></li><li><a class="toctext" href="momentum.html">Momentum</a></li><li><a class="toctext" href="volatility.html">Volatility</a></li><li><a class="toctext" href="volume.html">Volume</a></li><li><a class="toctext" href="candlesticks.html">Candlesticks</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href="levels.html">Trade levels</a></li></ul><a class="edit-page" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/895b74207c94aada989e59f0876bc99bbc9bf4e8/docs/src/levels.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/></header><h1><a class="nav-anchor" id="Trade-levels-1" href="#Trade-levels-1">Trade levels</a></h1><h2><a class="nav-anchor" id="Floor-Trader-Pivots-1" href="#Floor-Trader-Pivots-1">Floor Trader Pivots</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.floorpivots" href="#MarketTechnicals.floorpivots"><code>MarketTechnicals.floorpivots</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">floorpivots(ohlc)</code></pre><p>Floor Trader Pivots</p><div>\[\begin{align*}
+
+    R3 &amp; = Pivot_t + (R2 - S1) \\
+    R2 &amp; = Pivot_t + (R1 - S1) \\
+    R1 &amp; = 2 Pivot_t - P^{low}_{t-1} \\
+    Pivot_t &amp; = Price^{typical}_{t-1} =
+        \frac{P^{high}_{t-1} + P^{low}_{t-1} + P^{close}_{t-1}}{3} \\
+    S1 &amp; = 2 Pivot_t - P^{high}_{t-1} \\
+    S2 &amp; = Pivot_t - (R1 - S1) \\
+    S3 &amp; = Pivot_t - (R2 - S1)
+
+\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/895b74207c94aada989e59f0876bc99bbc9bf4e8/src/levels.jl#L3">source</a><br/></section><h2><a class="nav-anchor" id="Woodies-Pivots-1" href="#Woodies-Pivots-1">Woodies Pivots</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.woodiespivots" href="#MarketTechnicals.woodiespivots"><code>MarketTechnicals.woodiespivots</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">woodiespivots(ohlc)</code></pre><p>Woodie&#39;s Pivot</p><div>\[\begin{align*}
+
+    Range &amp; = Price^{high}_{t-1} - Price^{low}_{t-1} \\
+
+    R4 &amp; = S4 + Range \tag{not implemented} \\
+    R3 &amp; = R1 + Range \\
+    R2 &amp; = Pivot_t + Range \\
+    R1 &amp; = 2 Pivot_t - Price^{low}_{t-1} \\
+    Pivot_t &amp; =
+        \frac{Price^{high}_{t-1} + Price^{low}_{t-1} + 2 Price^{open}_t}{4} \\
+    S1 &amp; = 2 Pivot_t - Price^{high}_{t-1} \\
+    S2 &amp; = Pivot_t - Range \\
+    S3 &amp; = S1 - Range \\
+    S4 &amp; = S3 - Range \tag{not implemented}
+
+\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/895b74207c94aada989e59f0876bc99bbc9bf4e8/src/levels.jl#L40">source</a><br/></section><pre><code class="language-julia">  julia&gt; woodiespivots(ohlc)
+  504x7 TimeArray{Float64,2} 1980-01-04 to 1981-12-31
+
+                s3      s2      s1      pivot   r1      r2      r3
+  1980-01-04 | 100.99  102.13  103.81  104.94  106.63  107.76  109.45
+  1980-01-07 | 103.54  104.31  105.53  106.30  107.52  108.29  109.51
+  1980-01-08 | 103.81  104.81  105.81  106.81  107.81  108.81  109.81
+  1980-01-09 | 104.45  105.37  107.45  108.37  110.45  111.37  113.45
+  ...
+  1981-12-24 | 119.30  120.44  121.31  122.45  123.32  124.46  125.33
+  1981-12-28 | 120.31  120.94  121.80  122.43  123.29  123.92  124.78
+  1981-12-29 | 119.83  120.78  121.45  122.41  123.08  124.04  124.71
+  1981-12-30 | 119.00  120.06  120.78  121.84  122.56  123.62  124.34
+  1981-12-31 | 119.20  120.12  121.27  122.19  123.33  124.26  125.40</code></pre><footer><hr/><a class="previous" href="ma.html"><span class="direction">Previous</span><span class="title">Moving Averages</span></a><a class="next" href="momentum.html"><span class="direction">Next</span><span class="title">Momentum</span></a></footer></article></body></html>
