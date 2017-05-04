@@ -18,7 +18,7 @@ makedocs(
 )
 
 deploydocs(
-    repo = "github.com/APCLab/MarketTechnicals.jl.git",
+    repo = "github.com/JuliaQuant/MarketTechnicals.jl.git",
     julia  = "0.5",
     latest = "master",
     target = "build",
