@@ -6,11 +6,11 @@ module MarketTechnicals
 
 using TimeSeries, StatsBase
 
-export sma, ema,             
-       bollingerbands, truerange, atr, #keltnerbands, 
-       obv, vwap, 
-       doji, 
-       rsi, macd, cci, 
+export sma, ema,
+       bollingerbands, truerange, atr, #keltnerbands,
+       obv, vwap,
+       doji,
+       rsi, macd, cci,
        floorpivots, woodiespivots,
        typical
 
@@ -22,4 +22,4 @@ include("utilities.jl")
 include("volatility.jl")
 include("volume.jl")
 
-end 
+end
