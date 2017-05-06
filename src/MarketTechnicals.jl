@@ -6,7 +6,7 @@ module MarketTechnicals
 
 using TimeSeries, StatsBase
 
-export sma, ema,
+export sma, ema, kama,
        bollingerbands, truerange, atr, #keltnerbands,
        obv, vwap,
        doji,

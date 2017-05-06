@@ -47,6 +47,30 @@ function ema{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)
     TimeArray(tstamps, vals[n:length(ta),:], cname, ta.meta)
 end
 
+function kama{T,N}(ta::TimeArray{T,N}, n::Int=10, fn::Int=2, sn::Int=30)
+    vola = moving(abs(ta .- lag(ta)), sum, n)
+    change = abs(ta .- lag(ta, n))
+    er = change ./ vola  # Efficiency Ratio
+
+    # Smooth Constant
+    sc = (er .* (2 / (fn + 1) - 2 / (sn + 1)) .+ 2 / (sn + 1)).^2
+
+    cl = ta[n+1:end]
+    vals = similar(cl.values)
+    # using simple moving average as initial kama
+    pri_kama = mean(ta[1:n].values, 1)
+
+    @assert length(cl) == length(sc)
+
+    for idx ∈ 1:length(cl)
+        vals[idx, :] =
+            pri_kama =
+            pri_kama .+ sc[idx].values .* (cl[idx].values .- pri_kama)
+    end
+
+    TimeArray(cl.timestamp, vals, ["$c\_kama" for c in ta.colnames])
+end
+
 # Array dispatch for use by other algorithms
 
 function sma{T,N}(a::Array{T,N}, n::Int)
@@ -113,3 +137,30 @@ else ``k = \frac{2}{n + 1}``.
 ```
 """
 ema
+
+doc"""
+
+Kaufman's Adaptive Moving Average
+
+**Arguments**:
+
+- `n`: period
+
+- `fn`: the fastest EMA constant
+
+- `sn`: the slowest EMA constant
+
+**Formula**:
+
+```math
+    \begin{align*}
+        KAMA_t & = KAMA_{t-1} + SC \times (Price - KAMA_{t-1}) \\
+        SC     & =
+            (ER \times (\frac{2}{fn + 1} - \frac{2}{sn + 1}) + \frac{2}{sn + 1})^2 \\
+        ER     & = \frac{Change}{Volatility} \\
+        Change & = | Price - Price_{t-n} | \\
+        Volatility & = \sum_{i}^{n} | Price_i - Price_{i-1} |
+    \end{align*}
+```
+"""
+kama
