@@ -13,8 +13,11 @@ sudo: false
 
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia -e 'Pkg.clone(pwd()); Pkg.build("MarketTechnicals"); Pkg.test("MarketTechnicals")'
+  - julia -e 'Pkg.clone(pwd()); Pkg.build("MarketTechnicals"); Pkg.test("MarketTechnicals", coverage=true)'
 
 after_success:
   - julia -e 'Pkg.add("Documenter")'
   - julia -e 'cd(Pkg.dir("MarketTechnicals", "docs")); include("make.jl")'
+
+  - julia -e 'Pkg.add("Coverage")'
+  - julia -e 'cd(Pkg.dir("MarketTechnicals")); using Coverage; Coveralls.submit(Coveralls.process_folder())'
