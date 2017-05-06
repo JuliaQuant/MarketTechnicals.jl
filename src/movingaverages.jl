@@ -89,7 +89,7 @@ doc"""
 Simple Moving Average
 
 ```math
-SMA = \frac{\sum^n{P_i}}{n}
+SMA = \frac{\sum_i^n{P_i}}{n}
 ```
 """
 sma
