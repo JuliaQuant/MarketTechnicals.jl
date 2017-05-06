@@ -46,6 +46,18 @@ facts("Moving averages on TimeArrays") do
         @fact ema(ohlc, 10, wilder=true).values[491,:]  --> roughly([21.317, 21.865, 20.945, 21.401], atol=.01)  # TTR value 21.40100
         @fact ema(ohlc, 10, wilder=true).timestamp[491] --> Date(2001,12,31)
     end
+
+    context("kama") do
+        ta = kama(cl)
+        @fact ta.values[1]        --> roughly(98.9052, atol=.01)
+        @fact ta.values[2]        --> roughly(99.0098, atol=.01)
+        @fact ta.values[3]        --> roughly(99.4499, atol=.01)
+        @fact ta.timestamp[1]     --> Date(2000, 1, 18)
+
+        ta = kama(ohlc)
+        @fact length(ta.colnames) --> 4
+        @fact ta.timestamp[1]     --> Date(2000, 1, 18)
+    end
 end
 
 facts("Moving averages on arrays") do
