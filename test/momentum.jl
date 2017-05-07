@@ -1,5 +1,3 @@
-using MarketTechnicals, MarketData, FactCheck
-
 facts("Momentum") do
 
     context("rsi") do
