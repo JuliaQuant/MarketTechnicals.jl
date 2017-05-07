@@ -1,9 +1,12 @@
 ### 0.6.0
 
-* macd: rename original `macd` column to `dif`,
-  and add the macd osc bar as `macd`.
+* doc: migrate to `Documenter.jl`, and the online doc is available at github 
+  pages. (issue #63, #58, #69)
 
-* macd: widen to accept multi-column `TimeArray`.
+* macd: rename original `macd` column to `dif`,
+  and add the macd osc bar as `macd`. (issue #71)
+
+* macd: widen to accept multi-column `TimeArray`. (issue #72)
 
 ### 0.5.0
 
