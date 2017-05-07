@@ -73,11 +73,12 @@ Moving Average Convergence / Divergence
     \end{align*}
 ```
 
-*Return*:
-    `TimeArray` with 3 columns `["macd", "dif", "signal"]`.
+**Return**:
 
-    If the input is a multi-column `TimeArray`, the new column names will be
-    `["A_macd", "B_macd", "A_dif", "B_dif", "A_signal", "B_signal"]`.
+`TimeArray` with 3 columns `["macd", "dif", "signal"]`.
+
+If the input is a multi-column `TimeArray`, the new column names will be
+`["A_macd", "B_macd", "A_dif", "B_dif", "A_signal", "B_signal"]`.
 
 """
 function macd{T,N}(ta::TimeArray{T,N},
