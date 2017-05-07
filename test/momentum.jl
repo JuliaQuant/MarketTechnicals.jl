@@ -27,6 +27,18 @@ facts("Momentum") do
         @fact macd(cl).timestamp[end] --> Date(2001,12,31)
     end
 
+    context("macd multi-column TimeArray") do
+        # multi-column TimeArray
+        # TTR: MACD(..., maType="EMA", percent=0)
+        ta = macd(ohlc["Open", "Close"])
+        @fact ta.colnames[1:2]        --> ["Open_macd", "Close_macd"]
+        @fact ta.values[end, 3]       --> roughly(0.44254569, atol=.01)    # Open_dif
+        @fact ta.values[end, 5]       --> roughly(4.536854e-01, atol=.01)  # Open_signal
+        @fact ta.values[end, 4]       --> roughly(0.421175152, atol=.01)   # Close_dif
+        @fact ta.values[end, 6]       --> roughly(4.414275e-01, atol=.01)  # Close_signal
+        @fact ta.timestamp[end]       --> Date(2001, 12, 31)
+    end
+
      context("cci") do
         @fact cci(ohlc).values[1]      --> roughly(360.765, atol=01)      # TTR::CCI value is -38.931614
         @fact cci(ohlc).values[end]    --> roughly(44.651, atol=.01)      # TTR::CCI value is 46.3511339

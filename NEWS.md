@@ -3,6 +3,8 @@
 * macd: rename original `macd` column to `dif`,
   and add the macd osc bar as `macd`.
 
+* macd: widen to accept multi-column `TimeArray`.
+
 ### 0.5.0
 
 * support floor of julia 0.5.0

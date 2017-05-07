@@ -72,10 +72,22 @@ Moving Average Convergence / Divergence
         DEM & = EMA(DIF, 9) \tag{signal}
     \end{align*}
 ```
+
+*Return*:
+    `TimeArray` with 3 columns `["macd", "dif", "signal"]`.
+
+    If the input is a multi-column `TimeArray`, the new column names will be
+    `["A_macd", "B_macd", "A_dif", "B_dif", "A_signal", "B_signal"]`.
+
 """
-function macd{T}(ta::TimeArray{T,1}, fast::Int=12, slow::Int=26, signal::Int=9)
+function macd{T,N}(ta::TimeArray{T,N},
+                   fast::Int=12, slow::Int=26, signal::Int=9)
     dif = ema(ta, fast) .- ema(ta, slow)
     sig = ema(dif, signal)
     osc = dif .- sig
-    merge(merge(osc, dif), sig, colnames=["macd", "dif", "signal"])
+
+    cols = ["macd", "dif", "signal"]
+    new_cols = (N > 1) ? gen_colnames(ta.colnames, cols) : cols
+
+    merge(merge(osc, dif), sig, colnames=new_cols)
 end
