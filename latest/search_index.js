@@ -173,7 +173,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Momentum",
     "title": "MarketTechnicals.macd",
     "category": "Function",
-    "text": "macd(ta, fast=12, slow=26, signal=9)\n\nMoving Average Convergence / Divergence\n\n    beginalign*\n        MACD Bar  = DIF - DEM \n        DIF  = EMA(P_close fast) - EMA(P_close slow) \n        DEM  = EMA(DIF 9) tagsignal\n    endalign*\n\n\n\n"
+    "text": "macd(ta, fast=12, slow=26, signal=9)\n\nMoving Average Convergence / Divergence\n\n    beginalign*\n        MACD Bar  = DIF - DEM \n        DIF  = EMA(P_close fast) - EMA(P_close slow) \n        DEM  = EMA(DIF 9) tagsignal\n    endalign*\n\nReturn:     TimeArray with 3 columns [\"macd\", \"dif\", \"signal\"].\n\nIf the input is a multi-column `TimeArray`, the new column names will be\n`[\"A_macd\", \"B_macd\", \"A_dif\", \"B_dif\", \"A_signal\", \"B_signal\"]`.\n\n\n\n"
 },
 
 {
