@@ -61,7 +61,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Moving Averages",
     "title": "MarketTechnicals.sma",
     "category": "Function",
-    "text": "sma(arr, n)\n\nSimple Moving Average\n\nSMA = fracsum^nP_in\n\n\n\n"
+    "text": "sma(arr, n)\n\nSimple Moving Average\n\nSMA = fracsum_i^nP_in\n\n\n\n"
 },
 
 {
@@ -69,7 +69,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Moving Averages",
     "title": "Simple Moving Average",
     "category": "section",
-    "text": "sma"
+    "text": "smausing MarketData\nusing MarketTechnicals\n\nsma(cl, 5)"
 },
 
 {
@@ -85,7 +85,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Moving Averages",
     "title": "Exponential Moving Average",
     "category": "section",
-    "text": "ema  julia> ema(cl, 10, wilder=true)\n  496x1 TimeArray{Float64,1} 1980-01-16 to 1981-12-31\n\n                Close\n  1980-01-16 | 108.89\n  1980-01-17 | 109.07\n  1980-01-18 | 109.27\n  1980-01-21 | 109.56\n  ...\n  1981-12-24 | 123.44\n  1981-12-28 | 123.33\n  1981-12-29 | 123.16\n  1981-12-30 | 123.07\n  1981-12-31 | 123.02"
+    "text": "emausing MarketData\nusing MarketTechnicals\n\nema(cl, 10, wilder=true)"
 },
 
 {
@@ -117,7 +117,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Trade levels",
     "title": "Floor Trader Pivots",
     "category": "section",
-    "text": "floorpivots"
+    "text": "floorpivotsusing MarketData\nusing MarketTechnicals\n\nfloorpivots(ohlc)"
 },
 
 {
@@ -133,7 +133,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Trade levels",
     "title": "Woodies Pivots",
     "category": "section",
-    "text": "woodiespivots  julia> woodiespivots(ohlc)\n  504x7 TimeArray{Float64,2} 1980-01-04 to 1981-12-31\n\n                s3      s2      s1      pivot   r1      r2      r3\n  1980-01-04 | 100.99  102.13  103.81  104.94  106.63  107.76  109.45\n  1980-01-07 | 103.54  104.31  105.53  106.30  107.52  108.29  109.51\n  1980-01-08 | 103.81  104.81  105.81  106.81  107.81  108.81  109.81\n  1980-01-09 | 104.45  105.37  107.45  108.37  110.45  111.37  113.45\n  ...\n  1981-12-24 | 119.30  120.44  121.31  122.45  123.32  124.46  125.33\n  1981-12-28 | 120.31  120.94  121.80  122.43  123.29  123.92  124.78\n  1981-12-29 | 119.83  120.78  121.45  122.41  123.08  124.04  124.71\n  1981-12-30 | 119.00  120.06  120.78  121.84  122.56  123.62  124.34\n  1981-12-31 | 119.20  120.12  121.27  122.19  123.33  124.26  125.40"
+    "text": "woodiespivotsusing MarketData\nusing MarketTechnicals\n\nwoodiespivots(ohlc)"
 },
 
 {
@@ -165,7 +165,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Momentum",
     "title": "RSI",
     "category": "section",
-    "text": "rsi"
+    "text": "rsiusing MarketData\nusing MarketTechnicals\n\nrsi(cl)"
 },
 
 {
@@ -181,7 +181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Momentum",
     "title": "MACD",
     "category": "section",
-    "text": "macd"
+    "text": "macdusing MarketData\nusing MarketTechnicals\n\nmacd(cl)"
 },
 
 {
@@ -197,7 +197,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Momentum",
     "title": "CCI",
     "category": "section",
-    "text": "cci"
+    "text": "cciusing MarketData\nusing MarketTechnicals\n\ncci(ohlc)"
 },
 
 {
@@ -229,7 +229,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Volatility",
     "title": "Bollinger Bands",
     "category": "section",
-    "text": "bollingerbands"
+    "text": "bollingerbandsusing MarketData\nusing MarketTechnicals\n\nbollingerbands(cl)"
 },
 
 {
@@ -245,7 +245,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Volatility",
     "title": "True Range",
     "category": "section",
-    "text": "truerange"
+    "text": "truerangeusing MarketData\nusing MarketTechnicals\n\ntruerange(ohlc)"
 },
 
 {
@@ -261,7 +261,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Volatility",
     "title": "Average True Range",
     "category": "section",
-    "text": "atr"
+    "text": "atrusing MarketData\nusing MarketTechnicals\n\natr(ohlc)"
 },
 
 {
@@ -301,7 +301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Volume",
     "title": "On Balance Volume (OBV)",
     "category": "section",
-    "text": "obv"
+    "text": "obvusing MarketData\nusing MarketTechnicals\n\nobv(ohlcv)"
 },
 
 {
@@ -317,7 +317,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Volume",
     "title": "Volume Weight-Adjusted Price (VWAP)",
     "category": "section",
-    "text": "vwap"
+    "text": "vwapusing MarketData\nusing MarketTechnicals\n\nvwap(ohlcv)"
 },
 
 {
@@ -341,7 +341,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Candlesticks",
     "title": "Doji",
     "category": "section",
-    "text": "The doji pattern is identified with a very small candle body, where the open and closing price are nearly identical. It suggests some ambivalence in the market about what the fair value of the underlying asset is.\n    julia> using MarketTechnicals, MarketData\n\n    julia> findwhen(doji(ohlc))\n    5-element Array{Date{ISOCalendar},1}:\n     1980-10-14\n     1981-04-07\n     1981-05-08\n     1981-06-08\n     1981-07-14"
+    "text": "The doji pattern is identified with a very small candle body, where the open and closing price are nearly identical. It suggests some ambivalence in the market about what the fair value of the underlying asset is.using TimeSeries\nusing MarketData\nusing MarketTechnicals\n\nfindwhen(doji(ohlc))"
 },
 
 ]}
