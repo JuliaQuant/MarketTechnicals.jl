@@ -24,15 +24,10 @@ where the open and closing price are nearly identical.
 It suggests some ambivalence in the market
 about what the fair value of the underlying asset is.
 
-```julia
+```@repl
+using TimeSeries
+using MarketData
+using MarketTechnicals
 
-    julia> using MarketTechnicals, MarketData
-
-    julia> findwhen(doji(ohlc))
-    5-element Array{Date{ISOCalendar},1}:
-     1980-10-14
-     1981-04-07
-     1981-05-08
-     1981-06-08
-     1981-07-14
+findwhen(doji(ohlc))
 ```
