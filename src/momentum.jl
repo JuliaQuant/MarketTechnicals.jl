@@ -7,12 +7,12 @@ Relative Strength Index
     RSI = \frac{EMA(Up, n)}{EMA(Up, n) + EMA(Dn, n)}
 ```
 """
-function rsi{T,N}(ta::TimeArray{T,N}, n::Int=14; wilder=false)
+function rsi{T,N}(ta::TimeArray{T,N}, n::Int=14; wilder::Bool=false)
     # for the record I'm not happy about transposing zeros here
     # since it's difficult to see why
     ret = vcat(zeros(length(colnames(ta)))', diff(ta.values))
-    ups = zeros(size(ta.values,1), size(ta.values,2))
-    dns = zeros(size(ta.values,1), size(ta.values,2))
+    ups = zeros(size(ta.values, 1), size(ta.values, 2))
+    dns = zeros(size(ta.values, 1), size(ta.values, 2))
 
     for i in 1:size(ta.values,1)
         for j in 1:size(ta.values,2)
@@ -24,16 +24,9 @@ function rsi{T,N}(ta::TimeArray{T,N}, n::Int=14; wilder=false)
         end
     end
 
-    if  wilder
-        upsema = ema(ups, n, wilder=true)
-        dnsema = abs(ema(dns, n, wilder=true))
-        rs     = upsema ./ dnsema
-
-    else
-        upsema  = ema(ups, n)
-        dnsema  = abs(ema(dns, n))
-        rs      = upsema ./ dnsema
-    end
+    upsema = ema(ups, n, wilder=wilder)
+    dnsema = abs(ema(dns, n, wilder=wilder))
+    rs     = upsema ./ dnsema
 
     res  = 100 .- (100./(1 .+ rs))
 
