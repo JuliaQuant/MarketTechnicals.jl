@@ -83,7 +83,7 @@ If the input is a multi-column `TimeArray`, the new column names will be
 """
 function macd{T,N}(ta::TimeArray{T,N},
                    fast::Int=12, slow::Int=26, signal::Int=9;
-                   wilder=false)
+                   wilder::Bool=false)
     dif = ema(ta, fast, wilder=wilder) .- ema(ta, slow, wilder=wilder)
     sig = ema(dif, signal, wilder=wilder)
     osc = dif .- sig
