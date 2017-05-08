@@ -17,6 +17,7 @@ script:
 
 after_success:
   - julia -e 'Pkg.add("Documenter")'
+  - julia -e 'Pkg.add("MarketData")'
   - julia -e 'cd(Pkg.dir("MarketTechnicals", "docs")); include("make.jl")'
 
   - julia -e 'Pkg.add("Coverage")'
