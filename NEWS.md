@@ -8,6 +8,8 @@
 
 * macd: widen to accept multi-column `TimeArray`. (issue #72)
 
+* rsi: rename the ouput column. (issue #75)
+
 ### 0.5.0
 
 * support floor of julia 0.5.0

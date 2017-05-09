@@ -38,7 +38,7 @@ function truerange{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
     lows     = merge(ohlc[l], lag(ohlc[c]))
     truehigh = TimeArray(highs.timestamp, maximum(highs.values, 2), ["hi"], highs.meta)
     truelow  = TimeArray(lows.timestamp,  minimum(lows.values, 2),  ["lo"], lows.meta)
-    truehigh .- truelow
+    rename(truehigh .- truelow, "tr")
 end
 
 doc"""
