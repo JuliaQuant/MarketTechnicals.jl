@@ -1,5 +1,14 @@
+doc"""
+    typical(ohlc; h="High", l="Low", c="Close")
+
+Typical Price
+
+```math
+    \text{Typical Price} = \frac{H + L + C}{3}
+```
+"""
 function typical{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
-    val = (ohlc[h] .+ ohlc[l] .+ ohlc[c]) ./3
+    val = (ohlc[h] .+ ohlc[l] .+ ohlc[c]) ./ 3
     TimeArray(val.timestamp, val.values, ["typical"], ohlc.meta)
 end
 
