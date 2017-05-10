@@ -1,6 +1,9 @@
 ### 0.6.0
 
-* doc: migrate to `Documenter.jl`, and the online doc is available at github 
+* New indicator:
+  * Kaufman's Adaptive Moving Average (issue #76)
+
+* doc: migrate to `Documenter.jl`, and the online doc is available at github
   pages. (issue #63, #58, #69)
 
 * macd: rename original `macd` column to `dif`,
