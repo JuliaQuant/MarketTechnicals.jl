@@ -11,6 +11,8 @@
 
 * macd: widen to accept multi-column `TimeArray`. (issue #72)
 
+* macd: add wiler option for `ema` calculation. (issue #79)
+
 * rsi: rename the ouput column. (issue #75)
 
 ### 0.5.0
