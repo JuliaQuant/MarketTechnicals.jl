@@ -61,7 +61,7 @@ function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int=20, c::Float64=0.015)
 end
 
 doc"""
-    macd(ta, fast=12, slow=26, signal=9)
+    macd(ta, fast=12, slow=26, signal=9; wilder=false)
 
 Moving Average Convergence / Divergence
 
@@ -82,9 +82,10 @@ If the input is a multi-column `TimeArray`, the new column names will be
 
 """
 function macd{T,N}(ta::TimeArray{T,N},
-                   fast::Int=12, slow::Int=26, signal::Int=9)
-    dif = ema(ta, fast) .- ema(ta, slow)
-    sig = ema(dif, signal)
+                   fast::Int=12, slow::Int=26, signal::Int=9;
+                   wilder::Bool=false)
+    dif = ema(ta, fast, wilder=wilder) .- ema(ta, slow, wilder=wilder)
+    sig = ema(dif, signal, wilder=wilder)
     osc = dif .- sig
 
     cols = ["macd", "dif", "signal"]
