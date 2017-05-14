@@ -21,7 +21,7 @@ var documenterSearchIndex = {"docs": [
     "page": "MarketTechnicals Overview",
     "title": "Contents",
     "category": "section",
-    "text": "Pages = [\n    \"getting_started.md\",\n    \"ma.md\",\n    \"levels.md\",\n    \"momentum.md\",\n    \"volatility.md\",\n    \"volume.md\",\n    \"candlesticks.md\",\n]"
+    "text": "Pages = [\n    \"getting_started.md\",\n    \"ma.md\",\n    \"levels.md\",\n    \"momentum.md\",\n    \"volatility.md\",\n    \"volume.md\",\n    \"candlesticks.md\",\n    \"utils.md\",\n]"
 },
 
 {
@@ -342,6 +342,38 @@ var documenterSearchIndex = {"docs": [
     "title": "Doji",
     "category": "section",
     "text": "The doji pattern is identified with a very small candle body, where the open and closing price are nearly identical. It suggests some ambivalence in the market about what the fair value of the underlying asset is.using TimeSeries\nusing MarketData\nusing MarketTechnicals\n\nfindwhen(doji(ohlc))"
+},
+
+{
+    "location": "utils.html#",
+    "page": "Utilities",
+    "title": "Utilities",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "utils.html#Utilities-1",
+    "page": "Utilities",
+    "title": "Utilities",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "utils.html#MarketTechnicals.typical",
+    "page": "Utilities",
+    "title": "MarketTechnicals.typical",
+    "category": "Function",
+    "text": "typical(ohlc; h=\"High\", l=\"Low\", c=\"Close\")\n\nTypical Price\n\n    textTypical Price = fracH + L + C3\n\n\n\n"
+},
+
+{
+    "location": "utils.html#Typical-Price-1",
+    "page": "Utilities",
+    "title": "Typical Price",
+    "category": "section",
+    "text": "typicalusing MarketData\nusing MarketTechnicals\n\nmerge(ohlc, typical(ohlc))"
 },
 
 ]}
