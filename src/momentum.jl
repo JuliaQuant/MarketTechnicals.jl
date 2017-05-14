@@ -47,10 +47,16 @@ Commodity Channel Index
 ```math
     CCI = \frac{P_{typical} - SMA(P_{typical})}{c \times \sigma(P_{typical})}
 ```
+
+**Reference**
+
+- https://en.wikipedia.org/wiki/Commodity_channel_index
+
 """
-function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int=20, c::Float64=0.015)
-    res = moving(typical(ohlc), mean_abs_dev, ma) ./ c
-    rename(res, "cci")
+function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int=20, c::AbstractFloat=0.015)
+    pt = typical(ohlc)
+    cci = ((pt .- sma(pt, ma)) ./ moving(pt, mean_abs_dev, ma)) ./ c
+    rename(cci, "cci")
 end
 
 doc"""
