@@ -201,6 +201,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "momentum.html#MarketTechnicals.roc",
+    "page": "Momentum",
+    "title": "MarketTechnicals.roc",
+    "category": "Function",
+    "text": "roc\n\nRate of Change\n\nFormula:\n\n    roc = fracclose_t - close_t-nclose_t-n\n\nReference:\n\nWikipedia\n\n\n\n"
+},
+
+{
+    "location": "momentum.html#ROC-1",
+    "page": "Momentum",
+    "title": "ROC",
+    "category": "section",
+    "text": "rocusing MarketData\nusing MarketTechnicals\n\nroc(cl, 5)"
+},
+
+{
     "location": "volatility.html#",
     "page": "Volatility",
     "title": "Volatility",
