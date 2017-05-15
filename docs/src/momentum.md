@@ -38,3 +38,16 @@ using MarketTechnicals
 
 cci(ohlc)
 ```
+
+## ROC
+
+```@docs
+roc
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+roc(cl, 5)
+```

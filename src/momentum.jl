@@ -86,3 +86,24 @@ function macd{T,N}(ta::TimeArray{T,N},
 
     merge(merge(osc, dif), sig, colnames=new_cols)
 end
+
+doc"""
+    roc
+
+Rate of Change
+
+**Formula**:
+
+```math
+    roc = \frac{close_{t} - close_{t-n}}{close_{t-n}}
+```
+
+**Reference**:
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Momentum_(technical_analysis))
+
+"""
+function roc(ta::TimeArray, n::Integer)
+    prev = lag(ta, n)
+    rename((ta .- prev) ./ prev, ["$c\_roc_$n" for c ∈ ta.colnames])
+end
