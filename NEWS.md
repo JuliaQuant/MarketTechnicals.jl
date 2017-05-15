@@ -3,6 +3,8 @@
 * New indicator:
   * Kaufman's Adaptive Moving Average (issue #76)
 
+  * ROC (issue #82)
+
 * doc: migrate to `Documenter.jl`, and the online doc is available at github
   pages. (issue #63, #58, #69)
 
