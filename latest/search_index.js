@@ -89,6 +89,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "ma.html#MarketTechnicals.kama",
+    "page": "Moving Averages",
+    "title": "MarketTechnicals.kama",
+    "category": "Function",
+    "text": "Kaufman's Adaptive Moving Average\n\nArguments:\n\nn: period\nfn: the fastest EMA constant\nsn: the slowest EMA constant\n\nFormula:\n\n    beginalign*\n        KAMA_t  = KAMA_t-1 + SC times (Price - KAMA_t-1) \n        SC      =\n            (ER times (frac2fn + 1 - frac2sn + 1) + frac2sn + 1)^2 \n        ER      = fracChangeVolatility \n        Change  =  Price - Price_t-n  \n        Volatility  = sum_i^n  Price_i - Price_i-1 \n    endalign*\n\n\n\n"
+},
+
+{
+    "location": "ma.html#Kaufman's-Adaptive-Moving-Average-1",
+    "page": "Moving Averages",
+    "title": "Kaufman's Adaptive Moving Average",
+    "category": "section",
+    "text": "kamausing MarketData\nusing MarketTechnicals\n\nkama(cl)"
+},
+
+{
     "location": "levels.html#",
     "page": "Trade levels",
     "title": "Trade levels",
