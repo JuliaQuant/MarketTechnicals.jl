@@ -15,5 +15,6 @@ Pages = [
     "volatility.md",
     "volume.md",
     "candlesticks.md",
+    "utils.md",
 ]
 ```

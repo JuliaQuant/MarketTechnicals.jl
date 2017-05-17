@@ -1,14 +1,13 @@
 facts("Utilities") do
 
-    context("Base.abs returns all positive numbers") do
-        @fact sum((abs(cl .- op) .>= 0).values) --> length(cl)
-    end
+    context("typical price") do
 
-    context("pad correctly pads NaN values for non-existent values") do
-        @fact sum((abs(cl .- op) .>= 0).values) --> length(cl)
-    end
+        ts = collect(Date(2017, 5, 1):Date(2017, 5, 5))
+        ta = typical(
+                TimeArray(ts, reshape(1:15, (5, 3)), ["High", "Low", "Close"]))
 
-    context("pad correctly pads NaN values for missing values") do
-        @fact sum((abs(cl .- op) .>= 0).values) --> length(cl)
+        @fact ta.timestamp[1]   --> Date(2017, 5, 1)
+        @fact ta.timestamp[end] --> Date(2017, 5, 5)
+        @fact ta.values         --> [6, 7, 8, 9, 10]
     end
 end

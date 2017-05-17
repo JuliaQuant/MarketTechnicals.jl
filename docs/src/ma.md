@@ -25,3 +25,17 @@ using MarketTechnicals
 
 ema(cl, 10, wilder=true)
 ```
+
+## Kaufman's Adaptive Moving Average
+
+```@docs
+kama
+```
+
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+kama(cl)
+```
