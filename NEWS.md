@@ -17,6 +17,8 @@
 
 * rsi: rename the ouput column. (issue #75)
 
+* cci: fix calculation. (issue #84)
+
 ### 0.5.0
 
 * support floor of julia 0.5.0
