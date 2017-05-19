@@ -37,11 +37,13 @@ facts("Momentum") do
         @fact ta.timestamp[end]       --> Date(2001, 12, 31)
     end
 
-    context("cci") do
-        @fact cci(ohlc).values[1]      --> roughly(360.765, atol=01)      # TTR::CCI value is -38.931614
-        @fact cci(ohlc).values[end]    --> roughly(44.651, atol=.01)      # TTR::CCI value is 46.3511339
-        @fact cci(ohlc).timestamp[end] --> Date(2001,12,31)
-    end
+     context("cci") do
+        # TTR::CCI value is -38.931614
+        @fact cci(ohlc).values[1]      --> roughly(-38.931614, atol=.01)
+        # TTR::CCI value is 46.3511339
+        @fact cci(ohlc).values[end]    --> roughly(46.3511339, atol=.01)
+        @fact cci(ohlc).timestamp[end] --> Date(2001, 12, 31)
+     end
 
     context("roc") do
         ta = roc(cl, 3)
