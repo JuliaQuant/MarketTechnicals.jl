@@ -205,7 +205,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Momentum",
     "title": "MarketTechnicals.cci",
     "category": "Function",
-    "text": "cci(ohlc, ma=20, c=0.015)\n\nCommodity Channel Index\n\n    CCI = fracP_typical - SMA(P_typical)c times sigma(P_typical)\n\n\n\n"
+    "text": "cci(ohlc, ma=20, c=0.015)\n\nCommodity Channel Index\n\n    CCI = fracP_typical - SMA(P_typical)c times sigma(P_typical)\n\nReference\n\nhttps://en.wikipedia.org/wiki/Commodity_channel_index\n\n\n\n"
 },
 
 {
