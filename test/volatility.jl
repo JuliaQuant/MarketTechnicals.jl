@@ -19,12 +19,17 @@ facts("Volatility") do
         @fact atr(ohlc).timestamp[1] --> Date(2000,1,24)
     end
 
-   #  context("keltner_bands") do
-   #      @fact keltnerbands(ohlc)["kma"].values[end] --> roughly(21.42)  # needs confirmation
-   #      @fact keltnerbandb(ohlc)["kup"].values[end] --> roughly(22.32)  # needs confirmation
-   #      @fact keltnerbands(ohlc)["kdn"].values[end] --> roughly(20.52)  # needs confirmation
-   #      @fact keltnerbands(ohlc).timestamp[1]       --> Date(2000,1,14)
-   #  end
+   context("keltner_bands") do
+       ta = keltnerbands(ohlc)
+       @fact ta["kup"].values[end] > ta["kma"].values[end]  --> true
+       @fact ta["kma"].values[end] > ta["kdn"].values[end]  --> true
+
+       @fact ta["kup"].values[end] --> roughly(23.3156, atol=.01)  # needs confirmation
+       @fact ta["kma"].values[end] --> roughly(21.3705, atol=.01)  # needs confirmation
+       @fact ta["kdn"].values[end] --> roughly(19.4254, atol=.01)  # needs confirmation
+       @fact ta.timestamp[1]       --> Date(2000, 2, 1)
+       @fact ta.timestamp[end]     --> Date(2001, 12, 31)
+   end
 
    #  context("chaikin_volatility") do
    #     @fact chk --> 17.0466
