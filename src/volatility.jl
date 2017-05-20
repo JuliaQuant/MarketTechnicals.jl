@@ -61,22 +61,43 @@ end
 
 atr{T,N}(ta::TimeArray{T,N}) = atr(ta, 14)
 
-# function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Int)
-# 	typ = typical(ohlc)
-# 	rng = ohlc["High"] .- ohlc["Low"]
-# 	rma = sma(rng, n)
-#
-# 	kma     = sma(typ, n)
-# 	tstamps = kma.timestamp
-#
-# 	kma = TimeArray(tstamps, kma.values, ["kma"])
-# 	kup = TimeArray(tstamps, (kma.+rma).values, ["kup"])
-# 	kdn = TimeArray(tstamps, (kma.-rma).values, ["kdn"])
-#
-# 	merge(kma, merge(kup, kdn))
-# end
+doc"""
+    keltnerbands(ohlc, n=20, w=2; h="High", l="Low", c="Close")
 
-keltnerbands{T,N}(ohlc::TimeArray{T,N}) = keltnerbands(ohlc, 10)
+**Keltner Channels**
+
+Linda Bradford Raschke introduced the newer version of Keltner Channels
+in the 1980s. We implement the newer version.
+
+**Formula**
+
+```math
+    \begin{align*}
+        \text{Up}   & = \text{Mid} + w \times ATR(n) \\
+        \text{Mid}  & = EMA(P_{typical}, n) \\
+        \text{Down} & = \text{Mid} - w \times ATR(n)
+    \end{align*}
+```
+
+**Referenc**
+
+- [StockCharts]
+  (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels)
+
+- [Wikipedia]
+  (https://en.wikipedia.org/wiki/Keltner_channel)
+
+"""
+function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Integer=20, w::Integer=2;
+                           h="High", l="Low", c="Close")
+    kma = rename(ema(typical(ohlc, h=h, l=l, c=c), n), "kma")
+    rng = atr(ohlc, n, h=h, l=l, c=c)
+
+    kup = rename(kma .+ (2 .* rng), "kup")
+    kdn = rename(kma .- (2 .* rng), "kdn")
+
+    merge(kup, merge(kma, kdn))
+end
 
 # # function chaikinvolatility{T,N}(ta::TimeArray{T,N}, n::Int)
 # #   #code here
