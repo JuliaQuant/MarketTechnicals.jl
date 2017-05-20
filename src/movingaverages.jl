@@ -56,7 +56,7 @@ function kama{T,N}(ta::TimeArray{T,N}, n::Int=10, fn::Int=2, sn::Int=30)
     sc = (er .* (2 / (fn + 1) - 2 / (sn + 1)) .+ 2 / (sn + 1)).^2
 
     cl = ta[n+1:end]
-    vals = similar(cl.values)
+    vals = similar(Array{Float64}, indices(cl.values))
     # using simple moving average as initial kama
     pri_kama = mean(ta[1:n].values, 1)
 
@@ -68,7 +68,14 @@ function kama{T,N}(ta::TimeArray{T,N}, n::Int=10, fn::Int=2, sn::Int=30)
             pri_kama .+ sc[idx].values .* (cl[idx].values .- pri_kama)
     end
 
-    TimeArray(cl.timestamp, vals, ["$c\_kama" for c in ta.colnames])
+    cols =
+    if length(ta.colnames) == 1
+        ["kama"]
+    else
+        ["$c\_kama" for c in ta.colnames]
+    end
+
+    TimeArray(cl.timestamp, vals, cols)
 end
 
 # Array dispatch for use by other algorithms

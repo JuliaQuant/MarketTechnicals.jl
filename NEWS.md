@@ -1,7 +1,7 @@
 ### 0.6.0
 
 * New indicator:
-  * Kaufman's Adaptive Moving Average (issue #76)
+  * Kaufman's Adaptive Moving Average (issue #76, #83)
 
   * ROC (issue #82)
 
