@@ -47,3 +47,34 @@ relu(x) = max(x, 0)
 
 relu(ta::TimeArray) = TimeArray(ta.timestamp, relu.(ta.values),
                                 ta.colnames, ta.meta)
+
+"""
+The soomth method used by ADX
+"""
+function wilder_smooth(ta::TimeArray, n::Integer;
+                       padding::Bool=false, dx::Bool=false)
+    val = similar(Array{Float64}, indices(ta.values))
+
+    first_cal = (dx ? mean : sum)
+
+    for i ∈ 1:size(val, 1)
+        val[i, :] =
+            if i < n
+                NaN
+            elseif i == n
+                first_cal(ta[1:n].values, 1)
+            elseif dx
+                (val[i-1, :] .* (n - 1) .+ ta.values[i, :]) ./ n
+            else
+                (val[i-1, :] .* (n - 1) ./ n) .+ ta.values[i, :]
+            end
+    end
+
+    ret = TimeArray(ta.timestamp, val, ta.colnames, ta.meta)
+
+    if padding
+        ret
+    else
+        dropnan(ret)
+    end
+end
