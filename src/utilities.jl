@@ -42,3 +42,8 @@ julia> gen_colnames(["Open", "Close"], ["macd", "dif", "sig"])
 function gen_colnames(orig::Vector{String}, suffix::Vector{String})
    vec(["$o\_$s" for o ∈ orig, s ∈ suffix])
 end
+
+relu(x) = max(x, 0)
+
+relu(ta::TimeArray) = TimeArray(ta.timestamp, relu.(ta.values),
+                                ta.colnames, ta.meta)
