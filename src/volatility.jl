@@ -59,8 +59,6 @@ function atr{T,N}(ohlc::TimeArray{T,N}, n::Integer=14;
     TimeArray(res.timestamp, res.values, ["atr"], ohlc.meta)
 end
 
-atr{T,N}(ta::TimeArray{T,N}) = atr(ta, 14)
-
 doc"""
     keltnerbands(ohlc, n=20, w=2; h="High", l="Low", c="Close")
 
