@@ -39,7 +39,7 @@ using MarketTechnicals
 cci(ohlc)
 ```
 
-## ROC
+## Rate of Change (ROC)
 
 ```@docs
 roc

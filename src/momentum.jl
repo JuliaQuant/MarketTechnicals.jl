@@ -96,7 +96,7 @@ end
 doc"""
     roc(ta, n)
 
-Rate of Change
+**Rate of Change**
 
 **Formula**:
 
