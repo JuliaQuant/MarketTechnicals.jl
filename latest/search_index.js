@@ -297,11 +297,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "volatility.html#MarketTechnicals.keltnerbands",
+    "page": "Volatility",
+    "title": "MarketTechnicals.keltnerbands",
+    "category": "Function",
+    "text": "keltnerbands(ohlc, n=20, w=2; h=\"High\", l=\"Low\", c=\"Close\")\n\nKeltner Channels\n\nLinda Bradford Raschke introduced the newer version of Keltner Channels in the 1980s. We implement the newer version.\n\nFormula\n\n    beginalign*\n        textUp    = textMid + w times ATR(n) \n        textMid   = EMA(P_typical n) \n        textDown  = textMid - w times ATR(n)\n    endalign*\n\nReferenc\n\nStockCharts\nWikipedia\n\n\n\n"
+},
+
+{
     "location": "volatility.html#Keltner-Bands-1",
     "page": "Volatility",
     "title": "Keltner Bands",
     "category": "section",
-    "text": "Not Implemented"
+    "text": "keltnerbandsusing MarketData\nusing MarketTechnicals\n\nkeltnerbands(ohlc)"
 },
 
 {
