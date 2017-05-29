@@ -10,7 +10,7 @@ export sma, ema, kama,
        bollingerbands, truerange, atr, keltnerbands,
        obv, vwap, adl,
        doji,
-       rsi, macd, cci, roc,
+       rsi, macd, cci, roc, chaikin_osc,
        floorpivots, woodiespivots,
        typical
 
