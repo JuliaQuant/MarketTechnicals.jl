@@ -68,6 +68,12 @@ Developed by Marc Chaikin
 
 **Formula**
 
+```math
+    Chaikin\ OSC = EMA(ADL, fast) - EMA(ADL, slow)
+```
+
+where the [`adl`](@ref) is the Accumulation/Distribution Line.
+
 **Reference**
 
 - [StockCharts]

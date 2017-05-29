@@ -26,6 +26,19 @@ using MarketTechnicals
 macd(cl)
 ```
 
+## Chaikin Oscillator
+
+```@docs
+chaikin_osc
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+chaikin_osc(ohlcv)
+```
+
 ## CCI
 
 ```@docs
