@@ -66,12 +66,19 @@ function williams_ad(x)
 end
 
 doc"""
+    adl(ohlcv; h="High", l="Low", c="Close", v="Volume")
 
-    adl(ohlcv)
-
-**Accumulation Distribution Line**
+**Accumulation/Distribution Line**
 
 Developed by Marc Chaikin.
+
+**Formula**
+
+```math
+    ADL_t = ADL_{t-1} +
+        \frac{(Close_t - Low_t) - (High_t - Close_t)}{High_t - Low_t}
+        \times Volume_t
+```
 
 **Reference**
 

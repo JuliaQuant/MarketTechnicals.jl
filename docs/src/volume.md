@@ -1,5 +1,18 @@
 # Volume
 
+## Accumulation/Distribution Line (ADL)
+
+```@docs
+adl
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+adl(ohlcv)
+```
+
 ## On Balance Volume (OBV)
 
 ```@docs
