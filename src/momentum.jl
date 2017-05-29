@@ -94,7 +94,7 @@ function macd{T,N}(ta::TimeArray{T,N},
 end
 
 doc"""
-    roc
+    roc(ta, n)
 
 Rate of Change
 
