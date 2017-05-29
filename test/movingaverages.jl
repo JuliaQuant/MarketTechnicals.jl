@@ -53,10 +53,14 @@ facts("Moving averages on TimeArrays") do
         @fact ta.values[2]        --> roughly(99.0098, atol=.01)
         @fact ta.values[3]        --> roughly(99.4499, atol=.01)
         @fact ta.timestamp[1]     --> Date(2000, 1, 18)
+        @fact ta.colnames         --> ["kama"]
 
         ta = kama(ohlc)
         @fact length(ta.colnames) --> 4
         @fact ta.timestamp[1]     --> Date(2000, 1, 18)
+
+        ta = kama(TimeArray(collect(Date(2011, 1, 1):Date(2011, 1, 20)), 1:20))
+        @fact ta.timestamp[end]   --> Date(2011, 1, 20)
     end
 end
 
