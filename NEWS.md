@@ -5,6 +5,8 @@
 * New indicator:
   * Kaufman's Adaptive Moving Average (issue #76, #83)
 
+  * Kelter Bands (issue #88)
+
   * ROC (issue #82)
 
 * doc: migrate to `Documenter.jl`, and the online doc is available at github
