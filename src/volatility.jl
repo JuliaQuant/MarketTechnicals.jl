@@ -79,7 +79,7 @@ in the 1980s. We implement the newer version.
     \end{align*}
 ```
 
-**Referenc**
+**Reference**
 
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels)
