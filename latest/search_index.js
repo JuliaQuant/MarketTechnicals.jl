@@ -221,7 +221,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Momentum",
     "title": "MarketTechnicals.roc",
     "category": "Function",
-    "text": "roc\n\nRate of Change\n\nFormula:\n\n    roc = fracclose_t - close_t-nclose_t-n\n\nReference:\n\nWikipedia\n\n\n\n"
+    "text": "roc(ta, n)\n\nRate of Change\n\nFormula:\n\n    roc = fracclose_t - close_t-nclose_t-n\n\nReference:\n\nWikipedia\n\n\n\n"
 },
 
 {
