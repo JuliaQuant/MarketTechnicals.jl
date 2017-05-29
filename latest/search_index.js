@@ -301,7 +301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Volatility",
     "title": "MarketTechnicals.keltnerbands",
     "category": "Function",
-    "text": "keltnerbands(ohlc, n=20, w=2; h=\"High\", l=\"Low\", c=\"Close\")\n\nKeltner Channels\n\nLinda Bradford Raschke introduced the newer version of Keltner Channels in the 1980s. We implement the newer version.\n\nFormula\n\n    beginalign*\n        textUp    = textMid + w times ATR(n) \n        textMid   = EMA(P_typical n) \n        textDown  = textMid - w times ATR(n)\n    endalign*\n\nReferenc\n\nStockCharts\nWikipedia\n\n\n\n"
+    "text": "keltnerbands(ohlc, n=20, w=2; h=\"High\", l=\"Low\", c=\"Close\")\n\nKeltner Channels\n\nLinda Bradford Raschke introduced the newer version of Keltner Channels in the 1980s. We implement the newer version.\n\nFormula\n\n    beginalign*\n        textUp    = textMid + w times ATR(n) \n        textMid   = EMA(P_typical n) \n        textDown  = textMid - w times ATR(n)\n    endalign*\n\nReference\n\nStockCharts\nWikipedia\n\n\n\n"
 },
 
 {
