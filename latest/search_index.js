@@ -225,9 +225,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "momentum.html#ROC-1",
+    "location": "momentum.html#Rate-of-Change-(ROC)-1",
     "page": "Momentum",
-    "title": "ROC",
+    "title": "Rate of Change (ROC)",
     "category": "section",
     "text": "rocusing MarketData\nusing MarketTechnicals\n\nroc(cl, 5)"
 },
