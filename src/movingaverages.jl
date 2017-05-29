@@ -1,21 +1,5 @@
-function sma{T,N}(ta::TimeArray{T,N}, n::Int)
-
-    tstamps = ta.timestamp[n:end]
-
-    vals = zeros(size(ta.values,1) - (n-1), size(ta.values,2))
-    for i in 1:size(ta.values,1) - (n-1)
-        for j in 1:size(ta.values,2)
-            vals[i,j] = mean(ta.values[i:i+(n-1),j])
-        end
-    end
-
-    cname   = String[]
-    cols    = colnames(ta)
-    for c in 1:length(cols)
-        push!(cname, string(cols[c], "_sma_", n))
-    end
-
-    TimeArray(tstamps, vals, cname, ta.meta)
+@padding function sma{T,N}(ta::TimeArray{T,N}, n::Int)
+    rename(moving(ta, mean, n), gen_colnames(ta.colnames, "sma_$n"))
 end
 
 function ema{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)

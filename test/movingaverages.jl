@@ -17,6 +17,15 @@ facts("Moving averages on TimeArrays") do
         @fact sma(ohlc, 10).timestamp[491] --> Date(2001,12,31)
     end
 
+    context("sma padding=true") do
+        ta = sma(cl, 5, padding=true)
+        @fact ta.meta             --> cl.meta
+        @fact ta.timestamp[1]     --> Date(2000, 1, 3)
+        @fact isnan(ta.values[1]) --> true
+        @fact isnan(ta.values[4]) --> true
+        @fact isnan(ta.values[5]) --> false
+    end
+
     context("ema") do
         @fact ema(cl, 10).values[1]        --> roughly(98.782, atol=.01)   # TTR value 98.78200
         @fact ema(cl, 10).values[2]        --> roughly(99.719, atol=.01)   # TTR value 99.71982
