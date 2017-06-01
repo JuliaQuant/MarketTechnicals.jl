@@ -7,7 +7,7 @@ module MarketTechnicals
 using TimeSeries, StatsBase
 
 export sma, ema, kama,
-       bollingerbands, truerange, atr, keltnerbands,
+       bollingerbands, truerange, atr, keltnerbands, donchian_channels,
        obv, vwap,
        doji,
        rsi, macd, cci, roc, adx,
