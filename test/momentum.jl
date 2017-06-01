@@ -52,4 +52,14 @@ facts("Momentum") do
         @fact ta.values[2]     --> roughly(-0.02926829268292683, atol=.01)
         @fact ta.values[3]     --> roughly(-0.06009615384615385, atol=.01)
     end
+
+    context("adx") do
+        ta = adx(ohlc)
+        @fact ta.colnames     --> ["adx", "dx", "+di", "-di"]
+        @fact ta.values[1, 1] --> roughly(10.5998, atol=.01)
+        @fact ta.values[1, 2] --> roughly(0.3916,  atol=.01)
+        @fact ta.values[1, 3] --> roughly(23.6226, atol=.01)
+        @fact ta.values[1, 4] --> roughly(23.4383, atol=.01)
+        @fact ta.timestamp[1] --> Date(2000, 2, 10)
+    end
 end

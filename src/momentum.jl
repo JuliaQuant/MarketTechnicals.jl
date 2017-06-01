@@ -113,3 +113,37 @@ function roc(ta::TimeArray, n::Integer)
     prev = lag(ta, n)
     rename((ta .- prev) ./ prev, ["$c\_roc_$n" for c ∈ ta.colnames])
 end
+
+doc"""
+    adx{T,N}(ohlc, n=14; h="High", l="Low", c="Close")
+
+**Average Directional Movement Index**
+
+Developed by J. Welles Wilder.
+This Implementation follow StockCharts.
+
+**Reference**
+
+- [wikipedia]
+  (https://en.wikipedia.org/wiki/Average_directional_movement_index)
+
+- [StockCharts]
+  (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx)
+"""
+function adx{T,N}(ohlc::TimeArray{T,N}, n::Integer=14;
+                  h="High", l="Low", c="Close")
+    dm = relu(merge(ohlc[h] .- lag(ohlc[h]), lag(ohlc[l]) .- ohlc[l]))
+    dm.values[findmin(dm.values, 2)[2]] = 0
+
+    dm = wilder_smooth(dm, n)
+
+    tr = wilder_smooth(truerange(ohlc, h=h, l=l, c=c), n)
+
+    di = (dm ./ tr) .* 100
+    di = rename(di, ["+di", "-di"])
+
+    dx = abs((di["+di"] .- di["-di"]) ./ (di["+di"] .+ di["-di"])) .* 100
+    adx = wilder_smooth(dx, n, dx=true)
+
+    rename(merge(adx, merge(dx, di)), ["adx", "dx", "+di", "-di"])
+end

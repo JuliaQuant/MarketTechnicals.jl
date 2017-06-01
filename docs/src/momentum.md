@@ -1,5 +1,18 @@
 # Momentum
 
+## ADX
+
+```@docs
+adx
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+adx(ohlc)
+```
+
 ## RSI
 
 ```@docs
