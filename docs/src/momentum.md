@@ -1,6 +1,6 @@
 # Momentum
 
-## ADX
+## Average Directional Movement Index (ADX)
 
 ```@docs
 adx
