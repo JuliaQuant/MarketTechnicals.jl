@@ -97,6 +97,9 @@ function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Integer=20, w::Integer=2;
     merge(kup, merge(kma, kdn))
 end
 
-# # function chaikinvolatility{T,N}(ta::TimeArray{T,N}, n::Int)
-# #   #code here
-# # end
+function chaikinvolatility(ta::TimeArray, n::Integer=10, p::Integer=10;
+                                h="High", l="Low")
+    rng = ema(ta[h] .- ta[l], n)
+    prev = lag(rng, p)
+    rename((rng .- prev) ./ prev * 100, "chaikinvolatility")
+end
