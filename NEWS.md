@@ -7,7 +7,9 @@
 
   * Kelter Bands (issue #88)
 
-  * ROC (issue #82)
+  * Rate of change (ROC) (issue #82)
+
+  * Average Directional Movement Index (ADX) (issue #89)
 
 * doc: migrate to `Documenter.jl`, and the online doc is available at github
   pages. (issue #63, #58, #69)
