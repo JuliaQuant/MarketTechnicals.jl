@@ -97,6 +97,32 @@ function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Integer=20, w::Integer=2;
     merge(kup, merge(kma, kdn))
 end
 
+doc"""
+    chaikinvolatility(ta, n=10, p=10; h="High", l="Low")
+
+**Chaikin Volatility**
+
+**Parameters**
+
+- `n` is the smooth period
+
+- `p` is the previous period
+
+**Formula**
+
+```math
+    Chaikin\ Vola =
+        \frac{EMA(High_t - Low_t, n) - EMA(High_{t-p} - Low_{t-p}, n)}
+        {EMA(High_{t-p} - Low_{t-p}, n)}
+        \times 100
+```
+
+**Reference**
+
+- [IncredibleCharts]
+  (https://www.incrediblecharts.com/indicators/chaikin_volatility.php)
+
+"""
 function chaikinvolatility(ta::TimeArray, n::Integer=10, p::Integer=10;
                                 h="High", l="Low")
     rng = ema(ta[h] .- ta[l], n)
