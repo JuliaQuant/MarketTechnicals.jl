@@ -169,6 +169,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "momentum.html#MarketTechnicals.adx",
+    "page": "Momentum",
+    "title": "MarketTechnicals.adx",
+    "category": "Function",
+    "text": "adx{T,N}(ohlc, n=14; h=\"High\", l=\"Low\", c=\"Close\")\n\nAverage Directional Movement Index\n\nDeveloped by J. Welles Wilder. This Implementation follow StockCharts.\n\nReference\n\nwikipedia\nStockCharts\n\n\n\n"
+},
+
+{
+    "location": "momentum.html#ADX-1",
+    "page": "Momentum",
+    "title": "ADX",
+    "category": "section",
+    "text": "adxusing MarketData\nusing MarketTechnicals\n\nadx(ohlc)"
+},
+
+{
     "location": "momentum.html#MarketTechnicals.rsi",
     "page": "Momentum",
     "title": "MarketTechnicals.rsi",
