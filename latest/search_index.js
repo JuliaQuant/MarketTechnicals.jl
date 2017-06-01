@@ -177,9 +177,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "momentum.html#ADX-1",
+    "location": "momentum.html#Average-Directional-Movement-Index-(ADX)-1",
     "page": "Momentum",
-    "title": "ADX",
+    "title": "Average Directional Movement Index (ADX)",
     "category": "section",
     "text": "adxusing MarketData\nusing MarketTechnicals\n\nadx(ohlc)"
 },
