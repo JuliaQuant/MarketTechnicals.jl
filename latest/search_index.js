@@ -345,6 +345,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "volume.html#MarketTechnicals.adl",
+    "page": "Volume",
+    "title": "MarketTechnicals.adl",
+    "category": "Function",
+    "text": "adl(ohlcv; h=\"High\", l=\"Low\", c=\"Close\", v=\"Volume\")\n\nAccumulation/Distribution Line\n\nDeveloped by Marc Chaikin.\n\nFormula\n\n    ADL_t = ADL_t-1 +\n        frac(Close_t - Low_t) - (High_t - Close_t)High_t - Low_t\n        times Volume_t\n\nReference\n\nStockCharts\n\n\n\n"
+},
+
+{
+    "location": "volume.html#Accumulation/Distribution-Line-(ADL)-1",
+    "page": "Volume",
+    "title": "Accumulation/Distribution Line (ADL)",
+    "category": "section",
+    "text": "adlusing MarketData\nusing MarketTechnicals\n\nadl(ohlcv)"
+},
+
+{
     "location": "volume.html#MarketTechnicals.obv",
     "page": "Volume",
     "title": "MarketTechnicals.obv",
