@@ -64,3 +64,41 @@ end
 function williams_ad(x)
     #code here
 end
+
+doc"""
+    adl(ohlcv; h="High", l="Low", c="Close", v="Volume")
+
+**Accumulation/Distribution Line**
+
+Developed by Marc Chaikin.
+
+**Formula**
+
+```math
+    ADL_t = ADL_{t-1} +
+        \frac{(Close_t - Low_t) - (High_t - Close_t)}{High_t - Low_t}
+        \times Volume_t
+```
+
+**Reference**
+
+- [StockCharts]
+  (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line)
+"""
+function adl(ohlcv::TimeArray; h="High", l="Low", c="Close", v="Volume")
+    _h = ohlcv[h]
+    _l = ohlcv[l]
+    _c = ohlcv[c]
+    _v = ohlcv[v]
+
+    flow_facor = ((_c .- _l) .- (_h .- _c)) ./ (_h .- _l)
+    flow_vol = flow_facor .* _v
+
+    vals = similar(flow_vol.values)
+    vals[1] = flow_vol.values[1]
+    for i ∈ 2:length(flow_vol.values)
+        vals[i] = vals[i-1] + flow_vol.values[i]
+    end
+
+    TimeArray(ohlcv.timestamp, vals, ["adl"], ohlcv.meta)
+end
