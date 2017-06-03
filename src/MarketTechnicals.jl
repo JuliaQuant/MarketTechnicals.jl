@@ -8,7 +8,7 @@ using TimeSeries, StatsBase
 
 export sma, ema, kama,
        bollingerbands, truerange, atr, keltnerbands,
-       obv, vwap,
+       obv, vwap, adl,
        doji,
        rsi, macd, cci, roc, adx,
        floorpivots, woodiespivots,
