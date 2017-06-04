@@ -147,3 +147,48 @@ function adx{T,N}(ohlc::TimeArray{T,N}, n::Integer=14;
 
     rename(merge(adx, merge(dx, di)), ["adx", "dx", "+di", "-di"])
 end
+
+doc"""
+    stoch_osc(ohlc, n=14, fast_d=3, slow_d=3; h="High", l="Low", c="Close")
+
+**Stochastic Oscillator**
+
+A.k.a *%K%D*, or *KD*
+
+**Parameter**
+
+- `n`: period of fast(raw) `%K`
+
+- `fast_d`: MA period of fast `%D`
+
+- `slow_d`: MA period of slow `%D`
+
+**Formula**
+
+```math
+    \begin{align*}
+        fast\ \%K & = \frac{Close_t - \max(High_{t-n}, \dots, High_t)}
+            {\max(High_{t-n}, \dots, High_t) - \min(Low_{t-n}, \dots, Low_t)}
+            \times 100 \\
+        fast\ \%D & = SMA(fast\ \%K) \\
+        slow\ \%D & = SMA(fast\ \%D)
+    \end{align*}
+```
+
+**Reference**
+
+- [Wikipedia]
+  (https://en.wikipedia.org/wiki/Stochastic_oscillator)
+
+- [FMLabs]
+  (http://www.fmlabs.com/reference/default.htm?url=StochasticOscillator.htm)
+"""
+function stoch_osc(ohlc::TimeArray, n::Integer=14, fast_d::Integer=3,
+                   slow_d::Integer=3; h="High", l="Low", c="Close")
+    high = moving(ohlc[h], maximum, n)
+    low = moving(ohlc[l], minimum, n)
+    fast_k = rename((ohlc[c] .- low) ./ (high .- low) * 100, "fast_k")
+    fast_d = rename(sma(fast_k, fast_d), "fast_d")
+    slow_d = rename(sma(fast_d, slow_d), "slow_d")
+    merge(merge(fast_k, fast_d), slow_d)
+end
