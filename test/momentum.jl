@@ -62,4 +62,29 @@ facts("Momentum") do
         @fact ta.values[1, 4] --> roughly(23.4383, atol=.01)
         @fact ta.timestamp[1] --> Date(2000, 2, 10)
     end
+
+    context("stochastic osc") do
+        """
+        Quote from TTR
+        > stoch(x[, c("High", "Low", "Close")], maType=SMA)
+                     fastK      fastD      slowD
+         [18,] 0.671428571 0.69466667 0.67441270
+         [19,] 0.432000000 0.59342857 0.64901587
+         [20,] 0.492857143 0.53209524 0.60673016
+         [21,] 0.392857143 0.43923810 0.52158730
+         [22,] 0.217586207 0.36776683 0.44636672
+         [23,] 0.326296296 0.31224655 0.37308382
+         [24,] 0.500000000 0.34796083 0.34265807
+         [25,] 0.724444444 0.51691358 0.39237365
+         [26,] 0.754814815 0.65975309 0.50820917
+         [27,] 0.801061008 0.76010676 0.64559114
+         [28,] 0.839964633 0.79861349 0.73949111
+        """
+        ta = stoch_osc(ohlc)
+        @fact ta.colnames     --> ["fast_k", "fast_d", "slow_d"]
+        @fact ta.timestamp    --> ohlc[18:end].timestamp
+        @fact ta.values[1, 1] --> roughly(67.142857, atol=.01)
+        @fact ta.values[1, 2] --> roughly(69.466667, atol=.01)
+        @fact ta.values[1, 3] --> roughly(67.441270, atol=.01)
+    end
 end
