@@ -217,6 +217,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "momentum.html#MarketTechnicals.chaikin_osc",
+    "page": "Momentum",
+    "title": "MarketTechnicals.chaikin_osc",
+    "category": "Function",
+    "text": "chaikin_osc(ohlcv, fast=3, slow=10; h=\"High\", l=\"Low\", c=\"Close\")\n\nChaikin Oscillator\n\nDeveloped by Marc Chaikin\n\nFormula\n\n    Chaikin OSC = EMA(ADL fast) - EMA(ADL slow)\n\nwhere the adl is the Accumulation/Distribution Line.\n\nReference\n\nStockCharts\n\n\n\n"
+},
+
+{
+    "location": "momentum.html#Chaikin-Oscillator-1",
+    "page": "Momentum",
+    "title": "Chaikin Oscillator",
+    "category": "section",
+    "text": "chaikin_oscusing MarketData\nusing MarketTechnicals\n\nchaikin_osc(ohlcv)"
+},
+
+{
     "location": "momentum.html#MarketTechnicals.cci",
     "page": "Momentum",
     "title": "MarketTechnicals.cci",
