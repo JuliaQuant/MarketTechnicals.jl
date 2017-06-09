@@ -297,6 +297,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "volatility.html#MarketTechnicals.chaikinvolatility",
+    "page": "Volatility",
+    "title": "MarketTechnicals.chaikinvolatility",
+    "category": "Function",
+    "text": "chaikinvolatility(ta, n=10, p=10; h=\"High\", l=\"Low\")\n\nChaikin Volatility\n\nParameters\n\nn is the smooth period\np is the previous period\n\nFormula\n\n    Chaikin Vola =\n        fracEMA(High_t - Low_t n) - EMA(High_t-p - Low_t-p n)\n        EMA(High_t-p - Low_t-p n)\n        times 100\n\nReference\n\nIncredibleCharts\n\n\n\n"
+},
+
+{
+    "location": "volatility.html#Chaikin-Volatility-1",
+    "page": "Volatility",
+    "title": "Chaikin Volatility",
+    "category": "section",
+    "text": "chaikinvolatilityusing MarketData\nusing MarketTechnicals\n\nchaikinvolatility(ohlc)"
+},
+
+{
     "location": "volatility.html#MarketTechnicals.truerange",
     "page": "Volatility",
     "title": "MarketTechnicals.truerange",
