@@ -13,6 +13,19 @@ using MarketTechnicals
 bollingerbands(cl)
 ```
 
+## Chaikin Volatility
+
+```@docs
+chaikinvolatility
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+chaikinvolatility(ohlc)
+```
+
 ## True Range
 
 ```@docs
