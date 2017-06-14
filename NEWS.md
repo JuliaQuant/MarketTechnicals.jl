@@ -11,6 +11,12 @@
 
   * Average Directional Movement Index (ADX) (issue #89)
 
+  * Accumulation/Distribution Line (ADL) (issue #91)
+
+  * Chaikin Oscillator (issue #92)
+
+  * Implement Chaikin Volatility (issue #94)
+
 * doc: migrate to `Documenter.jl`, and the online doc is available at github
   pages. (issue #63, #58, #69)
 
