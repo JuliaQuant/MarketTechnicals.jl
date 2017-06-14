@@ -345,6 +345,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "volatility.html#MarketTechnicals.donchian_channels",
+    "page": "Volatility",
+    "title": "MarketTechnicals.donchian_channels",
+    "category": "Function",
+    "text": "donchian_channels(ta, n=20; h=\"High\", l=\"Low\")\n\nDonchian Channels\n\nFormula\n\n    beginalign*\n        Up    = max (High_1 to High_t) \n        Mid   = fracUp + Down2 \n        Down  = min (Low_1 to Low_t)\n    endalign*\n\nReference\n\nTradingView Wiki\n\n\n\n"
+},
+
+{
+    "location": "volatility.html#Donchian-Channels-1",
+    "page": "Volatility",
+    "title": "Donchian Channels",
+    "category": "section",
+    "text": "donchian_channelsusing MarketData\nusing MarketTechnicals\n\ndonchian_channels(ohlc)"
+},
+
+{
     "location": "volatility.html#MarketTechnicals.keltnerbands",
     "page": "Volatility",
     "title": "MarketTechnicals.keltnerbands",
