@@ -13,6 +13,19 @@ using MarketTechnicals
 bollingerbands(cl)
 ```
 
+## Chaikin Volatility
+
+```@docs
+chaikinvolatility
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+chaikinvolatility(ohlc)
+```
+
 ## True Range
 
 ```@docs
@@ -37,6 +50,19 @@ using MarketData
 using MarketTechnicals
 
 atr(ohlc)
+```
+
+## Donchian Channels
+
+```@docs
+donchian_channels
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+donchian_channels(ohlc)
 ```
 
 ## Keltner Bands

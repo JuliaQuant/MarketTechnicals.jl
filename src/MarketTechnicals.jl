@@ -7,10 +7,10 @@ module MarketTechnicals
 using TimeSeries, StatsBase
 
 export sma, ema, kama,
-       bollingerbands, truerange, atr, keltnerbands,
+       bollingerbands, truerange, atr, keltnerbands, chaikinvolatility, donchian_channels,
        obv, vwap, adl,
        doji,
-       rsi, macd, cci, roc, adx, stoch_osc,
+       rsi, macd, cci, roc, adx, stoch_osc, chaikin_osc,
        floorpivots, woodiespivots,
        typical
 

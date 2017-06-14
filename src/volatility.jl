@@ -23,6 +23,34 @@ function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Integer=20,
 end
 
 doc"""
+    donchian_channels(ta, n=20; h="High", l="Low")
+
+**Donchian Channels**
+
+**Formula**
+
+```math
+    \begin{align*}
+        Up   & = \max (High_1\ to\ High_t) \\
+        Mid  & = \frac{Up + Down}{2} \\
+        Down & = \min (Low_1\ to\ Low_t)
+    \end{align*}
+```
+
+**Reference**
+
+- [TradingView Wiki]
+  (https://www.tradingview.com/wiki/Donchian_Channels_(DC))
+
+"""
+function donchian_channels(ta::TimeArray, n::Integer=20; h="High", l="Low")
+    up = rename(moving(ta[h], maximum, n), "up")
+    down = rename(moving(ta[l], minimum, n), "down")
+    mid = rename((up .+ down) ./ 2, "mid")
+    merge(up, merge(mid, down))
+end
+
+doc"""
     truerange(ohlc; h="High", l="Low", c="Close")
 
 True Range
@@ -97,6 +125,35 @@ function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Integer=20, w::Integer=2;
     merge(kup, merge(kma, kdn))
 end
 
-# # function chaikinvolatility{T,N}(ta::TimeArray{T,N}, n::Int)
-# #   #code here
-# # end
+doc"""
+    chaikinvolatility(ta, n=10, p=10; h="High", l="Low")
+
+**Chaikin Volatility**
+
+**Parameters**
+
+- `n` is the smooth period
+
+- `p` is the previous period
+
+**Formula**
+
+```math
+    Chaikin\ Vola =
+        \frac{EMA(High_t - Low_t, n) - EMA(High_{t-p} - Low_{t-p}, n)}
+        {EMA(High_{t-p} - Low_{t-p}, n)}
+        \times 100
+```
+
+**Reference**
+
+- [IncredibleCharts]
+  (https://www.incrediblecharts.com/indicators/chaikin_volatility.php)
+
+"""
+function chaikinvolatility(ta::TimeArray, n::Integer=10, p::Integer=10;
+                                h="High", l="Low")
+    rng = ema(ta[h] .- ta[l], n)
+    prev = lag(rng, p)
+    rename((rng .- prev) ./ prev * 100, "chaikinvolatility")
+end

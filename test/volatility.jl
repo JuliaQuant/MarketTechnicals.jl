@@ -1,16 +1,25 @@
 facts("Volatility") do
 
-     context("bollinger_bands") do
-         @fact bollingerbands(cl)["up"].values[1]   --> roughly(117.3251, atol=.01)      # TTR default uses sample=FALSE and value 117.3251
-         @fact bollingerbands(cl)["down"].values[1] --> roughly(89.39392, atol=.01)      # TTR default uses sample=FALSE and value 89.39392
-         @fact bollingerbands(cl)["mean"].values[1] --> roughly(103.3595, atol=.01)      # TTR 103.3595
-         @fact bollingerbands(cl).timestamp[1]      --> Date(2000,1,31)
-         @fact bollingerbands(cl).timestamp[end]    --> Date(2001,12,31)
-     end
+    context("bollinger_bands") do
+        @fact bollingerbands(cl)["up"].values[1]   --> roughly(117.3251, atol=.01)      # TTR default uses sample=FALSE and value 117.3251
+        @fact bollingerbands(cl)["down"].values[1] --> roughly(89.39392, atol=.01)      # TTR default uses sample=FALSE and value 89.39392
+        @fact bollingerbands(cl)["mean"].values[1] --> roughly(103.3595, atol=.01)      # TTR 103.3595
+        @fact bollingerbands(cl).timestamp[1]      --> Date(2000,1,31)
+        @fact bollingerbands(cl).timestamp[end]    --> Date(2001,12,31)
+    end
 
     context("truerange") do
         @fact truerange(ohlc).values[end]    --> roughly(0.83, atol=.01)       # TTR 0.83
         @fact truerange(ohlc).timestamp[end] --> Date(2001,12,31)
+    end
+
+    context("donchian_channels") do
+        ta = donchian_channels(ohlc)
+        @fact ta.meta               --> ohlc.meta
+        @fact ta.timestamp          --> ohlc[20:end].timestamp
+        @fact ta["up"].values[1]    --> roughly(121.5, atol=.01)
+        @fact ta["down"].values[1]  --> roughly(86.5, atol=.01)
+        @fact ta["mid"].values[1]   --> (ta["up"].values[1] + ta["down"].values[1]) / 2
     end
 
     context("atr") do
@@ -19,19 +28,25 @@ facts("Volatility") do
         @fact atr(ohlc).timestamp[1] --> Date(2000,1,24)
     end
 
-   context("keltner_bands") do
-       ta = keltnerbands(ohlc)
-       @fact ta["kup"].values[end] > ta["kma"].values[end]  --> true
-       @fact ta["kma"].values[end] > ta["kdn"].values[end]  --> true
+    context("keltner_bands") do
+        ta = keltnerbands(ohlc)
+        @fact ta["kup"].values[end] > ta["kma"].values[end]  --> true
+        @fact ta["kma"].values[end] > ta["kdn"].values[end]  --> true
 
-       @fact ta["kup"].values[end] --> roughly(23.3156, atol=.01)  # needs confirmation
-       @fact ta["kma"].values[end] --> roughly(21.3705, atol=.01)  # needs confirmation
-       @fact ta["kdn"].values[end] --> roughly(19.4254, atol=.01)  # needs confirmation
-       @fact ta.timestamp[1]       --> Date(2000, 2, 1)
-       @fact ta.timestamp[end]     --> Date(2001, 12, 31)
-   end
+        @fact ta["kup"].values[end] --> roughly(23.3156, atol=.01)  # needs confirmation
+        @fact ta["kma"].values[end] --> roughly(21.3705, atol=.01)  # needs confirmation
+        @fact ta["kdn"].values[end] --> roughly(19.4254, atol=.01)  # needs confirmation
+        @fact ta.timestamp[1]       --> Date(2000, 2, 1)
+        @fact ta.timestamp[end]     --> Date(2001, 12, 31)
+    end
 
-   #  context("chaikin_volatility") do
-   #     @fact chk --> 17.0466
-   #  end
+    context("chaikin_volatility") do
+        ta = chaikinvolatility(ohlc)
+
+        @fact ta.timestamp     --> ohlc[10+10:end].timestamp
+        @fact ta.colnames      --> ["chaikinvolatility"]
+        @fact ta.meta          --> ohlc.meta
+        @fact ta.values[1]     --> roughly(-2.2401, atol=.01)  # needs confirmation
+        @fact ta.values[2]     --> roughly(-3.2901, atol=.01)  # needs confirmation
+    end
 end

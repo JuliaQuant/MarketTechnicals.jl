@@ -60,6 +60,32 @@ function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int=20, c::AbstractFloat=0.015)
 end
 
 doc"""
+    chaikin_osc(ohlcv, fast=3, slow=10; h="High", l="Low", c="Close")
+
+**Chaikin Oscillator**
+
+Developed by Marc Chaikin
+
+**Formula**
+
+```math
+    Chaikin\ OSC = EMA(ADL, fast) - EMA(ADL, slow)
+```
+
+where the [`adl`](@ref) is the Accumulation/Distribution Line.
+
+**Reference**
+
+- [StockCharts]
+  (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_oscillator)
+"""
+function chaikin_osc(ohlcv::TimeArray, fast::Integer=3, slow::Integer=10;
+                     h="High", l="Low", c="Close")
+    _adl = adl(ohlcv, h=h, l=l, c=c)
+    rename(ema(_adl, fast) .- ema(_adl, slow), ["chaikin_osc"])
+end
+
+doc"""
     macd(ta, fast=12, slow=26, signal=9; wilder=false)
 
 Moving Average Convergence / Divergence
