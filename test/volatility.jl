@@ -13,6 +13,15 @@ facts("Volatility") do
         @fact truerange(ohlc).timestamp[end] --> Date(2001,12,31)
     end
 
+    context("donchian_channels") do
+        ta = donchian_channels(ohlc)
+        @fact ta.meta               --> ohlc.meta
+        @fact ta.timestamp          --> ohlc[20:end].timestamp
+        @fact ta["up"].values[1]    --> roughly(121.5, atol=.01)
+        @fact ta["down"].values[1]  --> roughly(86.5, atol=.01)
+        @fact ta["mid"].values[1]   --> (ta["up"].values[1] + ta["down"].values[1]) / 2
+    end
+
     context("atr") do
         @fact atr(ohlc).values[1]    --> roughly(8.343571428571428)   # TTR value 8.343571
         @fact atr(ohlc).values[end]  --> roughly(0.9664561242651976)  # TTR value 0.9664561

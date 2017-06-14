@@ -52,6 +52,19 @@ using MarketTechnicals
 atr(ohlc)
 ```
 
+## Donchian Channels
+
+```@docs
+donchian_channels
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+donchian_channels(ohlc)
+```
+
 ## Keltner Bands
 
 ```@docs
