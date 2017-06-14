@@ -15,7 +15,9 @@
 
   * Chaikin Oscillator (issue #92)
 
-  * Implement Chaikin Volatility (issue #94)
+  * Chaikin Volatility (issue #94)
+
+  * Donchian Channels (issue #95)
 
 * doc: migrate to `Documenter.jl`, and the online doc is available at github
   pages. (issue #63, #58, #69)
