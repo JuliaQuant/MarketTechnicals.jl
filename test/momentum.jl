@@ -78,6 +78,28 @@ facts("Momentum") do
         @fact cci(ohlc).timestamp[end] --> Date(2001, 12, 31)
     end
 
+    context("aroon") do
+        """
+        Quote from TTR
+
+        > aroon(x[c('High', 'Low')], 25)
+              aroonUp aroonDn oscillator
+        [24,]      NA      NA         NA
+        [25,]      NA      NA         NA
+        [26,]      48      28         20
+        [27,]      44      24         20
+        [28,]      40      20         20
+        [29,]      36      16         20
+        [30,]      32      12         20
+        """
+        ta = aroon(ohlc)
+        @fact ta.colnames      --> ["up", "dn", "osc"]
+        @fact ta.timestamp     --> ohlc[25:end].timestamp
+        @fact ta.values[2, 1]   --> roughly(48)
+        @fact ta.values[2, 2]   --> roughly(28)
+        @fact ta.values[2, 3]   --> roughly(20)
+    end
+
     context("roc") do
         ta = roc(cl, 3)
         @fact ta.colnames      --> ["Close_roc_3"]
