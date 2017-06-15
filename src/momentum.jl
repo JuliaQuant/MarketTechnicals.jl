@@ -141,6 +141,34 @@ function roc(ta::TimeArray, n::Integer)
 end
 
 doc"""
+    aroon(ohlc, n=25; h="High", l="Low")
+
+**Aroon Oscillator**
+
+**Formula**
+
+```math
+    \begin{align*}
+        up   & = \frac{\mathop{argmax}(High_{t-n} \dots High_t)}{n} \times 100 \\
+        down & = \frac{\mathop{argmin}(Low_{t-n} \dots Low_t)}{n} \times 100 \\
+        osc  & = up - down
+    \end{align*}
+```
+
+**Reference**
+
+- [StockCharts]
+  (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:aroon_oscillator)
+"""
+function aroon(ohlc::TimeArray, n::Integer=25; h="High", l="Low")
+    up = rename(moving(ohlc[h], indmax, n) / n * 100, "up")
+    dn = rename(moving(ohlc[l], indmin, n) / n * 100, "dn")
+    osc = rename(up .- dn, "osc")
+
+    merge(merge(up, dn), osc)
+end
+
+doc"""
     adx{T,N}(ohlc, n=14; h="High", l="Low", c="Close")
 
 **Average Directional Movement Index**
