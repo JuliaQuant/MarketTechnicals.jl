@@ -265,6 +265,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "momentum.html#MarketTechnicals.stoch_osc",
+    "page": "Momentum",
+    "title": "MarketTechnicals.stoch_osc",
+    "category": "Function",
+    "text": "stoch_osc(ohlc, n=14, fast_d=3, slow_d=3; h=\"High\", l=\"Low\", c=\"Close\")\n\nStochastic Oscillator\n\nA.k.a %K%D, or KD\n\nParameter\n\nn: period of fast(raw) %K\nfast_d: MA period of fast %D\nslow_d: MA period of slow %D\n\nFormula\n\n    beginalign*\n        fast K  = fracClose_t - max(High_t-n dots High_t)\n            max(High_t-n dots High_t) - min(Low_t-n dots Low_t)\n            times 100 \n        fast D  = SMA(fast K) \n        slow D  = SMA(fast D)\n    endalign*\n\nReference\n\nWikipedia\nFMLabs\n\n\n\n"
+},
+
+{
+    "location": "momentum.html#Stochastic-Oscillator-1",
+    "page": "Momentum",
+    "title": "Stochastic Oscillator",
+    "category": "section",
+    "text": "stoch_oscusing MarketData\nusing MarketTechnicals\n\nstoch_osc(ohlc)"
+},
+
+{
     "location": "volatility.html#",
     "page": "Volatility",
     "title": "Volatility",
