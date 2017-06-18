@@ -18,6 +18,8 @@
   * Chaikin Volatility (issue #94)
 
   * Donchian Channels (issue #95)
+  
+  * Stochastic Oscillator (issue #96)
 
 * doc: migrate to `Documenter.jl`, and the online doc is available at github
   pages. (issue #63, #58, #69)
