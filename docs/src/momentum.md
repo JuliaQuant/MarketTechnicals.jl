@@ -77,3 +77,16 @@ using MarketTechnicals
 
 roc(cl, 5)
 ```
+
+## Stochastic Oscillator
+
+```@docs
+stoch_osc
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+stoch_osc(ohlc)
+```
