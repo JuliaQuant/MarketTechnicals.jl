@@ -185,6 +185,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "momentum.html#MarketTechnicals.aroon",
+    "page": "Momentum",
+    "title": "MarketTechnicals.aroon",
+    "category": "Function",
+    "text": "aroon(ohlc, n=25; h=\"High\", l=\"Low\")\n\nAroon Oscillator\n\nFormula\n\n    beginalign*\n        up    = fracmathopargmax(High_t-n dots High_t)n times 100 \n        down  = fracmathopargmin(Low_t-n dots Low_t)n times 100 \n        osc   = up - down\n    endalign*\n\nReference\n\nStockCharts\n\n\n\n"
+},
+
+{
+    "location": "momentum.html#Aroon-Oscillator-1",
+    "page": "Momentum",
+    "title": "Aroon Oscillator",
+    "category": "section",
+    "text": "aroonusing MarketData\nusing MarketTechnicals\n\naroon(ohlc)"
+},
+
+{
     "location": "momentum.html#MarketTechnicals.rsi",
     "page": "Momentum",
     "title": "MarketTechnicals.rsi",
