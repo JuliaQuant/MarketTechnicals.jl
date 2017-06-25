@@ -13,6 +13,19 @@ using MarketTechnicals
 adx(ohlc)
 ```
 
+## Aroon Oscillator
+
+```@docs
+aroon
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+aroon(ohlc)
+```
+
 ## RSI
 
 ```@docs
