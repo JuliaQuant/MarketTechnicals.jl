@@ -1,13 +1,21 @@
-using FactCheck
-using MarketData
-using MarketTechnicals
+using Base.Test
 
-include("candlesticks.jl")
-include("levels.jl")
-include("momentum.jl")
-include("movingaverages.jl")
-include("utilities.jl")
-include("volatility.jl")
-include("volume.jl")
+tests = [
+    "candlesticks",
+    "levels",
+    "momentum",
+    "movingaverages",
+    "utilities",
+    "volatility",
+    "volume",
+]
 
-exitstatus()
+
+@testset "MarketTechnicals" begin
+    println("Running tests:")
+
+    for test ∈ tests
+        println("\t* $test ...")
+        include("$test.jl")
+    end
+end
