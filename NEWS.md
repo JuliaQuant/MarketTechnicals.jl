@@ -1,6 +1,6 @@
 ### 0.6.0
 
-* Drop 0.4 support (issue #86)
+* Drop julia 0.4 support (issue #86)
 
 * New indicator:
   * Kaufman's Adaptive Moving Average (issue #76, #83)
