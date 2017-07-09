@@ -23,7 +23,7 @@ function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Integer=20,
 end
 
 doc"""
-    donchian_channels(ta, n=20; h="High", l="Low")
+    donchianchannels(ta, n=20; h="High", l="Low")
 
 **Donchian Channels**
 
@@ -43,7 +43,7 @@ doc"""
   (https://www.tradingview.com/wiki/Donchian_Channels_(DC))
 
 """
-function donchian_channels(ta::TimeArray, n::Integer=20; h="High", l="Low")
+function donchianchannels(ta::TimeArray, n::Integer=20; h="High", l="Low")
     up = rename(moving(ta[h], maximum, n), "up")
     down = rename(moving(ta[l], minimum, n), "down")
     mid = rename((up .+ down) ./ 2, "mid")
