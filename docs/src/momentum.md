@@ -55,14 +55,14 @@ macd(cl)
 ## Chaikin Oscillator
 
 ```@docs
-chaikin_osc
+chaikinoscillator
 ```
 
 ```@repl
 using MarketData
 using MarketTechnicals
 
-chaikin_osc(ohlcv)
+chaikinoscillator(ohlcv)
 ```
 
 ## CCI
