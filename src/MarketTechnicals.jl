@@ -10,7 +10,7 @@ export sma, ema, kama,
        bollingerbands, truerange, atr, keltnerbands, chaikinvolatility, donchianchannels,
        obv, vwap, adl,
        doji,
-       rsi, macd, cci, roc, adx, stoch_osc, chaikinoscillator, aroon,
+       rsi, macd, cci, roc, adx, stochasticoscillator, chaikinoscillator, aroon,
        floorpivots, woodiespivots,
        typical
 

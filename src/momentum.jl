@@ -203,7 +203,7 @@ function adx{T,N}(ohlc::TimeArray{T,N}, n::Integer=14;
 end
 
 doc"""
-    stoch_osc(ohlc, n=14, fast_d=3, slow_d=3; h="High", l="Low", c="Close")
+    stochasticoscillator(ohlc, n=14, fast_d=3, slow_d=3; h="High", l="Low", c="Close")
 
 **Stochastic Oscillator**
 
@@ -237,8 +237,8 @@ A.k.a *%K%D*, or *KD*
 - [FMLabs]
   (http://www.fmlabs.com/reference/default.htm?url=StochasticOscillator.htm)
 """
-function stoch_osc(ohlc::TimeArray, n::Integer=14, fast_d::Integer=3,
-                   slow_d::Integer=3; h="High", l="Low", c="Close")
+function stochasticoscillator(ohlc::TimeArray, n::Integer=14, fast_d::Integer=3,
+                              slow_d::Integer=3; h="High", l="Low", c="Close")
     high = moving(ohlc[h], maximum, n)
     low = moving(ohlc[l], minimum, n)
     fast_k = rename((ohlc[c] .- low) ./ (high .- low) * 100, "fast_k")

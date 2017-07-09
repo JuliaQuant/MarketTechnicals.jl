@@ -138,7 +138,7 @@ end
 end
 
 
-@testset "stochastic osc" begin
+@testset "stochasticoscillator" begin
     """
     Quote from TTR
     > stoch(x[, c("High", "Low", "Close")], maType=SMA)
@@ -155,7 +155,7 @@ end
     [27,] 0.801061008 0.76010676 0.64559114
     [28,] 0.839964633 0.79861349 0.73949111
     """
-    ta = stoch_osc(ohlc)
+    ta = stochasticoscillator(ohlc)
     @test ta.colnames  == ["fast_k", "fast_d", "slow_d"]
     @test ta.timestamp == ohlc[18:end].timestamp
     @test isapprox(ta.values[1, 1], 67.142857, atol=.01)
