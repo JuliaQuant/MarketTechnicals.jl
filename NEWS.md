@@ -37,6 +37,10 @@
 
 * cci: fix calculation. (issue #84)
 
+* new feature: now `src/.rc.jl` is available for user customization, 
+  see: https://github.com/JuliaQuant/MarketTechnicals.jl/blob/12c6ce0fff730f2de36833dd83152d5b5a8a66b9/docs/src/index.md#naming-convention
+  (issue #98)
+
 ### 0.5.0
 
 * support floor of julia 0.5.0
