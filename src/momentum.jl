@@ -60,7 +60,7 @@ function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int=20, c::AbstractFloat=0.015)
 end
 
 doc"""
-    chaikin_osc(ohlcv, fast=3, slow=10; h="High", l="Low", c="Close")
+    chaikinoscillator(ohlcv, fast=3, slow=10; h="High", l="Low", c="Close")
 
 **Chaikin Oscillator**
 
@@ -79,10 +79,10 @@ where the [`adl`](@ref) is the Accumulation/Distribution Line.
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_oscillator)
 """
-function chaikin_osc(ohlcv::TimeArray, fast::Integer=3, slow::Integer=10;
-                     h="High", l="Low", c="Close")
+function chaikinoscillator(ohlcv::TimeArray, fast::Integer=3, slow::Integer=10;
+                           h="High", l="Low", c="Close")
     _adl = adl(ohlcv, h=h, l=l, c=c)
-    rename(ema(_adl, fast) .- ema(_adl, slow), ["chaikin_osc"])
+    rename(ema(_adl, fast) .- ema(_adl, slow), ["chaikinoscillator"])
 end
 
 doc"""
@@ -203,7 +203,7 @@ function adx{T,N}(ohlc::TimeArray{T,N}, n::Integer=14;
 end
 
 doc"""
-    stoch_osc(ohlc, n=14, fast_d=3, slow_d=3; h="High", l="Low", c="Close")
+    stochasticoscillator(ohlc, n=14, fast_d=3, slow_d=3; h="High", l="Low", c="Close")
 
 **Stochastic Oscillator**
 
@@ -237,8 +237,8 @@ A.k.a *%K%D*, or *KD*
 - [FMLabs]
   (http://www.fmlabs.com/reference/default.htm?url=StochasticOscillator.htm)
 """
-function stoch_osc(ohlc::TimeArray, n::Integer=14, fast_d::Integer=3,
-                   slow_d::Integer=3; h="High", l="Low", c="Close")
+function stochasticoscillator(ohlc::TimeArray, n::Integer=14, fast_d::Integer=3,
+                              slow_d::Integer=3; h="High", l="Low", c="Close")
     high = moving(ohlc[h], maximum, n)
     low = moving(ohlc[l], minimum, n)
     fast_k = rename((ohlc[c] .- low) ./ (high .- low) * 100, "fast_k")

@@ -52,7 +52,7 @@ end
 end
 
 
-@testset "chaikin_osc" begin
+@testset "chaikinoscillator" begin
     """
     Quote from TTR
 
@@ -76,8 +76,8 @@ end
     [81]   1214832.531   1341044.310   1592063.283    936678.383    186056.580
     [86]  -1209996.220  -1516911.058  -1995687.520  -2776094.760  -4090715.405
     """
-    ta = chaikin_osc(ohlcv)
-    @test ta.colnames     == ["chaikin_osc"]
+    ta = chaikinoscillator(ohlcv)
+    @test ta.colnames     == ["chaikinoscillator"]
     @test ta.meta         == ta.meta
     @test ta.timestamp[1] == ohlcv.timestamp[10]
     @test isapprox(ta.values[1], -6851466.867, atol=.01)
@@ -138,7 +138,7 @@ end
 end
 
 
-@testset "stochastic osc" begin
+@testset "stochasticoscillator" begin
     """
     Quote from TTR
     > stoch(x[, c("High", "Low", "Close")], maType=SMA)
@@ -155,7 +155,7 @@ end
     [27,] 0.801061008 0.76010676 0.64559114
     [28,] 0.839964633 0.79861349 0.73949111
     """
-    ta = stoch_osc(ohlc)
+    ta = stochasticoscillator(ohlc)
     @test ta.colnames  == ["fast_k", "fast_d", "slow_d"]
     @test ta.timestamp == ohlc[18:end].timestamp
     @test isapprox(ta.values[1, 1], 67.142857, atol=.01)

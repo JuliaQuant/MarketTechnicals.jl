@@ -27,8 +27,8 @@ end
 end
 
 
-@testset "donchian_channels" begin
-    ta = donchian_channels(ohlc)
+@testset "donchianchannels" begin
+    ta = donchianchannels(ohlc)
 
     @test ta.meta      == ohlc.meta
     @test ta.timestamp == ohlc[20:end].timestamp

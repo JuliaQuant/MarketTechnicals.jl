@@ -55,14 +55,14 @@ atr(ohlc)
 ## Donchian Channels
 
 ```@docs
-donchian_channels
+donchianchannels
 ```
 
 ```@repl
 using MarketData
 using MarketTechnicals
 
-donchian_channels(ohlc)
+donchianchannels(ohlc)
 ```
 
 ## Keltner Bands

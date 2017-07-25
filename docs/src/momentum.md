@@ -55,14 +55,14 @@ macd(cl)
 ## Chaikin Oscillator
 
 ```@docs
-chaikin_osc
+chaikinoscillator
 ```
 
 ```@repl
 using MarketData
 using MarketTechnicals
 
-chaikin_osc(ohlcv)
+chaikinoscillator(ohlcv)
 ```
 
 ## CCI
@@ -94,12 +94,12 @@ roc(cl, 5)
 ## Stochastic Oscillator
 
 ```@docs
-stoch_osc
+stochasticoscillator
 ```
 
 ```@repl
 using MarketData
 using MarketTechnicals
 
-stoch_osc(ohlc)
+stochasticoscillator(ohlc)
 ```
