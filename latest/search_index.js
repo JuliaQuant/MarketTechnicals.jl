@@ -17,6 +17,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "index.html#Naming-Convention-1",
+    "page": "MarketTechnicals Overview",
+    "title": "Naming Convention",
+    "category": "section",
+    "text": "This package names its method by spelling out the entire name without camel casing or underscores, which is typical for the Julia programming language. In special cases where an abbreviation is widely recognized, it is used instead. For example, the rsi, cci and adx methods are abbreviated while chaikinvolatility is spelled out.For those who find this naming convention too cumbersome, an src/.rc.jl file is provided. It has been added to the .gitignore file so whatever modifications or customizations you make there will not be corrupted with each package update. An example of using this to rename methods would be to include the following line:export cvola\n\ncvola = chaikinvolatility"
+},
+
+{
     "location": "index.html#Contents-1",
     "page": "MarketTechnicals Overview",
     "title": "Contents",
@@ -233,11 +241,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "momentum.html#MarketTechnicals.chaikin_osc",
+    "location": "momentum.html#MarketTechnicals.chaikinoscillator",
     "page": "Momentum",
-    "title": "MarketTechnicals.chaikin_osc",
+    "title": "MarketTechnicals.chaikinoscillator",
     "category": "Function",
-    "text": "chaikin_osc(ohlcv, fast=3, slow=10; h=\"High\", l=\"Low\", c=\"Close\")\n\nChaikin Oscillator\n\nDeveloped by Marc Chaikin\n\nFormula\n\n    Chaikin OSC = EMA(ADL fast) - EMA(ADL slow)\n\nwhere the adl is the Accumulation/Distribution Line.\n\nReference\n\nStockCharts\n\n\n\n"
+    "text": "chaikinoscillator(ohlcv, fast=3, slow=10; h=\"High\", l=\"Low\", c=\"Close\")\n\nChaikin Oscillator\n\nDeveloped by Marc Chaikin\n\nFormula\n\n    Chaikin OSC = EMA(ADL fast) - EMA(ADL slow)\n\nwhere the adl is the Accumulation/Distribution Line.\n\nReference\n\nStockCharts\n\n\n\n"
 },
 
 {
@@ -245,7 +253,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Momentum",
     "title": "Chaikin Oscillator",
     "category": "section",
-    "text": "chaikin_oscusing MarketData\nusing MarketTechnicals\n\nchaikin_osc(ohlcv)"
+    "text": "chaikinoscillatorusing MarketData\nusing MarketTechnicals\n\nchaikinoscillator(ohlcv)"
 },
 
 {
@@ -281,11 +289,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "momentum.html#MarketTechnicals.stoch_osc",
+    "location": "momentum.html#MarketTechnicals.stochasticoscillator",
     "page": "Momentum",
-    "title": "MarketTechnicals.stoch_osc",
+    "title": "MarketTechnicals.stochasticoscillator",
     "category": "Function",
-    "text": "stoch_osc(ohlc, n=14, fast_d=3, slow_d=3; h=\"High\", l=\"Low\", c=\"Close\")\n\nStochastic Oscillator\n\nA.k.a %K%D, or KD\n\nParameter\n\nn: period of fast(raw) %K\nfast_d: MA period of fast %D\nslow_d: MA period of slow %D\n\nFormula\n\n    beginalign*\n        fast K  = fracClose_t - max(High_t-n dots High_t)\n            max(High_t-n dots High_t) - min(Low_t-n dots Low_t)\n            times 100 \n        fast D  = SMA(fast K) \n        slow D  = SMA(fast D)\n    endalign*\n\nReference\n\nWikipedia\nFMLabs\n\n\n\n"
+    "text": "stochasticoscillator(ohlc, n=14, fast_d=3, slow_d=3; h=\"High\", l=\"Low\", c=\"Close\")\n\nStochastic Oscillator\n\nA.k.a %K%D, or KD\n\nParameter\n\nn: period of fast(raw) %K\nfast_d: MA period of fast %D\nslow_d: MA period of slow %D\n\nFormula\n\n    beginalign*\n        fast K  = fracClose_t - max(High_t-n dots High_t)\n            max(High_t-n dots High_t) - min(Low_t-n dots Low_t)\n            times 100 \n        fast D  = SMA(fast K) \n        slow D  = SMA(fast D)\n    endalign*\n\nReference\n\nWikipedia\nFMLabs\n\n\n\n"
 },
 
 {
@@ -293,7 +301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Momentum",
     "title": "Stochastic Oscillator",
     "category": "section",
-    "text": "stoch_oscusing MarketData\nusing MarketTechnicals\n\nstoch_osc(ohlc)"
+    "text": "stochasticoscillatorusing MarketData\nusing MarketTechnicals\n\nstochasticoscillator(ohlc)"
 },
 
 {
@@ -377,11 +385,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "volatility.html#MarketTechnicals.donchian_channels",
+    "location": "volatility.html#MarketTechnicals.donchianchannels",
     "page": "Volatility",
-    "title": "MarketTechnicals.donchian_channels",
+    "title": "MarketTechnicals.donchianchannels",
     "category": "Function",
-    "text": "donchian_channels(ta, n=20; h=\"High\", l=\"Low\")\n\nDonchian Channels\n\nFormula\n\n    beginalign*\n        Up    = max (High_1 to High_t) \n        Mid   = fracUp + Down2 \n        Down  = min (Low_1 to Low_t)\n    endalign*\n\nReference\n\nTradingView Wiki\n\n\n\n"
+    "text": "donchianchannels(ta, n=20; h=\"High\", l=\"Low\")\n\nDonchian Channels\n\nFormula\n\n    beginalign*\n        Up    = max (High_1 to High_t) \n        Mid   = fracUp + Down2 \n        Down  = min (Low_1 to Low_t)\n    endalign*\n\nReference\n\nTradingView Wiki\n\n\n\n"
 },
 
 {
@@ -389,7 +397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Volatility",
     "title": "Donchian Channels",
     "category": "section",
-    "text": "donchian_channelsusing MarketData\nusing MarketTechnicals\n\ndonchian_channels(ohlc)"
+    "text": "donchianchannelsusing MarketData\nusing MarketTechnicals\n\ndonchianchannels(ohlc)"
 },
 
 {
