@@ -1,4 +1,4 @@
-function sma{T,N}(ta::TimeArray{T,N}, n::Int)
+function sma(ta::TimeArray{T,N}, n::Int) where {T,N}
 
     tstamps = ta.timestamp[n:end]
 
@@ -18,7 +18,7 @@ function sma{T,N}(ta::TimeArray{T,N}, n::Int)
     TimeArray(tstamps, vals, cname, ta.meta)
 end
 
-function ema{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)
+function ema(ta::TimeArray{T,N}, n::Int; wilder=false) where {T,N}
 
     if  wilder
         k  = 1/n
@@ -47,7 +47,7 @@ function ema{T,N}(ta::TimeArray{T,N}, n::Int; wilder=false)
     TimeArray(tstamps, vals[n:length(ta),:], cname, ta.meta)
 end
 
-function kama{T,N}(ta::TimeArray{T,N}, n::Int=10, fn::Int=2, sn::Int=30)
+function kama(ta::TimeArray{T,N}, n::Int=10, fn::Int=2, sn::Int=30) where {T,N}
     vola = moving(abs(ta .- lag(ta)), sum, n)
     change = abs(ta .- lag(ta, n))
     er = change ./ vola  # Efficiency Ratio
@@ -80,7 +80,7 @@ end
 
 # Array dispatch for use by other algorithms
 
-function sma{T,N}(a::Array{T,N}, n::Int)
+function sma(a::Array{T,N}, n::Int) where {T,N}
 
     vals = zeros(size(a,1) - (n-1), size(a,2))
 
@@ -93,7 +93,7 @@ function sma{T,N}(a::Array{T,N}, n::Int)
     vals
 end
 
-function ema{T,N}(a::Array{T,N}, n::Int; wilder=false)
+function ema(a::Array{T,N}, n::Int; wilder=false) where {T,N}
 
     if  wilder
         k  = 1/n

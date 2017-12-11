@@ -104,9 +104,9 @@ If the input is a multi-column `TimeArray`, the new column names will be
 `["A_macd", "B_macd", "A_dif", "B_dif", "A_signal", "B_signal"]`.
 
 """
-function macd{T,N}(ta::TimeArray{T,N},
-                   fast::Int=12, slow::Int=26, signal::Int=9;
-                   wilder::Bool=false)
+function macd(ta::TimeArray{T,N},
+              fast::Int=12, slow::Int=26, signal::Int=9;
+              wilder::Bool=false) where {T,N}
     dif = ema(ta, fast, wilder=wilder) .- ema(ta, slow, wilder=wilder)
     sig = ema(dif, signal, wilder=wilder)
     osc = dif .- sig

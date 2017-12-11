@@ -13,7 +13,7 @@ On Balance Volume
 ```
 
 """
-function obv{T,N}(ohlcv::TimeArray{T,N}; price="Close", v="Volume")
+function obv(ohlcv::TimeArray{T,N}; price="Close", v="Volume") where {T,N}
 
     ret    = percentchange(ohlcv[price])
     vol    = zeros(length(ohlcv))
@@ -40,7 +40,7 @@ Volume Weight-Adjusted Price
 ```
 
 """
-function vwap{T,N}(ohlcv::TimeArray{T,N}, n::Int; price="Close", v="Volume")
+function vwap(ohlcv::TimeArray{T,N}, n::Int; price="Close", v="Volume") where {T,N}
 
     p   = ohlcv[price]
     q   = ohlcv[v]
@@ -51,7 +51,7 @@ function vwap{T,N}(ohlcv::TimeArray{T,N}, n::Int; price="Close", v="Volume")
     TimeArray(val.timestamp, val.values, ["vwap"], ohlcv.meta)
 end
 
-vwap{T,N}(ohlcv::TimeArray{T,N}) = vwap(ohlcv, 10)
+vwap(ohlcv::TimeArray{T,N}) where {T,N} = vwap(ohlcv, 10)
 
 function advance_decline(x)
     #code here

@@ -7,12 +7,12 @@ Typical Price
     \text{Typical Price} = \frac{H + L + C}{3}
 ```
 """
-function typical{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
+function typical(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close") where {T,N}
     val = (ohlc[h] .+ ohlc[l] .+ ohlc[c]) ./ 3
     TimeArray(val.timestamp, val.values, ["typical"], ohlc.meta)
 end
 
-function mean_abs_dev{T}(a::Array{T,1}, scale::Bool=false)
+function mean_abs_dev(a::Array{T,1}, scale::Bool=false) where T
     scale ? c = 1 / (-sqrt(2) * erfcinv(3 * 1 / 2)) : c =1
 
     res = ones(length(a))
