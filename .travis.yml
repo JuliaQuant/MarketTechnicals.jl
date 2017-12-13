@@ -4,12 +4,18 @@ os:
   - linux
 
 julia:
-  - 0.5
+  - 0.6
 
 notifications:
   email: false
 
 sudo: false
+
+branches:
+  only:
+    - master
+    - stable
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/  # for tagging
 
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
@@ -21,4 +27,4 @@ after_success:
   - julia -e 'cd(Pkg.dir("MarketTechnicals", "docs")); include("make.jl")'
 
   - julia -e 'Pkg.add("Coverage")'
-  - julia -e 'cd(Pkg.dir("MarketTechnicals")); using Coverage; Coveralls.submit(Coveralls.process_folder())'
+  - julia -e 'cd(Pkg.dir("MarketTechnicals")); using Coverage; Codecov.submit(process_folder())'

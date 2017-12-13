@@ -7,10 +7,8 @@ Relative Strength Index
     RSI = \frac{EMA(Up, n)}{EMA(Up, n) + EMA(Dn, n)}
 ```
 """
-function rsi{T,N}(ta::TimeArray{T,N}, n::Int=14; wilder::Bool=false)
-    # for the record I'm not happy about transposing zeros here
-    # since it's difficult to see why
-    ret = vcat(zeros(length(colnames(ta)))', diff(ta.values))
+function rsi(ta::TimeArray, n::Int=14; wilder::Bool=false)
+    ret = [zeros(1, size(ta, 2)); diff(ta.values)]
     ups = zeros(size(ta.values, 1), size(ta.values, 2))
     dns = zeros(size(ta.values, 1), size(ta.values, 2))
 
@@ -53,7 +51,7 @@ Commodity Channel Index
 - https://en.wikipedia.org/wiki/Commodity_channel_index
 
 """
-function cci{T,N}(ohlc::TimeArray{T,N}, ma::Int=20, c::AbstractFloat=0.015)
+function cci(ohlc::TimeArray, ma::Int=20, c::AbstractFloat=0.015)
     pt = typical(ohlc)
     cci = ((pt .- sma(pt, ma)) ./ moving(pt, mean_abs_dev, ma)) ./ c
     rename(cci, "cci")
@@ -169,7 +167,7 @@ function aroon(ohlc::TimeArray, n::Integer=25; h="High", l="Low")
 end
 
 doc"""
-    adx{T,N}(ohlc, n=14; h="High", l="Low", c="Close")
+    adx(ohlc, n=14; h="High", l="Low", c="Close")
 
 **Average Directional Movement Index**
 
@@ -184,8 +182,7 @@ This Implementation follow StockCharts.
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx)
 """
-function adx{T,N}(ohlc::TimeArray{T,N}, n::Integer=14;
-                  h="High", l="Low", c="Close")
+function adx(ohlc::TimeArray, n::Integer=14; h="High", l="Low", c="Close")
     dm = relu(merge(ohlc[h] .- lag(ohlc[h]), lag(ohlc[l]) .- ohlc[l]))
     dm.values[findmin(dm.values, 2)[2]] = 0
 
@@ -196,7 +193,7 @@ function adx{T,N}(ohlc::TimeArray{T,N}, n::Integer=14;
     di = (dm ./ tr) .* 100
     di = rename(di, ["+di", "-di"])
 
-    dx = abs((di["+di"] .- di["-di"]) ./ (di["+di"] .+ di["-di"])) .* 100
+    dx = abs.((di["+di"] .- di["-di"]) ./ (di["+di"] .+ di["-di"])) .* 100
     adx = wilder_smooth(dx, n, dx=true)
 
     rename(merge(adx, merge(dx, di)), ["adx", "dx", "+di", "-di"])
