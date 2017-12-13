@@ -20,7 +20,7 @@ makedocs(
 
 deploydocs(
     repo = "github.com/JuliaQuant/MarketTechnicals.jl.git",
-    julia  = "0.5",
+    julia  = "0.6",
     latest = "master",
     target = "build",
     deps = nothing,  # we use the `format = :html`, without `mkdocs`
