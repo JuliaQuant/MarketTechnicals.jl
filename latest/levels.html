@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Trade levels · MarketTechnicals.jl</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link href="assets/highlightjs/default.css" rel="stylesheet" type="text/css"/><link href="assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>MarketTechnicals.jl</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" action="search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="index.html">MarketTechnicals Overview</a></li><li><a class="toctext" href="getting_started.html">Getting Started</a></li><li><a class="toctext" href="ma.html">Moving Averages</a></li><li class="current"><a class="toctext" href="levels.html">Trade levels</a><ul class="internal"><li><a class="toctext" href="#Floor-Trader-Pivots-1">Floor Trader Pivots</a></li><li><a class="toctext" href="#Woodies-Pivots-1">Woodies Pivots</a></li></ul></li><li><a class="toctext" href="momentum.html">Momentum</a></li><li><a class="toctext" href="volatility.html">Volatility</a></li><li><a class="toctext" href="volume.html">Volume</a></li><li><a class="toctext" href="candlesticks.html">Candlesticks</a></li><li><a class="toctext" href="utils.html">Utilities</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href="levels.html">Trade levels</a></li></ul><a class="edit-page" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/docs/src/levels.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Trade levels</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Trade-levels-1" href="#Trade-levels-1">Trade levels</a></h1><h2><a class="nav-anchor" id="Floor-Trader-Pivots-1" href="#Floor-Trader-Pivots-1">Floor Trader Pivots</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.floorpivots" href="#MarketTechnicals.floorpivots"><code>MarketTechnicals.floorpivots</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">floorpivots(ohlc)</code></pre><p>Floor Trader Pivots</p><div>\[\begin{align*}
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Trade levels · MarketTechnicals.jl</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link href="assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>MarketTechnicals.jl</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="index.html">MarketTechnicals Overview</a></li><li><a class="toctext" href="getting_started.html">Getting Started</a></li><li><a class="toctext" href="ma.html">Moving Averages</a></li><li class="current"><a class="toctext" href="levels.html">Trade levels</a><ul class="internal"><li><a class="toctext" href="#Floor-Trader-Pivots-1">Floor Trader Pivots</a></li><li><a class="toctext" href="#Woodies-Pivots-1">Woodies Pivots</a></li></ul></li><li><a class="toctext" href="momentum.html">Momentum</a></li><li><a class="toctext" href="volatility.html">Volatility</a></li><li><a class="toctext" href="volume.html">Volume</a></li><li><a class="toctext" href="candlesticks.html">Candlesticks</a></li><li><a class="toctext" href="utils.html">Utilities</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href="levels.html">Trade levels</a></li></ul><a class="edit-page" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/master/docs/src/levels.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Trade levels</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Trade-levels-1" href="#Trade-levels-1">Trade levels</a></h1><h2><a class="nav-anchor" id="Floor-Trader-Pivots-1" href="#Floor-Trader-Pivots-1">Floor Trader Pivots</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.floorpivots" href="#MarketTechnicals.floorpivots"><code>MarketTechnicals.floorpivots</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">floorpivots(ohlc)</code></pre><p>Floor Trader Pivots</p><div>\[\begin{align*}
 
     R3 &amp; = Pivot_t + (R2 - S1) \\
     R2 &amp; = Pivot_t + (R1 - S1) \\
@@ -10,23 +10,32 @@
     S2 &amp; = Pivot_t - (R1 - S1) \\
     S3 &amp; = Pivot_t - (R2 - S1)
 
-\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/levels.jl#L3">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/levels.jl#L3">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; floorpivots(ohlc)
 499x7 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-04 to 2001-12-31
-
-             s3        s2        s1        pivot     r1        r2        r3
-2000-01-04 | 94.11     97.9      104.92    108.71    115.73    119.52    123.31
-2000-01-05 | 89.49     95.34     98.92     104.77    108.35    114.2     120.05
-2000-01-06 | 93.5867   98.2933   101.1467  105.8533  108.7067  113.4133  118.12
-2000-01-07 | 79.0      87.0      91.0      99.0      103.0     111.0     119.0
-⋮
-2001-12-26 | 20.4733   20.6867   21.0233   21.2367   21.5733   21.7867   22.0
-2001-12-27 | 19.8267   20.4833   20.9867   21.6433   22.1467   22.8033   23.46
-2001-12-28 | 21.0133   21.2967   21.6833   21.9667   22.3533   22.6367   22.92
-2001-12-31 | 20.8867   21.4233   21.9267   22.4633   22.9667   23.5033   24.04</code></pre><h2><a class="nav-anchor" id="Woodies-Pivots-1" href="#Woodies-Pivots-1">Woodies Pivots</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.woodiespivots" href="#MarketTechnicals.woodiespivots"><code>MarketTechnicals.woodiespivots</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">woodiespivots(ohlc)</code></pre><p>Woodie&#39;s Pivot</p><div>\[\begin{align*}
+│            │ s3      │ s2      │ s1       │ pivot    │ r1       │ r2       │
+├────────────┼─────────┼─────────┼──────────┼──────────┼──────────┼──────────┤
+│ 2000-01-04 │ 94.11   │ 97.9    │ 104.92   │ 108.71   │ 115.73   │ 119.52   │
+│ 2000-01-05 │ 89.49   │ 95.34   │ 98.92    │ 104.77   │ 108.35   │ 114.2    │
+│ 2000-01-06 │ 93.5867 │ 98.2933 │ 101.1467 │ 105.8533 │ 108.7067 │ 113.4133 │
+│ 2000-01-07 │ 79.0    │ 87.0    │ 91.0     │ 99.0     │ 103.0    │ 111.0    │
+│ 2000-01-10 │ 90.8333 │ 93.1667 │ 96.3333  │ 98.6667  │ 101.8333 │ 104.1667 │
+│ 2000-01-11 │ 86.75   │ 90.75   │ 94.25    │ 98.25    │ 101.75   │ 105.75   │
+│ 2000-01-12 │ 80.16   │ 85.33   │ 89.04    │ 94.21    │ 97.92    │ 103.09   │
+│ 2000-01-13 │ 74.96   │ 80.73   │ 83.96    │ 89.73    │ 92.96    │ 98.73    │
+│ 2000-01-14 │ 87.0    │ 89.75   │ 93.25    │ 96.0     │ 99.5     │ 102.25   │
+   ⋮
+│ 2001-12-19 │ 19.2667 │ 19.7433 │ 20.3767  │ 20.8533  │ 21.4867  │ 21.9633  │
+│ 2001-12-20 │ 19.6233 │ 20.0467 │ 20.8333  │ 21.2567  │ 22.0433  │ 22.4667  │
+│ 2001-12-21 │ 19.52   │ 20.07   │ 20.37    │ 20.92    │ 21.22    │ 21.77    │
+│ 2001-12-24 │ 19.9467 │ 20.3733 │ 20.6867  │ 21.1133  │ 21.4267  │ 21.8533  │
+│ 2001-12-26 │ 20.4733 │ 20.6867 │ 21.0233  │ 21.2367  │ 21.5733  │ 21.7867  │
+│ 2001-12-27 │ 19.8267 │ 20.4833 │ 20.9867  │ 21.6433  │ 22.1467  │ 22.8033  │
+│ 2001-12-28 │ 21.0133 │ 21.2967 │ 21.6833  │ 21.9667  │ 22.3533  │ 22.6367  │
+│ 2001-12-31 │ 20.8867 │ 21.4233 │ 21.9267  │ 22.4633  │ 22.9667  │ 23.5033  │</code></pre><h2><a class="nav-anchor" id="Woodies-Pivots-1" href="#Woodies-Pivots-1">Woodies Pivots</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.woodiespivots" href="#MarketTechnicals.woodiespivots"><code>MarketTechnicals.woodiespivots</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">woodiespivots(ohlc)</code></pre><p>Woodie&#39;s Pivot</p><div>\[\begin{align*}
 
     Range &amp; = Price^{high}_{t-1} - Price^{low}_{t-1} \\
 
@@ -41,20 +50,29 @@ julia&gt; floorpivots(ohlc)
     S3 &amp; = S1 - Range \\
     S4 &amp; = S3 - Range \tag{not implemented}
 
-\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/levels.jl#L40">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/levels.jl#L40">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; woodiespivots(ohlc)
 499x7 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-04 to 2001-12-31
-
-             s3        s2        s1        pivot     r1        r2        r3
-2000-01-04 | 92.035    96.8625   102.845   107.6725  113.655   118.4825  124.465
-2000-01-05 | 89.605    95.3975   99.035    104.8275  108.465   114.2575  117.895
-2000-01-06 | 94.78     98.89     102.34    106.45    109.9     114.01    117.46
-2000-01-07 | 78.5      86.75     90.5      98.75     102.5     110.75    114.5
-⋮
-2001-12-26 | 20.525    20.7125   21.075    21.2625   21.625    21.8125   22.175
-2001-12-27 | 19.84     20.49     21.0      21.65     22.16     22.81     23.32
-2001-12-28 | 20.965    21.2725   21.635    21.9425   22.305    22.6125   22.975
-2001-12-31 | 20.95     21.455    21.99     22.495    23.03     23.535    24.07</code></pre><footer><hr/><a class="previous" href="ma.html"><span class="direction">Previous</span><span class="title">Moving Averages</span></a><a class="next" href="momentum.html"><span class="direction">Next</span><span class="title">Momentum</span></a></footer></article></body></html>
+│            │ s3     │ s2      │ s1      │ pivot    │ r1      │ r2       │
+├────────────┼────────┼─────────┼─────────┼──────────┼─────────┼──────────┤
+│ 2000-01-04 │ 92.035 │ 96.8625 │ 102.845 │ 107.6725 │ 113.655 │ 118.4825 │
+│ 2000-01-05 │ 89.605 │ 95.3975 │ 99.035  │ 104.8275 │ 108.465 │ 114.2575 │
+│ 2000-01-06 │ 94.78  │ 98.89   │ 102.34  │ 106.45   │ 109.9   │ 114.01   │
+│ 2000-01-07 │ 78.5   │ 86.75   │ 90.5    │ 98.75    │ 102.5   │ 110.75   │
+│ 2000-01-10 │ 93.75  │ 94.625  │ 99.25   │ 100.125  │ 104.75  │ 105.625  │
+│ 2000-01-11 │ 84.69  │ 89.72   │ 92.19   │ 97.22    │ 99.69   │ 104.72   │
+│ 2000-01-12 │ 81.68  │ 86.09   │ 90.56   │ 94.97    │ 99.44   │ 103.85   │
+│ 2000-01-13 │ 80.98  │ 83.74   │ 89.98   │ 92.74    │ 98.98   │ 101.74   │
+│ 2000-01-14 │ 90.625 │ 91.5625 │ 96.875  │ 97.8125  │ 103.125 │ 104.0625 │
+   ⋮
+│ 2001-12-19 │ 18.915 │ 19.5675 │ 20.025  │ 20.6775  │ 21.135  │ 21.7875  │
+│ 2001-12-20 │ 19.585 │ 20.0275 │ 20.795  │ 21.2375  │ 22.005  │ 22.4475  │
+│ 2001-12-21 │ 19.735 │ 20.1775 │ 20.585  │ 21.0275  │ 21.435  │ 21.8775  │
+│ 2001-12-24 │ 19.79  │ 20.295  │ 20.53   │ 21.035   │ 21.27   │ 21.775   │
+│ 2001-12-26 │ 20.525 │ 20.7125 │ 21.075  │ 21.2625  │ 21.625  │ 21.8125  │
+│ 2001-12-27 │ 19.84  │ 20.49   │ 21.0    │ 21.65    │ 22.16   │ 22.81    │
+│ 2001-12-28 │ 20.965 │ 21.2725 │ 21.635  │ 21.9425  │ 22.305  │ 22.6125  │
+│ 2001-12-31 │ 20.95  │ 21.455  │ 21.99   │ 22.495   │ 23.03   │ 23.535   │</code></pre><footer><hr/><a class="previous" href="ma.html"><span class="direction">Previous</span><span class="title">Moving Averages</span></a><a class="next" href="momentum.html"><span class="direction">Next</span><span class="title">Momentum</span></a></footer></article></body></html>

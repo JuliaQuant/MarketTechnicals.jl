@@ -1,144 +1,382 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Momentum · MarketTechnicals.jl</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link href="assets/highlightjs/default.css" rel="stylesheet" type="text/css"/><link href="assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>MarketTechnicals.jl</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" action="search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="index.html">MarketTechnicals Overview</a></li><li><a class="toctext" href="getting_started.html">Getting Started</a></li><li><a class="toctext" href="ma.html">Moving Averages</a></li><li><a class="toctext" href="levels.html">Trade levels</a></li><li class="current"><a class="toctext" href="momentum.html">Momentum</a><ul class="internal"><li><a class="toctext" href="#Average-Directional-Movement-Index-(ADX)-1">Average Directional Movement Index (ADX)</a></li><li><a class="toctext" href="#Aroon-Oscillator-1">Aroon Oscillator</a></li><li><a class="toctext" href="#RSI-1">RSI</a></li><li><a class="toctext" href="#MACD-1">MACD</a></li><li><a class="toctext" href="#Chaikin-Oscillator-1">Chaikin Oscillator</a></li><li><a class="toctext" href="#CCI-1">CCI</a></li><li><a class="toctext" href="#Rate-of-Change-(ROC)-1">Rate of Change (ROC)</a></li><li><a class="toctext" href="#Stochastic-Oscillator-1">Stochastic Oscillator</a></li></ul></li><li><a class="toctext" href="volatility.html">Volatility</a></li><li><a class="toctext" href="volume.html">Volume</a></li><li><a class="toctext" href="candlesticks.html">Candlesticks</a></li><li><a class="toctext" href="utils.html">Utilities</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href="momentum.html">Momentum</a></li></ul><a class="edit-page" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/docs/src/momentum.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Momentum</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Momentum-1" href="#Momentum-1">Momentum</a></h1><h2><a class="nav-anchor" id="Average-Directional-Movement-Index-(ADX)-1" href="#Average-Directional-Movement-Index-(ADX)-1">Average Directional Movement Index (ADX)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.adx" href="#MarketTechnicals.adx"><code>MarketTechnicals.adx</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">adx{T,N}(ohlc, n=14; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p><strong>Average Directional Movement Index</strong></p><p>Developed by J. Welles Wilder. This Implementation follow StockCharts.</p><p><strong>Reference</strong></p><ul><li><p><a href="https://en.wikipedia.org/wiki/Average_directional_movement_index">wikipedia</a></p></li><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx">StockCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/momentum.jl#L171">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Momentum · MarketTechnicals.jl</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link href="assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>MarketTechnicals.jl</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="index.html">MarketTechnicals Overview</a></li><li><a class="toctext" href="getting_started.html">Getting Started</a></li><li><a class="toctext" href="ma.html">Moving Averages</a></li><li><a class="toctext" href="levels.html">Trade levels</a></li><li class="current"><a class="toctext" href="momentum.html">Momentum</a><ul class="internal"><li><a class="toctext" href="#Average-Directional-Movement-Index-(ADX)-1">Average Directional Movement Index (ADX)</a></li><li><a class="toctext" href="#Aroon-Oscillator-1">Aroon Oscillator</a></li><li><a class="toctext" href="#RSI-1">RSI</a></li><li><a class="toctext" href="#MACD-1">MACD</a></li><li><a class="toctext" href="#Chaikin-Oscillator-1">Chaikin Oscillator</a></li><li><a class="toctext" href="#CCI-1">CCI</a></li><li><a class="toctext" href="#Rate-of-Change-(ROC)-1">Rate of Change (ROC)</a></li><li><a class="toctext" href="#Stochastic-Oscillator-1">Stochastic Oscillator</a></li></ul></li><li><a class="toctext" href="volatility.html">Volatility</a></li><li><a class="toctext" href="volume.html">Volume</a></li><li><a class="toctext" href="candlesticks.html">Candlesticks</a></li><li><a class="toctext" href="utils.html">Utilities</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href="momentum.html">Momentum</a></li></ul><a class="edit-page" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/master/docs/src/momentum.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Momentum</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Momentum-1" href="#Momentum-1">Momentum</a></h1><h2><a class="nav-anchor" id="Average-Directional-Movement-Index-(ADX)-1" href="#Average-Directional-Movement-Index-(ADX)-1">Average Directional Movement Index (ADX)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.adx" href="#MarketTechnicals.adx"><code>MarketTechnicals.adx</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">adx(ohlc, n=14; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p><strong>Average Directional Movement Index</strong></p><p>Developed by J. Welles Wilder. This Implementation follow StockCharts.</p><p><strong>Reference</strong></p><ul><li><p><a href="https://en.wikipedia.org/wiki/Average_directional_movement_index">wikipedia</a></p></li><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx">StockCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/momentum.jl#L169">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; adx(ohlc)
 473x4 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-02-10 to 2001-12-31
-
-             adx      dx       +di      -di
-2000-02-10 | 10.5998  0.3916   23.6226  23.4383
-2000-02-11 | 10.0953  3.5371   22.1956  23.8233
-2000-02-14 | 9.4222   0.6728   22.348   22.0493
-2000-02-15 | 9.4482   9.7856   25.495   20.9501
-⋮
-2001-12-26 | 26.414   35.357   26.5486  12.6789
-2001-12-27 | 27.0528  35.357   25.066   11.9709
-2001-12-28 | 28.2837  44.2848  28.6435  11.0606
-2001-12-31 | 29.1676  40.6586  26.8864  11.3429</code></pre><h2><a class="nav-anchor" id="Aroon-Oscillator-1" href="#Aroon-Oscillator-1">Aroon Oscillator</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.aroon" href="#MarketTechnicals.aroon"><code>MarketTechnicals.aroon</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">aroon(ohlc, n=25; h=&quot;High&quot;, l=&quot;Low&quot;)</code></pre><p><strong>Aroon Oscillator</strong></p><p><strong>Formula</strong></p><div>\[    \begin{align*}
+│            │ adx     │ dx      │ +di     │ -di     │
+├────────────┼─────────┼─────────┼─────────┼─────────┤
+│ 2000-02-10 │ 10.5998 │ 0.3916  │ 23.6226 │ 23.4383 │
+│ 2000-02-11 │ 10.0953 │ 3.5371  │ 22.1956 │ 23.8233 │
+│ 2000-02-14 │ 9.4222  │ 0.6728  │ 22.348  │ 22.0493 │
+│ 2000-02-15 │ 9.4482  │ 9.7856  │ 25.495  │ 20.9501 │
+│ 2000-02-16 │ 8.9272  │ 2.1537  │ 23.6555 │ 22.6581 │
+│ 2000-02-17 │ 8.4433  │ 2.1537  │ 23.0363 │ 22.065  │
+│ 2000-02-18 │ 8.0918  │ 3.5217  │ 21.8706 │ 23.4673 │
+│ 2000-02-22 │ 8.459   │ 13.2324 │ 19.4557 │ 25.3898 │
+│ 2000-02-23 │ 8.3907  │ 7.5034  │ 19.9902 │ 23.2335 │
+   ⋮
+│ 2001-12-19 │ 26.3951 │ 22.3314 │ 26.0296 │ 16.5263 │
+│ 2001-12-20 │ 26.1049 │ 22.3314 │ 24.2042 │ 15.3674 │
+│ 2001-12-21 │ 25.9085 │ 23.3553 │ 23.208  │ 14.4199 │
+│ 2001-12-24 │ 25.7261 │ 23.3553 │ 22.2731 │ 13.839  │
+│ 2001-12-26 │ 26.414  │ 35.357  │ 26.5486 │ 12.6789 │
+│ 2001-12-27 │ 27.0528 │ 35.357  │ 25.066  │ 11.9709 │
+│ 2001-12-28 │ 28.2837 │ 44.2848 │ 28.6435 │ 11.0606 │
+│ 2001-12-31 │ 29.1676 │ 40.6586 │ 26.8864 │ 11.3429 │</code></pre><h2><a class="nav-anchor" id="Aroon-Oscillator-1" href="#Aroon-Oscillator-1">Aroon Oscillator</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.aroon" href="#MarketTechnicals.aroon"><code>MarketTechnicals.aroon</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">aroon(ohlc, n=25; h=&quot;High&quot;, l=&quot;Low&quot;)</code></pre><p><strong>Aroon Oscillator</strong></p><p><strong>Formula</strong></p><div>\[    \begin{align*}
         up   &amp; = \frac{\mathop{argmax}(High_{t-n} \dots High_t)}{n} \times 100 \\
         down &amp; = \frac{\mathop{argmin}(Low_{t-n} \dots Low_t)}{n} \times 100 \\
         osc  &amp; = up - down
-    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:aroon_oscillator">StockCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/momentum.jl#L143">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:aroon_oscillator">StockCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/momentum.jl#L141">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; aroon(ohlc)
+WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
+Stacktrace:
+ [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
+ [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [4] #aroon#41(::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:162
+ [5] aroon(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:162
+ [6] eval(::Module, ::Any) at ./boot.jl:235
+ [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
+ [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
+ [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
+ [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
+ [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
+ [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
+ [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
+ [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
+ [17] include_from_node1(::String) at ./loading.jl:576
+ [18] include(::String) at ./sysimg.jl:14
+ [19] eval(::Module, ::Any) at ./boot.jl:235
+ [20] process_options(::Base.JLOptions) at ./client.jl:286
+ [21] _start() at ./client.jl:371
+while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
+WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
+Stacktrace:
+ [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
+ [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [4] #aroon#41(::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:163
+ [5] aroon(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:162
+ [6] eval(::Module, ::Any) at ./boot.jl:235
+ [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
+ [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
+ [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
+ [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
+ [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
+ [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
+ [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
+ [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
+ [17] include_from_node1(::String) at ./loading.jl:576
+ [18] include(::String) at ./sysimg.jl:14
+ [19] eval(::Module, ::Any) at ./boot.jl:235
+ [20] process_options(::Base.JLOptions) at ./client.jl:286
+ [21] _start() at ./client.jl:371
+while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
 476x3 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-02-07 to 2001-12-31
-
-             up        dn        osc
-2000-02-07 | 52.0      32.0      20.0
-2000-02-08 | 48.0      28.0      20.0
-2000-02-09 | 44.0      24.0      20.0
-2000-02-10 | 40.0      20.0      20.0
-⋮
-2001-12-26 | 44.0      8.0       36.0
-2001-12-27 | 40.0      4.0       36.0
-2001-12-28 | 36.0      4.0       32.0
-2001-12-31 | 32.0      4.0       28.0</code></pre><h2><a class="nav-anchor" id="RSI-1" href="#RSI-1">RSI</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.rsi" href="#MarketTechnicals.rsi"><code>MarketTechnicals.rsi</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">rsi(ta, n=14; wilder=false)</code></pre><p>Relative Strength Index</p><div>\[    RSI = \frac{EMA(Up, n)}{EMA(Up, n) + EMA(Dn, n)}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/momentum.jl#L1">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+│            │ up    │ dn    │ osc   │
+├────────────┼───────┼───────┼───────┤
+│ 2000-02-07 │ 52.0  │ 32.0  │ 20.0  │
+│ 2000-02-08 │ 48.0  │ 28.0  │ 20.0  │
+│ 2000-02-09 │ 44.0  │ 24.0  │ 20.0  │
+│ 2000-02-10 │ 40.0  │ 20.0  │ 20.0  │
+│ 2000-02-11 │ 36.0  │ 16.0  │ 20.0  │
+│ 2000-02-14 │ 32.0  │ 12.0  │ 20.0  │
+│ 2000-02-15 │ 28.0  │ 8.0   │ 20.0  │
+│ 2000-02-16 │ 24.0  │ 4.0   │ 20.0  │
+│ 2000-02-17 │ 20.0  │ 4.0   │ 16.0  │
+   ⋮
+│ 2001-12-19 │ 60.0  │ 12.0  │ 48.0  │
+│ 2001-12-20 │ 56.0  │ 8.0   │ 48.0  │
+│ 2001-12-21 │ 52.0  │ 4.0   │ 48.0  │
+│ 2001-12-24 │ 48.0  │ 4.0   │ 44.0  │
+│ 2001-12-26 │ 44.0  │ 8.0   │ 36.0  │
+│ 2001-12-27 │ 40.0  │ 4.0   │ 36.0  │
+│ 2001-12-28 │ 36.0  │ 4.0   │ 32.0  │
+│ 2001-12-31 │ 32.0  │ 4.0   │ 28.0  │</code></pre><h2><a class="nav-anchor" id="RSI-1" href="#RSI-1">RSI</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.rsi" href="#MarketTechnicals.rsi"><code>MarketTechnicals.rsi</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">rsi(ta, n=14; wilder=false)</code></pre><p>Relative Strength Index</p><div>\[    RSI = \frac{EMA(Up, n)}{EMA(Up, n) + EMA(Dn, n)}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/momentum.jl#L1">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; rsi(cl)
+WARNING: abs(x::AbstractArray{T}) where T &lt;: Number is deprecated, use abs.(x) instead.
+Stacktrace:
+ [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
+ [2] abs(::Array{Float64,2}) at ./deprecated.jl:57
+ [3] #rsi#30(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:26
+ [4] rsi(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:11
+ [5] eval(::Module, ::Any) at ./boot.jl:235
+ [6] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
+ [7] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
+ [8] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
+ [9] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
+ [10] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [11] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
+ [12] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [13] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
+ [14] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
+ [15] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
+ [16] include_from_node1(::String) at ./loading.jl:576
+ [17] include(::String) at ./sysimg.jl:14
+ [18] eval(::Module, ::Any) at ./boot.jl:235
+ [19] process_options(::Base.JLOptions) at ./client.jl:286
+ [20] _start() at ./client.jl:371
+while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
 487x1 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-21 to 2001-12-31
-
-             Close_rsi_14
-2000-01-21 | 49.5172
-2000-01-24 | 42.4303
-2000-01-25 | 51.8575
-2000-01-26 | 48.6983
-⋮
-2001-12-26 | 54.3448
-2001-12-27 | 61.7068
-2001-12-28 | 65.6713
-2001-12-31 | 55.8492</code></pre><h2><a class="nav-anchor" id="MACD-1" href="#MACD-1">MACD</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.macd" href="#MarketTechnicals.macd"><code>MarketTechnicals.macd</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">macd(ta, fast=12, slow=26, signal=9; wilder=false)</code></pre><p>Moving Average Convergence / Divergence</p><div>\[    \begin{align*}
+│            │ Close_rsi_14 │
+├────────────┼──────────────┤
+│ 2000-01-21 │ 49.5172      │
+│ 2000-01-24 │ 42.4303      │
+│ 2000-01-25 │ 51.8575      │
+│ 2000-01-26 │ 48.6983      │
+│ 2000-01-27 │ 48.3846      │
+│ 2000-01-28 │ 36.4395      │
+│ 2000-01-31 │ 40.7309      │
+│ 2000-02-01 │ 36.1086      │
+│ 2000-02-02 │ 34.2627      │
+   ⋮
+│ 2001-12-19 │ 55.3167      │
+│ 2001-12-20 │ 43.0604      │
+│ 2001-12-21 │ 47.7045      │
+│ 2001-12-24 │ 52.5736      │
+│ 2001-12-26 │ 54.3448      │
+│ 2001-12-27 │ 61.7068      │
+│ 2001-12-28 │ 65.6713      │
+│ 2001-12-31 │ 55.8492      │</code></pre><h2><a class="nav-anchor" id="MACD-1" href="#MACD-1">MACD</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.macd" href="#MarketTechnicals.macd"><code>MarketTechnicals.macd</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">macd(ta, fast=12, slow=26, signal=9; wilder=false)</code></pre><p>Moving Average Convergence / Divergence</p><div>\[    \begin{align*}
         MACD Bar &amp; = DIF - DEM \\
         DIF &amp; = EMA(P_{close}, fast) - EMA(P_{close}, slow) \\
         DEM &amp; = EMA(DIF, 9) \tag{signal}
-    \end{align*}\]</div><p><strong>Return</strong>:</p><p><code>TimeArray</code> with 3 columns <code>[&quot;macd&quot;, &quot;dif&quot;, &quot;signal&quot;]</code>.</p><p>If the input is a multi-column <code>TimeArray</code>, the new column names will be <code>[&quot;A_macd&quot;, &quot;B_macd&quot;, &quot;A_dif&quot;, &quot;B_dif&quot;, &quot;A_signal&quot;, &quot;B_signal&quot;]</code>.</p></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/momentum.jl#L88">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+    \end{align*}\]</div><p><strong>Return</strong>:</p><p><code>TimeArray</code> with 3 columns <code>[&quot;macd&quot;, &quot;dif&quot;, &quot;signal&quot;]</code>.</p><p>If the input is a multi-column <code>TimeArray</code>, the new column names will be <code>[&quot;A_macd&quot;, &quot;B_macd&quot;, &quot;A_dif&quot;, &quot;B_dif&quot;, &quot;A_signal&quot;, &quot;B_signal&quot;]</code>.</p></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/momentum.jl#L86">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; macd(cl)
 467x3 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-02-18 to 2001-12-31
-
-             macd    dif     signal
-2000-02-18 | -0.0472 3.5339  3.5811
-2000-02-22 | -0.1375 3.4092  3.5467
-2000-02-23 | -0.0636 3.4672  3.5308
-2000-02-24 | -0.1131 3.3894  3.5026
-⋮
-2001-12-26 | -0.1494 0.3244  0.4738
-2001-12-27 | -0.0861 0.3661  0.4523
-2001-12-28 | -0.0231 0.4234  0.4465
-2001-12-31 | -0.0203 0.4212  0.4414</code></pre><h2><a class="nav-anchor" id="Chaikin-Oscillator-1" href="#Chaikin-Oscillator-1">Chaikin Oscillator</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.chaikinoscillator" href="#MarketTechnicals.chaikinoscillator"><code>MarketTechnicals.chaikinoscillator</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">chaikinoscillator(ohlcv, fast=3, slow=10; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p><strong>Chaikin Oscillator</strong></p><p>Developed by Marc Chaikin</p><p><strong>Formula</strong></p><div>\[    Chaikin\ OSC = EMA(ADL, fast) - EMA(ADL, slow)\]</div><p>where the <a href="volume.html#MarketTechnicals.adl"><code>adl</code></a> is the Accumulation/Distribution Line.</p><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_oscillator">StockCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/momentum.jl#L62">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+│            │ macd    │ dif    │ signal │
+├────────────┼─────────┼────────┼────────┤
+│ 2000-02-18 │ -0.0472 │ 3.5339 │ 3.5811 │
+│ 2000-02-22 │ -0.1375 │ 3.4092 │ 3.5467 │
+│ 2000-02-23 │ -0.0636 │ 3.4672 │ 3.5308 │
+│ 2000-02-24 │ -0.1131 │ 3.3894 │ 3.5026 │
+│ 2000-02-25 │ -0.4778 │ 2.9054 │ 3.3831 │
+│ 2000-02-28 │ -0.5289 │ 2.7219 │ 3.2509 │
+│ 2000-02-29 │ -0.4755 │ 2.6565 │ 3.132  │
+│ 2000-03-01 │ 0.5557  │ 3.8266 │ 3.2709 │
+│ 2000-03-02 │ 0.6127  │ 4.0368 │ 3.4241 │
+   ⋮
+│ 2001-12-19 │ -0.2075 │ 0.4641 │ 0.6716 │
+│ 2001-12-20 │ -0.2337 │ 0.3795 │ 0.6132 │
+│ 2001-12-21 │ -0.2224 │ 0.3352 │ 0.5576 │
+│ 2001-12-24 │ -0.1858 │ 0.3254 │ 0.5111 │
+│ 2001-12-26 │ -0.1494 │ 0.3244 │ 0.4738 │
+│ 2001-12-27 │ -0.0861 │ 0.3661 │ 0.4523 │
+│ 2001-12-28 │ -0.0231 │ 0.4234 │ 0.4465 │
+│ 2001-12-31 │ -0.0203 │ 0.4212 │ 0.4414 │</code></pre><h2><a class="nav-anchor" id="Chaikin-Oscillator-1" href="#Chaikin-Oscillator-1">Chaikin Oscillator</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.chaikinoscillator" href="#MarketTechnicals.chaikinoscillator"><code>MarketTechnicals.chaikinoscillator</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">chaikinoscillator(ohlcv, fast=3, slow=10; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p><strong>Chaikin Oscillator</strong></p><p>Developed by Marc Chaikin</p><p><strong>Formula</strong></p><div>\[    Chaikin\ OSC = EMA(ADL, fast) - EMA(ADL, slow)\]</div><p>where the <a href="volume.html#MarketTechnicals.adl"><code>adl</code></a> is the Accumulation/Distribution Line.</p><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_oscillator">StockCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/momentum.jl#L60">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; chaikinoscillator(ohlcv)
 491x1 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-14 to 2001-12-31
-
-             chaikinoscillator
-2000-01-14 | -6.8514668666e6
-2000-01-18 | -5.5088241581e6
-2000-01-19 | -4.1457475832e6
-2000-01-20 | -8.4133210223e6
-⋮
-2001-12-26 | 49086.3672
-2001-12-27 | 328390.5719
-2001-12-28 | 249377.6771
-2001-12-31 | -456423.2686</code></pre><h2><a class="nav-anchor" id="CCI-1" href="#CCI-1">CCI</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.cci" href="#MarketTechnicals.cci"><code>MarketTechnicals.cci</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">cci(ohlc, ma=20, c=0.015)</code></pre><p>Commodity Channel Index</p><div>\[    CCI = \frac{P_{typical} - SMA(P_{typical})}{c \times \sigma(P_{typical})}\]</div><p><strong>Reference</strong></p><ul><li><p>https://en.wikipedia.org/wiki/Commodity_channel_index</p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/momentum.jl#L42">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+│            │ chaikinoscillator │
+├────────────┼───────────────────┤
+│ 2000-01-14 │ -6.8514668666e6   │
+│ 2000-01-18 │ -5.5088241581e6   │
+│ 2000-01-19 │ -4.1457475832e6   │
+│ 2000-01-20 │ -8.4133210223e6   │
+│ 2000-01-21 │ -1.00258648284e7  │
+│ 2000-01-24 │ -1.06556036696e7  │
+│ 2000-01-25 │ -8.7610031514e6   │
+│ 2000-01-26 │ -8.0258147742e6   │
+│ 2000-01-27 │ -6.9954363677e6   │
+   ⋮
+│ 2001-12-19 │ 2.9106729951e6    │
+│ 2001-12-20 │ 2.140953294e6     │
+│ 2001-12-21 │ 962258.2028       │
+│ 2001-12-24 │ 586108.9693       │
+│ 2001-12-26 │ 49086.3672        │
+│ 2001-12-27 │ 328390.5719       │
+│ 2001-12-28 │ 249377.6771       │
+│ 2001-12-31 │ -456423.2686      │</code></pre><h2><a class="nav-anchor" id="CCI-1" href="#CCI-1">CCI</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.cci" href="#MarketTechnicals.cci"><code>MarketTechnicals.cci</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">cci(ohlc, ma=20, c=0.015)</code></pre><p>Commodity Channel Index</p><div>\[    CCI = \frac{P_{typical} - SMA(P_{typical})}{c \times \sigma(P_{typical})}\]</div><p><strong>Reference</strong></p><ul><li><p>https://en.wikipedia.org/wiki/Commodity_channel_index</p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/momentum.jl#L40">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; cci(ohlc)
+WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
+Stacktrace:
+ [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
+ [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [4] cci(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64, ::Float64) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:56
+ [5] cci(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:55
+ [6] eval(::Module, ::Any) at ./boot.jl:235
+ [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
+ [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
+ [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
+ [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
+ [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
+ [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
+ [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
+ [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
+ [17] include_from_node1(::String) at ./loading.jl:576
+ [18] include(::String) at ./sysimg.jl:14
+ [19] eval(::Module, ::Any) at ./boot.jl:235
+ [20] process_options(::Base.JLOptions) at ./client.jl:286
+ [21] _start() at ./client.jl:371
+while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
 481x1 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
-
-             cci
-2000-01-31 | -38.9316
-2000-02-01 | -22.3949
-2000-02-02 | -48.4746
-2000-02-03 | -6.0758
-⋮
-2001-12-26 | 19.6668
-2001-12-27 | 45.6476
-2001-12-28 | 84.8749
-2001-12-31 | 46.3511</code></pre><h2><a class="nav-anchor" id="Rate-of-Change-(ROC)-1" href="#Rate-of-Change-(ROC)-1">Rate of Change (ROC)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.roc" href="#MarketTechnicals.roc"><code>MarketTechnicals.roc</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">roc(ta, n)</code></pre><p><strong>Rate of Change</strong></p><p><strong>Formula</strong>:</p><div>\[    roc = \frac{close_{t} - close_{t-n}}{close_{t-n}}\]</div><p><strong>Reference</strong>:</p><ul><li><p><a href="https://en.wikipedia.org/wiki/Momentum_(technical_analysis)">Wikipedia</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/momentum.jl#L122">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+│            │ cci      │
+├────────────┼──────────┤
+│ 2000-01-31 │ -38.9316 │
+│ 2000-02-01 │ -22.3949 │
+│ 2000-02-02 │ -48.4746 │
+│ 2000-02-03 │ -6.0758  │
+│ 2000-02-04 │ 46.586   │
+│ 2000-02-07 │ 88.8638  │
+│ 2000-02-08 │ 108.1928 │
+│ 2000-02-09 │ 99.3306  │
+│ 2000-02-10 │ 74.4932  │
+   ⋮
+│ 2001-12-19 │ -0.5821  │
+│ 2001-12-20 │ -37.2007 │
+│ 2001-12-21 │ -27.4224 │
+│ 2001-12-24 │ -17.225  │
+│ 2001-12-26 │ 19.6668  │
+│ 2001-12-27 │ 45.6476  │
+│ 2001-12-28 │ 84.8749  │
+│ 2001-12-31 │ 46.3511  │</code></pre><h2><a class="nav-anchor" id="Rate-of-Change-(ROC)-1" href="#Rate-of-Change-(ROC)-1">Rate of Change (ROC)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.roc" href="#MarketTechnicals.roc"><code>MarketTechnicals.roc</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">roc(ta, n)</code></pre><p><strong>Rate of Change</strong></p><p><strong>Formula</strong>:</p><div>\[    roc = \frac{close_{t} - close_{t-n}}{close_{t-n}}\]</div><p><strong>Reference</strong>:</p><ul><li><p><a href="https://en.wikipedia.org/wiki/Momentum_(technical_analysis)">Wikipedia</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/momentum.jl#L120">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; roc(cl, 5)
 495x1 TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-10 to 2001-12-31
-
-             Close_roc_5
-2000-01-10 | -0.1268
-2000-01-11 | -0.0951
-2000-01-12 | -0.1616
-2000-01-13 | 0.0184
-⋮
-2001-12-26 | 0.0228
-2001-12-27 | 0.0208
-2001-12-28 | 0.0851
-2001-12-31 | 0.0429</code></pre><h2><a class="nav-anchor" id="Stochastic-Oscillator-1" href="#Stochastic-Oscillator-1">Stochastic Oscillator</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.stochasticoscillator" href="#MarketTechnicals.stochasticoscillator"><code>MarketTechnicals.stochasticoscillator</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">stochasticoscillator(ohlc, n=14, fast_d=3, slow_d=3; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p><strong>Stochastic Oscillator</strong></p><p>A.k.a <em>%K%D</em>, or <em>KD</em></p><p><strong>Parameter</strong></p><ul><li><p><code>n</code>: period of fast(raw) <code>%K</code></p></li><li><p><code>fast_d</code>: MA period of fast <code>%D</code></p></li><li><p><code>slow_d</code>: MA period of slow <code>%D</code></p></li></ul><p><strong>Formula</strong></p><div>\[    \begin{align*}
+│            │ Close_roc_5 │
+├────────────┼─────────────┤
+│ 2000-01-10 │ -0.1268     │
+│ 2000-01-11 │ -0.0951     │
+│ 2000-01-12 │ -0.1616     │
+│ 2000-01-13 │ 0.0184      │
+│ 2000-01-14 │ 0.0094      │
+│ 2000-01-18 │ 0.0633      │
+│ 2000-01-19 │ 0.1489      │
+│ 2000-01-20 │ 0.3018      │
+│ 2000-01-21 │ 0.1505      │
+   ⋮
+│ 2001-12-19 │ 0.006       │
+│ 2001-12-20 │ -0.0157     │
+│ 2001-12-21 │ 0.0299      │
+│ 2001-12-24 │ 0.0359      │
+│ 2001-12-26 │ 0.0228      │
+│ 2001-12-27 │ 0.0208      │
+│ 2001-12-28 │ 0.0851      │
+│ 2001-12-31 │ 0.0429      │</code></pre><h2><a class="nav-anchor" id="Stochastic-Oscillator-1" href="#Stochastic-Oscillator-1">Stochastic Oscillator</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.stochasticoscillator" href="#MarketTechnicals.stochasticoscillator"><code>MarketTechnicals.stochasticoscillator</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">stochasticoscillator(ohlc, n=14, fast_d=3, slow_d=3; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p><strong>Stochastic Oscillator</strong></p><p>A.k.a <em>%K%D</em>, or <em>KD</em></p><p><strong>Parameter</strong></p><ul><li><p><code>n</code>: period of fast(raw) <code>%K</code></p></li><li><p><code>fast_d</code>: MA period of fast <code>%D</code></p></li><li><p><code>slow_d</code>: MA period of slow <code>%D</code></p></li></ul><p><strong>Formula</strong></p><div>\[    \begin{align*}
         fast\ \%K &amp; = \frac{Close_t - \max(High_{t-n}, \dots, High_t)}
             {\max(High_{t-n}, \dots, High_t) - \min(Low_{t-n}, \dots, Low_t)}
             \times 100 \\
         fast\ \%D &amp; = SMA(fast\ \%K) \\
         slow\ \%D &amp; = SMA(fast\ \%D)
-    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://en.wikipedia.org/wiki/Stochastic_oscillator">Wikipedia</a></p></li><li><p><a href="http://www.fmlabs.com/reference/default.htm?url=StochasticOscillator.htm">FMLabs</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/momentum.jl#L205">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://en.wikipedia.org/wiki/Stochastic_oscillator">Wikipedia</a></p></li><li><p><a href="http://www.fmlabs.com/reference/default.htm?url=StochasticOscillator.htm">FMLabs</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/momentum.jl#L202">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; stochasticoscillator(ohlc)
+WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
+Stacktrace:
+ [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
+ [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [4] #stochasticoscillator#47(::String, ::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64, ::Int64, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:239
+ [5] stochasticoscillator(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:239
+ [6] eval(::Module, ::Any) at ./boot.jl:235
+ [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
+ [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
+ [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
+ [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
+ [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
+ [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
+ [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
+ [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
+ [17] include_from_node1(::String) at ./loading.jl:576
+ [18] include(::String) at ./sysimg.jl:14
+ [19] eval(::Module, ::Any) at ./boot.jl:235
+ [20] process_options(::Base.JLOptions) at ./client.jl:286
+ [21] _start() at ./client.jl:371
+while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
+WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
+Stacktrace:
+ [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
+ [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [4] #stochasticoscillator#47(::String, ::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64, ::Int64, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:240
+ [5] stochasticoscillator(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:239
+ [6] eval(::Module, ::Any) at ./boot.jl:235
+ [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
+ [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
+ [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
+ [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
+ [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
+ [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
+ [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
+ [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
+ [17] include_from_node1(::String) at ./loading.jl:576
+ [18] include(::String) at ./sysimg.jl:14
+ [19] eval(::Module, ::Any) at ./boot.jl:235
+ [20] process_options(::Base.JLOptions) at ./client.jl:286
+ [21] _start() at ./client.jl:371
+while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
+WARNING: *(ta::TimeArray, args...) is deprecated, use *.(ta, args...) instead.
+Stacktrace:
+ [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
+ [2] *(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Int64) at ./deprecated.jl:57
+ [3] #stochasticoscillator#47(::String, ::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64, ::Int64, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:241
+ [4] stochasticoscillator(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/momentum.jl:239
+ [5] eval(::Module, ::Any) at ./boot.jl:235
+ [6] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
+ [7] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
+ [8] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
+ [9] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
+ [10] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [11] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
+ [12] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [13] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
+ [14] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
+ [15] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
+ [16] include_from_node1(::String) at ./loading.jl:576
+ [17] include(::String) at ./sysimg.jl:14
+ [18] eval(::Module, ::Any) at ./boot.jl:235
+ [19] process_options(::Base.JLOptions) at ./client.jl:286
+ [20] _start() at ./client.jl:371
+while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
 483x3 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-27 to 2001-12-31
-
-             fast_k    fast_d   slow_d
-2000-01-27 | 67.1429   69.4667  67.4413
-2000-01-28 | 43.2      59.3429  64.9016
-2000-01-31 | 49.2857   53.2095  60.673
-2000-02-01 | 39.2857   43.9238  52.1587
-⋮
-2001-12-26 | 41.0557   32.1286  27.0096
-2001-12-27 | 68.2759   47.1884  34.2224
-2001-12-28 | 80.4124   63.248   47.5216
-2001-12-31 | 62.1993   70.2958  60.2441</code></pre><footer><hr/><a class="previous" href="levels.html"><span class="direction">Previous</span><span class="title">Trade levels</span></a><a class="next" href="volatility.html"><span class="direction">Next</span><span class="title">Volatility</span></a></footer></article></body></html>
+│            │ fast_k  │ fast_d  │ slow_d  │
+├────────────┼─────────┼─────────┼─────────┤
+│ 2000-01-27 │ 67.1429 │ 69.4667 │ 67.4413 │
+│ 2000-01-28 │ 43.2    │ 59.3429 │ 64.9016 │
+│ 2000-01-31 │ 49.2857 │ 53.2095 │ 60.673  │
+│ 2000-02-01 │ 39.2857 │ 43.9238 │ 52.1587 │
+│ 2000-02-02 │ 21.7586 │ 36.7767 │ 44.6367 │
+│ 2000-02-03 │ 32.6296 │ 31.2247 │ 37.3084 │
+│ 2000-02-04 │ 50.0    │ 34.7961 │ 34.2658 │
+│ 2000-02-07 │ 72.4444 │ 51.6914 │ 39.2374 │
+│ 2000-02-08 │ 75.4815 │ 65.9753 │ 50.8209 │
+   ⋮
+│ 2001-12-19 │ 38.8325 │ 25.2115 │ 18.6783 │
+│ 2001-12-20 │ 14.7208 │ 25.6345 │ 21.8838 │
+│ 2001-12-21 │ 23.0964 │ 25.5499 │ 25.4653 │
+│ 2001-12-24 │ 32.2335 │ 23.3503 │ 24.8449 │
+│ 2001-12-26 │ 41.0557 │ 32.1286 │ 27.0096 │
+│ 2001-12-27 │ 68.2759 │ 47.1884 │ 34.2224 │
+│ 2001-12-28 │ 80.4124 │ 63.248  │ 47.5216 │
+│ 2001-12-31 │ 62.1993 │ 70.2958 │ 60.2441 │</code></pre><footer><hr/><a class="previous" href="levels.html"><span class="direction">Previous</span><span class="title">Trade levels</span></a><a class="next" href="volatility.html"><span class="direction">Next</span><span class="title">Volatility</span></a></footer></article></body></html>

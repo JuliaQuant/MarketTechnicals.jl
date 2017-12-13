@@ -1,57 +1,108 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Volume · MarketTechnicals.jl</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link href="assets/highlightjs/default.css" rel="stylesheet" type="text/css"/><link href="assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>MarketTechnicals.jl</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" action="search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="index.html">MarketTechnicals Overview</a></li><li><a class="toctext" href="getting_started.html">Getting Started</a></li><li><a class="toctext" href="ma.html">Moving Averages</a></li><li><a class="toctext" href="levels.html">Trade levels</a></li><li><a class="toctext" href="momentum.html">Momentum</a></li><li><a class="toctext" href="volatility.html">Volatility</a></li><li class="current"><a class="toctext" href="volume.html">Volume</a><ul class="internal"><li><a class="toctext" href="#Accumulation/Distribution-Line-(ADL)-1">Accumulation/Distribution Line (ADL)</a></li><li><a class="toctext" href="#On-Balance-Volume-(OBV)-1">On Balance Volume (OBV)</a></li><li><a class="toctext" href="#Volume-Weight-Adjusted-Price-(VWAP)-1">Volume Weight-Adjusted Price (VWAP)</a></li></ul></li><li><a class="toctext" href="candlesticks.html">Candlesticks</a></li><li><a class="toctext" href="utils.html">Utilities</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href="volume.html">Volume</a></li></ul><a class="edit-page" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/docs/src/volume.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Volume</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Volume-1" href="#Volume-1">Volume</a></h1><h2><a class="nav-anchor" id="Accumulation/Distribution-Line-(ADL)-1" href="#Accumulation/Distribution-Line-(ADL)-1">Accumulation/Distribution Line (ADL)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.adl" href="#MarketTechnicals.adl"><code>MarketTechnicals.adl</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">adl(ohlcv; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;, v=&quot;Volume&quot;)</code></pre><p><strong>Accumulation/Distribution Line</strong></p><p>Developed by Marc Chaikin.</p><p><strong>Formula</strong></p><div>\[    ADL_t = ADL_{t-1} +
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Volume · MarketTechnicals.jl</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link href="assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>MarketTechnicals.jl</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="index.html">MarketTechnicals Overview</a></li><li><a class="toctext" href="getting_started.html">Getting Started</a></li><li><a class="toctext" href="ma.html">Moving Averages</a></li><li><a class="toctext" href="levels.html">Trade levels</a></li><li><a class="toctext" href="momentum.html">Momentum</a></li><li><a class="toctext" href="volatility.html">Volatility</a></li><li class="current"><a class="toctext" href="volume.html">Volume</a><ul class="internal"><li><a class="toctext" href="#Accumulation/Distribution-Line-(ADL)-1">Accumulation/Distribution Line (ADL)</a></li><li><a class="toctext" href="#On-Balance-Volume-(OBV)-1">On Balance Volume (OBV)</a></li><li><a class="toctext" href="#Volume-Weight-Adjusted-Price-(VWAP)-1">Volume Weight-Adjusted Price (VWAP)</a></li></ul></li><li><a class="toctext" href="candlesticks.html">Candlesticks</a></li><li><a class="toctext" href="utils.html">Utilities</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href="volume.html">Volume</a></li></ul><a class="edit-page" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/master/docs/src/volume.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Volume</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Volume-1" href="#Volume-1">Volume</a></h1><h2><a class="nav-anchor" id="Accumulation/Distribution-Line-(ADL)-1" href="#Accumulation/Distribution-Line-(ADL)-1">Accumulation/Distribution Line (ADL)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.adl" href="#MarketTechnicals.adl"><code>MarketTechnicals.adl</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">adl(ohlcv; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;, v=&quot;Volume&quot;)</code></pre><p><strong>Accumulation/Distribution Line</strong></p><p>Developed by Marc Chaikin.</p><p><strong>Formula</strong></p><div>\[    ADL_t = ADL_{t-1} +
         \frac{(Close_t - Low_t) - (High_t - Close_t)}{High_t - Low_t}
-        \times Volume_t\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line">StockCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/volume.jl#L68">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+        \times Volume_t\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line">StockCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/volume.jl#L68">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; adl(ohlcv)
 500x1 TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-03 to 2001-12-31
-
-             adl
-2000-01-03 | 4.2882507863e6
-2000-01-04 | 984498.0822
-2000-01-05 | -4.1263627644e6
-2000-01-06 | -1.09832627644e7
-⋮
-2001-12-26 | -1.455874044448e8
-2001-12-27 | -1.440051089224e8
-2001-12-28 | -1.445187146916e8
-2001-12-31 | -1.465641074627e8</code></pre><h2><a class="nav-anchor" id="On-Balance-Volume-(OBV)-1" href="#On-Balance-Volume-(OBV)-1">On Balance Volume (OBV)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.obv" href="#MarketTechnicals.obv"><code>MarketTechnicals.obv</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">obv(ohlcv; price=&quot;Close&quot;, v=&quot;Volume&quot;)</code></pre><p>On Balance Volume</p><div>\[    OBV_t = OBV_{t - 1} +
+│            │ adl               │
+├────────────┼───────────────────┤
+│ 2000-01-03 │ 4.2882507863e6    │
+│ 2000-01-04 │ 984498.0822       │
+│ 2000-01-05 │ -4.1263627644e6   │
+│ 2000-01-06 │ -1.09832627644e7  │
+│ 2000-01-07 │ -9.113399128e6    │
+│ 2000-01-10 │ -1.0015299128e7   │
+│ 2000-01-11 │ -1.19598612902e7  │
+│ 2000-01-12 │ -1.93384766235e7  │
+│ 2000-01-13 │ -1.60191326235e7  │
+   ⋮
+│ 2001-12-19 │ -1.395757822699e8 │
+│ 2001-12-20 │ -1.430557822699e8 │
+│ 2001-12-21 │ -1.451589119997e8 │
+│ 2001-12-24 │ -1.445506992724e8 │
+│ 2001-12-26 │ -1.455874044448e8 │
+│ 2001-12-27 │ -1.440051089224e8 │
+│ 2001-12-28 │ -1.445187146916e8 │
+│ 2001-12-31 │ -1.465641074627e8 │</code></pre><h2><a class="nav-anchor" id="On-Balance-Volume-(OBV)-1" href="#On-Balance-Volume-(OBV)-1">On Balance Volume (OBV)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.obv" href="#MarketTechnicals.obv"><code>MarketTechnicals.obv</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">obv(ohlcv; price=&quot;Close&quot;, v=&quot;Volume&quot;)</code></pre><p>On Balance Volume</p><div>\[    OBV_t = OBV_{t - 1} +
         \begin{cases}
             volume  &amp; \text{if} \ close_t &gt; close_{t-1} \\
             0       &amp; \text{if} \ close_t = close_{t-1} \\
             -volume &amp; \text{if} \ close_t &lt; close_{t-1}
-        \end{cases}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/volume.jl#L1">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+        \end{cases}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/volume.jl#L1">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; obv(ohlcv)
 500x1 TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-03 to 2001-12-31
-
-             obv
-2000-01-03 | 4783900
-2000-01-04 | 209100
-2000-01-05 | 7158400
-2000-01-06 | 301500
-⋮
-2001-12-26 | -89294700
-2001-12-27 | -85874900
-2001-12-28 | -80533400
-2001-12-31 | -82993800</code></pre><h2><a class="nav-anchor" id="Volume-Weight-Adjusted-Price-(VWAP)-1" href="#Volume-Weight-Adjusted-Price-(VWAP)-1">Volume Weight-Adjusted Price (VWAP)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.vwap" href="#MarketTechnicals.vwap"><code>MarketTechnicals.vwap</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">vwap(ohlcv, n; price=&quot;Close&quot;, v=&quot;Volume&quot;)</code></pre><p>Volume Weight-Adjusted Price</p><div>\[    P = \frac{\sum_j P_j Q_j}{\sum_j Q_j} \ ,\text{where Q is the volume}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/tree/6ddfdaad2215421f7c78d0836715edde1c069e26/src/volume.jl#L33">source</a><br/></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+│            │ obv        │
+├────────────┼────────────┤
+│ 2000-01-03 │ 4.7839e6   │
+│ 2000-01-04 │ 209100.0   │
+│ 2000-01-05 │ 7.1584e6   │
+│ 2000-01-06 │ 301500.0   │
+│ 2000-01-07 │ 4.4152e6   │
+│ 2000-01-10 │ -94300.0   │
+│ 2000-01-11 │ -4.0367e6  │
+│ 2000-01-12 │ -1.27516e7 │
+│ 2000-01-13 │ -3.5312e6  │
+   ⋮
+│ 2001-12-19 │ -9.34465e7 │
+│ 2001-12-20 │ -9.73905e7 │
+│ 2001-12-21 │ -9.28131e7 │
+│ 2001-12-24 │ -9.1909e7  │
+│ 2001-12-26 │ -8.92947e7 │
+│ 2001-12-27 │ -8.58749e7 │
+│ 2001-12-28 │ -8.05334e7 │
+│ 2001-12-31 │ -8.29938e7 │</code></pre><h2><a class="nav-anchor" id="Volume-Weight-Adjusted-Price-(VWAP)-1" href="#Volume-Weight-Adjusted-Price-(VWAP)-1">Volume Weight-Adjusted Price (VWAP)</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.vwap" href="#MarketTechnicals.vwap"><code>MarketTechnicals.vwap</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">vwap(ohlcv, n; price=&quot;Close&quot;, v=&quot;Volume&quot;)</code></pre><p>Volume Weight-Adjusted Price</p><div>\[    P = \frac{\sum_j P_j Q_j}{\sum_j Q_j} \ ,\text{where Q is the volume}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ab521ae92b80e729c495c425902f204e47514677/src/volume.jl#L33">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; vwap(ohlcv)
+WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
+Stacktrace:
+ [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
+ [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
+ [4] #vwap#78(::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/volume.jl:47
+ [5] vwap(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/volume.jl:54
+ [6] eval(::Module, ::Any) at ./boot.jl:235
+ [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
+ [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
+ [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
+ [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
+ [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
+ [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
+ [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
+ [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
+ [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
+ [17] include_from_node1(::String) at ./loading.jl:576
+ [18] include(::String) at ./sysimg.jl:14
+ [19] eval(::Module, ::Any) at ./boot.jl:235
+ [20] process_options(::Base.JLOptions) at ./client.jl:286
+ [21] _start() at ./client.jl:371
+while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
 491x1 TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-14 to 2001-12-31
-
-             vwap
-2000-01-14 | 97.9215
-2000-01-18 | 97.1709
-2000-01-19 | 97.6203
-2000-01-20 | 100.8515
-⋮
-2001-12-26 | 21.0572
-2001-12-27 | 21.1139
-2001-12-28 | 21.3165
-2001-12-31 | 21.4446</code></pre><footer><hr/><a class="previous" href="volatility.html"><span class="direction">Previous</span><span class="title">Volatility</span></a><a class="next" href="candlesticks.html"><span class="direction">Next</span><span class="title">Candlesticks</span></a></footer></article></body></html>
+│            │ vwap     │
+├────────────┼──────────┤
+│ 2000-01-14 │ 97.9215  │
+│ 2000-01-18 │ 97.1709  │
+│ 2000-01-19 │ 97.6203  │
+│ 2000-01-20 │ 100.8515 │
+│ 2000-01-21 │ 102.1978 │
+│ 2000-01-24 │ 102.6203 │
+│ 2000-01-25 │ 103.6321 │
+│ 2000-01-26 │ 104.6497 │
+│ 2000-01-27 │ 107.573  │
+   ⋮
+│ 2001-12-19 │ 21.6524  │
+│ 2001-12-20 │ 21.3642  │
+│ 2001-12-21 │ 21.2082  │
+│ 2001-12-24 │ 21.0995  │
+│ 2001-12-26 │ 21.0572  │
+│ 2001-12-27 │ 21.1139  │
+│ 2001-12-28 │ 21.3165  │
+│ 2001-12-31 │ 21.4446  │</code></pre><footer><hr/><a class="previous" href="volatility.html"><span class="direction">Previous</span><span class="title">Volatility</span></a><a class="next" href="candlesticks.html"><span class="direction">Next</span><span class="title">Candlesticks</span></a></footer></article></body></html>
