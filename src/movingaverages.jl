@@ -1,5 +1,4 @@
 function sma(ta::TimeArray{T,N}, n::Int) where {T,N}
-
     tstamps = ta.timestamp[n:end]
 
     vals = zeros(size(ta.values,1) - (n-1), size(ta.values,2))
@@ -9,8 +8,8 @@ function sma(ta::TimeArray{T,N}, n::Int) where {T,N}
         end
     end
 
-    cname   = String[]
-    cols    = colnames(ta)
+    cname = String[]
+    cols  = colnames(ta)
     for c in 1:length(cols)
         push!(cname, string(cols[c], "_sma_", n))
     end
@@ -19,11 +18,10 @@ function sma(ta::TimeArray{T,N}, n::Int) where {T,N}
 end
 
 function ema(ta::TimeArray{T,N}, n::Int; wilder=false) where {T,N}
-
-    if  wilder
-        k  = 1/n
+    k = if wilder
+        1 / n
     else
-        k = 2/(n+1)
+        2 / (n + 1)
     end
 
     tstamps = ta.timestamp[n:end]
@@ -48,8 +46,8 @@ function ema(ta::TimeArray{T,N}, n::Int; wilder=false) where {T,N}
 end
 
 function kama(ta::TimeArray{T,N}, n::Int=10, fn::Int=2, sn::Int=30) where {T,N}
-    vola = moving(abs(ta .- lag(ta)), sum, n)
-    change = abs(ta .- lag(ta, n))
+    vola = moving(sum, abs.(ta .- lag(ta)), n)
+    change = abs.(ta .- lag(ta, n))
     er = change ./ vola  # Efficiency Ratio
 
     # Smooth Constant
@@ -81,7 +79,6 @@ end
 # Array dispatch for use by other algorithms
 
 function sma(a::Array{T,N}, n::Int) where {T,N}
-
     vals = zeros(size(a,1) - (n-1), size(a,2))
 
     for i in 1:size(a,1) - (n-1)
@@ -94,14 +91,13 @@ function sma(a::Array{T,N}, n::Int) where {T,N}
 end
 
 function ema(a::Array{T,N}, n::Int; wilder=false) where {T,N}
-
-    if  wilder
-        k  = 1/n
+    k = if wilder
+        1 / n
     else
-        k = 2/(n+1)
+        2 / (n + 1)
     end
 
-    vals    =  zeros(size(a,1), size(a,2))
+    vals = zeros(size(a,1), size(a,2))
     # seed with first value with an sma value
     vals[n,:] = sma(a, n)[1,:]
 
@@ -111,7 +107,7 @@ function ema(a::Array{T,N}, n::Int; wilder=false) where {T,N}
         end
     end
 
-    vals[n:end,:]
+    vals[n:end, :]
 end
 
 doc"""

@@ -13,11 +13,10 @@ Bollinger Bands
 \end{align*}
 ```
 """
-function bollingerbands(ta::TimeArray{T,N}, ma::Integer=20,
-                        width::AbstractFloat=2.0) where {T,N}
+function bollingerbands(ta::TimeArray, ma::Integer=20, width::AbstractFloat=2.0)
     tama   = sma(ta, ma)
-    upband = tama .+ moving(ta, std, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm
-    dnband = tama .- moving(ta, std, ma) .* width .* sqrt((ma-1)/ma)
+    upband = tama .+ moving(std, ta, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm
+    dnband = tama .- moving(std, ta, ma) .* width .* sqrt((ma-1)/ma)
     bands  =  merge(upband, dnband)
     merge(bands, tama, colnames = ["up", "down", "mean"])
 end
@@ -44,8 +43,8 @@ doc"""
 
 """
 function donchianchannels(ta::TimeArray, n::Integer=20; h="High", l="Low")
-    up = rename(moving(ta[h], maximum, n), "up")
-    down = rename(moving(ta[l], minimum, n), "down")
+    up = rename(moving(maximum, ta[h], n), "up")
+    down = rename(moving(minimum, ta[l], n), "down")
     mid = rename((up .+ down) ./ 2, "mid")
     merge(up, merge(mid, down))
 end
@@ -80,8 +79,7 @@ It's the exponential moving average of [`truerange`](@ref)
 ```
 
 """
-function atr(ohlc::TimeArray{T,N}, n::Integer=14;
-             h="High", l="Low", c="Close") where {T,N}
+function atr(ohlc::TimeArray, n::Integer=14; h="High", l="Low", c="Close")
     # atr was invented by Wilder, so only his ema is currently supported
     res = ema(truerange(ohlc), n, wilder=true)
     TimeArray(res.timestamp, res.values, ["atr"], ohlc.meta)
@@ -114,8 +112,8 @@ in the 1980s. We implement the newer version.
   (https://en.wikipedia.org/wiki/Keltner_channel)
 
 """
-function keltnerbands(ohlc::TimeArray{T,N}, n::Integer=20, w::Integer=2;
-                      h="High", l="Low", c="Close") where {T,N}
+function keltnerbands(ohlc::TimeArray, n::Integer=20, w::Integer=2;
+                      h="High", l="Low", c="Close")
     kma = rename(ema(typical(ohlc, h=h, l=l, c=c), n), "kma")
     rng = atr(ohlc, n, h=h, l=l, c=c)
 
@@ -152,8 +150,8 @@ doc"""
 
 """
 function chaikinvolatility(ta::TimeArray, n::Integer=10, p::Integer=10;
-                                h="High", l="Low")
+                           h="High", l="Low")
     rng = ema(ta[h] .- ta[l], n)
     prev = lag(rng, p)
-    rename((rng .- prev) ./ prev * 100, "chaikinvolatility")
+    rename(@.((rng - prev) / prev * 100), "chaikinvolatility")
 end

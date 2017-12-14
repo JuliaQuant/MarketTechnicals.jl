@@ -23,10 +23,10 @@ function rsi(ta::TimeArray, n::Int=14; wilder::Bool=false)
     end
 
     upsema = ema(ups, n, wilder=wilder)
-    dnsema = abs(ema(dns, n, wilder=wilder))
+    dnsema = abs.(ema(dns, n, wilder=wilder))
     rs     = upsema ./ dnsema
 
-    res  = 100 .- (100./(1 .+ rs))
+    res  = @. 100 - (100 / (1 + rs))
 
     cname   = String[]
     cols    = colnames(ta)
@@ -53,7 +53,7 @@ Commodity Channel Index
 """
 function cci(ohlc::TimeArray, ma::Int=20, c::AbstractFloat=0.015)
     pt = typical(ohlc)
-    cci = ((pt .- sma(pt, ma)) ./ moving(pt, mean_abs_dev, ma)) ./ c
+    cci = ((pt .- sma(pt, ma)) ./ moving(mean_abs_dev, pt, ma)) ./ c
     rename(cci, "cci")
 end
 
@@ -159,8 +159,8 @@ doc"""
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:aroon_oscillator)
 """
 function aroon(ohlc::TimeArray, n::Integer=25; h="High", l="Low")
-    up = rename(moving(ohlc[h], indmax, n) / n * 100, "up")
-    dn = rename(moving(ohlc[l], indmin, n) / n * 100, "dn")
+    up = rename(moving(indmax, ohlc[h], n) ./ n .* 100, "up")
+    dn = rename(moving(indmin, ohlc[l], n) ./ n .* 100, "dn")
     osc = rename(up .- dn, "osc")
 
     merge(merge(up, dn), osc)
@@ -193,7 +193,7 @@ function adx(ohlc::TimeArray, n::Integer=14; h="High", l="Low", c="Close")
     di = (dm ./ tr) .* 100
     di = rename(di, ["+di", "-di"])
 
-    dx = abs.((di["+di"] .- di["-di"]) ./ (di["+di"] .+ di["-di"])) .* 100
+    dx = @. abs((di["+di"] - di["-di"]) / (di["+di"] + di["-di"])) * 100
     adx = wilder_smooth(dx, n, dx=true)
 
     rename(merge(adx, merge(dx, di)), ["adx", "dx", "+di", "-di"])
@@ -236,9 +236,9 @@ A.k.a *%K%D*, or *KD*
 """
 function stochasticoscillator(ohlc::TimeArray, n::Integer=14, fast_d::Integer=3,
                               slow_d::Integer=3; h="High", l="Low", c="Close")
-    high = moving(ohlc[h], maximum, n)
-    low = moving(ohlc[l], minimum, n)
-    fast_k = rename((ohlc[c] .- low) ./ (high .- low) * 100, "fast_k")
+    high = moving(maximum, ohlc[h], n)
+    low = moving(minimum, ohlc[l], n)
+    fast_k = rename((ohlc[c] .- low) ./ (high .- low) .* 100, "fast_k")
     fast_d = rename(sma(fast_k, fast_d), "fast_d")
     slow_d = rename(sma(fast_d, slow_d), "slow_d")
     merge(merge(fast_k, fast_d), slow_d)

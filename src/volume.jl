@@ -41,11 +41,10 @@ Volume Weight-Adjusted Price
 
 """
 function vwap(ohlcv::TimeArray{T,N}, n::Int; price="Close", v="Volume") where {T,N}
-
     p   = ohlcv[price]
     q   = ohlcv[v]
-    ∑PQ = moving(p.*q, sum, n)
-    ∑Q  = moving(q, sum, n)
+    ∑PQ = moving(sum, p .* q, n)
+    ∑Q  = moving(sum, q, n)
     val = ∑PQ ./ ∑Q
 
     TimeArray(val.timestamp, val.values, ["vwap"], ohlcv.meta)
