@@ -13,8 +13,8 @@ Bollinger Bands
 \end{align*}
 ```
 """
-function bollingerbands{T,N}(ta::TimeArray{T,N}, ma::Integer=20,
-                             width::AbstractFloat=2.0)
+function bollingerbands(ta::TimeArray{T,N}, ma::Integer=20,
+                        width::AbstractFloat=2.0) where {T,N}
     tama   = sma(ta, ma)
     upband = tama .+ moving(ta, std, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm
     dnband = tama .- moving(ta, std, ma) .* width .* sqrt((ma-1)/ma)
@@ -60,7 +60,7 @@ True Range
 ```
 
 """
-function truerange{T,N}(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close")
+function truerange(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close") where {T,N}
     highs    = merge(ohlc[h], lag(ohlc[c]))
     lows     = merge(ohlc[l], lag(ohlc[c]))
     truehigh = TimeArray(highs.timestamp, maximum(highs.values, 2), ["hi"], highs.meta)
@@ -80,8 +80,8 @@ It's the exponential moving average of [`truerange`](@ref)
 ```
 
 """
-function atr{T,N}(ohlc::TimeArray{T,N}, n::Integer=14;
-                  h="High", l="Low", c="Close")
+function atr(ohlc::TimeArray{T,N}, n::Integer=14;
+             h="High", l="Low", c="Close") where {T,N}
     # atr was invented by Wilder, so only his ema is currently supported
     res = ema(truerange(ohlc), n, wilder=true)
     TimeArray(res.timestamp, res.values, ["atr"], ohlc.meta)
@@ -114,8 +114,8 @@ in the 1980s. We implement the newer version.
   (https://en.wikipedia.org/wiki/Keltner_channel)
 
 """
-function keltnerbands{T,N}(ohlc::TimeArray{T,N}, n::Integer=20, w::Integer=2;
-                           h="High", l="Low", c="Close")
+function keltnerbands(ohlc::TimeArray{T,N}, n::Integer=20, w::Integer=2;
+                      h="High", l="Low", c="Close") where {T,N}
     kma = rename(ema(typical(ohlc, h=h, l=l, c=c), n), "kma")
     rng = atr(ohlc, n, h=h, l=l, c=c)
 

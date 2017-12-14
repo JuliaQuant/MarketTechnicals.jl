@@ -1,4 +1,4 @@
-function doji{T,N}(ohlc::TimeArray{T,N}; width=.01, op="Open", hi="High", lo="Low", cl="Close")
+function doji(ohlc::TimeArray{T,N}; width=.01, op="Open", hi="High", lo="Low", cl="Close") where {T,N}
   res = abs((ohlc[op] .- ohlc[cl])) ./ (ohlc[hi] .- ohlc[lo]) .< width
   TimeArray(res.timestamp, res.values, ["doji"], ohlc.meta)
 end

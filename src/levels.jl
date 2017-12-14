@@ -20,7 +20,7 @@ Floor Trader Pivots
 \end{align*}
 ```
 """
-function floorpivots{T,N}(ohlc::TimeArray{T,N})
+function floorpivots(ohlc::TimeArray{T,N}) where {T,N}
 
     p  = lag(typical(ohlc))
     s1 = 2.*p .- lag(ohlc["High"])
@@ -61,7 +61,7 @@ Woodie's Pivot
 \end{align*}
 ```
 """
-function woodiespivots{T,N}(ohlc::TimeArray{T,N})
+function woodiespivots(ohlc::TimeArray{T,N}) where {T,N}
 
     rng = lag(ohlc["High"]) .- lag(ohlc["Low"])
 
