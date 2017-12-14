@@ -76,6 +76,7 @@ end
     [81]   1214832.531   1341044.310   1592063.283    936678.383    186056.580
     [86]  -1209996.220  -1516911.058  -1995687.520  -2776094.760  -4090715.405
     """
+
     ta = chaikinoscillator(ohlcv)
     @test ta.colnames     == ["chaikinoscillator"]
     @test ta.meta         == ta.meta
@@ -109,6 +110,7 @@ end
     [29,]      36      16         20
     [30,]      32      12         20
     """
+
     ta = aroon(ohlc)
     @test ta.colnames  == ["up", "dn", "osc"]
     @test ta.timestamp == ohlc[25:end].timestamp
@@ -155,6 +157,7 @@ end
     [27,] 0.801061008 0.76010676 0.64559114
     [28,] 0.839964633 0.79861349 0.73949111
     """
+
     ta = stochasticoscillator(ohlc)
     @test ta.colnames  == ["fast_k", "fast_d", "slow_d"]
     @test ta.timestamp == ohlc[18:end].timestamp
