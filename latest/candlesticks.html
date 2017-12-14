@@ -6,29 +6,6 @@ julia&gt; using MarketData
 julia&gt; using MarketTechnicals
 
 julia&gt; findwhen(doji(ohlc))
-WARNING: abs(ta::TimeArray, args...) is deprecated, use abs.(ta, args...) instead.
-Stacktrace:
- [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
- [2] abs(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}) at ./deprecated.jl:57
- [3] #doji#1(::Float64, ::String, ::String, ::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/candlesticks.jl:2
- [4] doji(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/candlesticks.jl:2
- [5] eval(::Module, ::Any) at ./boot.jl:235
- [6] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
- [7] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
- [8] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
- [9] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
- [10] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [11] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
- [12] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [13] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
- [14] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
- [15] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
- [16] include_from_node1(::String) at ./loading.jl:576
- [17] include(::String) at ./sysimg.jl:14
- [18] eval(::Module, ::Any) at ./boot.jl:235
- [19] process_options(::Base.JLOptions) at ./client.jl:286
- [20] _start() at ./client.jl:371
-while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
 5-element Array{Date,1}:
  2000-05-30
  2000-12-11

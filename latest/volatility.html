@@ -5,59 +5,11 @@
     Mean &amp; = SMA \\
     Down &amp; = SMA - width \times \sigma
 
-\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/574be273b68bd0e795ed59a540a924f8285fd617/src/volatility.jl#L1">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L1">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; bollingerbands(cl)
-WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
-Stacktrace:
- [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
- [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
- [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
- [4] bollingerbands(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Int64, ::Float64) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:19
- [5] bollingerbands(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:18
- [6] eval(::Module, ::Any) at ./boot.jl:235
- [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
- [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
- [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
- [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
- [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
- [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
- [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
- [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
- [17] include_from_node1(::String) at ./loading.jl:576
- [18] include(::String) at ./sysimg.jl:14
- [19] eval(::Module, ::Any) at ./boot.jl:235
- [20] process_options(::Base.JLOptions) at ./client.jl:286
- [21] _start() at ./client.jl:371
-while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
-WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
-Stacktrace:
- [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
- [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
- [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
- [4] bollingerbands(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Int64, ::Float64) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:20
- [5] bollingerbands(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:18
- [6] eval(::Module, ::Any) at ./boot.jl:235
- [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
- [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
- [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
- [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
- [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
- [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
- [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
- [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
- [17] include_from_node1(::String) at ./loading.jl:576
- [18] include(::String) at ./sysimg.jl:14
- [19] eval(::Module, ::Any) at ./boot.jl:235
- [20] process_options(::Base.JLOptions) at ./client.jl:286
- [21] _start() at ./client.jl:371
-while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
 481x3 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
 │            │ up       │ down    │ mean     │
 ├────────────┼──────────┼─────────┼──────────┤
@@ -81,34 +33,11 @@ while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in express
 │ 2001-12-31 │ 23.3718  │ 20.0182 │ 21.695   │</code></pre><h2><a class="nav-anchor" id="Chaikin-Volatility-1" href="#Chaikin-Volatility-1">Chaikin Volatility</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.chaikinvolatility" href="#MarketTechnicals.chaikinvolatility"><code>MarketTechnicals.chaikinvolatility</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">chaikinvolatility(ta, n=10, p=10; h=&quot;High&quot;, l=&quot;Low&quot;)</code></pre><p><strong>Chaikin Volatility</strong></p><p><strong>Parameters</strong></p><ul><li><p><code>n</code> is the smooth period</p></li><li><p><code>p</code> is the previous period</p></li></ul><p><strong>Formula</strong></p><div>\[    Chaikin\ Vola =
         \frac{EMA(High_t - Low_t, n) - EMA(High_{t-p} - Low_{t-p}, n)}
         {EMA(High_{t-p} - Low_{t-p}, n)}
-        \times 100\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://www.incrediblecharts.com/indicators/chaikin_volatility.php">IncredibleCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/574be273b68bd0e795ed59a540a924f8285fd617/src/volatility.jl#L128">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+        \times 100\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://www.incrediblecharts.com/indicators/chaikin_volatility.php">IncredibleCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L126">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; chaikinvolatility(ohlc)
-WARNING: *(ta::TimeArray, args...) is deprecated, use *.(ta, args...) instead.
-Stacktrace:
- [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
- [2] *(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64) at ./deprecated.jl:57
- [3] #chaikinvolatility#74(::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:158
- [4] chaikinvolatility(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:156
- [5] eval(::Module, ::Any) at ./boot.jl:235
- [6] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
- [7] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
- [8] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
- [9] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
- [10] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [11] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
- [12] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [13] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
- [14] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
- [15] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
- [16] include_from_node1(::String) at ./loading.jl:576
- [17] include(::String) at ./sysimg.jl:14
- [18] eval(::Module, ::Any) at ./boot.jl:235
- [19] process_options(::Base.JLOptions) at ./client.jl:286
- [20] _start() at ./client.jl:371
-while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
 481x1 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
 │            │ chaikinvolatility │
 ├────────────┼───────────────────┤
@@ -129,7 +58,7 @@ while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in express
 │ 2001-12-26 │ -15.0247          │
 │ 2001-12-27 │ -13.2106          │
 │ 2001-12-28 │ -10.9081          │
-│ 2001-12-31 │ -7.6953           │</code></pre><h2><a class="nav-anchor" id="True-Range-1" href="#True-Range-1">True Range</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.truerange" href="#MarketTechnicals.truerange"><code>MarketTechnicals.truerange</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">truerange(ohlc; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>True Range</p><div>\[    TR = \max (H_t, C_{t-1}) - \min (L_t, C{t-1})\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/574be273b68bd0e795ed59a540a924f8285fd617/src/volatility.jl#L53">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+│ 2001-12-31 │ -7.6953           │</code></pre><h2><a class="nav-anchor" id="True-Range-1" href="#True-Range-1">True Range</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.truerange" href="#MarketTechnicals.truerange"><code>MarketTechnicals.truerange</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">truerange(ohlc; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>True Range</p><div>\[    TR = \max (H_t, C_{t-1}) - \min (L_t, C{t-1})\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L52">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
@@ -154,7 +83,7 @@ julia&gt; truerange(ohlc)
 │ 2001-12-26 │ 1.16  │
 │ 2001-12-27 │ 0.76  │
 │ 2001-12-28 │ 1.04  │
-│ 2001-12-31 │ 0.83  │</code></pre><h2><a class="nav-anchor" id="Average-True-Range-1" href="#Average-True-Range-1">Average True Range</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.atr" href="#MarketTechnicals.atr"><code>MarketTechnicals.atr</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">atr(ohlc, n=14; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>Average True Range</p><p>It&#39;s the exponential moving average of <a href="volatility.html#MarketTechnicals.truerange"><code>truerange</code></a></p><div>\[    ATR = EMA(TR, n)\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/574be273b68bd0e795ed59a540a924f8285fd617/src/volatility.jl#L71">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+│ 2001-12-31 │ 0.83  │</code></pre><h2><a class="nav-anchor" id="Average-True-Range-1" href="#Average-True-Range-1">Average True Range</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.atr" href="#MarketTechnicals.atr"><code>MarketTechnicals.atr</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">atr(ohlc, n=14; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>Average True Range</p><p>It&#39;s the exponential moving average of <a href="volatility.html#MarketTechnicals.truerange"><code>truerange</code></a></p><div>\[    ATR = EMA(TR, n)\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L70">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
@@ -183,59 +112,11 @@ julia&gt; atr(ohlc)
         Up   &amp; = \max (High_1\ to\ High_t) \\
         Mid  &amp; = \frac{Up + Down}{2} \\
         Down &amp; = \min (Low_1\ to\ Low_t)
-    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://www.tradingview.com/wiki/Donchian_Channels_(DC)">TradingView Wiki</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/574be273b68bd0e795ed59a540a924f8285fd617/src/volatility.jl#L25">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://www.tradingview.com/wiki/Donchian_Channels_(DC)">TradingView Wiki</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L24">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; donchianchannels(ohlc)
-WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
-Stacktrace:
- [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
- [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
- [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
- [4] #donchianchannels#64(::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:47
- [5] donchianchannels(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:47
- [6] eval(::Module, ::Any) at ./boot.jl:235
- [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
- [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
- [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
- [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
- [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
- [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
- [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
- [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
- [17] include_from_node1(::String) at ./loading.jl:576
- [18] include(::String) at ./sysimg.jl:14
- [19] eval(::Module, ::Any) at ./boot.jl:235
- [20] process_options(::Base.JLOptions) at ./client.jl:286
- [21] _start() at ./client.jl:371
-while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
-WARNING: moving(ta::TimeArray, f, window; padding=false) is deprecated, use moving(f, ta, window; padding=padding) instead.
-Stacktrace:
- [1] depwarn(::String, ::Symbol) at ./deprecated.jl:70
- [2] #moving#43(::Bool, ::Function, ::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
- [3] moving(::TimeSeries.TimeArray{Float64,1,Date,Array{Float64,1}}, ::Function, ::Int64) at ./deprecated.jl:57
- [4] #donchianchannels#64(::String, ::String, ::Function, ::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:48
- [5] donchianchannels(::TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}}) at /home/travis/.julia/v0.6/MarketTechnicals/src/volatility.jl:47
- [6] eval(::Module, ::Any) at ./boot.jl:235
- [7] #12 at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:503 [inlined]
- [8] cd(::Documenter.Expanders.##12#14, ::String) at ./file.jl:70
- [9] withoutput(::Documenter.Expanders.##11#13{Documenter.Documents.Page}) at /home/travis/.julia/v0.6/Documenter/src/Utilities/Utilities.jl:589
- [10] runner(::Type{Documenter.Expanders.REPLBlocks}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:501
- [11] dispatch(::Type{Documenter.Expanders.ExpanderPipeline}, ::Base.Markdown.Code, ::Documenter.Documents.Page, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [12] expand(::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Expanders.jl:29
- [13] dispatch(::Type{Documenter.Builder.DocumentPipeline}, ::Documenter.Documents.Document) at /home/travis/.julia/v0.6/Documenter/src/Selectors.jl:164
- [14] cd(::Documenter.##2#3{Documenter.Documents.Document}, ::String) at ./file.jl:70
- [15] #makedocs#1(::Bool, ::Array{Any,1}, ::Function) at /home/travis/.julia/v0.6/Documenter/src/Documenter.jl:187
- [16] (::Documenter.#kw##makedocs)(::Array{Any,1}, ::Documenter.#makedocs) at ./&lt;missing&gt;:0
- [17] include_from_node1(::String) at ./loading.jl:576
- [18] include(::String) at ./sysimg.jl:14
- [19] eval(::Module, ::Any) at ./boot.jl:235
- [20] process_options(::Base.JLOptions) at ./client.jl:286
- [21] _start() at ./client.jl:371
-while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in expression starting on line 5
 481x3 TimeSeries.TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
 │            │ up    │ mid    │ down  │
 ├────────────┼───────┼────────┼───────┤
@@ -260,7 +141,7 @@ while loading /home/travis/.julia/v0.6/MarketTechnicals/docs/make.jl, in express
         \text{Up}   &amp; = \text{Mid} + w \times ATR(n) \\
         \text{Mid}  &amp; = EMA(P_{typical}, n) \\
         \text{Down} &amp; = \text{Mid} - w \times ATR(n)
-    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels">StockCharts</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Keltner_channel">Wikipedia</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/574be273b68bd0e795ed59a540a924f8285fd617/src/volatility.jl#L90">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels">StockCharts</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Keltner_channel">Wikipedia</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L88">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
