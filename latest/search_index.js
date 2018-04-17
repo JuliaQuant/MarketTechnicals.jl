@@ -181,7 +181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Momentum",
     "title": "MarketTechnicals.adx",
     "category": "function",
-    "text": "adx(ohlc, n=14; h=\"High\", l=\"Low\", c=\"Close\")\n\nAverage Directional Movement Index\n\nDeveloped by J. Welles Wilder. This Implementation follow StockCharts.\n\nReference\n\nwikipedia\nStockCharts\n\n\n\n"
+    "text": "adx(ohlc, n=14; h=\"High\", l=\"Low\", c=\"Close\")\n\nAverage Directional Movement Index\n\nDeveloped by J. Welles Wilder. This Implementation follows StockCharts.\n\nReference\n\nwikipedia\nStockCharts\n\n\n\n"
 },
 
 {
