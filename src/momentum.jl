@@ -8,12 +8,12 @@ Relative Strength Index
 ```
 """
 function rsi(ta::TimeArray, n::Int=14; wilder::Bool=false)
-    ret = [zeros(1, size(ta, 2)); diff(ta.values)]
-    ups = zeros(size(ta.values, 1), size(ta.values, 2))
-    dns = zeros(size(ta.values, 1), size(ta.values, 2))
+    ret = diff(ta.values)
+    ups = zeros(size(ta.values, 1) - 1, size(ta.values, 2))
+    dns = zeros(size(ta.values, 1) - 1, size(ta.values, 2))
 
-    for i in 1:size(ta.values,1)
-        for j in 1:size(ta.values,2)
+    for i in 1:size(ta.values, 1) - 1
+        for j in 1:size(ta.values, 2)
             if ret[i,j] >= 0
                 ups[i,j] += ret[i,j]
             else
@@ -34,7 +34,7 @@ function rsi(ta::TimeArray, n::Int=14; wilder::Bool=false)
         push!(cname, string(cols[c], "_rsi_", n))
     end
 
-    TimeArray(ta.timestamp[n:end], res, cname, ta.meta)
+    TimeArray(ta.timestamp[n+1:end], res, cname, ta.meta)
 end
 
 doc"""
