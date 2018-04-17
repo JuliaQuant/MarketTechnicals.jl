@@ -5,7 +5,7 @@
     Mean &amp; = SMA \\
     Down &amp; = SMA - width \times \sigma
 
-\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L1">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+\end{align*}\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/da9320d99ce7e21d8ab5517bbdc2695df14b0b99/src/volatility.jl#L1">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
@@ -33,7 +33,7 @@ julia&gt; bollingerbands(cl)
 │ 2001-12-31 │ 23.3718  │ 20.0182 │ 21.695   │</code></pre><h2><a class="nav-anchor" id="Chaikin-Volatility-1" href="#Chaikin-Volatility-1">Chaikin Volatility</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.chaikinvolatility" href="#MarketTechnicals.chaikinvolatility"><code>MarketTechnicals.chaikinvolatility</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">chaikinvolatility(ta, n=10, p=10; h=&quot;High&quot;, l=&quot;Low&quot;)</code></pre><p><strong>Chaikin Volatility</strong></p><p><strong>Parameters</strong></p><ul><li><p><code>n</code> is the smooth period</p></li><li><p><code>p</code> is the previous period</p></li></ul><p><strong>Formula</strong></p><div>\[    Chaikin\ Vola =
         \frac{EMA(High_t - Low_t, n) - EMA(High_{t-p} - Low_{t-p}, n)}
         {EMA(High_{t-p} - Low_{t-p}, n)}
-        \times 100\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://www.incrediblecharts.com/indicators/chaikin_volatility.php">IncredibleCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L126">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+        \times 100\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://www.incrediblecharts.com/indicators/chaikin_volatility.php">IncredibleCharts</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/da9320d99ce7e21d8ab5517bbdc2695df14b0b99/src/volatility.jl#L126">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
@@ -58,7 +58,7 @@ julia&gt; chaikinvolatility(ohlc)
 │ 2001-12-26 │ -15.0247          │
 │ 2001-12-27 │ -13.2106          │
 │ 2001-12-28 │ -10.9081          │
-│ 2001-12-31 │ -7.6953           │</code></pre><h2><a class="nav-anchor" id="True-Range-1" href="#True-Range-1">True Range</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.truerange" href="#MarketTechnicals.truerange"><code>MarketTechnicals.truerange</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">truerange(ohlc; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>True Range</p><div>\[    TR = \max (H_t, C_{t-1}) - \min (L_t, C{t-1})\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L52">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+│ 2001-12-31 │ -7.6953           │</code></pre><h2><a class="nav-anchor" id="True-Range-1" href="#True-Range-1">True Range</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.truerange" href="#MarketTechnicals.truerange"><code>MarketTechnicals.truerange</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">truerange(ohlc; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>True Range</p><div>\[    TR = \max (H_t, C_{t-1}) - \min (L_t, C{t-1})\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/da9320d99ce7e21d8ab5517bbdc2695df14b0b99/src/volatility.jl#L52">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
@@ -83,7 +83,7 @@ julia&gt; truerange(ohlc)
 │ 2001-12-26 │ 1.16  │
 │ 2001-12-27 │ 0.76  │
 │ 2001-12-28 │ 1.04  │
-│ 2001-12-31 │ 0.83  │</code></pre><h2><a class="nav-anchor" id="Average-True-Range-1" href="#Average-True-Range-1">Average True Range</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.atr" href="#MarketTechnicals.atr"><code>MarketTechnicals.atr</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">atr(ohlc, n=14; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>Average True Range</p><p>It&#39;s the exponential moving average of <a href="volatility.html#MarketTechnicals.truerange"><code>truerange</code></a></p><div>\[    ATR = EMA(TR, n)\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L70">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+│ 2001-12-31 │ 0.83  │</code></pre><h2><a class="nav-anchor" id="Average-True-Range-1" href="#Average-True-Range-1">Average True Range</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="MarketTechnicals.atr" href="#MarketTechnicals.atr"><code>MarketTechnicals.atr</code></a> — <span class="docstring-category">Function</span>.</div><div><pre><code class="language-none">atr(ohlc, n=14; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>Average True Range</p><p>It&#39;s the exponential moving average of <a href="volatility.html#MarketTechnicals.truerange"><code>truerange</code></a></p><div>\[    ATR = EMA(TR, n)\]</div></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/da9320d99ce7e21d8ab5517bbdc2695df14b0b99/src/volatility.jl#L70">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
@@ -112,7 +112,7 @@ julia&gt; atr(ohlc)
         Up   &amp; = \max (High_1\ to\ High_t) \\
         Mid  &amp; = \frac{Up + Down}{2} \\
         Down &amp; = \min (Low_1\ to\ Low_t)
-    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://www.tradingview.com/wiki/Donchian_Channels_(DC)">TradingView Wiki</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L24">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="https://www.tradingview.com/wiki/Donchian_Channels_(DC)">TradingView Wiki</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/da9320d99ce7e21d8ab5517bbdc2695df14b0b99/src/volatility.jl#L24">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
@@ -141,7 +141,7 @@ julia&gt; donchianchannels(ohlc)
         \text{Up}   &amp; = \text{Mid} + w \times ATR(n) \\
         \text{Mid}  &amp; = EMA(P_{typical}, n) \\
         \text{Down} &amp; = \text{Mid} - w \times ATR(n)
-    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels">StockCharts</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Keltner_channel">Wikipedia</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/1d04f174801e64e15922d5cb9488e37a7cbc477a/src/volatility.jl#L88">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
+    \end{align*}\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels">StockCharts</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Keltner_channel">Wikipedia</a></p></li></ul></div><a class="source-link" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/da9320d99ce7e21d8ab5517bbdc2695df14b0b99/src/volatility.jl#L88">source</a></section><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
