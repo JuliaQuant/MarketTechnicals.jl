@@ -172,7 +172,7 @@ doc"""
 **Average Directional Movement Index**
 
 Developed by J. Welles Wilder.
-This Implementation follow StockCharts.
+This Implementation follows StockCharts.
 
 **Reference**
 
