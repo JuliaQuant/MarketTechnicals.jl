@@ -78,6 +78,9 @@ using MarketTechnicals
 
         ta = kama(TimeArray(collect(Date(2011, 1, 1):Date(2011, 1, 20)), 1:20))
         @test ta.timestamp[end] == Date(2011, 1, 20)
+
+        ta = kama(TimeArray(collect(Date(2011, 1, 1):Date(2011, 1, 20)), fill(42, 20)))
+        @test ta.values == fill(42, length(ta))
     end
 end
 
