@@ -12,12 +12,12 @@ function rsi(ta::TimeArray, n::Int=14; wilder::Bool=false)
     ups = zeros(size(ta.values, 1) - 1, size(ta.values, 2))
     dns = zeros(size(ta.values, 1) - 1, size(ta.values, 2))
 
-    for i in 1:size(ta.values, 1) - 1
+    @inbounds for i in 1:size(ta.values, 1) - 1
         for j in 1:size(ta.values, 2)
-            if ret[i,j] >= 0
-                ups[i,j] += ret[i,j]
+            if ret[i, j] >= 0
+                ups[i, j] += ret[i, j]
             else
-                dns[i,j] += ret[i,j]
+                dns[i, j] += ret[i, j]
             end
         end
     end
