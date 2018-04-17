@@ -10,19 +10,22 @@ using MarketTechnicals
 
 
 @testset "rsi" begin
+    # TTR: RSI(x["Close"])
+    # TTR: 45.95363 50.50249 48.97830 48.83191 ...
+    @test rsi(cl, wilder=true).values[1:4] ≈ [45.95363, 50.50249, 48.97830, 48.83191] atol=.01
     # TTR value is 55.84922
-    @test isapprox(rsi(cl).values[end]             , 55.849, atol=.01)
+    @test rsi(cl).values[end] ≈ 55.849 atol=.01
     # TTR value is 55.95932
-    @test isapprox(rsi(cl, wilder=true).values[end], 55.959, atol=.01)
+    @test rsi(cl, wilder=true).values[end] ≈ 55.959 atol=.01
     # TTR value is 56.21947
-    @test isapprox(rsi(cl, 10).values[end]         , 56.219, atol=.01)
-    @test isapprox(rsi(ohlc).values[end,:]         , [68.030, 61.872, 70.062, 55.849], atol=.01)
+    @test rsi(cl, 10).values[end] ≈ 56.219 atol=.01
+    @test rsi(ohlc).values[end, :] ≈ [68.030, 61.872, 70.062, 55.849] atol=.01
 
     # seed is included (TODO: debate amongst yourselves)
-    @test rsi(cl).timestamp[1]              == Date(2000,1,21)
-    @test rsi(cl, wilder=true).timestamp[1] == Date(2000,1,21)
-    @test rsi(cl, 10).timestamp[1]          == Date(2000,1,14)
-    @test rsi(ohlc).timestamp[1]            == Date(2000,1,21)
+    @test rsi(cl).timestamp[1]              == Date(2000,1,24)
+    @test rsi(cl, wilder=true).timestamp[1] == Date(2000,1,24)
+    @test rsi(cl, 10).timestamp[1]          == Date(2000,1,18)
+    @test rsi(ohlc).timestamp[1]            == Date(2000,1,24)
 
     @test rsi(cl).timestamp[end]              == Date(2001,12,31)
     @test rsi(cl, wilder=true).timestamp[end] == Date(2001,12,31)
