@@ -501,7 +501,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Candlesticks",
     "title": "Doji",
     "category": "section",
-    "text": "The doji pattern is identified with a very small candle body, where the open and closing price are nearly identical. It suggests some ambivalence in the market about what the fair value of the underlying asset is.using TimeSeries\nusing MarketData\nusing MarketTechnicals\n\nfindwhen(doji(ohlc))"
+    "text": "The doji pattern is identified with a very small candle body, where the open and closing price are nearly identical. It suggests some ambivalence in the market about what the fair value of the underlying asset is.using MarketData\nusing MarketTechnicals\n\nfindwhen(doji(ohlc))"
 },
 
 {
