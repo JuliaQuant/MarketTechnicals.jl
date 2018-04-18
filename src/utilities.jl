@@ -77,3 +77,5 @@ function wilder_smooth(ta::TimeArray, n::Integer;
         dropnan(ret)
     end
 end
+
+safediv(x, y) = ifelse(iszero(x) && iszero(y), x, x / y)

@@ -48,8 +48,7 @@ end
 function kama(ta::TimeArray{T,N}, n::Int=10, fn::Int=2, sn::Int=30) where {T,N}
     vola = moving(sum, abs.(ta .- lag(ta)), n)
     change = abs.(ta .- lag(ta, n))
-    f = (x, y) -> (iszero(x) && iszero(y)) ? x : x / y
-    er = f.(change, vola)  # Efficiency Ratio
+    er = safediv.(change, vola)  # Efficiency Ratio
 
     # Smooth Constant
     sc = (er .* (2 / (fn + 1) - 2 / (sn + 1)) .+ 2 / (sn + 1)).^2

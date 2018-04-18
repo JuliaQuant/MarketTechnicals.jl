@@ -96,6 +96,10 @@ end
     # TTR::CCI value is 46.3511339
     @test isapprox(cci(ohlc).values[end], 46.3511339, atol=.01)
     @test cci(ohlc).timestamp[end] == Date(2001, 12, 31)
+
+    ta = cci(TimeArray(collect(Date(2011, 1, 1):Date(2011, 1, 30)),
+                       fill(42, (30, 4)), ["Open", "High", "Low", "Close"]))
+    @test all(cci.values .== 0)
 end
 
 
