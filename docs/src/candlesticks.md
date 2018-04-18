@@ -25,7 +25,6 @@ It suggests some ambivalence in the market
 about what the fair value of the underlying asset is.
 
 ```@repl
-using TimeSeries
 using MarketData
 using MarketTechnicals
 
