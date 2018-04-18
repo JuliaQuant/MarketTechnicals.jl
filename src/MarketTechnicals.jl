@@ -1,10 +1,11 @@
-__precompile__(true)
-
-using TimeSeries, StatsBase
+__precompile__()
 
 module MarketTechnicals
 
-using TimeSeries, StatsBase
+using Reexport
+using StatsBase
+
+@reexport using TimeSeries
 
 export sma, ema, kama,
        bollingerbands, truerange, atr, keltnerbands, chaikinvolatility, donchianchannels,
