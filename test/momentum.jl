@@ -99,7 +99,7 @@ end
 
     ta = cci(TimeArray(collect(Date(2011, 1, 1):Date(2011, 1, 30)),
                        fill(42, (30, 4)), ["Open", "High", "Low", "Close"]))
-    @test all(cci.values .== 0)
+    @test all(ta.values .== 0)
 end
 
 
