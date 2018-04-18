@@ -53,7 +53,7 @@ Commodity Channel Index
 """
 function cci(ohlc::TimeArray, ma::Int=20, c::AbstractFloat=0.015)
     pt = typical(ohlc)
-    cci = ((pt .- sma(pt, ma)) ./ moving(mean_abs_dev, pt, ma)) ./ c
+    cci = safediv.((pt .- sma(pt, ma)), moving(mean_abs_dev, pt, ma)) ./ c
     rename(cci, "cci")
 end
 
