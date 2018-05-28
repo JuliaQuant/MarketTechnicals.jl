@@ -243,3 +243,37 @@ function stochasticoscillator(ohlc::TimeArray, n::Integer=14, fast_d::Integer=3,
     slow_d = rename(sma(fast_d, slow_d), "slow_d")
     merge(merge(fast_k, fast_d), slow_d)
 end
+
+doc"""
+    ppo(ta, fast=12, slow=26, signal=9; wilder=false)
+
+Percentage Price Oscillator
+
+```math
+    \begin{align*}
+        PPO Bar & = PERCENTDIF - DEM \\
+        PERCENTDIF & = (EMA(P_{close}, fast) - EMA(P_{close}, slow)))/EMA(P_{close}, slow) \\
+        DEM & = EMA(PERCENTDIF, 9) \tag{signal}
+    \end{align*}
+```
+
+**Return**:
+
+`TimeArray` with 3 columns `["ppo", "percentdif", "signal"]`.
+
+If the input is a multi-column `TimeArray`, the new column names will be
+`["A_macd", "B_macd", "A_dif", "B_dif", "A_signal", "B_signal"]`.
+
+"""
+
+function ppo(ta::TimeArray{T,N},fast::Int=12, slow::Int=26, signal::Int=9;wilder::Bool=false)
+    short_ema = ema(ohlc[pricetouse],fast,wilder=wilder)
+    long_ema = ema(ohlc[pricetouse],slow,wilder=wilder)
+    precentdif = ((short_ema .- long_ema)./long_ema)*100
+    sig = ema(ppo,signal,wilder=wilder)
+    ppo = precentdif .- sig
+    cols = ["ppo", "percentdif", "signal"]
+    new_cols = (N > 1) ? gen_colnames(ta.colnames, cols) : cols
+
+    merge(merge(osc, dif), sig, colnames=new_cols)
+end
