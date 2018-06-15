@@ -7,7 +7,7 @@ using StatsBase
 
 @reexport using TimeSeries
 
-export sma, ema, kama,
+export sma, ema, kama, env,
        bollingerbands, truerange, atr, keltnerbands, chaikinvolatility, donchianchannels,
        obv, vwap, adl,
        doji,
