@@ -84,25 +84,25 @@ using MarketTechnicals
     end
 
     @testset "env" begin
-        upper, lower = env(cl, 10)
-        @test isapprox(upper.values[1]  , 108.66, atol=.01)
-        @test isapprox(upper.values[2]  , 107.78, atol=.01)
-        @test isapprox(upper.values[490]  , 23.3926, atol=.01)
-        @test isapprox(upper.values[491]  , 23.5587, atol=.01)
-        @test isapprox(lower.values[1]  , 88.9038, atol=.01)
-        @test isapprox(lower.values[2]  , 88.1838, atol=.01)
-        @test isapprox(lower.values.values[490]  , 19.1394, atol=.01)
-        @test isapprox(lower.values[491]  , 19.2753, atol=.01)
+        ta = env(cl, 10)
+        @test isapprox(ta.values[1,2]  , 108.66, atol=.01)
+        @test isapprox(ta.values[2,2]  , 107.78, atol=.01)
+        @test isapprox(ta.values[490,2]  , 23.3926, atol=.01)
+        @test isapprox(ta.values[491,2]  , 23.5587, atol=.01)
+        @test isapprox(ta.values[1,1]  , 88.9038, atol=.01)
+        @test isapprox(ta.values[2,1]  , 88.1838, atol=.01)
+        @test isapprox(ta.values[490,1]  , 19.1394, atol=.01)
+        @test isapprox(ta.values[491,1]  , 19.2753, atol=.01)
 
-        upper, lower = env(ohlc, 10)
-        @test isapprox(upper.values.values.values[1,:]  , [110.761, 114.379, 105.601, 108.66] , atol=.01)
-        @test isapprox(upper.values.values[2,:]  , [110.334, 113.664, 105.464, 107.78], atol=.01)
-        @test isapprox(upper.values[490,:]  , [23.1891, 23.8535, 22.8767, 23.3926], atol=.01)
-        @test isapprox(upper.values.values[491,:]  , [23.3849, 24.0548, 23.0681, 23.5587], atol=.01)
-        @test isapprox(lower.values[1,:]  , [90.6228, 93.5829, 86.4009, 88.9038] , atol=.01)
-        @test isapprox(lower.values[2,:]  , [90.2736, 92.9979, 86.2884, 88.1838], atol=.01)
-        @test isapprox(lower.values[490,:]  , [18.9729, 19.5165, 18.7173, 19.1394], atol=.01)
-        @test isapprox(lower.values[491,:]  , [19.1331, 19.6812, 18.8739, 19.2753], atol=.01)
+        ta = env(ohlc, 10)
+        @test isapprox(ta.values[1,5:end]  , [110.761, 114.379, 105.601, 108.66] , atol=.01)
+        @test isapprox(ta.values[2,5:end]  , [110.334, 113.664, 105.464, 107.78], atol=.01)
+        @test isapprox(ta.values[490,5:end]  , [23.1891, 23.8535, 22.8767, 23.3926], atol=.01)
+        @test isapprox(ta.values[491,5:end]  , [23.3849, 24.0548, 23.0681, 23.5587], atol=.01)
+        @test isapprox(ta.values[1,1:4]  , [90.6228, 93.5829, 86.4009, 88.9038] , atol=.01)
+        @test isapprox(ta.values[2,1:4]  , [90.2736, 92.9979, 86.2884, 88.1838], atol=.01)
+        @test isapprox(ta.values[490,1:4]  , [18.9729, 19.5165, 18.7173, 19.1394], atol=.01)
+        @test isapprox(ta.values[491,1:4]  , [19.1331, 19.6812, 18.8739, 19.2753], atol=.01)
     end
 end
 
@@ -181,8 +181,5 @@ end
     end
 end
 
-upper, lower = env(cl, 10)
-@test isapprox(upper[1]  , 108.66, atol=.01)
-@test isapprox(upper[2]  , 107.78, atol=.01)
 
 end  # @testset "Moving Averages"

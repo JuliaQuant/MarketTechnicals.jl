@@ -90,7 +90,10 @@ function env(ta::TimeArray{T,N}, n::Int; e::Float64 = 0.1) where {T,N}
         push!(cname, string(cols[c], "_env_", n))
     end
 
-    TimeArray(tstamps, upper, cname, ta.meta), TimeArray(tstamps, lower, cname, ta.meta)
+    u = TimeArray(tstamps, upper, cname, ta.meta)
+    l = TimeArray(tstamps, lower, cname, ta.meta)
+
+    merge(l, u, :inner)
 end
 
 # Array dispatch for use by other algorithms
