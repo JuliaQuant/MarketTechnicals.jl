@@ -159,25 +159,17 @@ end
     end
 
     @testset "Array dispatch on env" begin
-        upper, lower = env(cl.values, 10)
-        @test isapprox(upper[1]  , 108.66, atol=.01)
-        @test isapprox(upper[2]  , 107.78, atol=.01)
-        @test isapprox(upper[490]  , 23.3926, atol=.01)
-        @test isapprox(upper[491]  , 23.5587, atol=.01)
-        @test isapprox(lower[1]  , 88.9038, atol=.01)
-        @test isapprox(lower[2]  , 88.1838, atol=.01)
-        @test isapprox(lower[490]  , 19.1394, atol=.01)
-        @test isapprox(lower[491]  , 19.2753, atol=.01)
+        ta = env(cl.values, 10)
+        @test isapprox(ta[1,:]  , [88.9038, 108.66], atol=.01)
+        @test isapprox(ta[2,:]  , [88.1838, 107.78], atol=.01)
+        @test isapprox(ta[490,:]  , [19.1394, 23.3926], atol=.01)
+        @test isapprox(ta[491,:]  , [19.2753, 23.5587], atol=.01)
 
-        upper, lower = env(ohlc.values, 10)
-        @test isapprox(upper[1,:]  , [110.761, 114.379, 105.601, 108.66] , atol=.01)
-        @test isapprox(upper[2,:]  , [110.334, 113.664, 105.464, 107.78], atol=.01)
-        @test isapprox(upper[490,:]  , [23.1891, 23.8535, 22.8767, 23.3926], atol=.01)
-        @test isapprox(upper[491,:]  , [23.3849, 24.0548, 23.0681, 23.5587], atol=.01)
-        @test isapprox(lower[1,:]  , [90.6228, 93.5829, 86.4009, 88.9038] , atol=.01)
-        @test isapprox(lower[2,:]  , [90.2736, 92.9979, 86.2884, 88.1838], atol=.01)
-        @test isapprox(lower[490,:]  , [18.9729, 19.5165, 18.7173, 19.1394], atol=.01)
-        @test isapprox(lower[491,:]  , [19.1331, 19.6812, 18.8739, 19.2753], atol=.01)
+        ta = env(ohlc.values, 10)
+        @test isapprox(ta[1,:]  , [90.6228, 93.5829, 86.4009, 88.9038, 110.761, 114.379, 105.601, 108.66] , atol=.01)
+        @test isapprox(ta[2,:]  , [90.2736, 92.9979, 86.2884, 88.1838, 110.334, 113.664, 105.464, 107.78], atol=.01)
+        @test isapprox(ta[490,:]  , [18.9729, 19.5165, 18.7173, 19.1394, 23.1891, 23.8535, 22.8767, 23.3926], atol=.01)
+        @test isapprox(ta[491,:]  , [19.1331, 19.6812, 18.8739, 19.2753, 23.3849, 24.0548, 23.0681, 23.5587], atol=.01)
     end
 end
 

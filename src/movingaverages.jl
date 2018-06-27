@@ -80,15 +80,11 @@ function env(ta::TimeArray{T,N}, n::Int; e::Float64 = 0.1) where {T,N}
     tstamps = ta.timestamp[n:end]
 
     s = sma(ta, n)
-
-    upper = s.values .+ (s.values .* e)
-    lower = s.values .- (s.values .* e)
-
-    cname = String[]
-    cols  = colnames(ta)
-    for c in 1:length(cols)
-        push!(cname, string(cols[c], "_env_", n))
-    end
+    
+    upper = @. s.values + (s.values * e)
+    lower = @. s.values - (s.values * e)
+    
+    cname = string.(colnames(ta), "_env_", 1)
 
     u = TimeArray(tstamps, upper, cname, ta.meta)
     l = TimeArray(tstamps, lower, cname, ta.meta)
@@ -136,7 +132,7 @@ function env(a::Array{T,N}, n::Int; e::Float64 = 0.1) where {T,N}
     upper = s + s * e
     lower = s - s * e
 
-    upper, lower
+    [lower upper]
 end
 
 doc"""
