@@ -76,6 +76,22 @@ function kama(ta::TimeArray{T,N}, n::Int=10, fn::Int=2, sn::Int=30) where {T,N}
     TimeArray(cl.timestamp, vals, cols)
 end
 
+function env(ta::TimeArray{T,N}, n::Int; e::Float64 = 0.1) where {T,N}
+    tstamps = ta.timestamp[n:end]
+
+    s = sma(ta, n)
+    
+    upper = @. s.values + (s.values * e)
+    lower = @. s.values - (s.values * e)
+    
+    cname = string.(colnames(ta), "_env_", 1)
+
+    u = TimeArray(tstamps, upper, cname, ta.meta)
+    l = TimeArray(tstamps, lower, cname, ta.meta)
+
+    merge(l, u, :inner)
+end
+
 # Array dispatch for use by other algorithms
 
 function sma(a::Array{T,N}, n::Int) where {T,N}
@@ -108,6 +124,15 @@ function ema(a::Array{T,N}, n::Int; wilder=false) where {T,N}
     end
 
     vals[n:end, :]
+end
+
+function env(a::Array{T,N}, n::Int; e::Float64 = 0.1) where {T,N}
+    s = sma(a, n)
+
+    upper = s + s * e
+    lower = s - s * e
+
+    [lower upper]
 end
 
 doc"""
