@@ -39,3 +39,16 @@ using MarketTechnicals
 
 kama(cl)
 ```
+
+## Moving Average Envelope
+
+```@docs
+env
+```
+
+```@repl
+using MarketData
+using MarketTechnicals
+
+env(cl, 5)
+```
