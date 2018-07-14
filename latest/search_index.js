@@ -113,6 +113,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "ma.html#MarketTechnicals.env",
+    "page": "Moving Averages",
+    "title": "MarketTechnicals.env",
+    "category": "function",
+    "text": "env(arr, n; e = 0.1)\n\nMoving Average Envelope\n\n  beginalign*\n    textUpper Envelope  = textn period SMA  times (1 + e) \n    textLower Envelope  = textn period SMA  times (1 - e)\n  endalign*\n\nArguments\n\ne: the envelope, 0.1 implies the 10% envelope.\n\nReference\n\nTradingView\n\n\n\n"
+},
+
+{
+    "location": "ma.html#Moving-Average-Envelope-1",
+    "page": "Moving Averages",
+    "title": "Moving Average Envelope",
+    "category": "section",
+    "text": "envusing MarketData\nusing MarketTechnicals\n\nenv(cl, 5)"
+},
+
+{
     "location": "levels.html#",
     "page": "Trade levels",
     "title": "Trade levels",
