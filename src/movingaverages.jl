@@ -76,18 +76,19 @@ function kama(ta::TimeArray{T,N}, n::Int=10, fn::Int=2, sn::Int=30) where {T,N}
     TimeArray(cl.timestamp, vals, cols)
 end
 
-function env(ta::TimeArray{T,N}, n::Int; e::Float64 = 0.1) where {T,N}
+function env(ta::TimeArray, n::Int; e::Float64 = 0.1)
     tstamps = ta.timestamp[n:end]
 
     s = sma(ta, n)
-    
-    upper = @. s.values + (s.values * e)
-    lower = @. s.values - (s.values * e)
-    
-    cname = string.(colnames(ta), "_env_", 1)
 
-    u = TimeArray(tstamps, upper, cname, ta.meta)
-    l = TimeArray(tstamps, lower, cname, ta.meta)
+    upper = s.values .* (1 + e)
+    lower = s.values .* (1 - e)
+
+    up_cname = string.(colnames(ta), "_env_$n", "_up")
+    lw_cname = string.(colnames(ta), "_env_$n", "_low")
+
+    u = TimeArray(tstamps, upper, up_cname, ta.meta)
+    l = TimeArray(tstamps, lower, lw_cname, ta.meta)
 
     merge(l, u, :inner)
 end
@@ -126,11 +127,11 @@ function ema(a::Array{T,N}, n::Int; wilder=false) where {T,N}
     vals[n:end, :]
 end
 
-function env(a::Array{T,N}, n::Int; e::Float64 = 0.1) where {T,N}
+function env(a::AbstractArray, n::Int; e::Float64 = 0.1)
     s = sma(a, n)
 
-    upper = s + s * e
-    lower = s - s * e
+    upper = @. s * (1 + e)
+    lower = @. s * (1 - e)
 
     [lower upper]
 end
@@ -192,3 +193,26 @@ Kaufman's Adaptive Moving Average
 ```
 """
 kama
+
+doc"""
+
+    env(arr, n; e = 0.1)
+
+Moving Average Envelope
+
+```math
+  \begin{align*}
+    \text{Upper Envelope} & = \text{n period SMA } \times (1 + e) \\
+    \text{Lower Envelope} & = \text{n period SMA } \times (1 - e)
+  \end{align*}
+```
+
+**Arguments**
+
+- `e`: the envelope, `0.1` implies the `10%` envelope.
+
+**Reference**
+
+- [TradingView](https://www.tradingview.com/wiki/Envelope_(ENV))
+"""
+env

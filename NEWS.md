@@ -23,6 +23,8 @@
 
   * Aroon Oscillator (issue #97)
 
+  * Moving Average Envelope (issue #87, #115)
+
 * doc: migrate to `Documenter.jl`, and the online doc is available at github
   pages. (issue #63, #58, #69)
 
