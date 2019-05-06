@@ -1,15 +1,15 @@
-doc"""
+"""
     typical(ohlc; h="High", l="Low", c="Close")
 
 Typical Price
 
 ```math
-    \text{Typical Price} = \frac{H + L + C}{3}
+    'text{Typical Price} = frac{H + L + C}{3}'
 ```
 """
-function typical(ohlc::TimeArray{T,N}; h="High", l="Low", c="Close") where {T,N}
+function typical(ohlc::TimeArray{T,N}; h=:High, l=:Low, c=:Close) where {T,N}
     val = (ohlc[h] .+ ohlc[l] .+ ohlc[c]) ./ 3
-    TimeArray(val.timestamp, val.values, ["typical"], ohlc.meta)
+    TimeArray(timestamp(val), values(val), [:typical], meta(ohlc))
 end
 
 function mean_abs_dev(a::Array{T,1}, scale::Bool=false) where T
@@ -17,10 +17,10 @@ function mean_abs_dev(a::Array{T,1}, scale::Bool=false) where T
 
     res = ones(length(a))
     for i in 1:length(a)
-        @inbounds res[i] = abs(a[i] - mean(a))
+        @inbounds res[i] = abs(a[i] - nanmean(a))
     end
 
-    mean(res) * c
+    nanmean(res) * c
 end
 
 """
@@ -39,38 +39,51 @@ julia> gen_colnames(["Open", "Close"], ["macd", "dif", "sig"])
  "Close_sig"
 ```
 """
-gen_colnames(orig::Vector{String}, suffix::Vector{String}) =
-    vec(["$o\_$s" for o ∈ orig, s ∈ suffix])
+gen_colnames(orig::Vector{Symbol}, suffix::Vector{Symbol}) =
+    vec([Symbol("$(string(o))_$(string(s))") for o ∈ orig, s ∈ suffix])
 
 relu(x) = max(x, 0)
 
 relu(ta::TimeArray) =
-    TimeArray(ta.timestamp, relu.(ta.values), ta.colnames, ta.meta)
+    TimeArray(timestamp(ta), relu.(values(ta)), colnames(ta), meta(ta))
 
 """
-The soomth method used by ADX
+The smooth method used by ADX
 """
 function wilder_smooth(ta::TimeArray, n::Integer;
                        padding::Bool=false, dx::Bool=false)
-    val = similar(Array{Float64}, indices(ta.values))
+    val = similar(Array{Float64}, axes(values(ta)))
 
-    first_cal = (dx ? mean : sum)
+    first_cal = (dx ? nanmean : nansum)
+
+    ncols = size(val, 2)
+    _vals_ta = values(ta)
 
     for i ∈ 1:size(val, 1)
-        val[i, :] =
-            if i < n
-                NaN
-            elseif i == n
-                first_cal(ta[1:n].values, 1)
-            elseif dx
-                (val[i-1, :] .* (n - 1) .+ ta.values[i, :]) ./ n
-            else
-                (val[i-1, :] .* (n - 1) ./ n) .+ ta.values[i, :]
-            end
+        if i < n
+            val[i, :] .= NaN
+        elseif i == n
+            _fv = first_cal(values(ta[1:n]))
+            val[i, :] = typeof(_fv) == Float64 ? reshape([_fv], (1,1)) : _fv
+        elseif dx
+            _nv = (val[i-1, :] .* (n - 1) .+ _vals_ta[i, :]) ./ n
+            _nv[isnan.(_nv)] .= val[i-1, :][isnan.(_nv)]
+
+            val[i, :] = reshape(_nv, (ncols,1))
+        else
+            _nv = (val[i-1, :] .* (n - 1) ./ n) .+ _vals_ta[i, :]
+            _nv[isnan.(_nv)] .= val[i-1, :][isnan.(_nv)]
+
+            val[i, :] = reshape(_nv, (ncols,1))
+        end
     end
 
-    ret = TimeArray(ta.timestamp, val, ta.colnames, ta.meta)
+    ret = TimeArray(timestamp(ta), val, colnames(ta), meta(ta))
 
+    # println("Wilder Smooth")
+    # println(ret)
+
+    
     if padding
         ret
     else
@@ -79,3 +92,14 @@ function wilder_smooth(ta::TimeArray, n::Integer;
 end
 
 safediv(x, y) = ifelse(iszero(x) && iszero(y), x, x / y)
+
+
+function lagfill(ta::TimeArray, r1::Int, fill::Float64)
+    _lta = lag(ta, r1, padding = true)
+    _lta_values = values(_lta)
+    _lta_values[1:r1] .= fill
+    
+    TimeArray(timestamp(ta), _lta_values, colnames(ta))
+    
+end
+
