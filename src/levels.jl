@@ -23,8 +23,8 @@ Floor Trader Pivots
 function floorpivots(ohlc::TimeArray{T,N}) where {T,N}
 
     p  = lag(typical(ohlc))
-    s1 = 2.*p .- lag(ohlc["High"])
-    r1 = 2.*p .- lag(ohlc["Low"])
+    s1 = 2 .* p .- lag(ohlc["High"])
+    r1 = 2 .* p .- lag(ohlc["Low"])
     s2 = p .- (r1 .- s1)
     r2 = (p .- s1) .+ r1
     s3 = p .- (r2 .- s1)
@@ -65,9 +65,9 @@ function woodiespivots(ohlc::TimeArray{T,N}) where {T,N}
 
     rng = lag(ohlc["High"]) .- lag(ohlc["Low"])
 
-    p  = (lag(ohlc["High"]) .+ lag(ohlc["Low"]) .+ 2.*ohlc["Open"]) ./ 4
-    s1 = 2.*p .- lag(ohlc["High"])
-    r1 = 2.*p .- lag(ohlc["Low"])
+    p  = (lag(ohlc["High"]) .+ lag(ohlc["Low"]) .+ 2 .* ohlc["Open"]) ./ 4
+    s1 = 2 .* p .- lag(ohlc["High"])
+    r1 = 2 .* p .- lag(ohlc["Low"])
     s2 = p .- rng
     r2 = p .+ rng
     s3 = s1 .- rng

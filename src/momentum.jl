@@ -135,7 +135,7 @@ doc"""
 """
 function roc(ta::TimeArray, n::Integer)
     prev = lag(ta, n)
-    rename((ta .- prev) ./ prev, ["$c\_roc_$n" for c ∈ ta.colnames])
+    rename((ta .- prev) ./ prev, ["$(c)_roc_$n" for c ∈ ta.colnames])
 end
 
 doc"""
