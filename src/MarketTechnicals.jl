@@ -4,6 +4,7 @@ module MarketTechnicals
 
 using Reexport
 using StatsBase
+using Markdown
 
 @reexport using TimeSeries
 
