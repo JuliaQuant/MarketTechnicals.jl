@@ -11,7 +11,7 @@ function sma(ta::TimeArray, n::Int)
     cname = String[]
     cols  = colnames(ta)
     for c in 1:length(cols)
-        push!(cname, string(cols[c], "_sma_", n))
+        push!(cname, Symbol(cols[c], "_sma_", n))
     end
 
     TimeArray(tstamps, vals, cname, meta(ta))
@@ -39,7 +39,7 @@ function ema(ta::TimeArray, n::Int; wilder=false)
     cname   = String[]
     cols    = colnames(ta)
     for c in 1:length(cols)
-        push!(cname, string(cols[c], "_ema_", n))
+        push!(cname, Symbol(cols[c], "_ema_", n))
     end
 
     TimeArray(tstamps, vals[n:length(ta),:], cname, meta(ta))
