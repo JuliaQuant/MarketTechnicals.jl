@@ -35,7 +35,7 @@ include("volume.jl")
 # for user customization
 RC_FILE = joinpath(@__DIR__, ".rc.jl")
 if !ispath(RC_FILE)
-    touch(RC_FILE)
+  touch(RC_FILE)
 end
 
 include(RC_FILE)

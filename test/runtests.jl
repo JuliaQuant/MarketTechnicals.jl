@@ -1,21 +1,21 @@
-using Base.Test
+using Test
 
 tests = [
-    "candlesticks",
-    "levels",
-    "momentum",
-    "movingaverages",
-    "utilities",
-    "volatility",
-    "volume",
+  "candlesticks",
+  "levels",
+  "momentum",
+  "movingaverages",
+  "utilities",
+  "volatility",
+  "volume",
 ]
 
 
 @testset "MarketTechnicals" begin
-    println("Running tests:")
+  println("Running tests:")
 
-    for test ∈ tests
-        println("\t* $test ...")
-        include("$test.jl")
-    end
+  for test ∈ tests
+    println("\t* $test ...")
+    include("$test.jl")
+  end
 end
