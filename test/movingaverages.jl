@@ -70,16 +70,16 @@ using MarketTechnicals
     @test isapprox(values(ta)[2], 99.0098, atol=.01)
     @test isapprox(values(ta)[3], 99.4499, atol=.01)
     @test timestamp(ta)[1] == Date(2000, 1, 18)
-    @test colnames(ta)     == ["kama"]
+    @test colnames(ta)     == [:kama]
 
     ta = kama(ohlc)
     @test length(colnames(ta)) == 4
     @test timestamp(ta)[1]     == Date(2000, 1, 18)
 
-    ta = kama(TimeArray(collect(Date(2011, 1, 1):Date(2011, 1, 20)), 1:20))
+    ta = kama(TimeArray(Date(2011, 1, 1):Day(1):Date(2011, 1, 20), 1:20))
     @test timestamp(ta)[end] == Date(2011, 1, 20)
 
-    ta = kama(TimeArray(collect(Date(2011, 1, 1):Date(2011, 1, 20)), fill(42, 20)))
+    ta = kama(TimeArray(Date(2011, 1, 1):Day(1):Date(2011, 1, 20), fill(42, 20)))
     @test values(ta) == fill(42, length(ta))
   end
 
