@@ -1,139 +1,140 @@
+# FIXME: Fix case of TimeArray{T, 1}, output type should be TimeArray{T, 1} as well
 function sma(ta::TimeArray, n::Int)
-    tstamps = timestamp(ta)[n:end]
+  tstamps = timestamp(ta)[n:end]
 
-    vals = zeros(size(values(ta),1) - (n-1), size(values(ta),2))
-    for i in 1:size(values(ta),1) - (n-1)
-        for j in 1:size(values(ta),2)
-            vals[i,j] = mean(values(ta)[i:i+(n-1),j])
-        end
+  vals = zeros(size(values(ta),1) - (n-1), size(values(ta),2))
+  for i in 1:size(values(ta),1) - (n-1)
+    for j in 1:size(values(ta),2)
+      vals[i,j] = mean(values(ta)[i:i+(n-1),j])
     end
+  end
 
-    cname = String[]
-    cols  = colnames(ta)
-    for c in 1:length(cols)
-        push!(cname, Symbol(cols[c], "_sma_", n))
-    end
+  cname = String[]
+  cols  = colnames(ta)
+  for c in 1:length(cols)
+    push!(cname, Symbol(cols[c], "_sma_", n))
+  end
 
-    TimeArray(tstamps, vals, cname, meta(ta))
+  TimeArray(tstamps, vals, cname, meta(ta))
 end
 
 function ema(ta::TimeArray, n::Int; wilder=false)
-    k = if wilder
-        1 / n
-    else
-        2 / (n + 1)
+  k = if wilder
+    1 / n
+  else
+    2 / (n + 1)
+  end
+
+  tstamps = timestamp(ta)[n:end]
+
+  vals    =  zeros(size(values(ta),1), size(values(ta),2))
+  # seed with first value with an sma value
+  vals[n, :] = values(sma(ta, n))[1, :]
+
+  for i in n+1:size(values(ta),1)
+    for j in 1:size(values(ta),2)
+      vals[i,j] = values(ta)[i,j] * k + vals[i-1, j] * (1-k)
     end
+  end
 
-    tstamps = timestamp(ta)[n:end]
+  cname   = String[]
+  cols    = colnames(ta)
+  for c in 1:length(cols)
+    push!(cname, Symbol(cols[c], "_ema_", n))
+  end
 
-    vals    =  zeros(size(values(ta),1), size(values(ta),2))
-    # seed with first value with an sma value
-    vals[n, :] = values(sma(ta, n))[1, :]
-
-    for i in n+1:size(values(ta),1)
-        for j in 1:size(values(ta),2)
-            vals[i,j] = values(ta)[i,j] * k + vals[i-1, j] * (1-k)
-        end
-    end
-
-    cname   = String[]
-    cols    = colnames(ta)
-    for c in 1:length(cols)
-        push!(cname, Symbol(cols[c], "_ema_", n))
-    end
-
-    TimeArray(tstamps, vals[n:length(ta),:], cname, meta(ta))
+  TimeArray(tstamps, vals[n:length(ta),:], cname, meta(ta))
 end
 
 function kama(ta::TimeArray, n::Int=10, fn::Int=2, sn::Int=30)
-    vola = moving(sum, abs.(ta .- lag(ta)), n)
-    change = abs.(ta .- lag(ta, n))
-    er = safediv.(change, vola)  # Efficiency Ratio
+  vola = moving(sum, abs.(ta .- lag(ta)), n)
+  change = abs.(ta .- lag(ta, n))
+  er = safediv.(change, vola)  # Efficiency Ratio
 
-    # Smooth Constant
-    sc = (er .* (2 / (fn + 1) - 2 / (sn + 1)) .+ 2 / (sn + 1)).^2
+  # Smooth Constant
+  sc = (er .* (2 / (fn + 1) - 2 / (sn + 1)) .+ 2 / (sn + 1)).^2
 
-    cl = ta[n+1:end]
-    vals = similar(values(cl), Float64)
-    # using simple moving average as initial kama
-    pri_kama = mean(values(ta[1:n]), dims = 1)
+  cl = ta[n+1:end]
+  vals = similar(values(cl), Float64)
+  # using simple moving average as initial kama
+  pri_kama = mean(values(ta[1:n]), dims = 1)
 
-    @assert length(cl) == length(sc)
+  @assert length(cl) == length(sc)
 
-    for idx ∈ 1:length(cl)
-        vals[idx, :] =
-            pri_kama =
-            pri_kama .+ values(sc[idx]) .* (values(cl[idx]) .- pri_kama)
-    end
+  for idx ∈ 1:length(cl)
+    vals[idx, :] =
+    pri_kama =
+    pri_kama .+ values(sc[idx]) .* (values(cl[idx]) .- pri_kama)
+  end
 
-    cols =
-    if length(colnames(ta)) == 1
-        [:kama]
-    else
-      ["$(c)_kama" for c in colnames(ta)]
-    end
+  cols =
+  if length(colnames(ta)) == 1
+    [:kama]
+  else
+    ["$(c)_kama" for c in colnames(ta)]
+  end
 
-    TimeArray(timestamp(cl), vals, cols)
+  TimeArray(timestamp(cl), vals, cols)
 end
 
 function env(ta::TimeArray, n::Int; e::Float64 = 0.1)
-    tstamps = timestamp(ta)[n:end]
+  tstamps = timestamp(ta)[n:end]
 
-    s = sma(ta, n)
+  s = sma(ta, n)
 
-    upper = values(s) .* (1 + e)
-    lower = values(s) .* (1 - e)
+  upper = values(s) .* (1 + e)
+  lower = values(s) .* (1 - e)
 
-    up_cname = string.(colnames(ta), "_env_$n", "_up")
-    lw_cname = string.(colnames(ta), "_env_$n", "_low")
+  up_cname = string.(colnames(ta), "_env_$n", "_up")
+  lw_cname = string.(colnames(ta), "_env_$n", "_low")
 
-    u = TimeArray(tstamps, upper, up_cname, meta(ta))
-    l = TimeArray(tstamps, lower, lw_cname, meta(ta))
+  u = TimeArray(tstamps, upper, up_cname, meta(ta))
+  l = TimeArray(tstamps, lower, lw_cname, meta(ta))
 
-    merge(l, u, :inner)
+  merge(l, u, :inner)
 end
 
 # Array dispatch for use by other algorithms
 
-function sma(a::Array, n::Int)
-    vals = zeros(size(a,1) - (n-1), size(a,2))
+function sma(a::AbstractArray, n::Integer)
+  vals = zeros(size(a,1) - (n-1), size(a,2))
 
-    for i in 1:size(a,1) - (n-1)
-        for j in 1:size(a,2)
-            vals[i,j] = mean(a[i:i+(n-1),j])
-        end
+  for i in 1:size(a,1) - (n-1)
+    for j in 1:size(a,2)
+      vals[i,j] = mean(a[i:i+(n-1),j])
     end
+  end
 
-    vals
+  vals
 end
 
-function ema(a::Array, n::Int; wilder=false)
-    k = if wilder
-        1 / n
-    else
-        2 / (n + 1)
+function ema(a::AbstractArray, n::Int; wilder = false)
+  k = if wilder
+    1 / n
+  else
+    2 / (n + 1)
+  end
+
+  vals = zeros(size(a,1), size(a,2))
+  # seed with first value with an sma value
+  vals[n,:] = sma(a, n)[1,:]
+
+  for i in n+1:size(a,1)
+    for j in 1:size(a,2)
+      vals[i,j] = a[i,j] * k + vals[i-1, j] * (1-k)
     end
+  end
 
-    vals = zeros(size(a,1), size(a,2))
-    # seed with first value with an sma value
-    vals[n,:] = sma(a, n)[1,:]
-
-    for i in n+1:size(a,1)
-        for j in 1:size(a,2)
-            vals[i,j] = a[i,j] * k + vals[i-1, j] * (1-k)
-        end
-    end
-
-    vals[n:end, :]
+  vals[n:end, :]
 end
 
 function env(a::AbstractArray, n::Int; e::Float64 = 0.1)
-    s = sma(a, n)
+  s = sma(a, n)
 
-    upper = @. s * (1 + e)
-    lower = @. s * (1 - e)
+  upper = @. s * (1 + e)
+  lower = @. s * (1 - e)
 
-    [lower upper]
+  [lower upper]
 end
 
 doc"""
