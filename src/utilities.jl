@@ -39,7 +39,7 @@ julia> gen_colnames(["Open", "Close"], ["macd", "dif", "sig"])
  "Close_sig"
 ```
 """
-gen_colnames(orig::Vector{String}, suffix::Vector{String}) =
+gen_colnames(orig::Vector, suffix::Vector) =
   vec([Symbol(o, "_", s) for o ∈ orig, s ∈ suffix])
 
 relu(x) = max(x, 0)

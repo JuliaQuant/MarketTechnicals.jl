@@ -1,49 +1,16 @@
-# FIXME: Fix case of TimeArray{T, 1}, output type should be TimeArray{T, 1} as well
-function sma(ta::TimeArray, n::Int)
-  tstamps = timestamp(ta)[n:end]
-
-  vals = zeros(size(values(ta),1) - (n-1), size(values(ta),2))
-  for i in 1:size(values(ta),1) - (n-1)
-    for j in 1:size(values(ta),2)
-      vals[i,j] = mean(values(ta)[i:i+(n-1),j])
-    end
-  end
-
-  cname = String[]
-  cols  = colnames(ta)
-  for c in 1:length(cols)
-    push!(cname, Symbol(cols[c], "_sma_", n))
-  end
-
-  TimeArray(tstamps, vals, cname, meta(ta))
+function sma(ta::TimeArray, n::Integer)
+  m = moving(mean, ta, n)
+  cols = gen_colnames(colnames(ta), ["sma_$n"])
+  TimeArray(m; colnames = cols)
 end
 
-function ema(ta::TimeArray, n::Int; wilder=false)
-  k = if wilder
-    1 / n
-  else
-    2 / (n + 1)
-  end
-
+function ema(ta::TimeArray, n::Integer; wilder::Bool = false)
+  k       = wilder ? (1 / n) : 2 / (n + 1)
   tstamps = timestamp(ta)[n:end]
+  vals    = _ema(values(ta), n, k)
+  cols    = gen_colnames(colnames(ta), ["ema_$n"])
 
-  vals    =  zeros(size(values(ta),1), size(values(ta),2))
-  # seed with first value with an sma value
-  vals[n, :] = values(sma(ta, n))[1, :]
-
-  for i in n+1:size(values(ta),1)
-    for j in 1:size(values(ta),2)
-      vals[i,j] = values(ta)[i,j] * k + vals[i-1, j] * (1-k)
-    end
-  end
-
-  cname   = String[]
-  cols    = colnames(ta)
-  for c in 1:length(cols)
-    push!(cname, Symbol(cols[c], "_ema_", n))
-  end
-
-  TimeArray(tstamps, vals[n:length(ta),:], cname, meta(ta))
+  TimeArray(tstamps, vals, cols, meta(ta))
 end
 
 function kama(ta::TimeArray, n::Int=10, fn::Int=2, sn::Int=30)
@@ -68,11 +35,11 @@ function kama(ta::TimeArray, n::Int=10, fn::Int=2, sn::Int=30)
   end
 
   cols =
-  if length(colnames(ta)) == 1
-    [:kama]
-  else
-    ["$(c)_kama" for c in colnames(ta)]
-  end
+    if length(colnames(ta)) == 1
+      [:kama]
+    else
+      Symbol.(colnames(ta), "_kama")
+    end
 
   TimeArray(timestamp(cl), vals, cols)
 end
@@ -85,50 +52,65 @@ function env(ta::TimeArray, n::Int; e::Float64 = 0.1)
   upper = values(s) .* (1 + e)
   lower = values(s) .* (1 - e)
 
-  up_cname = string.(colnames(ta), "_env_$n", "_up")
-  lw_cname = string.(colnames(ta), "_env_$n", "_low")
+  up_cname = Symbol.(colnames(ta), "_env_$n", "_up")
+  lw_cname = Symbol.(colnames(ta), "_env_$n", "_low")
 
   u = TimeArray(tstamps, upper, up_cname, meta(ta))
   l = TimeArray(tstamps, lower, lw_cname, meta(ta))
 
-  merge(l, u, :inner)
+  merge(l, u, method = :inner)
 end
 
 # Array dispatch for use by other algorithms
 
-function sma(a::AbstractArray, n::Integer)
-  vals = zeros(size(a,1) - (n-1), size(a,2))
-
-  for i in 1:size(a,1) - (n-1)
-    for j in 1:size(a,2)
-      vals[i,j] = mean(a[i:i+(n-1),j])
-    end
+function sma(A::AbstractArray{T,1}, n::Integer) where {T}
+  B = similar(@view(A[n:end]), Float64)
+  for i ∈ eachindex(B)
+    B[i] = mean(@view(A[i:i+n-1]))
   end
-
-  vals
+  B
 end
 
-function ema(a::AbstractArray, n::Int; wilder = false)
-  k = if wilder
-    1 / n
-  else
-    2 / (n + 1)
+function sma(A::AbstractArray{T,2}, n::Integer) where {T}
+  B = similar(@view(A[n:end, :]), Float64)
+  for i ∈ 1:size(B, 1)
+    B[i, :] .= vec(mean(@view(A[i:i+n-1, :]), dims = 1))
   end
-
-  vals = zeros(size(a,1), size(a,2))
-  # seed with first value with an sma value
-  vals[n,:] = sma(a, n)[1,:]
-
-  for i in n+1:size(a,1)
-    for j in 1:size(a,2)
-      vals[i,j] = a[i,j] * k + vals[i-1, j] * (1-k)
-    end
-  end
-
-  vals[n:end, :]
+  B
 end
 
-function env(a::AbstractArray, n::Int; e::Float64 = 0.1)
+ema(A::AbstractArray, n::Integer; wilder = false) =
+  _ema(A, n, ifelse(wilder, 1 / n, 2 / (n + 1 )))
+
+function _ema(A::AbstractArray{T,1}, n::Integer, k::AbstractFloat) where {T}
+  l = length(A)
+  B = @view A[n:end]
+  C = similar(B, Float64)
+  # sma as initial value
+  C[1] = first(sma(@view(A[1:n]), n))
+
+  for i ∈ 2:size(C, 1)
+    C[i] = B[i] * k + C[i-1] * (1 - k)
+  end
+
+  C
+end
+
+function _ema(A::AbstractArray{T,2}, n::Integer, k::AbstractFloat) where {T}
+  l = size(A, 1)
+  B = @view A[n:end, :]
+  C = similar(B, Float64)
+  # sma as initial value
+  C[1, :] .= @view(sma(@view(A[1:n, :]), n)[1, :])
+
+  for i ∈ 2:size(C, 1)
+    @. C[i, :] = B[i, :] * k + C[i-1, :] * (1 - k)
+  end
+
+  C
+end
+
+function env(a::AbstractArray, n::Integer; e::Float64 = 0.1)
   s = sma(a, n)
 
   upper = @. s * (1 + e)

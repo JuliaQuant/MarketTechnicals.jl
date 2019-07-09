@@ -13,7 +13,7 @@ Bollinger Bands
 \end{align*}
 ```
 """
-function bollingerbands(ta::TimeArray, ma::Integer=20, width::AbstractFloat=2.0)
+function bollingerbands(ta::TimeArray, ma::Integer = 20, width::AbstractFloat = 2.0)
     tama   = sma(ta, ma)
     upband = tama .+ moving(std, ta, ma) .* width .* sqrt((ma-1)/ma) # take out Bessel correction, per algorithm
     dnband = tama .- moving(std, ta, ma) .* width .* sqrt((ma-1)/ma)
