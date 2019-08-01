@@ -64,26 +64,22 @@ function wilder_smooth(ta::TimeArray, n::Integer;
             val[i, :] .= NaN
         elseif i == n
             _fv = first_cal(values(ta[1:n]))
-            val[i, :] = typeof(_fv) == Float64 ? reshape([_fv], (1,1)) : _fv
+            val[i, :] = isa(_fv, Number) ? reshape([_fv], (1,ncols)) : _fv
         elseif dx
             _nv = (val[i-1, :] .* (n - 1) .+ _vals_ta[i, :]) ./ n
             _nv[isnan.(_nv)] .= val[i-1, :][isnan.(_nv)]
 
-            val[i, :] = reshape(_nv, (ncols,1))
+            val[i, :] = reshape(_nv, (1, ncols))
         else
             _nv = (val[i-1, :] .* (n - 1) ./ n) .+ _vals_ta[i, :]
             _nv[isnan.(_nv)] .= val[i-1, :][isnan.(_nv)]
 
-            val[i, :] = reshape(_nv, (ncols,1))
+            val[i, :] = reshape(_nv, (1, ncols))
         end
     end
 
     ret = TimeArray(timestamp(ta), val, colnames(ta), meta(ta))
 
-    # println("Wilder Smooth")
-    # println(ret)
-
-    
     if padding
         ret
     else

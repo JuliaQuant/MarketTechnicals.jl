@@ -95,11 +95,11 @@ function env(ta::TimeArray, n::Int; e::Float64 = 0.1)
     upper = values(s) .* (1 + e)
     lower = values(s) .* (1 - e)
 
-    up_cname = Symbol.("$(string.(colnames(ta)))_env_$n_up")
-    lw_cname = Symbol.("$(string.(colnames(ta)))_env_$n_low")
+    up_cnames = Symbol.(["$(string.(c_name))_env_$(n)_up" for c_name in colnames(ta)])
+    lw_cnames = Symbol.(["$(string.(c_name))_env_$(n)_low" for c_name in colnames(ta)])
 
-    u = TimeArray(tstamps, upper, up_cname, meta(ta))
-    l = TimeArray(tstamps, lower, lw_cname, meta(ta))
+    u = TimeArray(tstamps, upper, up_cnames, meta(ta))
+    l = TimeArray(tstamps, lower, lw_cnames, meta(ta))
 
     merge(l, u, :inner)
 end

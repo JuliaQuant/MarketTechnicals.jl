@@ -1,4 +1,4 @@
-using Base.Test
+using Test
 
 using MarketData
 using TimeSeries
@@ -12,46 +12,46 @@ using MarketTechnicals
 @testset "rsi" begin
     # TTR: RSI(x["Close"])
     # TTR: 45.95363 50.50249 48.97830 48.83191 ...
-    @test rsi(cl, wilder=true).values[1:4] ≈ [45.95363, 50.50249, 48.97830, 48.83191] atol=.01
+    @test values(rsi(cl, wilder=true))[1:4] ≈ [45.95363, 50.50249, 48.97830, 48.83191] atol=.01
     # TTR value is 55.84922
-    @test rsi(cl).values[end] ≈ 55.849 atol=.01
+    @test values(rsi(cl))[end] ≈ 55.849 atol=.01
     # TTR value is 55.95932
-    @test rsi(cl, wilder=true).values[end] ≈ 55.959 atol=.01
+    @test values(rsi(cl, wilder=true))[end] ≈ 55.959 atol=.01
     # TTR value is 56.21947
-    @test rsi(cl, 10).values[end] ≈ 56.219 atol=.01
-    @test rsi(ohlc).values[end, :] ≈ [68.030, 61.872, 70.062, 55.849] atol=.01
+    @test values(rsi(cl, 10))[end] ≈ 56.219 atol=.01
+    @test values(rsi(ohlc))[end, :] ≈ [68.030, 61.872, 70.062, 55.849] atol=.01
 
     # seed is included (TODO: debate amongst yourselves)
-    @test rsi(cl).timestamp[1]              == Date(2000,1,24)
-    @test rsi(cl, wilder=true).timestamp[1] == Date(2000,1,24)
-    @test rsi(cl, 10).timestamp[1]          == Date(2000,1,18)
-    @test rsi(ohlc).timestamp[1]            == Date(2000,1,24)
+    @test timestamp(rsi(cl))[1]              == Date(2000,1,24)
+    @test timestamp(rsi(cl, wilder=true))[1] == Date(2000,1,24)
+    @test timestamp(rsi(cl, 10))[1]          == Date(2000,1,18)
+    @test timestamp(rsi(ohlc))[1]            == Date(2000,1,24)
 
-    @test rsi(cl).timestamp[end]              == Date(2001,12,31)
-    @test rsi(cl, wilder=true).timestamp[end] == Date(2001,12,31)
-    @test rsi(cl, 10).timestamp[end]          == Date(2001,12,31)
-    @test rsi(ohlc).timestamp[end]            == Date(2001,12,31)
+    @test timestamp(rsi(cl))[end]              == Date(2001,12,31)
+    @test timestamp(rsi(cl, wilder=true))[end] == Date(2001,12,31)
+    @test timestamp(rsi(cl, 10))[end]          == Date(2001,12,31)
+    @test timestamp(rsi(ohlc))[end]            == Date(2001,12,31)
 end
 
 
 @testset "macd" begin
-    @test isapprox(macd(cl).values[end, 1], -0.020, atol=.01)
-    @test isapprox(macd(cl).values[end, 2], 0.421, atol=.01) # TTR value with percent=FALSE is 0.421175152
-    @test isapprox(macd(cl).values[end, 3], 0.441, atol=.01) # TTR value with percent=FALSE is 0.4414275
-    @test macd(cl).timestamp[end] == Date(2001,12,31)
+    @test isapprox(values(macd(cl))[end, 1], -0.020, atol=.01)
+    @test isapprox(values(macd(cl))[end, 2], 0.421, atol=.01) # TTR value with percent=FALSE is 0.421175152
+    @test isapprox(values(macd(cl))[end, 3], 0.441, atol=.01) # TTR value with percent=FALSE is 0.4414275
+    @test timestamp(macd(cl))[end] == Date(2001,12,31)
 end
 
 
 @testset "macd multi-column TimeArray" begin
     # multi-column TimeArray
     # TTR: MACD(..., maType="EMA", percent=0)
-    ta = macd(ohlc["Open", "Close"])
-    @test ta.colnames[1:2]  == ["Open_macd", "Close_macd"]
-    @test ta.timestamp[end] == Date(2001, 12, 31)
-    @test isapprox(ta.values[end, 3], 0.44254569, atol=.01)    # Open_dif
-    @test isapprox(ta.values[end, 5], 4.536854e-01, atol=.01)  # Open_signal
-    @test isapprox(ta.values[end, 4], 0.421175152, atol=.01)   # Close_dif
-    @test isapprox(ta.values[end, 6], 4.414275e-01, atol=.01)  # Close_signal
+    ta = macd(ohlc[:Open, :Close])
+    @test colnames(ta)[1:2]  == [:Open_macd, :Close_macd]
+    @test timestamp(ta)[end] == Date(2001, 12, 31)
+    @test isapprox(values(ta)[end, 3], 0.44254569, atol=.01)    # Open_dif
+    @test isapprox(values(ta)[end, 5], 4.536854e-01, atol=.01)  # Open_signal
+    @test isapprox(values(ta)[end, 4], 0.421175152, atol=.01)   # Close_dif
+    @test isapprox(values(ta)[end, 6], 4.414275e-01, atol=.01)  # Close_signal
 end
 
 
@@ -81,25 +81,25 @@ end
     """
 
     ta = chaikinoscillator(ohlcv)
-    @test ta.colnames     == ["chaikinoscillator"]
-    @test ta.meta         == ta.meta
-    @test ta.timestamp[1] == ohlcv.timestamp[10]
-    @test isapprox(ta.values[1], -6851466.867, atol=.01)
-    @test isapprox(ta.values[2], -5508824.158, atol=.01)
-    @test isapprox(ta.values[3], -4145747.583, atol=.01)
+    @test colnames(ta)     == [:chaikinoscillator]
+    @test meta(ta)         == meta(ta)
+    @test timestamp(ta)[1] == timestamp(ohlcv)[10]
+    @test isapprox(values(ta)[1], -6851466.867, atol=.01)
+    @test isapprox(values(ta)[2], -5508824.158, atol=.01)
+    @test isapprox(values(ta)[3], -4145747.583, atol=.01)
 end
 
 
 @testset "cci" begin
     # TTR::CCI value is -38.931614
-    @test isapprox(cci(ohlc).values[1]  , -38.931614, atol=.01)
+    @test isapprox(values(cci(ohlc))[1]  , -38.931614, atol=.01)
     # TTR::CCI value is 46.3511339
-    @test isapprox(cci(ohlc).values[end], 46.3511339, atol=.01)
-    @test cci(ohlc).timestamp[end] == Date(2001, 12, 31)
+    @test isapprox(values(cci(ohlc))[end], 46.3511339, atol=.01)
+    @test timestamp(cci(ohlc))[end] == Date(2001, 12, 31)
 
-    ta = cci(TimeArray(collect(Date(2011, 1, 1):Date(2011, 1, 30)),
-                       fill(42, (30, 4)), ["Open", "High", "Low", "Close"]))
-    @test all(ta.values .== 0)
+    ta = cci(TimeArray(collect(Date(2011, 1, 1):Day(1):Date(2011, 1, 30)),
+                       fill(42, (30, 4)), [:Open, :High, :Low, :Close]))
+    @test all(values(ta) .== 0)
 end
 
 
@@ -119,31 +119,31 @@ end
     """
 
     ta = aroon(ohlc)
-    @test ta.colnames  == ["up", "dn", "osc"]
-    @test ta.timestamp == ohlc[25:end].timestamp
-    @test isapprox(ta.values[2, 1], 48)
-    @test isapprox(ta.values[2, 2], 28)
-    @test isapprox(ta.values[2, 3], 20)
+    @test colnames(ta)  == [:up, :down, :osc]
+    @test timestamp(ta) == timestamp(ohlc[25:end])
+    @test isapprox(values(ta)[2, 1], 48)
+    @test isapprox(values(ta)[2, 2], 28)
+    @test isapprox(values(ta)[2, 3], 20)
 end
 
 
 @testset "roc" begin
     ta = roc(cl, 3)
-    @test ta.colnames == ["Close_roc_3"]
-    @test isapprox(ta.values[1], -0.15133107021618722, atol=.01)
-    @test isapprox(ta.values[2], -0.02926829268292683, atol=.01)
-    @test isapprox(ta.values[3], -0.06009615384615385, atol=.01)
+    @test colnames(ta) == [:Close_roc_3]
+    @test isapprox(values(ta)[1], -0.15133107021618722, atol=.01)
+    @test isapprox(values(ta)[2], -0.02926829268292683, atol=.01)
+    @test isapprox(values(ta)[3], -0.06009615384615385, atol=.01)
 end
 
 
 @testset "adx" begin
     ta = adx(ohlc)
-    @test ta.colnames == ["adx", "dx", "+di", "-di"]
-    @test isapprox(ta.values[1, 1], 10.5998, atol=.01)
-    @test isapprox(ta.values[1, 2], 0.3916,  atol=.01)
-    @test isapprox(ta.values[1, 3], 23.6226, atol=.01)
-    @test isapprox(ta.values[1, 4], 23.4383, atol=.01)
-    @test ta.timestamp[1] == Date(2000, 2, 10)
+    @test colnames(ta) == [:adx, :dx, :di_plus, :di_minus]
+    @test isapprox(values(ta)[1, 1], 10.5998, atol=.01)
+    @test isapprox(values(ta)[1, 2], 0.3916,  atol=.01)
+    @test isapprox(values(ta)[1, 3], 23.6226, atol=.01)
+    @test isapprox(values(ta)[1, 4], 23.4383, atol=.01)
+    @test timestamp(ta)[1] == Date(2000, 2, 10)
 end
 
 
@@ -166,11 +166,11 @@ end
     """
 
     ta = stochasticoscillator(ohlc)
-    @test ta.colnames  == ["fast_k", "fast_d", "slow_d"]
-    @test ta.timestamp == ohlc[18:end].timestamp
-    @test isapprox(ta.values[1, 1], 67.142857, atol=.01)
-    @test isapprox(ta.values[1, 2], 69.466667, atol=.01)
-    @test isapprox(ta.values[1, 3], 67.441270, atol=.01)
+    @test colnames(ta)  == [:fast_k, :fast_d, :slow_d]
+    @test timestamp(ta) == timestamp(ohlc[18:end])
+    @test isapprox(values(ta)[1, 1], 67.142857, atol=.01)
+    @test isapprox(values(ta)[1, 2], 69.466667, atol=.01)
+    @test isapprox(values(ta)[1, 3], 67.441270, atol=.01)
 end
 
 

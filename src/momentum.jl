@@ -12,9 +12,6 @@ function rsi(ta::TimeArray, n::Int=14; wilder::Bool=false)
     ups = zeros(size(values(ta), 1) - 1, size(values(ta), 2))
     dns = zeros(size(values(ta), 1) - 1, size(values(ta), 2))
 
-    # println("Ret")
-    # println(ret)
-
     #skip NaNs (by explicitly comparing on both sides of zero)
     @inbounds for i in 1:size(values(ta), 1) - 1
         for j in 1:size(values(ta), 2)
