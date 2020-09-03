@@ -29,7 +29,7 @@ Parameters:
     * suffix: the suffix applied to `orig`
 
 ```jldoctest
-julia> MarketTechnicals.gen_colnames(["Open", "Close"], ["macd", "dif", "sig"])
+julia> MarketTechnicals.gen_colnames([:Open, :Close], [:macd, :dif, :sig])
 6-element Array{Symbol,1}:
  :Open_macd
  :Close_macd
@@ -40,7 +40,7 @@ julia> MarketTechnicals.gen_colnames(["Open", "Close"], ["macd", "dif", "sig"])
 ```
 """
 gen_colnames(orig::Vector{Symbol}, suffix::Vector{Symbol}) =
-    vec([Symbol("$(string(o))_$(string(s))") for o ∈ orig, s ∈ suffix])
+    vec([Symbol(o, "_", s) for o ∈ orig, s ∈ suffix])
 
 relu(x) = max(x, 0)
 
