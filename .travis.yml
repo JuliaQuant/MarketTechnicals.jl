@@ -19,7 +19,7 @@ branches:
 
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia -e 'Pkg.clone(pwd()); Pkg.build("MarketTechnicals"); Pkg.test("MarketTechnicals", coverage=true)'
+  - julia -e 'Pkg.add(url=pwd()); Pkg.build("MarketTechnicals"); Pkg.test("MarketTechnicals", coverage=true)'
 
 after_success:
   - julia -e 'Pkg.add("Documenter")'
