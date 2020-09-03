@@ -29,14 +29,14 @@ Parameters:
     * suffix: the suffix applied to `orig`
 
 ```jldoctest
-julia> gen_colnames(["Open", "Close"], ["macd", "dif", "sig"])
-6-element Array{String,1}:
- "Open_macd"
- "Close_macd"
- "Open_dif"
- "Close_dif"
- "Open_sig"
- "Close_sig"
+julia> MarketTechnicals.gen_colnames(["Open", "Close"], ["macd", "dif", "sig"])
+6-element Array{Symbol,1}:
+ :Open_macd
+ :Close_macd
+ :Open_dif
+ :Close_dif
+ :Open_sig
+ :Close_sig
 ```
 """
 gen_colnames(orig::Vector{Symbol}, suffix::Vector{Symbol}) =
@@ -94,8 +94,8 @@ function lagfill(ta::TimeArray, r1::Int, fill::Float64)
     _lta = lag(ta, r1, padding = true)
     _lta_values = values(_lta)
     _lta_values[1:r1] .= fill
-    
+
     TimeArray(timestamp(ta), _lta_values, colnames(ta))
-    
+
 end
 
