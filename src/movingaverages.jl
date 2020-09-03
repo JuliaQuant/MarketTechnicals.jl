@@ -1,20 +1,20 @@
 function sma(ta::TimeArray, n::Int)
-    tstamps = ta.timestamp[n:end]
+    tstamps = timestamp(ta)[n:end]
 
-    vals = zeros(size(ta.values,1) - (n-1), size(ta.values,2))
-    for i in 1:size(ta.values,1) - (n-1)
-        for j in 1:size(ta.values,2)
-            vals[i,j] = mean(ta.values[i:i+(n-1),j])
+    vals = zeros(size(values(ta),1) - (n-1), size(values(ta),2))
+    for i in 1:size(values(ta),1) - (n-1)
+        for j in 1:size(values(ta),2)
+            vals[i,j] = nanmean(values(ta)[i:i+(n-1),j])[1]
         end
     end
 
-    cname = String[]
+    cname = Symbol[]
     cols  = colnames(ta)
     for c in 1:length(cols)
-        push!(cname, string(cols[c], "_sma_", n))
+        push!(cname, Symbol(string(cols[c], "_sma_", n)))
     end
 
-    TimeArray(tstamps, vals, cname, ta.meta)
+    TimeArray(tstamps, vals, cname, meta(ta))
 end
 
 function ema(ta::TimeArray, n::Int; wilder=false)
@@ -24,29 +24,30 @@ function ema(ta::TimeArray, n::Int; wilder=false)
         2 / (n + 1)
     end
 
-    tstamps = ta.timestamp[n:end]
+    tstamps = timestamp(ta)[n:end]
 
-    vals    =  zeros(size(ta.values,1), size(ta.values,2))
+    vals    =  zeros(size(values(ta),1), size(values(ta),2))
     # seed with first value with an sma value
-    vals[n,:] = sma(ta, n).values[1,:]
+    vals[n,:] = values(sma(ta, n))[1,:]
 
-    for i in n+1:size(ta.values,1)
-        for j in 1:size(ta.values,2)
-            vals[i,j] = ta.values[i,j] * k + vals[i-1, j] * (1-k)
+    for i in n+1:size(values(ta),1)
+        for j in 1:size(values(ta),2)
+            _v = values(ta)[i,j]
+            vals[i,j] = isnan(_v) ? vals[i-1, j] : _v * k + vals[i-1, j] * (1-k)
         end
     end
 
-    cname   = String[]
+    cname   = Symbol[]
     cols    = colnames(ta)
     for c in 1:length(cols)
-        push!(cname, string(cols[c], "_ema_", n))
+        push!(cname, Symbol(string(cols[c], "_ema_", n)))
     end
 
-    TimeArray(tstamps, vals[n:length(ta),:], cname, ta.meta)
+    TimeArray(tstamps, vals[n:length(ta),:], cname, meta(ta))
 end
 
 function kama(ta::TimeArray, n::Int=10, fn::Int=2, sn::Int=30)
-    vola = moving(sum, abs.(ta .- lag(ta)), n)
+    vola = moving(nansum, abs.(ta .- lag(ta)), n)
     change = abs.(ta .- lag(ta, n))
     er = safediv.(change, vola)  # Efficiency Ratio
 
@@ -54,43 +55,53 @@ function kama(ta::TimeArray, n::Int=10, fn::Int=2, sn::Int=30)
     sc = (er .* (2 / (fn + 1) - 2 / (sn + 1)) .+ 2 / (sn + 1)).^2
 
     cl = ta[n+1:end]
-    vals = similar(Array{Float64}, indices(cl.values))
+
+    vals = similar(Array{Float64}, axes(values(cl)))
     # using simple moving average as initial kama
-    pri_kama = mean(ta[1:n].values, 1)
+    pri_kama = nanmean(values(ta[1:n]))
 
     @assert length(cl) == length(sc)
 
     for idx ∈ 1:length(cl)
-        vals[idx, :] =
-            pri_kama =
-            pri_kama .+ sc[idx].values .* (cl[idx].values .- pri_kama)
+        _p_k = pri_kama .+ values(sc[idx]) .* (values(cl[idx]) .- pri_kama)
+        
+        #Added check for NaN and adequately backfill with the correct last available pri_kama
+        if typeof(pri_kama) == Float64
+            pri_kama = isnan.(_p_k)[1] ? pri_kama : _p_k
+        else
+            _p_k[isnan.(_p_k)] .= pri_kama[isnan.(_p_k)]
+            pri_kama = _p_k
+        end
+
+        vals[idx, :] = pri_kama
+            
     end
 
     cols =
-    if length(ta.colnames) == 1
-        ["kama"]
+    if length(colnames(ta)) == 1
+        [:kama]
     else
-        ["$c\_kama" for c in ta.colnames]
+        [Symbol("$(c)_kama") for c in colnames(ta)]
     end
 
-    TimeArray(cl.timestamp, vals, cols)
+    TimeArray(timestamp(cl), vals, cols)
 end
 
 function env(ta::TimeArray, n::Int; e::Float64 = 0.1)
-    tstamps = ta.timestamp[n:end]
+    tstamps = timestamp(ta)[n:end]
 
     s = sma(ta, n)
 
-    upper = s.values .* (1 + e)
-    lower = s.values .* (1 - e)
+    upper = values(s) .* (1 + e)
+    lower = values(s) .* (1 - e)
 
-    up_cname = string.(colnames(ta), "_env_$n", "_up")
-    lw_cname = string.(colnames(ta), "_env_$n", "_low")
+    up_cnames = Symbol.(["$(string.(c_name))_env_$(n)_up" for c_name in colnames(ta)])
+    lw_cnames = Symbol.(["$(string.(c_name))_env_$(n)_low" for c_name in colnames(ta)])
 
-    u = TimeArray(tstamps, upper, up_cname, ta.meta)
-    l = TimeArray(tstamps, lower, lw_cname, ta.meta)
+    u = TimeArray(tstamps, upper, up_cnames, meta(ta))
+    l = TimeArray(tstamps, lower, lw_cnames, meta(ta))
 
-    merge(l, u, :inner)
+    merge(l, u; method = :inner)
 end
 
 # Array dispatch for use by other algorithms
@@ -100,7 +111,7 @@ function sma(a::Array, n::Int)
 
     for i in 1:size(a,1) - (n-1)
         for j in 1:size(a,2)
-            vals[i,j] = mean(a[i:i+(n-1),j])
+            vals[i,j] = nanmean(a[i:i+(n-1),j])
         end
     end
 
@@ -136,18 +147,17 @@ function env(a::AbstractArray, n::Int; e::Float64 = 0.1)
     [lower upper]
 end
 
-doc"""
+"""
     sma(arr, n)
 
 Simple Moving Average
 
 ```math
-SMA = \frac{\sum_i^n{P_i}}{n}
+SMA = 'frac{sum_i^n{P_i}}{n}'
 ```
 """
-sma
 
-doc"""
+"""
     ema(arr, n, wilder=false)
 
 Exponemtial Moving Average
@@ -155,19 +165,18 @@ Exponemtial Moving Average
 A.k.a. exponentially weighted moving average (EWMA)
 
 ```math
-    \text{Let } k \text{denote the degree of weighting decrease}
+    'text{Let } k text{denote the degree of weighting decrease}'
 ```
 
-If parameter `wilder` is `true`, ``k = \frac{1}{n}``,
-else ``k = \frac{2}{n + 1}``.
+If parameter `wilder` is `true`, ``k = 'frac{1}{n}'``,
+else ``k = 'frac{2}{n + 1}'``.
 
 ```math
-    EMA_t = k \times P_t + (1 - k) \times EMA_{t - 1}
+    EMA_t = k 'times P_t + (1 - k) times EMA_{t - 1}'
 ```
 """
-ema
 
-doc"""
+"""
 
 Kaufman's Adaptive Moving Average
 
@@ -182,29 +191,28 @@ Kaufman's Adaptive Moving Average
 **Formula**:
 
 ```math
-    \begin{align*}
-        KAMA_t & = KAMA_{t-1} + SC \times (Price - KAMA_{t-1}) \\
+    'begin{align*}
+        KAMA_t & = KAMA_{t-1} + SC times (Price - KAMA_{t-1}) \\
         SC     & =
-            (ER \times (\frac{2}{fn + 1} - \frac{2}{sn + 1}) + \frac{2}{sn + 1})^2 \\
-        ER     & = \frac{Change}{Volatility} \\
+            (ER times (frac{2}{fn + 1} - frac{2}{sn + 1}) + frac{2}{sn + 1})^2 \\
+        ER     & = frac{Change}{Volatility} \\
         Change & = | Price - Price_{t-n} | \\
-        Volatility & = \sum_{i}^{n} | Price_i - Price_{i-1} |
-    \end{align*}
+        Volatility & = sum_{i}^{n} | Price_i - Price_{i-1} |
+    end{align*}'
 ```
 """
-kama
 
-doc"""
+"""
 
     env(arr, n; e = 0.1)
 
 Moving Average Envelope
 
 ```math
-  \begin{align*}
-    \text{Upper Envelope} & = \text{n period SMA } \times (1 + e) \\
-    \text{Lower Envelope} & = \text{n period SMA } \times (1 - e)
-  \end{align*}
+  'begin{align*}
+    text{Upper Envelope} & = text{n period SMA } times (1 + e) \\
+    text{Lower Envelope} & = text{n period SMA } times (1 - e)
+  end{align*}''
 ```
 
 **Arguments**
@@ -215,4 +223,3 @@ Moving Average Envelope
 
 - [TradingView](https://www.tradingview.com/wiki/Envelope_(ENV))
 """
-env

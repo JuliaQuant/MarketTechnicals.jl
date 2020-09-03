@@ -1,49 +1,48 @@
 # an idea: create one method named pivots with kwargs
-
-doc"""
+"""
     floorpivots(ohlc)
 
 Floor Trader Pivots
 
 ```math
-\begin{align*}
+'begin{align*}
 
     R3 & = Pivot_t + (R2 - S1) \\
     R2 & = Pivot_t + (R1 - S1) \\
     R1 & = 2 Pivot_t - P^{low}_{t-1} \\
     Pivot_t & = Price^{typical}_{t-1} =
-        \frac{P^{high}_{t-1} + P^{low}_{t-1} + P^{close}_{t-1}}{3} \\
+        frac{P^{high}_{t-1} + P^{low}_{t-1} + P^{close}_{t-1}}{3} \\
     S1 & = 2 Pivot_t - P^{high}_{t-1} \\
     S2 & = Pivot_t - (R1 - S1) \\
     S3 & = Pivot_t - (R2 - S1)
 
-\end{align*}
+end{align*}'
 ```
 """
 function floorpivots(ohlc::TimeArray{T,N}) where {T,N}
 
     p  = lag(typical(ohlc))
-    s1 = 2.*p .- lag(ohlc["High"])
-    r1 = 2.*p .- lag(ohlc["Low"])
+    s1 = 2 .*p .- lag(ohlc[:High])
+    r1 = 2 .*p .- lag(ohlc[:Low])
     s2 = p .- (r1 .- s1)
     r2 = (p .- s1) .+ r1
     s3 = p .- (r2 .- s1)
     r3 = (p .- s1) .+ r2
 
     TimeArray(
-        s1.timestamp,
-        [s3.values s2.values s1.values p.values r1.values r2.values r3.values],
-        ["s3", "s2", "s1", "pivot", "r1", "r2", "r3"], ohlc.meta)
+        timestamp(s1),
+        [values(s3) values(s2) values(s1) values(p) values(r1) values(r2) values(r3)],
+        [:s3, :s2, :s1, :pivot, :r1, :r2, :r3], meta(ohlc))
 
 end
 
-doc"""
+"""
     woodiespivots(ohlc)
 
 Woodie's Pivot
 
 ```math
-\begin{align*}
+'begin{align*}
 
     Range & = Price^{high}_{t-1} - Price^{low}_{t-1} \\
 
@@ -52,22 +51,22 @@ Woodie's Pivot
     R2 & = Pivot_t + Range \\
     R1 & = 2 Pivot_t - Price^{low}_{t-1} \\
     Pivot_t & =
-        \frac{Price^{high}_{t-1} + Price^{low}_{t-1} + 2 Price^{open}_t}{4} \\
+        frac{Price^{high}_{t-1} + Price^{low}_{t-1} + 2 Price^{open}_t}{4} \\
     S1 & = 2 Pivot_t - Price^{high}_{t-1} \\
     S2 & = Pivot_t - Range \\
     S3 & = S1 - Range \\
     S4 & = S3 - Range \tag{not implemented}
 
-\end{align*}
+end{align*}'
 ```
 """
 function woodiespivots(ohlc::TimeArray{T,N}) where {T,N}
 
-    rng = lag(ohlc["High"]) .- lag(ohlc["Low"])
+    rng = lag(ohlc[:High]) .- lag(ohlc[:Low])
 
-    p  = (lag(ohlc["High"]) .+ lag(ohlc["Low"]) .+ 2.*ohlc["Open"]) ./ 4
-    s1 = 2.*p .- lag(ohlc["High"])
-    r1 = 2.*p .- lag(ohlc["Low"])
+    p  = (lag(ohlc[:High]) .+ lag(ohlc[:Low]) .+ 2 .*ohlc[:Open]) ./ 4
+    s1 = 2 .*p .- lag(ohlc[:High])
+    r1 = 2 .*p .- lag(ohlc[:Low])
     s2 = p .- rng
     r2 = p .+ rng
     s3 = s1 .- rng
@@ -76,9 +75,9 @@ function woodiespivots(ohlc::TimeArray{T,N}) where {T,N}
     # r4 = r3 + range
 
     TimeArray(
-        s1.timestamp,
-        [s3.values s2.values s1.values p.values r1.values r2.values r3.values],
-        ["s3", "s2", "s1", "pivot", "r1", "r2", "r3"], ohlc.meta)
+        timestamp(s1),
+        [values(s3) values(s2) values(s1) values(p) values(r1) values(r2) values(r3)],
+        [:s3, :s2, :s1, :pivot, :r1, :r2, :r3], meta(ohlc))
 end
 #
 # function camarillapivots{T,V}(hi::Array{SeriesPair{T,V},1},

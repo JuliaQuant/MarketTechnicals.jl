@@ -1,4 +1,4 @@
-using Base.Test
+using Test
 
 using MarketData
 using TimeSeries
@@ -10,18 +10,18 @@ using MarketTechnicals
 
 
 @testset "obv" begin
-    @test obv(ohlcv).values[1]     == 4783900 # TTR value is 4783900
-    @test obv(ohlcv).values[12]    == 9390200 # TTR value is 2000-01-19   9390200
-    @test obv(ohlcv).timestamp[12] == Date(2000,1,19)
+    @test values(obv(ohlcv))[1]     == 4783900 # TTR value is 4783900
+    @test values(obv(ohlcv))[12]    == 9390200 # TTR value is 2000-01-19   9390200
+    @test timestamp(obv(ohlcv))[12] == Date(2000,1,19)
 end
 
 
 @testset "vwap" begin
     # TTR value 2000-01-14 97.92154
-    @test isapprox(vwap(ohlcv).values[1]   , 97.9215, atol=.01)
+    @test isapprox(values(vwap(ohlcv))[1]   , 97.9215, atol=.01)
     # TTR value  21.44458
-    @test isapprox(vwap(ohlcv).values[end] , 21.4446, atol=.01)
-    @test vwap(ohlcv).timestamp[1] == Date(2000,1,14)
+    @test isapprox(values(vwap(ohlcv))[end] , 21.4446, atol=.01)
+    @test timestamp(vwap(ohlcv))[1] == Date(2000,1,14)
 end
 
 
@@ -46,12 +46,12 @@ end
     """
     ta = adl(ohlcv)
 
-    @test ta.meta           == ohlcv.meta
-    @test ta.colnames       == ["adl"]
-    @test ta.timestamp[1]   == ohlcv.timestamp[1]
-    @test ta.timestamp[end] == ohlcv.timestamp[end]
-    @test isapprox(ta.values[1], 4.2882507863e6, atol=.01)
-    @test isapprox(ta.values[2], 984498.0822, atol=.01)
+    @test meta(ta)           == meta(ohlcv)
+    @test colnames(ta)       == [:adl]
+    @test timestamp(ta)[1]   == timestamp(ohlcv)[1]
+    @test timestamp(ta)[end] == timestamp(ohlcv)[end]
+    @test isapprox(values(ta)[1], 4.2882507863e6, atol=.01)
+    @test isapprox(values(ta)[2], 984498.0822, atol=.01)
 end
 
 
