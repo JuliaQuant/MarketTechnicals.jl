@@ -64,7 +64,7 @@ function kama(ta::TimeArray, n::Int=10, fn::Int=2, sn::Int=30)
 
     for idx ∈ 1:length(cl)
         _p_k = pri_kama .+ values(sc[idx]) .* (values(cl[idx]) .- pri_kama)
-        
+
         #Added check for NaN and adequately backfill with the correct last available pri_kama
         if typeof(pri_kama) == Float64
             pri_kama = isnan.(_p_k)[1] ? pri_kama : _p_k
@@ -74,7 +74,7 @@ function kama(ta::TimeArray, n::Int=10, fn::Int=2, sn::Int=30)
         end
 
         vals[idx, :] = pri_kama
-            
+
     end
 
     cols =
@@ -156,6 +156,7 @@ Simple Moving Average
 SMA = 'frac{sum_i^n{P_i}}{n}'
 ```
 """
+sma
 
 """
     ema(arr, n, wilder=false)
@@ -175,12 +176,13 @@ else ``k = 'frac{2}{n + 1}'``.
     EMA_t = k 'times P_t + (1 - k) times EMA_{t - 1}'
 ```
 """
+ema
 
 """
 
 Kaufman's Adaptive Moving Average
 
-**Arguments**:
+## Arguments
 
 - `n`: period
 
@@ -188,7 +190,7 @@ Kaufman's Adaptive Moving Average
 
 - `sn`: the slowest EMA constant
 
-**Formula**:
+## Formula
 
 ```math
     'begin{align*}
@@ -201,6 +203,7 @@ Kaufman's Adaptive Moving Average
     end{align*}'
 ```
 """
+kama
 
 """
 
@@ -223,3 +226,4 @@ Moving Average Envelope
 
 - [TradingView](https://www.tradingview.com/wiki/Envelope_(ENV))
 """
+env
