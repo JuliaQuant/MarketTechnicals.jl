@@ -1,16 +1,15 @@
-__precompile__()
-
 module MarketTechnicals
 
+using Markdown: @doc_str
 using Reexport
-using StatsBase
 using Statistics
+using StatsBase
 
 @reexport using TimeSeries
 
 export sma, ema, kama, env,
        bollingerbands, truerange, atr, keltnerbands, chaikinvolatility, donchianchannels,
-       obv, vwap, adl, chaikinmoneyflow, forceindex, easeofmovement, volumepricetrend, 
+       obv, vwap, adl, chaikinmoneyflow, forceindex, easeofmovement, volumepricetrend,
        doji,
        rsi, macd, cci, roc, adx, stochasticoscillator, chaikinoscillator, aroon, vortex,
        trix, massindex, dpo, kst, ichimoku, moneyflowindex, tsi, ultimateoscillator, williamsr,
@@ -32,22 +31,22 @@ function nancumsum(x)
 	cumsum(x)
 end
 
-function nanargmax(x) 
+function nanargmax(x)
 	x[isnan.(x)] .= -Inf
 	argmax(x)
 end
 
-function nanargmin(x) 
+function nanargmin(x)
 	x[isnan.(x)] .= Inf
 	argmin(x)
 end
 
-function nanmax(x) 
+function nanmax(x)
 	x[isnan.(x)] .= -Inf
 	maximum(x)
 end
 
-function nanmin(x) 
+function nanmin(x)
 	x[isnan.(x)] .= Inf
 	minimum(x)
 end
@@ -61,10 +60,9 @@ include("volatility.jl")
 include("volume.jl")
 
 # for user customization
-# FIXME: using @__DIR__ while we upgrade to julia 0.6+
-RC_FILE = joinpath(dirname(@__FILE__), ".rc.jl")
+RC_FILE = joinpath(@__DIR__, ".rc.jl")
 if !ispath(RC_FILE)
-    touch(RC_FILE)
+  touch(RC_FILE)
 end
 
 include(RC_FILE)

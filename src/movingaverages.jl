@@ -17,7 +17,7 @@ function sma(ta::TimeArray, n::Int)
     TimeArray(tstamps, vals, cname, meta(ta))
 end
 
-function ema(ta::TimeArray, n::Int; wilder=false)
+function ema(ta::TimeArray, n::Int; wilder = false)
     k = if wilder
         1 / n
     else
@@ -118,7 +118,7 @@ function sma(a::Array, n::Int)
     vals
 end
 
-function ema(a::Array, n::Int; wilder=false)
+function ema(a::Array, n::Int; wilder = false)
     k = if wilder
         1 / n
     else
@@ -147,42 +147,49 @@ function env(a::AbstractArray, n::Int; e::Float64 = 0.1)
     [lower upper]
 end
 
-"""
-    sma(arr, n)
+doc"""
+    sma(ta::TimeArray, n)
+    sma(A::Array, n)
 
 Simple Moving Average
 
+# Formula
+
 ```math
-SMA = 'frac{sum_i^n{P_i}}{n}'
+SMA = \frac{sum_i^n{P_i}}{n}
 ```
 """
 sma
 
-"""
-    ema(arr, n, wilder=false)
+doc"""
+    ema(ta::TimeArray, n, wilder = false)
+    ema(A::Array, n, wilder = false)
 
 Exponemtial Moving Average
 
 A.k.a. exponentially weighted moving average (EWMA)
 
+# Formula
+
 ```math
-    'text{Let } k text{denote the degree of weighting decrease}'
+    \text{Let } k text{denote the degree of weighting decrease}
 ```
 
-If parameter `wilder` is `true`, ``k = 'frac{1}{n}'``,
-else ``k = 'frac{2}{n + 1}'``.
+If parameter `wilder` is `true`, `k = \frac{1}{n}`,
+else `k = \frac{2}{n + 1}`.
 
 ```math
-    EMA_t = k 'times P_t + (1 - k) times EMA_{t - 1}'
+EMA_t = k \times P_t + (1 - k) \times EMA_{t - 1}
 ```
 """
 ema
 
-"""
+doc"""
+    kama(ta::TimeArray, n = 10, fn = 2, sn = 30)
 
 Kaufman's Adaptive Moving Average
 
-## Arguments
+# Arguments
 
 - `n`: period
 
@@ -190,7 +197,7 @@ Kaufman's Adaptive Moving Average
 
 - `sn`: the slowest EMA constant
 
-## Formula
+# Formula
 
 ```math
     'begin{align*}
@@ -205,24 +212,24 @@ Kaufman's Adaptive Moving Average
 """
 kama
 
-"""
-
-    env(arr, n; e = 0.1)
+doc"""
+    env(ta::TimeArray, n; e = 0.1)
+    env(A::AbstractArray, n; e = 0.1)
 
 Moving Average Envelope
 
 ```math
-  'begin{align*}
-    text{Upper Envelope} & = text{n period SMA } times (1 + e) \\
-    text{Lower Envelope} & = text{n period SMA } times (1 - e)
-  end{align*}''
+  \begin{align*}
+    \text{Upper Envelope} & = text{n period SMA } times (1 + e) \\
+    \text{Lower Envelope} & = text{n period SMA } times (1 - e)
+  \end{align*}
 ```
 
-**Arguments**
+# Arguments
 
 - `e`: the envelope, `0.1` implies the `10%` envelope.
 
-**Reference**
+# References
 
 - [TradingView](https://www.tradingview.com/wiki/Envelope_(ENV))
 """
