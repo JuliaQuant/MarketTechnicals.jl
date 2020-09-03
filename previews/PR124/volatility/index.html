@@ -5,57 +5,165 @@
     Mean &amp; = SMA \
     Down &amp; = SMA - width times sigma
 
-end{align*}&#39;&#39;\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/959e54fc6d6952a7a7ef67bd98b88df2140b44e0/src/volatility.jl#L1-L15">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
-ERROR: ArgumentError: Package MarketData not found in current path:
-- Run `import Pkg; Pkg.add(&quot;MarketData&quot;)` to install the MarketData package.
+end{align*}&#39;&#39;\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/77f7343d0de64606d0cf5d31781c840a9b7405a3/src/volatility.jl#L1-L15">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; bollingerbands(cl)
-ERROR: UndefVarError: cl not defined</code></pre><h2 id="Chaikin-Volatility"><a class="docs-heading-anchor" href="#Chaikin-Volatility">Chaikin Volatility</a><a id="Chaikin-Volatility-1"></a><a class="docs-heading-anchor-permalink" href="#Chaikin-Volatility" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.chaikinvolatility" href="#MarketTechnicals.chaikinvolatility"><code>MarketTechnicals.chaikinvolatility</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">chaikinvolatility(ta, n=10, p=10; h=&quot;High&quot;, l=&quot;Low&quot;)</code></pre><p><strong>Chaikin Volatility</strong></p><p><strong>Parameters</strong></p><ul><li><p><code>n</code> is the smooth period</p></li><li><p><code>p</code> is the previous period</p></li></ul><p><strong>Formula</strong></p><div>\[    &#39;Chaikin Vola =
+481×3 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
+│            │ up       │ down    │ mean     │
+├────────────┼──────────┼─────────┼──────────┤
+│ 2000-01-31 │ 117.3251 │ 89.3939 │ 103.3595 │
+│ 2000-02-01 │ 116.2242 │ 89.3258 │ 102.775  │
+│ 2000-02-02 │ 116.1505 │ 89.0305 │ 102.5905 │
+│ 2000-02-03 │ 116.105  │ 89.007  │ 102.556  │
+│ 2000-02-04 │ 116.4873 │ 89.9247 │ 103.206  │
+│ 2000-02-07 │ 117.9014 │ 89.9666 │ 103.934  │
+│ 2000-02-08 │ 119.2289 │ 90.3521 │ 104.7905 │
+│ 2000-02-09 │ 119.4875 │ 92.0805 │ 105.784  │
+│ 2000-02-10 │ 118.2181 │ 95.9809 │ 107.0995 │
+   ⋮
+│ 2001-12-19 │ 23.3847  │ 19.3273 │ 21.356   │
+│ 2001-12-20 │ 23.3129  │ 19.4981 │ 21.4055  │
+│ 2001-12-21 │ 23.2433  │ 19.6837 │ 21.4635  │
+│ 2001-12-24 │ 23.2429  │ 19.6831 │ 21.463   │
+│ 2001-12-26 │ 23.2546  │ 19.7204 │ 21.4875  │
+│ 2001-12-27 │ 23.2918  │ 19.8372 │ 21.5645  │
+│ 2001-12-28 │ 23.3476  │ 19.9824 │ 21.665   │
+│ 2001-12-31 │ 23.3718  │ 20.0182 │ 21.695   │</code></pre><h2 id="Chaikin-Volatility"><a class="docs-heading-anchor" href="#Chaikin-Volatility">Chaikin Volatility</a><a id="Chaikin-Volatility-1"></a><a class="docs-heading-anchor-permalink" href="#Chaikin-Volatility" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.chaikinvolatility" href="#MarketTechnicals.chaikinvolatility"><code>MarketTechnicals.chaikinvolatility</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">chaikinvolatility(ta, n=10, p=10; h=&quot;High&quot;, l=&quot;Low&quot;)</code></pre><p><strong>Chaikin Volatility</strong></p><p><strong>Parameters</strong></p><ul><li><p><code>n</code> is the smooth period</p></li><li><p><code>p</code> is the previous period</p></li></ul><p><strong>Formula</strong></p><div>\[    &#39;Chaikin Vola =
         frac{EMA(High_t - Low_t, n) - EMA(High_{t-p} - Low_{t-p}, n)}
         {EMA(High_{t-p} - Low_{t-p}, n)}
-        times 100&#39;\]</div><p><strong>Reference</strong></p><ul><li><a href="https://www.incrediblecharts.com/indicators/chaikin_volatility.php">IncredibleCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/959e54fc6d6952a7a7ef67bd98b88df2140b44e0/src/volatility.jl#L126-L151">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
-ERROR: ArgumentError: Package MarketData not found in current path:
-- Run `import Pkg; Pkg.add(&quot;MarketData&quot;)` to install the MarketData package.
+        times 100&#39;\]</div><p><strong>Reference</strong></p><ul><li><a href="https://www.incrediblecharts.com/indicators/chaikin_volatility.php">IncredibleCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/77f7343d0de64606d0cf5d31781c840a9b7405a3/src/volatility.jl#L126-L151">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; chaikinvolatility(ohlc)
-ERROR: UndefVarError: ohlc not defined</code></pre><h2 id="True-Range"><a class="docs-heading-anchor" href="#True-Range">True Range</a><a id="True-Range-1"></a><a class="docs-heading-anchor-permalink" href="#True-Range" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.truerange" href="#MarketTechnicals.truerange"><code>MarketTechnicals.truerange</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">truerange(ohlc; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>True Range</p><div>\[    TR = &#39;max (H_t, C_{t-1}) - min (L_t, C{t-1})&#39;\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/959e54fc6d6952a7a7ef67bd98b88df2140b44e0/src/volatility.jl#L52-L61">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
-ERROR: ArgumentError: Package MarketData not found in current path:
-- Run `import Pkg; Pkg.add(&quot;MarketData&quot;)` to install the MarketData package.
+481×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
+│            │ chaikinvolatility │
+├────────────┼───────────────────┤
+│ 2000-01-31 │ -2.2401           │
+│ 2000-02-01 │ -3.2901           │
+│ 2000-02-02 │ -3.4767           │
+│ 2000-02-03 │ -12.7455          │
+│ 2000-02-04 │ -5.0588           │
+│ 2000-02-07 │ -2.2411           │
+│ 2000-02-08 │ -15.7427          │
+│ 2000-02-09 │ -13.3072          │
+│ 2000-02-10 │ -16.8273          │
+   ⋮
+│ 2001-12-19 │ -14.5449          │
+│ 2001-12-20 │ -19.2088          │
+│ 2001-12-21 │ -16.5194          │
+│ 2001-12-24 │ -17.97            │
+│ 2001-12-26 │ -15.0247          │
+│ 2001-12-27 │ -13.2106          │
+│ 2001-12-28 │ -10.9081          │
+│ 2001-12-31 │ -7.6953           │</code></pre><h2 id="True-Range"><a class="docs-heading-anchor" href="#True-Range">True Range</a><a id="True-Range-1"></a><a class="docs-heading-anchor-permalink" href="#True-Range" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.truerange" href="#MarketTechnicals.truerange"><code>MarketTechnicals.truerange</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">truerange(ohlc; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>True Range</p><div>\[    TR = &#39;max (H_t, C_{t-1}) - min (L_t, C{t-1})&#39;\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/77f7343d0de64606d0cf5d31781c840a9b7405a3/src/volatility.jl#L52-L61">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; truerange(ohlc)
-ERROR: UndefVarError: ohlc not defined</code></pre><h2 id="Average-True-Range"><a class="docs-heading-anchor" href="#Average-True-Range">Average True Range</a><a id="Average-True-Range-1"></a><a class="docs-heading-anchor-permalink" href="#Average-True-Range" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.atr" href="#MarketTechnicals.atr"><code>MarketTechnicals.atr</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">atr(ohlc, n=14; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>Average True Range</p><p>It&#39;s the exponential moving average of <a href="#MarketTechnicals.truerange"><code>truerange</code></a></p><div>\[    ATR = EMA(TR, n)\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/959e54fc6d6952a7a7ef67bd98b88df2140b44e0/src/volatility.jl#L70-L81">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
-ERROR: ArgumentError: Package MarketData not found in current path:
-- Run `import Pkg; Pkg.add(&quot;MarketData&quot;)` to install the MarketData package.
+499×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-04 to 2001-12-31
+│            │ tr    │
+├────────────┼───────┤
+│ 2000-01-04 │ 10.75 │
+│ 2000-01-05 │ 8.06  │
+│ 2000-01-06 │ 12.0  │
+│ 2000-01-07 │ 6.0   │
+│ 2000-01-10 │ 7.5   │
+│ 2000-01-11 │ 8.88  │
+│ 2000-01-12 │ 9.0   │
+│ 2000-01-13 │ 11.56 │
+│ 2000-01-14 │ 5.5   │
+   ⋮
+│ 2001-12-19 │ 1.21  │
+│ 2001-12-20 │ 1.0   │
+│ 2001-12-21 │ 0.87  │
+│ 2001-12-24 │ 0.55  │
+│ 2001-12-26 │ 1.16  │
+│ 2001-12-27 │ 0.76  │
+│ 2001-12-28 │ 1.04  │
+│ 2001-12-31 │ 0.83  │</code></pre><h2 id="Average-True-Range"><a class="docs-heading-anchor" href="#Average-True-Range">Average True Range</a><a id="Average-True-Range-1"></a><a class="docs-heading-anchor-permalink" href="#Average-True-Range" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.atr" href="#MarketTechnicals.atr"><code>MarketTechnicals.atr</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">atr(ohlc, n=14; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p>Average True Range</p><p>It&#39;s the exponential moving average of <a href="#MarketTechnicals.truerange"><code>truerange</code></a></p><div>\[    ATR = EMA(TR, n)\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/77f7343d0de64606d0cf5d31781c840a9b7405a3/src/volatility.jl#L70-L81">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; atr(ohlc)
-ERROR: UndefVarError: ohlc not defined</code></pre><h2 id="Donchian-Channels"><a class="docs-heading-anchor" href="#Donchian-Channels">Donchian Channels</a><a id="Donchian-Channels-1"></a><a class="docs-heading-anchor-permalink" href="#Donchian-Channels" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.donchianchannels" href="#MarketTechnicals.donchianchannels"><code>MarketTechnicals.donchianchannels</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">donchianchannels(ta, n=20; h=&quot;High&quot;, l=&quot;Low&quot;)</code></pre><p><strong>Donchian Channels</strong></p><p><strong>Formula</strong></p><div>\[    &#39;begin{align*}
+486×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-24 to 2001-12-31
+│            │ atr    │
+├────────────┼────────┤
+│ 2000-01-24 │ 8.3436 │
+│ 2000-01-25 │ 8.5147 │
+│ 2000-01-26 │ 8.2237 │
+│ 2000-01-27 │ 8.0649 │
+│ 2000-01-28 │ 8.2217 │
+│ 2000-01-31 │ 8.3044 │
+│ 2000-02-01 │ 8.0684 │
+│ 2000-02-02 │ 7.8578 │
+│ 2000-02-03 │ 7.6851 │
+   ⋮
+│ 2001-12-19 │ 1.02   │
+│ 2001-12-20 │ 1.0185 │
+│ 2001-12-21 │ 1.0079 │
+│ 2001-12-24 │ 0.9752 │
+│ 2001-12-26 │ 0.9884 │
+│ 2001-12-27 │ 0.9721 │
+│ 2001-12-28 │ 0.977  │
+│ 2001-12-31 │ 0.9665 │</code></pre><h2 id="Donchian-Channels"><a class="docs-heading-anchor" href="#Donchian-Channels">Donchian Channels</a><a id="Donchian-Channels-1"></a><a class="docs-heading-anchor-permalink" href="#Donchian-Channels" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.donchianchannels" href="#MarketTechnicals.donchianchannels"><code>MarketTechnicals.donchianchannels</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">donchianchannels(ta, n=20; h=&quot;High&quot;, l=&quot;Low&quot;)</code></pre><p><strong>Donchian Channels</strong></p><p><strong>Formula</strong></p><div>\[    &#39;begin{align*}
         Up   &amp; = max (High_1 to High_t) \
         Mid  &amp; = frac{Up + Down}{2} \
         Down &amp; = min (Low_1 to Low_t)
-    end{align*}&#39;\]</div><p><strong>Reference</strong></p><ul><li><a href="https://www.tradingview.com/wiki/Donchian_Channels_(DC)">TradingView Wiki</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/959e54fc6d6952a7a7ef67bd98b88df2140b44e0/src/volatility.jl#L24-L44">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
-ERROR: ArgumentError: Package MarketData not found in current path:
-- Run `import Pkg; Pkg.add(&quot;MarketData&quot;)` to install the MarketData package.
+    end{align*}&#39;\]</div><p><strong>Reference</strong></p><ul><li><a href="https://www.tradingview.com/wiki/Donchian_Channels_(DC)">TradingView Wiki</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/77f7343d0de64606d0cf5d31781c840a9b7405a3/src/volatility.jl#L24-L44">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; donchianchannels(ohlc)
-ERROR: UndefVarError: ohlc not defined</code></pre><h2 id="Keltner-Bands"><a class="docs-heading-anchor" href="#Keltner-Bands">Keltner Bands</a><a id="Keltner-Bands-1"></a><a class="docs-heading-anchor-permalink" href="#Keltner-Bands" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.keltnerbands" href="#MarketTechnicals.keltnerbands"><code>MarketTechnicals.keltnerbands</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">keltnerbands(ohlc, n=20, w=2; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p><strong>Keltner Channels</strong></p><p>Linda Bradford Raschke introduced the newer version of Keltner Channels in the 1980s. We implement the newer version.</p><p><strong>Formula</strong></p><div>\[    &#39;begin{align*}
+481×3 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
+│            │ up    │ mid    │ down  │
+├────────────┼───────┼────────┼───────┤
+│ 2000-01-31 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-01 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-02 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-03 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-04 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-07 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-08 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-09 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-10 │ 121.5 │ 107.0  │ 92.5  │
+   ⋮
+│ 2001-12-19 │ 24.03 │ 21.645 │ 19.26 │
+│ 2001-12-20 │ 24.03 │ 21.8   │ 19.57 │
+│ 2001-12-21 │ 24.03 │ 21.955 │ 19.88 │
+│ 2001-12-24 │ 24.03 │ 22.06  │ 20.09 │
+│ 2001-12-26 │ 24.03 │ 22.06  │ 20.09 │
+│ 2001-12-27 │ 24.03 │ 22.06  │ 20.09 │
+│ 2001-12-28 │ 24.03 │ 22.06  │ 20.09 │
+│ 2001-12-31 │ 24.03 │ 22.06  │ 20.09 │</code></pre><h2 id="Keltner-Bands"><a class="docs-heading-anchor" href="#Keltner-Bands">Keltner Bands</a><a id="Keltner-Bands-1"></a><a class="docs-heading-anchor-permalink" href="#Keltner-Bands" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.keltnerbands" href="#MarketTechnicals.keltnerbands"><code>MarketTechnicals.keltnerbands</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">keltnerbands(ohlc, n=20, w=2; h=&quot;High&quot;, l=&quot;Low&quot;, c=&quot;Close&quot;)</code></pre><p><strong>Keltner Channels</strong></p><p>Linda Bradford Raschke introduced the newer version of Keltner Channels in the 1980s. We implement the newer version.</p><p><strong>Formula</strong></p><div>\[    &#39;begin{align*}
         text{Up}   &amp; = text{Mid} + w times ATR(n) \
         text{Mid}  &amp; = EMA(P_{typical}, n) \
         text{Down} &amp; = text{Mid} - w times ATR(n)
-    end{align*}&#39;\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels">StockCharts</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Keltner_channel">Wikipedia</a></p></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/959e54fc6d6952a7a7ef67bd98b88df2140b44e0/src/volatility.jl#L88-L114">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
-ERROR: ArgumentError: Package MarketData not found in current path:
-- Run `import Pkg; Pkg.add(&quot;MarketData&quot;)` to install the MarketData package.
+    end{align*}&#39;\]</div><p><strong>Reference</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels">StockCharts</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Keltner_channel">Wikipedia</a></p></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/77f7343d0de64606d0cf5d31781c840a9b7405a3/src/volatility.jl#L88-L114">source</a></section></article><pre><code class="language-julia-repl">julia&gt; using MarketData
 
 julia&gt; using MarketTechnicals
 
 julia&gt; keltnerbands(ohlc)
-ERROR: UndefVarError: ohlc not defined</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../momentum/">« Momentum</a><a class="docs-footer-nextpage" href="../volume/">Volume »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 3 September 2020 08:20">Thursday 3 September 2020</span>. Using Julia version 1.5.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+480×3 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-02-01 to 2001-12-31
+│            │ kup      │ kma      │ kdn     │
+├────────────┼──────────┼──────────┼─────────┤
+│ 2000-02-01 │ 119.9312 │ 103.6682 │ 87.4052 │
+│ 2000-02-02 │ 119.215  │ 103.2532 │ 87.2913 │
+│ 2000-02-03 │ 118.899  │ 103.1913 │ 87.4835 │
+│ 2000-02-04 │ 119.1651 │ 103.5737 │ 87.9823 │
+│ 2000-02-07 │ 119.9635 │ 104.3207 │ 88.6779 │
+│ 2000-02-08 │ 120.5981 │ 105.2504 │ 89.9028 │
+│ 2000-02-09 │ 121.1377 │ 106.0894 │ 91.0412 │
+│ 2000-02-10 │ 121.38   │ 106.6962 │ 92.0123 │
+│ 2000-02-11 │ 121.583  │ 107.0464 │ 92.5097 │
+   ⋮
+│ 2001-12-19 │ 23.0157  │ 20.9971  │ 18.9785 │
+│ 2001-12-20 │ 23.0074  │ 20.9898  │ 18.9721 │
+│ 2001-12-21 │ 23.0053  │ 21.0015  │ 18.9978 │
+│ 2001-12-24 │ 22.9825  │ 21.0239  │ 19.0653 │
+│ 2001-12-26 │ 23.0596  │ 21.0829  │ 19.1063 │
+│ 2001-12-27 │ 23.1209  │ 21.1671  │ 19.2133 │
+│ 2001-12-28 │ 23.2507  │ 21.2905  │ 19.3304 │
+│ 2001-12-31 │ 23.3156  │ 21.3705  │ 19.4254 │</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../momentum/">« Momentum</a><a class="docs-footer-nextpage" href="../volume/">Volume »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 3 September 2020 08:43">Thursday 3 September 2020</span>. Using Julia version 1.5.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
