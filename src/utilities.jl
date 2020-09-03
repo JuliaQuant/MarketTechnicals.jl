@@ -12,7 +12,7 @@ function typical(ohlc::TimeArray{T,N}; h=:High, l=:Low, c=:Close) where {T,N}
     TimeArray(timestamp(val), values(val), [:typical], meta(ohlc))
 end
 
-function mean_abs_dev(a::Array{T,1}, scale::Bool=false) where T
+function mean_abs_dev(a::AbstractArray{T,1}, scale::Bool=false) where T
     scale ? c = 1 / (-sqrt(2) * erfcinv(3 * 1 / 2)) : c =1
 
     res = ones(length(a))

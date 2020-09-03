@@ -1,3 +1,4 @@
 *.swp
 docs/build
 src/.rc.jl
+*.cov

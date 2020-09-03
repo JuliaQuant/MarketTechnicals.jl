@@ -101,7 +101,7 @@ function env(ta::TimeArray, n::Int; e::Float64 = 0.1)
     u = TimeArray(tstamps, upper, up_cnames, meta(ta))
     l = TimeArray(tstamps, lower, lw_cnames, meta(ta))
 
-    merge(l, u, :inner)
+    merge(l, u; method = :inner)
 end
 
 # Array dispatch for use by other algorithms
