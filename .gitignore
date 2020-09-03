@@ -2,3 +2,4 @@
 docs/build
 src/.rc.jl
 *.cov
+Manifest.toml
