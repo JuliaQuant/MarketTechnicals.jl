@@ -6,10 +6,12 @@
 sma
 ```
 
-```@repl
-using MarketData
+```@setup
 using MarketTechnicals
+using MarketData
+```
 
+```@repl
 sma(cl, 5)
 ```
 
@@ -20,9 +22,6 @@ ema
 ```
 
 ```@repl
-using MarketData
-using MarketTechnicals
-
 ema(cl, 10, wilder=true)
 ```
 
@@ -34,9 +33,6 @@ kama
 
 
 ```@repl
-using MarketData
-using MarketTechnicals
-
 kama(cl)
 ```
 
@@ -47,8 +43,5 @@ env
 ```
 
 ```@repl
-using MarketData
-using MarketTechnicals
-
 env(cl, 5)
 ```
