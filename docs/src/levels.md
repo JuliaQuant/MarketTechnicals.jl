@@ -1,15 +1,17 @@
 # Trade levels
 
+```@setup base
+using MarketData
+using MarketTechnicals
+```
+
 ## Floor Trader Pivots
 
 ```@docs
 floorpivots
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 floorpivots(ohlc)
 ```
 
@@ -19,9 +21,6 @@ floorpivots(ohlc)
 woodiespivots
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 woodiespivots(ohlc)
 ```
