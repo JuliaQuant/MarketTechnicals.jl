@@ -1,13 +1,15 @@
-"""
-    rsi(ta, n=14; wilder=false)
+@doc raw"""
+    rsi(ta::TimeArray, n = 14; wilder = false)
 
 Relative Strength Index
 
+# Formula
+
 ```math
-    RSI = 'frac{EMA(Up, n)}{EMA(Up, n) + EMA(Dn, n)}'
+\text{RSI} = \frac{\text{EMA}(\text{Up}, n)}{\text{EMA}(\text{Up}, n) + \text{EMA}(\text{Dn}, n)}
 ```
 """
-function rsi(ta::TimeArray, n::Int=14; wilder::Bool=false)
+function rsi(ta::TimeArray, n::Int = 14; wilder::Bool = false)
     ret = diff(values(ta), dims=1)
     ups = zeros(size(values(ta), 1) - 1, size(values(ta), 2))
     dns = zeros(size(values(ta), 1) - 1, size(values(ta), 2))
@@ -17,7 +19,7 @@ function rsi(ta::TimeArray, n::Int=14; wilder::Bool=false)
         for j in 1:size(values(ta), 2)
             if ret[i, j] >= 0
                 ups[i, j] += ret[i, j]
-            elseif ret[i, j] < 0   
+            elseif ret[i, j] < 0
                 dns[i, j] += ret[i, j]
             end
         end
@@ -38,42 +40,44 @@ function rsi(ta::TimeArray, n::Int=14; wilder::Bool=false)
     TimeArray(timestamp(ta)[n+1:end], res, cname, meta(ta))
 end
 
-"""
-    cci(ohlc, ma=20, c=0.015)
+@doc raw"""
+    cci(ohlc::TimeArray, ma = 20, c = 0.015)
 
 Commodity Channel Index
 
+# Formula
+
 ```math
-    CCI = 'frac{P_{typical} - SMA(P_{typical})}{c times sigma(P_{typical})}'
+CCI = \frac{P_{typical} - \text{SMA}(P_{typical})}{c \times \sigma(P_{typical})}
 ```
 
-**Reference**
+# Reference
 
-- https://en.wikipedia.org/wiki/Commodity_channel_index
+- [Wikipedia](https://en.wikipedia.org/wiki/Commodity_channel_index)
 
 """
-function cci(ohlc::TimeArray, ma::Int=20, c::AbstractFloat=0.015)
+function cci(ohlc::TimeArray, ma::Int = 20, c::AbstractFloat = 0.015)
     pt = typical(ohlc)
     cci = safediv.((pt .- sma(pt, ma)), moving(mean_abs_dev, pt, ma)) ./ c
     rename(cci, :cci)
 end
 
-"""
-    chaikinoscillator(ohlcv, fast=3, slow=10; h="High", l="Low", c="Close")
+@doc raw"""
+    chaikinoscillator(ohlcv::TimeArray, fast = 3, slow = 10; h = :High, l = :Low, c = :Close)
 
-**Chaikin Oscillator**
+Chaikin Oscillator
 
-Developed by Marc Chaikin
+Developed by Marc Chaikin.
 
-**Formula**
+# Formula
 
 ```math
-    'Chaikin OSC = EMA(ADL, fast) - EMA(ADL, slow)'
+\text{Chaikin OSC} = \text{EMA}(\text{ADL}, \text{fast}) - \text{EMA}(\text{ADL}, \text{slow})
 ```
 
 where the [`adl`](@ref) is the Accumulation/Distribution Line.
 
-**Reference**
+# Reference
 
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_oscillator)
@@ -84,25 +88,27 @@ function chaikinoscillator(ohlcv::TimeArray, fast::Integer=3, slow::Integer=10;
     rename(ema(_adl, fast) .- ema(_adl, slow), [:chaikinoscillator])
 end
 
-"""
+@doc raw"""
     macd(ta, fast=12, slow=26, signal=9; wilder=false)
 
 Moving Average Convergence / Divergence
 
+# Formula
+
 ```math
-    'begin{align*}
-        MACD Bar & = DIF - DEM \\
-        DIF & = EMA(P_{close}, fast) - EMA(P_{close}, slow) \\
-        DEM & = EMA(DIF, 9) tag{signal}
-    end{align*}'
+\begin{align*}
+  \text{MACD Bar} & = \text{DIF} - \text{DEM} \\
+  \text{DIF} & = \text{EMA}(P_{close}, \text{fast}) - \text{EMA}(P_{close}, \text{slow}) \\
+  \text{DEM} & = \text{EMA}(\text{DIF}, 9) tag{signal}
+\end{align*}'
 ```
 
-**Return**:
+# Return
 
-`TimeArray` with 3 columns `["macd", "dif", "signal"]`.
+`TimeArray` with 3 columns `[:macd, :dif, :signal]`.
 
 If the input is a multi-column `TimeArray`, the new column names will be
-`["A_macd", "B_macd", "A_dif", "B_dif", "A_signal", "B_signal"]`.
+`[:A_macd, :B_macd, :A_dif, :B_dif, :A_signal, :B_signal]`.
 
 """
 function macd(ta::TimeArray{T,N},
@@ -118,28 +124,28 @@ function macd(ta::TimeArray{T,N},
     merge(merge(osc, dif), sig, colnames=new_cols)
 end
 
-"""
-    roc(ta, n)
+@doc raw"""
+    roc(ta::TimeArray, n)
 
-**Rate of Change**
+Rate of Change
 
-**Formula**:
+# Formula
 
 ```math
-    roc = 'frac{close_{t} - close_{t-n}}{close_{t-n}}'
+\text{ROC} = \frac{P_{t} - P_{t-n}}{P_{t-n}}
 ```
 
-**Reference**:
+# Reference
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Momentum_(technical_analysis))
 
 """
 function roc(ta::TimeArray, n::Integer)
-    prev = lag(ta, n)
-    rename((ta .- prev) ./ prev, [Symbol("$(c)_roc_$(n)") for c ∈ colnames(ta)])
+  prev = lag(ta, n)
+  rename((ta .- prev) ./ prev, [Symbol("$(c)_roc_$(n)") for c ∈ colnames(ta)])
 end
 
-"""
+@doc raw"""
     aroon(ohlc, n=25; h="High", l="Low")
 
 **Aroon Oscillator**
@@ -167,7 +173,7 @@ function aroon(ohlc::TimeArray, n::Integer=25; h=:High, l=:Low)
     merge(merge(up, dn), osc)
 end
 
-"""
+@doc raw"""
     adx(ohlc, n=14; h="High", l="Low", c="Close")
 
 **Average Directional Movement Index**
@@ -204,7 +210,7 @@ function adx(ohlc::TimeArray, n::Integer=14; h=:High, l=:Low, c=:Close)
     rename(merge(adx, merge(dx, di)), ([:adx, :dx, :di_plus, :di_minus]))
 end
 
-"""
+@doc raw"""
     stochasticoscillator(ohlc, n=14, fast_d=3, slow_d=3; h="High", l="Low", c="Close")
 
 **Stochastic Oscillator**
@@ -254,7 +260,7 @@ end
 
 """
 Vortex Indicator
-    
+
     It consists of two oscillators that capture positive and negative trend
     movement. A bullish signal triggers when the positive trend indicator
     crosses above the negative trend indicator or a key level.
@@ -296,12 +302,12 @@ function trix(ohlc::TimeArray, n::Integer=14; c=:Close)
     ema1 = ema(_c, n)
     ema2 = ema(ema1, n)
     ema3 = ema(ema2, n)
-   
+
     _lagema3 = lagfill(ema3, 1, nanmean(values(ema3))[1])
 
     trix = (ema3 .- _lagema3) ./ _lagema3
     trix = rename(100 .* trix, [:trix])
-    
+
 end
 
 
@@ -313,7 +319,7 @@ MASS INDEX
     the current trend.
 
     http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:mass_index
-"""  
+"""
 function massindex(ohlc::TimeArray, n::Integer=14, n2::Int=25; h=:High, l=:Low)
     _h = ohlc[h]
     _l = ohlc[l]
@@ -323,7 +329,7 @@ function massindex(ohlc::TimeArray, n::Integer=14, n2::Int=25; h=:High, l=:Low)
     ema1 = ema(amplitude, n)
     ema2 = ema(ema1, n)
     mass = ema1 ./ ema2
-    mass = rename(moving(nansum, mass, n2), [:mi]) 
+    mass = rename(moving(nansum, mass, n2), [:mi])
 
 end
 
@@ -347,7 +353,7 @@ end
 
 """
 KST Oscillator (KST)
-    
+
     It is useful to identify major stock market cycle junctures because its
     formula is weighed to be more greatly influenced by the longer and more
     dominant time spans, in order to better reflect the primary swings of stock
@@ -357,7 +363,7 @@ KST Oscillator (KST)
 """
 function kst(ohlc::TimeArray, r1::Int=10, r2::Int=15, r3::Int=20, r4::Int=30,
         n1::Int=10, n2::Int=10, n3::Int=10, n4::Int=15, nsig::Int=9; c=:Close)
-    
+
     _c = ohlc[c]
 
     _meanc = nanmean(values(_c))
@@ -379,7 +385,7 @@ end
 
 """
 Ichimoku Kinkō Hyō (Ichimoku)
-    
+
     It identifies the trend and look for potential signals within that trend.
 
     http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ichimoku_cloud
@@ -398,7 +404,7 @@ function ichimoku(ohlc::TimeArray, n1::Int=9, n2::Int=26, n3::Int=52, visual::Bo
         spana = lagfill(spana, n2, nanmean(values(spana)))
         spanb = lagfill(spana, n2, nanmean(values(spanb)))
     end
-    
+
     ichimoku = rename(merge(spana, spanb), [:ichimoku_a, :ichimoku_b])
 
 end
@@ -407,7 +413,7 @@ end
 
 """
 Money Flow Index (MFI)
-    
+
     Uses both price and volume to measure buying and selling pressure. It is
     positive when the typical price rises (buying pressure) and negative when
     the typical price declines (selling pressure). A ratio of positive and
@@ -416,7 +422,7 @@ Money Flow Index (MFI)
 
     http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:money_flow_index_mfi
 """
-function moneyflowindex(ohlcv::TimeArray, n::Int=14; c=:Close, h=:High, l=:Low, v=:Volume)   
+function moneyflowindex(ohlcv::TimeArray, n::Int=14; c=:Close, h=:High, l=:Low, v=:Volume)
 
     _v = ohlcv[v]
     typ = typical(ohlcv, c = c, h = h, l = l)
@@ -428,11 +434,11 @@ function moneyflowindex(ohlcv::TimeArray, n::Int=14; c=:Close, h=:High, l=:Low, 
 
     mf_pos_flag = values(typ .> lagtyp)
     mf_neg_flag = values(typ .< lagtyp)
-    
+
     # Positive rate of money flow
     values_rmf_p = copy(values_rmf)
     values_rmf_p[mf_pos_flag] .= 0
-    rmf_p = moving(nansum, TimeArray(timestamp(ohlcv), values_rmf_p, [:rmf_p]), n, padding = true) 
+    rmf_p = moving(nansum, TimeArray(timestamp(ohlcv), values_rmf_p, [:rmf_p]), n, padding = true)
 
     # Negative rate of money flow
     values_rmf_n = copy(values_rmf)
@@ -440,7 +446,7 @@ function moneyflowindex(ohlcv::TimeArray, n::Int=14; c=:Close, h=:High, l=:Low, 
     rmf_n = moving(nansum, TimeArray(timestamp(ohlcv), values_rmf_n, [:rmf_n]), n, padding = true)
 
     mfr = rmf_p ./ rmf_n
-    
+
     mfi_values = 100 .- 100 ./ (1 .+ values(mfr))
 
     mfi = TimeArray(timestamp(ohlcv), mfi_values, [:mfi])
@@ -453,7 +459,7 @@ end
 TRUE STRENGTH INDEX
 
     Shows both trend direction and overbought/oversold conditions.
-    
+
     https://en.wikipedia.org/wiki/True_strength_index
 """
 function tsi(ohlc::TimeArray, r::Int=25, s::Int=13; c=:Close)
@@ -545,7 +551,7 @@ function williamsr(ohlc::TimeArray, n::Int=14; c=:Close, h=:High, l=:Low)
 
     hh = moving(nanmax, _h, n) # highest high over lookback period lbp
     ll = moving(nanmin, _l, n) # lowest low over lookback period lbp
-    
+
     wr = rename(-100 .* (hh .- _c) ./ (hh .- ll), [:wr])
 
 end
@@ -553,9 +559,9 @@ end
 
 """
 Awesome Oscillator
-    
+
     From: https://www.tradingview.com/wiki/Awesome_Oscillator_(AO)
-    
+
     The Awesome Oscillator is an indicator used to measure market momentum. AO
     calculates the difference of a 34 Period and 5 Period Simple Moving
     Averages. The Simple Moving Averages that are used are not calculated
@@ -581,7 +587,7 @@ function awesomeoscillator(ohlc::TimeArray, s::Int=5, len::Int=34; h=:High, l=:L
     _l = ohlc[l]
 
     mp = 0.5 .* (_h .+ _l)
-    
+
     ao = rename(moving(nanmean, mp, s) .- moving(nanmean, mp, len), [:ao])
 
 end

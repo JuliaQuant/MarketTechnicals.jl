@@ -1,17 +1,17 @@
 # Moving Averages
 
+```@setup base
+using MarketData
+using MarketTechnicals
+```
+
 ## Simple Moving Average
 
 ```@docs
 sma
 ```
 
-```@setup
-using MarketTechnicals
-using MarketData
-```
-
-```@repl
+```@repl base
 sma(cl, 5)
 ```
 
@@ -21,7 +21,7 @@ sma(cl, 5)
 ema
 ```
 
-```@repl
+```@repl base
 ema(cl, 10, wilder=true)
 ```
 
@@ -32,7 +32,7 @@ kama
 ```
 
 
-```@repl
+```@repl base
 kama(cl)
 ```
 
@@ -42,6 +42,6 @@ kama(cl)
 env
 ```
 
-```@repl
+```@repl base
 env(cl, 5)
 ```

@@ -1,15 +1,17 @@
 # Momentum
 
-## Average Directional Movement Index (ADX)
+```@setup base
+using MarketData
+using MarketTechnicals
+```
+
+## ADX
 
 ```@docs
 adx
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 adx(ohlc)
 ```
 
@@ -19,10 +21,7 @@ adx(ohlc)
 aroon
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 aroon(ohlc)
 ```
 
@@ -32,10 +31,7 @@ aroon(ohlc)
 rsi
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 rsi(cl)
 ```
 
@@ -45,10 +41,7 @@ rsi(cl)
 macd
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 macd(cl)
 ```
 
@@ -58,10 +51,7 @@ macd(cl)
 chaikinoscillator
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 chaikinoscillator(ohlcv)
 ```
 
@@ -71,10 +61,7 @@ chaikinoscillator(ohlcv)
 cci
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 cci(ohlc)
 ```
 
@@ -84,10 +71,7 @@ cci(ohlc)
 roc
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 roc(cl, 5)
 ```
 
@@ -97,9 +81,6 @@ roc(cl, 5)
 stochasticoscillator
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 stochasticoscillator(ohlc)
 ```
