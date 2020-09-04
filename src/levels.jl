@@ -4,6 +4,8 @@
 
 Floor Trader Pivots
 
+# Formula
+
 ```math
 \begin{align*}
 
@@ -38,6 +40,8 @@ end
     woodiespivots(ohlc::TimeArray)
 
 Woodie's Pivot
+
+# Formula
 
 ```math
 \begin{align*}
