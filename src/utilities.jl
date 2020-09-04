@@ -29,7 +29,7 @@ Parameters:
     * suffix: the suffix applied to `orig`
 
 ```jldoctest
-julia> MarketTechnicals.gen_colnames([:Open, :Close], [:macd, :dif, :sig])
+julia> gen_colnames([:Open, :Close], [:macd, :dif, :sig])
 6-element Array{Symbol,1}:
  :Open_macd
  :Close_macd
@@ -99,3 +99,36 @@ function lagfill(ta::TimeArray, r1::Int, fill::Float64)
 
 end
 
+_nanmean(x) = mean(filter(!isnan, x))
+nanmean(x; dims = 1) = ndims(x) > 1 ? mapslices(_nanmean, x, dims = dims) : _nanmean(x)
+
+_nansum(x) = sum(filter(!isnan,x))
+nansum(x; dims = 1) = ndims(x) > 1 ? mapslices(_nansum, x, dims = dims) : _nansum(x)
+
+_nanstd(x) = std(filter(!isnan,x))
+nanstd(x; dims = 1) = ndims(x) > 1 ? mapslices(_nanstd, x, dims = dims) : _nanstd(x)
+
+function nancumsum(x)
+	x[isnan.(x)] .= 0
+	cumsum(x)
+end
+
+function nanargmax(x)
+	x[isnan.(x)] .= -Inf
+	argmax(x)
+end
+
+function nanargmin(x)
+	x[isnan.(x)] .= Inf
+	argmin(x)
+end
+
+function nanmax(x)
+	x[isnan.(x)] .= -Inf
+	maximum(x)
+end
+
+function nanmin(x)
+	x[isnan.(x)] .= Inf
+	minimum(x)
+end

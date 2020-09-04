@@ -147,7 +147,7 @@ function env(a::AbstractArray, n::Int; e::Float64 = 0.1)
     [lower upper]
 end
 
-doc"""
+@doc raw"""
     sma(ta::TimeArray, n)
     sma(A::Array, n)
 
@@ -156,12 +156,12 @@ Simple Moving Average
 # Formula
 
 ```math
-SMA = \frac{sum_i^n{P_i}}{n}
+\text{SMA} = \frac{\sum_i^n{P_i}}{n}
 ```
 """
 sma
 
-doc"""
+@doc raw"""
     ema(ta::TimeArray, n, wilder = false)
     ema(A::Array, n, wilder = false)
 
@@ -172,19 +172,19 @@ A.k.a. exponentially weighted moving average (EWMA)
 # Formula
 
 ```math
-    \text{Let } k text{denote the degree of weighting decrease}
+\text{Let } k text{denote the degree of weighting decrease}
 ```
 
 If parameter `wilder` is `true`, `k = \frac{1}{n}`,
 else `k = \frac{2}{n + 1}`.
 
 ```math
-EMA_t = k \times P_t + (1 - k) \times EMA_{t - 1}
+\text{EMA}_t = k \times P_t + (1 - k) \times EMA_{t - 1}
 ```
 """
 ema
 
-doc"""
+@doc raw"""
     kama(ta::TimeArray, n = 10, fn = 2, sn = 30)
 
 Kaufman's Adaptive Moving Average
@@ -200,19 +200,18 @@ Kaufman's Adaptive Moving Average
 # Formula
 
 ```math
-    'begin{align*}
-        KAMA_t & = KAMA_{t-1} + SC times (Price - KAMA_{t-1}) \\
-        SC     & =
-            (ER times (frac{2}{fn + 1} - frac{2}{sn + 1}) + frac{2}{sn + 1})^2 \\
-        ER     & = frac{Change}{Volatility} \\
-        Change & = | Price - Price_{t-n} | \\
-        Volatility & = sum_{i}^{n} | Price_i - Price_{i-1} |
-    end{align*}'
+\begin{align*}
+  \text{KAMA}_t     & = KAMA_{t-1} + SC times (Price - KAMA_{t-1}) \\
+  \text{SC}         & = (ER times (frac{2}{fn + 1} - frac{2}{sn + 1}) + frac{2}{sn + 1})^2 \\
+  \text{ER}         & = frac{Change}{Volatility} \\
+  \text{Change}     & = | Price - Price_{t-n} | \\
+  \text{Volatility} & = \sum_{i}^{n} | Price_i - Price_{i-1} |
+\end{align*}
 ```
 """
 kama
 
-doc"""
+@doc raw"""
     env(ta::TimeArray, n; e = 0.1)
     env(A::AbstractArray, n; e = 0.1)
 
