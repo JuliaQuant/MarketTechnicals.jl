@@ -3,7 +3,7 @@ using MarketTechnicals
 
 
 makedocs(
-    format = Documenter.HTML(),
+    format = Documenter.HTML(mathengine = Documenter.Writers.HTMLWriter.MathJax3()),
     sitename = "MarketTechnicals.jl",
     modules = [MarketTechnicals],
     pages = [

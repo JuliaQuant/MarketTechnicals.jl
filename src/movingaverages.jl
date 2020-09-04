@@ -171,15 +171,13 @@ A.k.a. exponentially weighted moving average (EWMA)
 
 # Formula
 
-```math
-\text{Let } k text{denote the degree of weighting decrease}
-```
+Let ``k`` denote the degree of weighting decrease.
 
-If parameter `wilder` is `true`, `k = \frac{1}{n}`,
-else `k = \frac{2}{n + 1}`.
+If parameter `wilder` is `true`, ``k = \frac{1}{n}``,
+else ``k = \frac{2}{n + 1}``.
 
 ```math
-\text{EMA}_t = k \times P_t + (1 - k) \times EMA_{t - 1}
+\text{EMA}_t = k \times P_t + (1 - k) \times \text{EMA}_{t - 1}
 ```
 """
 ema
@@ -201,11 +199,11 @@ Kaufman's Adaptive Moving Average
 
 ```math
 \begin{align*}
-  \text{KAMA}_t     & = KAMA_{t-1} + SC times (Price - KAMA_{t-1}) \\
-  \text{SC}         & = (ER times (frac{2}{fn + 1} - frac{2}{sn + 1}) + frac{2}{sn + 1})^2 \\
-  \text{ER}         & = frac{Change}{Volatility} \\
-  \text{Change}     & = | Price - Price_{t-n} | \\
-  \text{Volatility} & = \sum_{i}^{n} | Price_i - Price_{i-1} |
+  \text{KAMA}_t     & = \text{KAMA}_{t-1} + \text{SC} \times (\text{Price} - \text{KAMA}_{t-1}) \\
+  \text{SC}         & = (\text{ER} \times (\frac{2}{fn + 1} - \frac{2}{sn + 1}) + \frac{2}{sn + 1})^2 \\
+  \text{ER}         & = \frac{Change}{Volatility} \\
+  \text{Change}     & = | \text{Price} - \text{Price}_{t-n} | \\
+  \text{Volatility} & = \sum_{i}^{n} | \text{Price}_i - \text{Price}_{i - 1} |
 \end{align*}
 ```
 """
@@ -218,10 +216,10 @@ kama
 Moving Average Envelope
 
 ```math
-  \begin{align*}
-    \text{Upper Envelope} & = text{n period SMA } times (1 + e) \\
-    \text{Lower Envelope} & = text{n period SMA } times (1 - e)
-  \end{align*}
+\begin{align*}
+  \text{Upper Envelope} & = \text{SMA}(n) \times (1 + e) \\
+  \text{Lower Envelope} & = \text{SMA}(n) \times (1 - e)
+\end{align*}
 ```
 
 # Arguments
