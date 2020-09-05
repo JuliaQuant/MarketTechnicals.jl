@@ -225,8 +225,8 @@ A.k.a *%K%D*, or *KD*
 
 ```math
 \begin{align*}
-  \text{fast %K} & = \frac{\text{Close}_t - max(\text{High}_{t-n}, \dots, \text{High}_t)}
-        {max(\text{High}_{t-n}, \dots, \text{High}_t) - min(\text{Low}_{t-n}, \dots, \text{Low}_t)}
+  \text{fast %K} & = \frac{\text{Close}_t - \max(\text{High}_{t-n}, \dots, \text{High}_t)}
+        {\max(\text{High}_{t-n}, \dots, \text{High}_t) - \min(\text{Low}_{t-n}, \dots, \text{Low}_t)}
         \times 100 \\
   \text{fast %D} & = \text{SMA}(\text{fast %K}) \\
   \text{slow %D} & = \text{SMA}(\text{fast %D})
@@ -486,9 +486,9 @@ momentum across three different timeframes.
 
 ```math
 \begin{align*}
-  \text{BP}        & = P^\text{Close} - min(P^\text{Low}, P_{t-1}^\text{Close}) \\
-  \text{TR}        & = max(P^\text{High}, P_{t-1}^\text{Close}) -
-                       min(P^\text{Low},  P_{t-1}^\text{Close}) \\
+  \text{BP}        & = P^\text{Close} - \min(P^\text{Low}, P_{t-1}^\text{Close}) \\
+  \text{TR}        & = \max(P^\text{High}, P_{t-1}^\text{Close}) -
+                       \min(P^\text{Low},  P_{t-1}^\text{Close}) \\
   \text{Average7}  & = \frac{\text{7-period BP Sum}}{\text{7-period TR Sum}} \\
   \text{Average14} & = \frac{\text{14-period BP Sum}}{\text{14-period TR Sum}} \\
   \text{Average28} & = \frac{\text{28-period BP Sum}}{\text{28-period TR Sum}} \\

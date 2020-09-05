@@ -5,16 +5,6 @@ using MarketData
 using MarketTechnicals
 ```
 
-## Simple Moving Average
-
-```@docs
-sma
-```
-
-```@repl base
-sma(cl, 5)
-```
-
 ## Exponential Moving Average
 
 ```@docs
@@ -43,4 +33,14 @@ env
 
 ```@repl base
 env(cl, 5)
+```
+
+## Simple Moving Average
+
+```@docs
+sma
+```
+
+```@repl base
+sma(cl, 5)
 ```
