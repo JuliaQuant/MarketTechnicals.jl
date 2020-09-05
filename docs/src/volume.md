@@ -1,40 +1,36 @@
 # Volume
 
-## Accumulation/Distribution Line (ADL)
+```@setup base
+using MarketData
+using MarketTechnicals
+```
+
+## ADL
 
 ```@docs
 adl
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 adl(ohlcv)
 ```
 
-## On Balance Volume (OBV)
+## OBV
 
 ```@docs
 obv
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 obv(ohlcv)
 ```
 
-## Volume Weight-Adjusted Price (VWAP)
+## VWAP
 
 ```@docs
 vwap
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 vwap(ohlcv)
 ```

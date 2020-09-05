@@ -16,17 +16,18 @@ Candlestick patterns identify certain formations for these candlesticks.
 Sometimes these patterns only concern a single trading day's activity and
 other times it spans several trading periods.
 
-## Doji
+```@setup base
+using MarketData
+using MarketTechnicals
+```
 
+## Doji
 
 The doji pattern is identified with a very small candle body,
 where the open and closing price are nearly identical.
 It suggests some ambivalence in the market
 about what the fair value of the underlying asset is.
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 findwhen(doji(ohlc))
 ```

@@ -5,7 +5,7 @@ using MarketData
 using MarketTechnicals
 ```
 
-## Average True Range
+## ATR
 
 ```@docs
 atr
@@ -55,7 +55,7 @@ keltnerbands
 keltnerbands(ohlc)
 ```
 
-## True Range
+## TR
 
 ```@docs
 truerange

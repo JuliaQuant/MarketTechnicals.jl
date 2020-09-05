@@ -1,10 +1,10 @@
-"""
-    typical(ohlc; h="High", l="Low", c="Close")
+@doc raw"""
+    typical(ohlc::TimeArray; h = :High, l = :Low, c = :Close)
 
 Typical Price
 
 ```math
-    'text{Typical Price} = frac{H + L + C}{3}'
+\text{Typical Price} = \frac{P^\text{High} + P^\text{Low} + P^\text{Close}}{3}
 ```
 """
 function typical(ohlc::TimeArray{T,N}; h=:High, l=:Low, c=:Close) where {T,N}
