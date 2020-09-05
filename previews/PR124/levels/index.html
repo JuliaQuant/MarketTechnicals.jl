@@ -10,7 +10,7 @@
   S_2            &amp; = \text{Pivot}_t - (R_1 - S_1) \\
   S_3            &amp; = \text{Pivot}_t - (R_2 - S_1)
 
-\end{align*}\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/78456af1a53522264b7b9f3aaa5c18e19cde4b27/src/levels.jl#L2-L23">source</a></section></article><pre><code class="language-julia-repl">julia&gt; floorpivots(ohlc)
+\end{align*}\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ae0ae07f71f34c5d1f58f4d9199875cf9c74743f/src/levels.jl#L2-L23">source</a></section></article><pre><code class="language-julia-repl">julia&gt; floorpivots(ohlc)
 499×7 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-04 to 2001-12-31
 │            │ s3      │ s2      │ s1       │ pivot    │ r1       │ r2       │
 ├────────────┼─────────┼─────────┼──────────┼──────────┼──────────┼──────────┤
@@ -43,7 +43,7 @@
   S_2            &amp; = \text{Pivot}_t - \text{Range} \\
   S_3            &amp; = S1 - \text{Range} \\
   S_4            &amp; = S3 - \text{Range} \tag{not implemented}
-\end{align*}\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/78456af1a53522264b7b9f3aaa5c18e19cde4b27/src/levels.jl#L39-L61">source</a></section></article><pre><code class="language-julia-repl">julia&gt; woodiespivots(ohlc)
+\end{align*}\]</div></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/ae0ae07f71f34c5d1f58f4d9199875cf9c74743f/src/levels.jl#L39-L61">source</a></section></article><pre><code class="language-julia-repl">julia&gt; woodiespivots(ohlc)
 499×7 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-04 to 2001-12-31
 │            │ s3     │ s2      │ s1      │ pivot    │ r1      │ r2       │
 ├────────────┼────────┼─────────┼─────────┼──────────┼─────────┼──────────┤
@@ -64,4 +64,4 @@
 │ 2001-12-26 │ 20.525 │ 20.7125 │ 21.075  │ 21.2625  │ 21.625  │ 21.8125  │
 │ 2001-12-27 │ 19.84  │ 20.49   │ 21.0    │ 21.65    │ 22.16   │ 22.81    │
 │ 2001-12-28 │ 20.965 │ 21.2725 │ 21.635  │ 21.9425  │ 22.305  │ 22.6125  │
-│ 2001-12-31 │ 20.95  │ 21.455  │ 21.99   │ 22.495   │ 23.03   │ 23.535   │</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../ma/">« Moving Averages</a><a class="docs-footer-nextpage" href="../momentum/">Momentum »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Saturday 5 September 2020 03:30">Saturday 5 September 2020</span>. Using Julia version 1.5.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+│ 2001-12-31 │ 20.95  │ 21.455  │ 21.99   │ 22.495   │ 23.03   │ 23.535   │</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../ma/">« Moving Averages</a><a class="docs-footer-nextpage" href="../momentum/">Momentum »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Saturday 5 September 2020 04:15">Saturday 5 September 2020</span>. Using Julia version 1.5.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
