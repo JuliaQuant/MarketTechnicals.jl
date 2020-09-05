@@ -1,6 +1,9 @@
 using Documenter
 using MarketTechnicals
 
+# https://juliadocs.github.io/Documenter.jl/stable/man/doctests/#Module-level-metadata
+DocMeta.setdocmeta!(MarketTechnicals, :DocTestSetup, :(using MarketTechnicals);
+                    recursive = true)
 
 makedocs(
   format = Documenter.HTML(mathengine = Documenter.Writers.HTMLWriter.MathJax3()),

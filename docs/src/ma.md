@@ -31,7 +31,6 @@ ema(cl, 10, wilder=true)
 kama
 ```
 
-
 ```@repl base
 kama(cl)
 ```

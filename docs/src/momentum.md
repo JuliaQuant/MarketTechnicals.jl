@@ -25,34 +25,14 @@ aroon
 aroon(ohlc)
 ```
 
-## RSI
+## Awesome Oscillator
 
 ```@docs
-rsi
+awesomeoscillator
 ```
 
 ```@repl base
-rsi(cl)
-```
-
-## MACD
-
-```@docs
-macd
-```
-
-```@repl base
-macd(cl)
-```
-
-## Chaikin Oscillator
-
-```@docs
-chaikinoscillator
-```
-
-```@repl base
-chaikinoscillator(ohlcv)
+awesomeoscillator(ohlc)
 ```
 
 ## CCI
@@ -65,6 +45,56 @@ cci
 cci(ohlc)
 ```
 
+## Chaikin Oscillator
+
+```@docs
+chaikinoscillator
+```
+
+```@repl base
+chaikinoscillator(ohlcv)
+```
+
+## DPO
+
+```@docs
+dpo
+```
+
+```@repl base
+dpo(ohlc)
+```
+
+## KST
+
+```@docs
+kst
+```
+
+```@repl base
+kst(cl)
+```
+
+## MACD
+
+```@docs
+macd
+```
+
+```@repl base
+macd(cl)
+```
+
+## Mass Index
+
+```@docs
+massindex
+```
+
+```@repl base
+massindex(ohlc)
+```
+
 ## Rate of Change (ROC)
 
 ```@docs
@@ -75,6 +105,16 @@ roc
 roc(cl, 5)
 ```
 
+## RSI
+
+```@docs
+rsi
+```
+
+```@repl base
+rsi(cl)
+```
+
 ## Stochastic Oscillator
 
 ```@docs
@@ -83,4 +123,44 @@ stochasticoscillator
 
 ```@repl base
 stochasticoscillator(ohlc)
+```
+
+## TRIX
+
+```@docs
+trix
+```
+
+```@repl base
+trix(cl)
+```
+
+## Ultimate Oscillator
+
+```@docs
+ultimateoscillator
+```
+
+```@repl base
+ultimateoscillator(ohlc)
+```
+
+## Vortex Indicator
+
+```@docs
+vortex
+```
+
+```@repl base
+vortex(ohlc)
+```
+
+## Williams %R
+
+```@docs
+williamsr
+```
+
+```@repl base
+williamsr(ohlc)
 ```

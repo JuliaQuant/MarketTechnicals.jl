@@ -29,7 +29,7 @@ Parameters:
     * suffix: the suffix applied to `orig`
 
 ```jldoctest
-julia> gen_colnames([:Open, :Close], [:macd, :dif, :sig])
+julia> MarketTechnicals.gen_colnames([:Open, :Close], [:macd, :dif, :sig])
 6-element Array{Symbol,1}:
  :Open_macd
  :Close_macd
@@ -96,7 +96,6 @@ function lagfill(ta::TimeArray, r1::Int, fill::Float64)
     _lta_values[1:r1] .= fill
 
     TimeArray(timestamp(ta), _lta_values, colnames(ta))
-
 end
 
 _nanmean(x) = mean(filter(!isnan, x))
