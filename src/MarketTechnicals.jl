@@ -6,15 +6,18 @@ using StatsBase
 
 @reexport using TimeSeries
 
+# movingaverages.jl
 export sma, ema, kama, env,
        bollingerbands, truerange, atr, keltnerbands, chaikinvolatility, donchianchannels,
        obv, vwap, adl, chaikinmoneyflow, forceindex, easeofmovement, volumepricetrend,
        doji,
-       rsi, macd, cci, roc, adx, stochasticoscillator, chaikinoscillator, aroon, vortex,
-       trix, massindex, dpo, kst, ichimoku, moneyflowindex, tsi, ultimateoscillator, williamsr,
-       awesomeoscillator,
-       floorpivots, woodiespivots,
        typical
+# levels.jl
+export floorpivots, woodiespivots
+# momentum.jl
+export rsi, macd, cci, roc, adx, stochasticoscillator, chaikinoscillator, aroon, vortex,
+       trix, massindex, dpo, kst, ichimoku, moneyflowindex, tsi, ultimateoscillator, williamsr,
+       awesomeoscillator
 
 include("utilities.jl")
 include("candlesticks.jl")
