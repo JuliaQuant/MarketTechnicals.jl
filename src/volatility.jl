@@ -36,7 +36,7 @@ Donchian Channels
 \end{align*}
 ```
 
-# Reference
+# References
 
 - [TradingView Wiki]
   (https://www.tradingview.com/wiki/Donchian_Channels_(DC))
@@ -82,9 +82,9 @@ It's the exponential moving average of [`truerange`](@ref)
 ```
 """
 function atr(ohlc::TimeArray, n::Integer = 14; h = :High, l = :Low, c = :Close)
-    # atr was invented by Wilder, so only his ema is currently supported
-    res = ema(truerange(ohlc; h = h, l = l, c = c), n, wilder = true)
-    TimeArray(timestamp(res), values(res), [:atr], meta(ohlc))
+  # atr was invented by Wilder, so only his ema is currently supported
+  res = ema(truerange(ohlc; h = h, l = l, c = c), n, wilder = true)
+  TimeArray(timestamp(res), values(res), [:atr], meta(ohlc))
 end
 
 @doc raw"""
@@ -105,7 +105,7 @@ in the 1980s. We implement the newer version.
 \end{align*}
 ```
 
-# Reference
+# References
 
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels)
@@ -113,15 +113,15 @@ in the 1980s. We implement the newer version.
 - [Wikipedia]
   (https://en.wikipedia.org/wiki/Keltner_channel)
 """
-function keltnerbands(ohlc::TimeArray, n::Integer=20, w::Float64=2.0;
-                      h=:High, l=:Low, c=:Close)
-    kma = rename(ema(typical(ohlc, h=h, l=l, c=c), n), :kma)
-    rng = atr(ohlc, n, h=h, l=l, c=c)
+function keltnerbands(ohlc::TimeArray, n::Integer = 20, w::AbstractFloat = 2.0;
+                      h = :High, l = :Low, c = :Close)
+  kma = rename(ema(typical(ohlc, h=h, l=l, c=c), n), :kma)
+  rng = atr(ohlc, n, h=h, l=l, c=c)
 
-    kup = rename(kma .+ (2 .* rng), :kup)
-    kdn = rename(kma .- (2 .* rng), :kdn)
+  kup = rename(kma .+ (2 .* rng), :kup)
+  kdn = rename(kma .- (2 .* rng), :kdn)
 
-    merge(kup, merge(kma, kdn))
+  merge(kup, merge(kma, kdn))
 end
 
 @doc raw"""
@@ -143,14 +143,14 @@ Chaikin Volatility
   \times 100
 ```
 
-# Reference
+# References
 
 - [IncredibleCharts]
   (https://www.incrediblecharts.com/indicators/chaikin_volatility.php)
 """
 function chaikinvolatility(ta::TimeArray, n::Integer = 10, p::Integer = 10;
                            h = :High, l = :Low)
-    rng = ema(ta[h] .- ta[l], n)
-    prev = lag(rng, p)
-    rename(@.((rng - prev) / prev * 100), :chaikinvolatility)
+  rng = ema(ta[h] .- ta[l], n)
+  prev = lag(rng, p)
+  rename(@.((rng - prev) / prev * 100), :chaikinvolatility)
 end

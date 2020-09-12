@@ -47,7 +47,7 @@ Commodity Channel Index
 CCI = \frac{P^{typical} - \text{SMA}(P^{typical})}{c \times \sigma(P^{typical})}
 ```
 
-# Reference
+# References
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Commodity_channel_index)
 
@@ -73,13 +73,13 @@ Developed by Marc Chaikin.
 
 where the [`adl`](@ref) is the Accumulation/Distribution Line.
 
-# Reference
+# References
 
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_oscillator)
 """
-function chaikinoscillator(ohlcv::TimeArray, fast::Integer=3, slow::Integer=10;
-                           h=:High, l=:Low, c=:Close, v=:Volume)
+function chaikinoscillator(ohlcv::TimeArray, fast::Integer = 3, slow::Integer = 10;
+                           h = :High, l = :Low, c = :Close, v = :Volume)
   _adl = adl(ohlcv, h=h, l=l, c=c, v=v)
   rename(ema(_adl, fast) .- ema(_adl, slow), [:chaikinoscillator])
 end
@@ -107,9 +107,8 @@ If the input is a multi-column `TimeArray`, the new column names will be
 `[:A_macd, :B_macd, :A_dif, :B_dif, :A_signal, :B_signal]`.
 
 """
-function macd(ta::TimeArray{T,N},
-              fast::Int=12, slow::Int=26, signal::Int=9;
-              wilder::Bool=false) where {T,N}
+function macd(ta::TimeArray{T,N}, fast::Integer = 12, slow::Integer = 26, signal::Integer = 9;
+              wilder::Bool = false) where {T, N}
   dif = ema(ta, fast, wilder=wilder) .- ema(ta, slow, wilder=wilder)
   sig = ema(dif, signal, wilder=wilder)
   osc = dif .- sig
@@ -131,7 +130,7 @@ Rate of Change
 \text{ROC} = \frac{P_{t} - P_{t-n}}{P_{t-n}}
 ```
 
-# Reference
+# References
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Momentum_(technical_analysis))
 
@@ -150,18 +149,18 @@ Aroon Oscillator
 
 ```math
 \begin{align*}
-    \text{up}   & = \frac{\mathop{argmax}(\text{High}_{t-n} \dots \text{High}_t)}{n} \times 100 \\
-    \text{down} & = \frac{\mathop{argmin}(\text{Low}_{t-n} \dots \text{Low}_t)}{n} \times 100 \\
-    \text{osc}  & = \text{up} - \text{down}
+  \text{up}   & = \frac{\mathop{argmax}(\text{High}_{t-n} \dots \text{High}_t)}{n} \times 100 \\
+  \text{down} & = \frac{\mathop{argmin}(\text{Low}_{t-n} \dots \text{Low}_t)}{n} \times 100 \\
+  \text{osc}  & = \text{up} - \text{down}
 \end{align*}
 ```
 
-# Reference
+# References
 
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:aroon_oscillator)
 """
-function aroon(ohlc::TimeArray, n::Integer=25; h = :High, l = :Low)
+function aroon(ohlc::TimeArray, n::Integer = 25; h = :High, l = :Low)
   up = rename(moving(nanargmax, ohlc[h], n) ./ n .* 100, :up)
   dn = rename(moving(nanargmin, ohlc[l], n) ./ n .* 100, :down)
   osc = rename(up .- dn, :osc)
@@ -177,7 +176,7 @@ Average Directional Movement Index
 Developed by J. Welles Wilder.
 This implementation follows StockCharts.
 
-# Reference
+# References
 
 - [wikipedia]
   (https://en.wikipedia.org/wiki/Average_directional_movement_index)
@@ -185,7 +184,7 @@ This implementation follows StockCharts.
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx)
 """
-function adx(ohlc::TimeArray, n::Integer=14; h = :High, l = :Low, c = :Close)
+function adx(ohlc::TimeArray, n::Integer = 14; h = :High, l = :Low, c = :Close)
   dm = relu(merge(ohlc[h] .- lag(ohlc[h]), lag(ohlc[l]) .- ohlc[l]))
 
   _dm_values = values(dm)
@@ -233,7 +232,7 @@ A.k.a *%K%D*, or *KD*
 \end{align*}
 ```
 
-# Reference
+# References
 
 - [Wikipedia]
   (https://en.wikipedia.org/wiki/Stochastic_oscillator)
@@ -241,8 +240,8 @@ A.k.a *%K%D*, or *KD*
 - [FMLabs]
   (http://www.fmlabs.com/reference/default.htm?url=StochasticOscillator.htm)
 """
-function stochasticoscillator(ohlc::TimeArray, n::Integer=14, fast_d::Integer=3,
-                              slow_d::Integer=3; h=:High, l=:Low, c=:Close)
+function stochasticoscillator(ohlc::TimeArray, n::Integer = 14, fast_d::Integer = 3,
+                              slow_d::Integer = 3; h = :High, l = :Low, c = :Close)
   high = moving(nanmax, ohlc[h], n)
   low = moving(nanmin, ohlc[l], n)
   fast_k = rename((ohlc[c] .- low) ./ (high .- low) .* 100, :fast_k)
@@ -261,7 +260,7 @@ It consists of two oscillators that capture positive and negative trend
 movement. A bullish signal triggers when the positive trend indicator
 crosses above the negative trend indicator or a key level.
 
-# Reference
+# References
 
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:vortex_indicator)
@@ -293,7 +292,7 @@ TRIX
 Shows the percent rate of change of a triple exponentially smoothed moving
 average.
 
-# Reference
+# References
 
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix)
@@ -318,11 +317,11 @@ It uses the high-low range to identify trend reversals based on range
 expansions. It identifies range bulges that can foreshadow a reversal of
 the current trend.
 
-# Reference
+# References
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:mass_index)
 """
-function massindex(ohlc::TimeArray, n::Integer=14, n2::Int=25; h=:High, l=:Low)
+function massindex(ohlc::TimeArray, n::Integer = 14, n2::Integer = 25; h = :High, l = :Low)
   _h = ohlc[h]
   _l = ohlc[l]
 
@@ -342,7 +341,7 @@ Detrended Price Oscillator (DPO)
 Is an indicator designed to remove trend from price and make it easier to
 identify cycles.
 
-# Reference
+# References
 - [StockCharts]
   (http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:detrended_price_osci)
 """
@@ -364,11 +363,11 @@ formula is weighed to be more greatly influenced by the longer and more
 dominant time spans, in order to better reflect the primary swings of stock
 market cycle.
 
-# Reference
+# References
 - [Wikipedia](https://en.wikipedia.org/wiki/KST_oscillator)
 """
-function kst(ta::TimeArray, r1::Int=10, r2::Int=15, r3::Int=20, r4::Int=30,
-             n1::Int=10, n2::Int=10, n3::Int=10, n4::Int=15, nsig::Int=9)
+function kst(ta::TimeArray, r1::Integer = 10, r2::Integer = 15, r3::Integer = 20, r4::Integer = 30,
+             n1::Integer = 10, n2::Integer = 10, n3::Integer = 10, n4::Integer = 15, nsig::Integer = 9)
   _meanc = nanmean(values(ta))
   _lagcr1 = lagfill(ta, r1, _meanc)
   _lagcr2 = lagfill(ta, r2, _meanc)
@@ -393,7 +392,8 @@ Ichimoku Kinkō Hyō (Ichimoku)
 
     http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ichimoku_cloud
 """
-function ichimoku(ohlc::TimeArray, n1::Int=9, n2::Int=26, n3::Int=52, visual::Bool=False; h=:High, l=:Low)
+function ichimoku(ohlc::TimeArray, n1::Integer = 9, n2::Integer = 26, n3::Integer = 52;
+                  visual::Bool = false, h = :High, l = :Low)
   _h = ohlc[h]
   _l = ohlc[l]
 
@@ -424,7 +424,8 @@ oscillator that moves between zero and one hundred.
 
 http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:money_flow_index_mfi
 """
-function moneyflowindex(ohlcv::TimeArray, n::Int=14; c=:Close, h=:High, l=:Low, v=:Volume)
+function moneyflowindex(ohlcv::TimeArray, n::Integer = 14;
+                        c = :Close, h = :High, l = :Low, v = :Volume)
   _v = ohlcv[v]
   typ = typical(ohlcv, c = c, h = h, l = l)
 
@@ -461,7 +462,7 @@ TRUE STRENGTH INDEX
 
     https://en.wikipedia.org/wiki/True_strength_index
 """
-function tsi(ohlc::TimeArray, r::Int=25, s::Int=13; c=:Close)
+function tsi(ohlc::TimeArray, r::Integer = 25, s::Integer = 13; c = :Close)
   _c = ohlc[c]
   _lagc = lagfill(_c, 1, nanmean(values(_c)))
 
@@ -500,13 +501,13 @@ momentum across three different timeframes.
 \end{align*}
 ```
 
-# Reference
+# References
 
 - [StockCharts](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator)
 """
-function ultimateoscillator(ohlc::TimeArray, s::Int=7, m::Int=14, len::Int=28,
-                            ws::Float64=4.0, wm::Float64=2.0, wl::Float64=1.0;
-                            c=:Close, h=:High, l=:Low)
+function ultimateoscillator(ohlc::TimeArray, s::Integer = 7, m::Integer = 14, len::Integer = 28,
+                            ws::AbstractFloat = 4.0, wm::AbstractFloat = 2.0, wl::AbstractFloat = 1.0;
+                            c = :Close, h = :High, l = :Low)
   _c = ohlc[c]
   _h = ohlc[h]
   _l = ohlc[l]
@@ -563,13 +564,13 @@ The Williams %R oscillates from 0 to -100. When the indicator produces
 readings from 0 to -20, this indicates overbought market conditions. When
 readings are -80 to -100, it indicates oversold market conditions [2].
 
-# Reference
+# References
 
 1. [StockCharts](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:williams_r)
 2. [Investopedia](https://www.investopedia.com/terms/w/williamsr.asp)
 
 """
-function williamsr(ohlc::TimeArray, n::Int=14; c=:Close, h=:High, l=:Low)
+function williamsr(ohlc::TimeArray, n::Integer = 14; c = :Close, h = :High, l = :Low)
   _c = ohlc[c]
   _h = ohlc[h]
   _l = ohlc[l]
@@ -605,12 +606,12 @@ simple moving average, graphed across the central points of the bars
 \end{align*}
 ```
 
-# Reference
+# References
 
 1. [TradingView](https://www.tradingview.com/wiki/Awesome_Oscillator_(AO))
 2. https://www.ifcm.co.uk/ntx-indicators/awesome-oscillator
 """
-function awesomeoscillator(ohlc::TimeArray, s::Int = 5, n::Int = 34;
+function awesomeoscillator(ohlc::TimeArray, s::Integer = 5, n::Integer = 34;
                            h = :High, l = :Low)
   _h = ohlc[h]
   _l = ohlc[l]

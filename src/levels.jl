@@ -109,4 +109,3 @@ end
 function market_profile(x)
   #code here
 end
-
