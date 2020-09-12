@@ -1,28 +1,29 @@
 using Documenter
 using MarketTechnicals
 
+# https://juliadocs.github.io/Documenter.jl/stable/man/doctests/#Module-level-metadata
+DocMeta.setdocmeta!(MarketTechnicals, :DocTestSetup, :(using MarketTechnicals);
+                    recursive = true)
 
 makedocs(
-    format = :html,
-    sitename = "MarketTechnicals.jl",
-    pages = [
-        "index.md",
-        "getting_started.md",
-        "ma.md",
-        "levels.md",
-        "momentum.md",
-        "volatility.md",
-        "volume.md",
-        "candlesticks.md",
-        "utils.md",
-    ]
+  format = Documenter.HTML(mathengine = Documenter.Writers.HTMLWriter.MathJax3()),
+  sitename = "MarketTechnicals.jl",
+  modules = [MarketTechnicals],
+  pages = [
+    "index.md",
+    "getting_started.md",
+    "ma.md",
+    "levels.md",
+    "momentum.md",
+    "volatility.md",
+    "volume.md",
+    "candlesticks.md",
+    "utils.md",
+  ],
 )
 
 deploydocs(
-    repo = "github.com/JuliaQuant/MarketTechnicals.jl.git",
-    julia  = "0.6",
-    latest = "master",
-    target = "build",
-    deps = nothing,  # we use the `format = :html`, without `mkdocs`
-    make = nothing,  # we use the `format = :html`, without `mkdocs`
+  repo         = "github.com/JuliaQuant/MarketTechnicals.jl.git",
+  devbranch    = "master",
+  push_preview = true,
 )

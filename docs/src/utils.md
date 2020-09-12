@@ -1,14 +1,16 @@
 # Utilities
 
+```@setup base
+using MarketData
+using MarketTechnicals
+```
+
 ## Typical Price
 
 ```@docs
 typical
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 merge(ohlc, typical(ohlc))
 ```

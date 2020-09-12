@@ -1,15 +1,17 @@
 # Momentum
 
-## Average Directional Movement Index (ADX)
+```@setup base
+using MarketData
+using MarketTechnicals
+```
+
+## ADX
 
 ```@docs
 adx
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 adx(ohlc)
 ```
 
@@ -19,50 +21,18 @@ adx(ohlc)
 aroon
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 aroon(ohlc)
 ```
 
-## RSI
+## Awesome Oscillator
 
 ```@docs
-rsi
+awesomeoscillator
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
-rsi(cl)
-```
-
-## MACD
-
-```@docs
-macd
-```
-
-```@repl
-using MarketData
-using MarketTechnicals
-
-macd(cl)
-```
-
-## Chaikin Oscillator
-
-```@docs
-chaikinoscillator
-```
-
-```@repl
-using MarketData
-using MarketTechnicals
-
-chaikinoscillator(ohlcv)
+```@repl base
+awesomeoscillator(ohlc)
 ```
 
 ## CCI
@@ -71,11 +41,58 @@ chaikinoscillator(ohlcv)
 cci
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 cci(ohlc)
+```
+
+## Chaikin Oscillator
+
+```@docs
+chaikinoscillator
+```
+
+```@repl base
+chaikinoscillator(ohlcv)
+```
+
+## DPO
+
+```@docs
+dpo
+```
+
+```@repl base
+dpo(ohlc)
+```
+
+## KST
+
+```@docs
+kst
+```
+
+```@repl base
+kst(cl)
+```
+
+## MACD
+
+```@docs
+macd
+```
+
+```@repl base
+macd(cl)
+```
+
+## Mass Index
+
+```@docs
+massindex
+```
+
+```@repl base
+massindex(ohlc)
 ```
 
 ## Rate of Change (ROC)
@@ -84,11 +101,18 @@ cci(ohlc)
 roc
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 roc(cl, 5)
+```
+
+## RSI
+
+```@docs
+rsi
+```
+
+```@repl base
+rsi(cl)
 ```
 
 ## Stochastic Oscillator
@@ -97,9 +121,46 @@ roc(cl, 5)
 stochasticoscillator
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 stochasticoscillator(ohlc)
+```
+
+## TRIX
+
+```@docs
+trix
+```
+
+```@repl base
+trix(cl)
+```
+
+## Ultimate Oscillator
+
+```@docs
+ultimateoscillator
+```
+
+```@repl base
+ultimateoscillator(ohlc)
+```
+
+## Vortex Indicator
+
+```@docs
+vortex
+```
+
+```@repl base
+vortex(ohlc)
+```
+
+## Williams %R
+
+```@docs
+williamsr
+```
+
+```@repl base
+williamsr(ohlc)
 ```

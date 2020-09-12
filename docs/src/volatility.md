@@ -1,15 +1,27 @@
 # Volatility
 
+```@setup base
+using MarketData
+using MarketTechnicals
+```
+
+## ATR
+
+```@docs
+atr
+```
+
+```@repl base
+atr(ohlc)
+```
+
 ## Bollinger Bands
 
 ```@docs
 bollingerbands
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 bollingerbands(cl)
 ```
 
@@ -19,37 +31,8 @@ bollingerbands(cl)
 chaikinvolatility
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 chaikinvolatility(ohlc)
-```
-
-## True Range
-
-```@docs
-truerange
-```
-
-```@repl
-using MarketData
-using MarketTechnicals
-
-truerange(ohlc)
-```
-
-## Average True Range
-
-```@docs
-atr
-```
-
-```@repl
-using MarketData
-using MarketTechnicals
-
-atr(ohlc)
 ```
 
 ## Donchian Channels
@@ -58,10 +41,7 @@ atr(ohlc)
 donchianchannels
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 donchianchannels(ohlc)
 ```
 
@@ -71,9 +51,16 @@ donchianchannels(ohlc)
 keltnerbands
 ```
 
-```@repl
-using MarketData
-using MarketTechnicals
-
+```@repl base
 keltnerbands(ohlc)
+```
+
+## TR
+
+```@docs
+truerange
+```
+
+```@repl base
+truerange(ohlc)
 ```
