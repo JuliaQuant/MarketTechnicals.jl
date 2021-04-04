@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Momentum · MarketTechnicals.jl</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit">MarketTechnicals.jl</span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">MarketTechnicals Overview</a></li><li><a class="tocitem" href="../getting_started/">Getting Started</a></li><li><a class="tocitem" href="../ma/">Moving Averages</a></li><li><a class="tocitem" href="../levels/">Trade levels</a></li><li class="is-active"><a class="tocitem" href>Momentum</a><ul class="internal"><li><a class="tocitem" href="#ADX"><span>ADX</span></a></li><li><a class="tocitem" href="#Aroon-Oscillator"><span>Aroon Oscillator</span></a></li><li><a class="tocitem" href="#Awesome-Oscillator"><span>Awesome Oscillator</span></a></li><li><a class="tocitem" href="#CCI"><span>CCI</span></a></li><li><a class="tocitem" href="#Chaikin-Oscillator"><span>Chaikin Oscillator</span></a></li><li><a class="tocitem" href="#DPO"><span>DPO</span></a></li><li><a class="tocitem" href="#KST"><span>KST</span></a></li><li><a class="tocitem" href="#MACD"><span>MACD</span></a></li><li><a class="tocitem" href="#Mass-Index"><span>Mass Index</span></a></li><li><a class="tocitem" href="#Rate-of-Change-(ROC)"><span>Rate of Change (ROC)</span></a></li><li><a class="tocitem" href="#RSI"><span>RSI</span></a></li><li><a class="tocitem" href="#Stochastic-Oscillator"><span>Stochastic Oscillator</span></a></li><li><a class="tocitem" href="#TRIX"><span>TRIX</span></a></li><li><a class="tocitem" href="#Ultimate-Oscillator"><span>Ultimate Oscillator</span></a></li><li><a class="tocitem" href="#Vortex-Indicator"><span>Vortex Indicator</span></a></li><li><a class="tocitem" href="#Williams-%R"><span>Williams %R</span></a></li></ul></li><li><a class="tocitem" href="../volatility/">Volatility</a></li><li><a class="tocitem" href="../volume/">Volume</a></li><li><a class="tocitem" href="../candlesticks/">Candlesticks</a></li><li><a class="tocitem" href="../utils/">Utilities</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Momentum</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Momentum</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/master/docs/src/momentum.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Momentum"><a class="docs-heading-anchor" href="#Momentum">Momentum</a><a id="Momentum-1"></a><a class="docs-heading-anchor-permalink" href="#Momentum" title="Permalink"></a></h1><h2 id="ADX"><a class="docs-heading-anchor" href="#ADX">ADX</a><a id="ADX-1"></a><a class="docs-heading-anchor-permalink" href="#ADX" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.adx" href="#MarketTechnicals.adx"><code>MarketTechnicals.adx</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">adx(ohlc::TimeArray, n = 14; h = :High, l = :Low, c = :Close)</code></pre><p>Average Directional Movement Index</p><p>Developed by J. Welles Wilder. This implementation follows StockCharts.</p><p><strong>References</strong></p><ul><li><p><a href="https://en.wikipedia.org/wiki/Average_directional_movement_index">wikipedia</a></p></li><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx">StockCharts</a></p></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L171-L186">source</a></section></article><pre><code class="language-julia-repl">julia&gt; adx(ohlc)
+473×4 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-02-10 to 2001-12-31
+│            │ adx     │ dx      │ di_plus │ di_minus │
+├────────────┼─────────┼─────────┼─────────┼──────────┤
+│ 2000-02-10 │ 10.5998 │ 0.3916  │ 23.6226 │ 23.4383  │
+│ 2000-02-11 │ 10.0953 │ 3.5371  │ 22.1956 │ 23.8233  │
+│ 2000-02-14 │ 9.4222  │ 0.6728  │ 22.348  │ 22.0493  │
+│ 2000-02-15 │ 9.4482  │ 9.7856  │ 25.495  │ 20.9501  │
+│ 2000-02-16 │ 8.9272  │ 2.1537  │ 23.6555 │ 22.6581  │
+│ 2000-02-17 │ 8.4433  │ 2.1537  │ 23.0363 │ 22.065   │
+│ 2000-02-18 │ 8.0918  │ 3.5217  │ 21.8706 │ 23.4673  │
+│ 2000-02-22 │ 8.459   │ 13.2324 │ 19.4557 │ 25.3898  │
+│ 2000-02-23 │ 8.3907  │ 7.5034  │ 19.9902 │ 23.2335  │
+   ⋮
+│ 2001-12-19 │ 26.3951 │ 22.3314 │ 26.0296 │ 16.5263  │
+│ 2001-12-20 │ 26.1049 │ 22.3314 │ 24.2042 │ 15.3674  │
+│ 2001-12-21 │ 25.9085 │ 23.3553 │ 23.208  │ 14.4199  │
+│ 2001-12-24 │ 25.7261 │ 23.3553 │ 22.2731 │ 13.839   │
+│ 2001-12-26 │ 26.414  │ 35.357  │ 26.5486 │ 12.6789  │
+│ 2001-12-27 │ 27.0528 │ 35.357  │ 25.066  │ 11.9709  │
+│ 2001-12-28 │ 28.2837 │ 44.2848 │ 28.6435 │ 11.0606  │
+│ 2001-12-31 │ 29.1676 │ 40.6586 │ 26.8864 │ 11.3429  │</code></pre><h2 id="Aroon-Oscillator"><a class="docs-heading-anchor" href="#Aroon-Oscillator">Aroon Oscillator</a><a id="Aroon-Oscillator-1"></a><a class="docs-heading-anchor-permalink" href="#Aroon-Oscillator" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.aroon" href="#MarketTechnicals.aroon"><code>MarketTechnicals.aroon</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">aroon(ohlc::TimeArray, n = 25; h = :High, l = :Low)</code></pre><p>Aroon Oscillator</p><p><strong>Formula</strong></p><p class="math-container">\[\begin{align*}
+  \text{up}   &amp; = \frac{\mathop{argmax}(\text{High}_{t-n} \dots \text{High}_t)}{n} \times 100 \\
+  \text{down} &amp; = \frac{\mathop{argmin}(\text{Low}_{t-n} \dots \text{Low}_t)}{n} \times 100 \\
+  \text{osc}  &amp; = \text{up} - \text{down}
+\end{align*}\]</p><p><strong>References</strong></p><ul><li><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:aroon_oscillator">StockCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L143-L162">source</a></section></article><pre><code class="language-julia-repl">julia&gt; aroon(ohlc)
+476×3 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-02-07 to 2001-12-31
+│            │ up    │ down  │ osc   │
+├────────────┼───────┼───────┼───────┤
+│ 2000-02-07 │ 52.0  │ 32.0  │ 20.0  │
+│ 2000-02-08 │ 48.0  │ 28.0  │ 20.0  │
+│ 2000-02-09 │ 44.0  │ 24.0  │ 20.0  │
+│ 2000-02-10 │ 40.0  │ 20.0  │ 20.0  │
+│ 2000-02-11 │ 36.0  │ 16.0  │ 20.0  │
+│ 2000-02-14 │ 32.0  │ 12.0  │ 20.0  │
+│ 2000-02-15 │ 28.0  │ 8.0   │ 20.0  │
+│ 2000-02-16 │ 24.0  │ 4.0   │ 20.0  │
+│ 2000-02-17 │ 20.0  │ 4.0   │ 16.0  │
+   ⋮
+│ 2001-12-19 │ 60.0  │ 12.0  │ 48.0  │
+│ 2001-12-20 │ 56.0  │ 8.0   │ 48.0  │
+│ 2001-12-21 │ 52.0  │ 4.0   │ 48.0  │
+│ 2001-12-24 │ 48.0  │ 4.0   │ 44.0  │
+│ 2001-12-26 │ 44.0  │ 8.0   │ 36.0  │
+│ 2001-12-27 │ 40.0  │ 4.0   │ 36.0  │
+│ 2001-12-28 │ 36.0  │ 4.0   │ 32.0  │
+│ 2001-12-31 │ 32.0  │ 4.0   │ 28.0  │</code></pre><h2 id="Awesome-Oscillator"><a class="docs-heading-anchor" href="#Awesome-Oscillator">Awesome Oscillator</a><a id="Awesome-Oscillator-1"></a><a class="docs-heading-anchor-permalink" href="#Awesome-Oscillator" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.awesomeoscillator" href="#MarketTechnicals.awesomeoscillator"><code>MarketTechnicals.awesomeoscillator</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">awesomeoscillator(ohlc::TimeArray, s = 5, n = 34; h = :High, l = :Low)</code></pre><p>Awesome Oscillator</p><p>The Awesome Oscillator is an indicator used to measure market momentum. AO calculates the difference of a 34 Period and 5 Period Simple Moving Averages. The Simple Moving Averages that are used are not calculated using closing price but rather each bar&#39;s midpoints. AO is generally used to affirm trends or to anticipate possible reversals [1].</p><p>Awesome Oscillator is a 34-period simple moving average, plotted through the central points of the bars (H+L)/2, and subtracted from the 5-period simple moving average, graphed across the central points of the bars <span>$\frac{H + L}{2}$</span> [2].</p><p class="math-container">\[\begin{align*}
+  \text{Median Price} &amp; = \frac{P^\text{High} + P^\text{Low}}{2} \\
+  \text{AO}           &amp; = \text{SMA}(\text{Median Price}, 5) -
+                          \text{SMA}(\text{Median Price}, 34)
+\end{align*}\]</p><p><strong>References</strong></p><ol><li><a href="https://www.tradingview.com/wiki/Awesome_Oscillator_(AO)">TradingView</a></li><li>https://www.ifcm.co.uk/ntx-indicators/awesome-oscillator</li></ol></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L585-L613">source</a></section></article><pre><code class="language-julia-repl">julia&gt; awesomeoscillator(ohlc)
+467×1 TimeArray{Float64,1,Date,Array{Float64,1}} 2000-02-18 to 2001-12-31
+│            │ ao     │
+├────────────┼────────┤
+│ 2000-02-18 │ 7.7782 │
+│ 2000-02-22 │ 7.5524 │
+│ 2000-02-23 │ 6.7719 │
+│ 2000-02-24 │ 6.5804 │
+│ 2000-02-25 │ 6.0609 │
+│ 2000-02-28 │ 5.3776 │
+│ 2000-02-29 │ 5.5131 │
+│ 2000-03-01 │ 6.6768 │
+│ 2000-03-02 │ 7.4729 │
+   ⋮
+│ 2001-12-19 │ 0.4436 │
+│ 2001-12-20 │ 0.3585 │
+│ 2001-12-21 │ 0.4223 │
+│ 2001-12-24 │ 0.4723 │
+│ 2001-12-26 │ 0.5835 │
+│ 2001-12-27 │ 0.6872 │
+│ 2001-12-28 │ 0.8786 │
+│ 2001-12-31 │ 0.9952 │</code></pre><h2 id="CCI"><a class="docs-heading-anchor" href="#CCI">CCI</a><a id="CCI-1"></a><a class="docs-heading-anchor-permalink" href="#CCI" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.cci" href="#MarketTechnicals.cci"><code>MarketTechnicals.cci</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">cci(ohlc::TimeArray, ma = 20, c = 0.015)</code></pre><p>Commodity Channel Index</p><p><strong>Formula</strong></p><p class="math-container">\[CCI = \frac{P^{typical} - \text{SMA}(P^{typical})}{c \times \sigma(P^{typical})}\]</p><p><strong>References</strong></p><ul><li><a href="https://en.wikipedia.org/wiki/Commodity_channel_index">Wikipedia</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L39-L54">source</a></section></article><pre><code class="language-julia-repl">julia&gt; cci(ohlc)
+481×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
+│            │ cci      │
+├────────────┼──────────┤
+│ 2000-01-31 │ -38.9316 │
+│ 2000-02-01 │ -22.3949 │
+│ 2000-02-02 │ -48.4746 │
+│ 2000-02-03 │ -6.0758  │
+│ 2000-02-04 │ 46.586   │
+│ 2000-02-07 │ 88.8638  │
+│ 2000-02-08 │ 108.1928 │
+│ 2000-02-09 │ 99.3306  │
+│ 2000-02-10 │ 74.4932  │
+   ⋮
+│ 2001-12-19 │ -0.5821  │
+│ 2001-12-20 │ -37.2007 │
+│ 2001-12-21 │ -27.4224 │
+│ 2001-12-24 │ -17.225  │
+│ 2001-12-26 │ 19.6668  │
+│ 2001-12-27 │ 45.6476  │
+│ 2001-12-28 │ 84.8749  │
+│ 2001-12-31 │ 46.3511  │</code></pre><h2 id="Chaikin-Oscillator"><a class="docs-heading-anchor" href="#Chaikin-Oscillator">Chaikin Oscillator</a><a id="Chaikin-Oscillator-1"></a><a class="docs-heading-anchor-permalink" href="#Chaikin-Oscillator" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.chaikinoscillator" href="#MarketTechnicals.chaikinoscillator"><code>MarketTechnicals.chaikinoscillator</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">chaikinoscillator(ohlcv::TimeArray, fast = 3, slow = 10; h = :High, l = :Low, c = :Close)</code></pre><p>Chaikin Oscillator</p><p>Developed by Marc Chaikin.</p><p><strong>Formula</strong></p><p class="math-container">\[\text{Chaikin OSC} = \text{EMA}(\text{ADL}, \text{fast}) - \text{EMA}(\text{ADL}, \text{slow})\]</p><p>where the <a href="../volume/#MarketTechnicals.adl"><code>adl</code></a> is the Accumulation/Distribution Line.</p><p><strong>References</strong></p><ul><li><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_oscillator">StockCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L61-L80">source</a></section></article><pre><code class="language-julia-repl">julia&gt; chaikinoscillator(ohlcv)
+491×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-14 to 2001-12-31
+│            │ chaikinoscillator │
+├────────────┼───────────────────┤
+│ 2000-01-14 │ -6.8514668666e6   │
+│ 2000-01-18 │ -5.5088241581e6   │
+│ 2000-01-19 │ -4.1457475832e6   │
+│ 2000-01-20 │ -8.4133210223e6   │
+│ 2000-01-21 │ -1.00258648284e7  │
+│ 2000-01-24 │ -1.06556036696e7  │
+│ 2000-01-25 │ -8.7610031514e6   │
+│ 2000-01-26 │ -8.0258147742e6   │
+│ 2000-01-27 │ -6.9954363677e6   │
+   ⋮
+│ 2001-12-19 │ 2.9106729951e6    │
+│ 2001-12-20 │ 2.140953294e6     │
+│ 2001-12-21 │ 962258.2028       │
+│ 2001-12-24 │ 586108.9693       │
+│ 2001-12-26 │ 49086.3672        │
+│ 2001-12-27 │ 328390.5719       │
+│ 2001-12-28 │ 249377.6771       │
+│ 2001-12-31 │ -456423.2686      │</code></pre><h2 id="DPO"><a class="docs-heading-anchor" href="#DPO">DPO</a><a id="DPO-1"></a><a class="docs-heading-anchor-permalink" href="#DPO" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.dpo" href="#MarketTechnicals.dpo"><code>MarketTechnicals.dpo</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">dpo(ta::TimeArray, n = 14)</code></pre><p>Detrended Price Oscillator (DPO)</p><p>Is an indicator designed to remove trend from price and make it easier to identify cycles.</p><p><strong>References</strong></p><ul><li><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:detrended_price_osci">StockCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L336-L347">source</a></section></article><pre><code class="language-julia-repl">julia&gt; dpo(ohlc)
+ERROR: MethodError: no method matching lagfill(::TimeArray{Float64,2,Date,Array{Float64,2}}, ::Int64, ::Array{Float64,2})
+Closest candidates are:
+  lagfill(::TimeArray, ::Integer, !Matched::AbstractFloat) at /home/runner/work/MarketTechnicals.jl/MarketTechnicals.jl/src/utilities.jl:90</code></pre><h2 id="KST"><a class="docs-heading-anchor" href="#KST">KST</a><a id="KST-1"></a><a class="docs-heading-anchor-permalink" href="#KST" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.kst" href="#MarketTechnicals.kst"><code>MarketTechnicals.kst</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">kst(ta::TimeArray, r1 = 10, r2 = 15, r3 = 20, r4 = 30,
+    n1 = 10, n2 = 10, n3 = 10, n4 = 15, nsig = 9)</code></pre><p>KST Oscillator (KST)</p><p>It is useful to identify major stock market cycle junctures because its formula is weighed to be more greatly influenced by the longer and more dominant time spans, in order to better reflect the primary swings of stock market cycle.</p><p><strong>References</strong></p><ul><li><a href="https://en.wikipedia.org/wiki/KST_oscillator">Wikipedia</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L355-L368">source</a></section></article><pre><code class="language-julia-repl">julia&gt; kst(cl)
+492×2 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-13 to 2001-12-31
+│            │ kst       │ signal    │
+├────────────┼───────────┼───────────┤
+│ 2000-01-13 │ NaN       │ NaN       │
+│ 2000-01-14 │ NaN       │ NaN       │
+│ 2000-01-18 │ NaN       │ NaN       │
+│ 2000-01-19 │ NaN       │ NaN       │
+│ 2000-01-20 │ NaN       │ NaN       │
+│ 2000-01-21 │ NaN       │ NaN       │
+│ 2000-01-24 │ 1179.3057 │ 1179.3057 │
+│ 2000-01-25 │ 1020.5118 │ 1099.9087 │
+│ 2000-01-26 │ 1016.9391 │ 1072.2522 │
+   ⋮
+│ 2001-12-19 │ 77.9045   │ 116.0573  │
+│ 2001-12-20 │ 31.3289   │ 99.1117   │
+│ 2001-12-21 │ 57.1128   │ 84.1556   │
+│ 2001-12-24 │ 54.3441   │ 72.0289   │
+│ 2001-12-26 │ 56.1443   │ 62.1569   │
+│ 2001-12-27 │ 67.4934   │ 56.9444   │
+│ 2001-12-28 │ 93.4212   │ 61.1549   │
+│ 2001-12-31 │ 62.0898   │ 61.2652   │</code></pre><h2 id="MACD"><a class="docs-heading-anchor" href="#MACD">MACD</a><a id="MACD-1"></a><a class="docs-heading-anchor-permalink" href="#MACD" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.macd" href="#MarketTechnicals.macd"><code>MarketTechnicals.macd</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">macd(ta, fast=12, slow=26, signal=9; wilder=false)</code></pre><p>Moving Average Convergence / Divergence</p><p><strong>Formula</strong></p><p class="math-container">\[\begin{align*}
+  \text{MACD Bar} &amp; = \text{DIF} - \text{DEM} \\
+  \text{DIF} &amp; = \text{EMA}(P^\text{Close}, \text{fast}) - \text{EMA}(P^\text{Close}, \text{slow}) \\
+  \text{DEM} &amp; = \text{EMA}(\text{DIF}, 9) \tag{signal}
+\end{align*}\]</p><p><strong>Return</strong></p><p><code>TimeArray</code> with 3 columns <code>[:macd, :dif, :signal]</code>.</p><p>If the input is a multi-column <code>TimeArray</code>, the new column names will be <code>[:A_macd, :B_macd, :A_dif, :B_dif, :A_signal, :B_signal]</code>.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L87-L109">source</a></section></article><pre><code class="language-julia-repl">julia&gt; macd(cl)
+467×3 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-02-18 to 2001-12-31
+│            │ macd    │ dif    │ signal │
+├────────────┼─────────┼────────┼────────┤
+│ 2000-02-18 │ -0.0472 │ 3.5339 │ 3.5811 │
+│ 2000-02-22 │ -0.1375 │ 3.4092 │ 3.5467 │
+│ 2000-02-23 │ -0.0636 │ 3.4672 │ 3.5308 │
+│ 2000-02-24 │ -0.1131 │ 3.3894 │ 3.5026 │
+│ 2000-02-25 │ -0.4778 │ 2.9054 │ 3.3831 │
+│ 2000-02-28 │ -0.5289 │ 2.7219 │ 3.2509 │
+│ 2000-02-29 │ -0.4755 │ 2.6565 │ 3.132  │
+│ 2000-03-01 │ 0.5557  │ 3.8266 │ 3.2709 │
+│ 2000-03-02 │ 0.6127  │ 4.0368 │ 3.4241 │
+   ⋮
+│ 2001-12-19 │ -0.2075 │ 0.4641 │ 0.6716 │
+│ 2001-12-20 │ -0.2337 │ 0.3795 │ 0.6132 │
+│ 2001-12-21 │ -0.2224 │ 0.3352 │ 0.5576 │
+│ 2001-12-24 │ -0.1858 │ 0.3254 │ 0.5111 │
+│ 2001-12-26 │ -0.1494 │ 0.3244 │ 0.4738 │
+│ 2001-12-27 │ -0.0861 │ 0.3661 │ 0.4523 │
+│ 2001-12-28 │ -0.0231 │ 0.4234 │ 0.4465 │
+│ 2001-12-31 │ -0.0203 │ 0.4212 │ 0.4414 │</code></pre><h2 id="Mass-Index"><a class="docs-heading-anchor" href="#Mass-Index">Mass Index</a><a id="Mass-Index-1"></a><a class="docs-heading-anchor-permalink" href="#Mass-Index" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.massindex" href="#MarketTechnicals.massindex"><code>MarketTechnicals.massindex</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">massindex(ohlc::TimeArray, n = 14, n2 = 25; h = :High, l = :Low)</code></pre><p>Mass Index</p><p>It uses the high-low range to identify trend reversals based on range expansions. It identifies range bulges that can foreshadow a reversal of the current trend.</p><p><strong>References</strong></p><ul><li><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:mass_index">StockCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L311-L323">source</a></section></article><pre><code class="language-julia-repl">julia&gt; massindex(ohlc)
+450×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-03-15 to 2001-12-31
+│            │ mi      │
+├────────────┼─────────┤
+│ 2000-03-15 │ 24.5435 │
+│ 2000-03-16 │ 24.6949 │
+│ 2000-03-17 │ 24.8397 │
+│ 2000-03-20 │ 24.9192 │
+│ 2000-03-21 │ 25.1132 │
+│ 2000-03-22 │ 25.3891 │
+│ 2000-03-23 │ 25.6577 │
+│ 2000-03-24 │ 25.9508 │
+│ 2000-03-27 │ 26.2132 │
+   ⋮
+│ 2001-12-19 │ 25.1477 │
+│ 2001-12-20 │ 25.1833 │
+│ 2001-12-21 │ 25.2162 │
+│ 2001-12-24 │ 25.1971 │
+│ 2001-12-26 │ 25.1867 │
+│ 2001-12-27 │ 25.1725 │
+│ 2001-12-28 │ 25.221  │
+│ 2001-12-31 │ 25.3128 │</code></pre><h2 id="Rate-of-Change-(ROC)"><a class="docs-heading-anchor" href="#Rate-of-Change-(ROC)">Rate of Change (ROC)</a><a id="Rate-of-Change-(ROC)-1"></a><a class="docs-heading-anchor-permalink" href="#Rate-of-Change-(ROC)" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.roc" href="#MarketTechnicals.roc"><code>MarketTechnicals.roc</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">roc(ta::TimeArray, n)</code></pre><p>Rate of Change</p><p><strong>Formula</strong></p><p class="math-container">\[\text{ROC} = \frac{P_{t} - P_{t-n}}{P_{t-n}}\]</p><p><strong>References</strong></p><ul><li><a href="https://en.wikipedia.org/wiki/Momentum_(technical_analysis)">Wikipedia</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L122-L137">source</a></section></article><pre><code class="language-julia-repl">julia&gt; roc(cl, 5)
+495×1 TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-10 to 2001-12-31
+│            │ Close_roc_5 │
+├────────────┼─────────────┤
+│ 2000-01-10 │ -0.1268     │
+│ 2000-01-11 │ -0.0951     │
+│ 2000-01-12 │ -0.1616     │
+│ 2000-01-13 │ 0.0184      │
+│ 2000-01-14 │ 0.0094      │
+│ 2000-01-18 │ 0.0633      │
+│ 2000-01-19 │ 0.1489      │
+│ 2000-01-20 │ 0.3018      │
+│ 2000-01-21 │ 0.1505      │
+   ⋮
+│ 2001-12-19 │ 0.006       │
+│ 2001-12-20 │ -0.0157     │
+│ 2001-12-21 │ 0.0299      │
+│ 2001-12-24 │ 0.0359      │
+│ 2001-12-26 │ 0.0228      │
+│ 2001-12-27 │ 0.0208      │
+│ 2001-12-28 │ 0.0851      │
+│ 2001-12-31 │ 0.0429      │</code></pre><h2 id="RSI"><a class="docs-heading-anchor" href="#RSI">RSI</a><a id="RSI-1"></a><a class="docs-heading-anchor-permalink" href="#RSI" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.rsi" href="#MarketTechnicals.rsi"><code>MarketTechnicals.rsi</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">rsi(ta::TimeArray, n = 14; wilder = false)</code></pre><p>Relative Strength Index</p><p><strong>Formula</strong></p><p class="math-container">\[\text{RSI} = \frac{\text{EMA}(\text{Up}, n)}{\text{EMA}(\text{Up}, n) + \text{EMA}(\text{Dn}, n)}\]</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L1-L11">source</a></section></article><pre><code class="language-julia-repl">julia&gt; rsi(cl)
+486×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-24 to 2001-12-31
+│            │ Close_rsi_14 │
+├────────────┼──────────────┤
+│ 2000-01-24 │ 45.9536      │
+│ 2000-01-25 │ 54.3451      │
+│ 2000-01-26 │ 51.1961      │
+│ 2000-01-27 │ 50.8823      │
+│ 2000-01-28 │ 38.7853      │
+│ 2000-01-31 │ 42.7753      │
+│ 2000-02-01 │ 38.0704      │
+│ 2000-02-02 │ 36.1812      │
+│ 2000-02-03 │ 45.8674      │
+   ⋮
+│ 2001-12-19 │ 55.3167      │
+│ 2001-12-20 │ 43.0604      │
+│ 2001-12-21 │ 47.7045      │
+│ 2001-12-24 │ 52.5736      │
+│ 2001-12-26 │ 54.3448      │
+│ 2001-12-27 │ 61.7068      │
+│ 2001-12-28 │ 65.6713      │
+│ 2001-12-31 │ 55.8492      │</code></pre><h2 id="Stochastic-Oscillator"><a class="docs-heading-anchor" href="#Stochastic-Oscillator">Stochastic Oscillator</a><a id="Stochastic-Oscillator-1"></a><a class="docs-heading-anchor-permalink" href="#Stochastic-Oscillator" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.stochasticoscillator" href="#MarketTechnicals.stochasticoscillator"><code>MarketTechnicals.stochasticoscillator</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">stochasticoscillator(ohlc, n = 14, fast_d = 3, slow_d = 3; h = :High, l = :Low, c = :Close)</code></pre><p>Stochastic Oscillator</p><p>A.k.a <em>%K%D</em>, or <em>KD</em></p><p><strong>Arguments</strong></p><ul><li><p><code>n</code>: period of fast(raw) <code>%K</code></p></li><li><p><code>fast_d</code>: MA period of fast <code>%D</code></p></li><li><p><code>slow_d</code>: MA period of slow <code>%D</code></p></li></ul><p><strong>Formula</strong></p><p class="math-container">\[\begin{align*}
+  \text{fast %K} &amp; = \frac{\text{Close}_t - \max(\text{High}_{t-n}, \dots, \text{High}_t)}
+        {\max(\text{High}_{t-n}, \dots, \text{High}_t) - \min(\text{Low}_{t-n}, \dots, \text{Low}_t)}
+        \times 100 \\
+  \text{fast %D} &amp; = \text{SMA}(\text{fast %K}) \\
+  \text{slow %D} &amp; = \text{SMA}(\text{fast %D})
+\end{align*}\]</p><p><strong>References</strong></p><ul><li><p><a href="https://en.wikipedia.org/wiki/Stochastic_oscillator">Wikipedia</a></p></li><li><p><a href="http://www.fmlabs.com/reference/default.htm?url=StochasticOscillator.htm">FMLabs</a></p></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L208-L242">source</a></section></article><pre><code class="language-julia-repl">julia&gt; stochasticoscillator(ohlc)
+483×3 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-27 to 2001-12-31
+│            │ fast_k  │ fast_d  │ slow_d  │
+├────────────┼─────────┼─────────┼─────────┤
+│ 2000-01-27 │ 67.1429 │ 69.4667 │ 67.4413 │
+│ 2000-01-28 │ 43.2    │ 59.3429 │ 64.9016 │
+│ 2000-01-31 │ 49.2857 │ 53.2095 │ 60.673  │
+│ 2000-02-01 │ 39.2857 │ 43.9238 │ 52.1587 │
+│ 2000-02-02 │ 21.7586 │ 36.7767 │ 44.6367 │
+│ 2000-02-03 │ 32.6296 │ 31.2247 │ 37.3084 │
+│ 2000-02-04 │ 50.0    │ 34.7961 │ 34.2658 │
+│ 2000-02-07 │ 72.4444 │ 51.6914 │ 39.2374 │
+│ 2000-02-08 │ 75.4815 │ 65.9753 │ 50.8209 │
+   ⋮
+│ 2001-12-19 │ 38.8325 │ 25.2115 │ 18.6783 │
+│ 2001-12-20 │ 14.7208 │ 25.6345 │ 21.8838 │
+│ 2001-12-21 │ 23.0964 │ 25.5499 │ 25.4653 │
+│ 2001-12-24 │ 32.2335 │ 23.3503 │ 24.8449 │
+│ 2001-12-26 │ 41.0557 │ 32.1286 │ 27.0096 │
+│ 2001-12-27 │ 68.2759 │ 47.1884 │ 34.2224 │
+│ 2001-12-28 │ 80.4124 │ 63.248  │ 47.5216 │
+│ 2001-12-31 │ 62.1993 │ 70.2958 │ 60.2441 │</code></pre><h2 id="TRIX"><a class="docs-heading-anchor" href="#TRIX">TRIX</a><a id="TRIX-1"></a><a class="docs-heading-anchor-permalink" href="#TRIX" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.trix" href="#MarketTechnicals.trix"><code>MarketTechnicals.trix</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">trix(ta::TimeArray, n = 14)</code></pre><p>TRIX</p><p>Shows the percent rate of change of a triple exponentially smoothed moving average.</p><p><strong>References</strong></p><ul><li><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix">StockCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L287-L299">source</a></section></article><pre><code class="language-julia-repl">julia&gt; trix(cl)
+461×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-02-29 to 2001-12-31
+│            │ trix     │
+├────────────┼──────────┤
+│ 2000-02-29 │ 140.5762 │
+│ 2000-03-01 │ 0.4409   │
+│ 2000-03-02 │ 0.4592   │
+│ 2000-03-03 │ 0.49     │
+│ 2000-03-06 │ 0.521    │
+│ 2000-03-07 │ 0.543    │
+│ 2000-03-08 │ 0.5547   │
+│ 2000-03-09 │ 0.5583   │
+│ 2000-03-10 │ 0.5625   │
+   ⋮
+│ 2001-12-19 │ 0.5017   │
+│ 2001-12-20 │ 0.451    │
+│ 2001-12-21 │ 0.4028   │
+│ 2001-12-24 │ 0.3619   │
+│ 2001-12-26 │ 0.3282   │
+│ 2001-12-27 │ 0.3067   │
+│ 2001-12-28 │ 0.2976   │
+│ 2001-12-31 │ 0.29     │</code></pre><h2 id="Ultimate-Oscillator"><a class="docs-heading-anchor" href="#Ultimate-Oscillator">Ultimate Oscillator</a><a id="Ultimate-Oscillator-1"></a><a class="docs-heading-anchor-permalink" href="#Ultimate-Oscillator" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.ultimateoscillator" href="#MarketTechnicals.ultimateoscillator"><code>MarketTechnicals.ultimateoscillator</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">ultimateoscillator(ohlc::TimeArray, s = 7, m = 14, len = 28,
+                   ws = 4.0, wm = 2.0, wl = 1.0;
+                   c = :Close, h = :High, l = :Low)</code></pre><p>Ultimate Oscillator</p><p>Larry Williams&#39; (1976) signal, a momentum oscillator designed to capture momentum across three different timeframes.</p><p class="math-container">\[\begin{align*}
+  \text{BP}        &amp; = P^\text{Close} - \min(P^\text{Low}, P_{t-1}^\text{Close}) \\
+  \text{TR}        &amp; = \max(P^\text{High}, P_{t-1}^\text{Close}) -
+                       \min(P^\text{Low},  P_{t-1}^\text{Close}) \\
+  \text{Average7}  &amp; = \frac{\text{7-period BP Sum}}{\text{7-period TR Sum}} \\
+  \text{Average14} &amp; = \frac{\text{14-period BP Sum}}{\text{14-period TR Sum}} \\
+  \text{Average28} &amp; = \frac{\text{28-period BP Sum}}{\text{28-period TR Sum}} \\
+  \text{UO}        &amp; = 100 \times
+                       \frac{(4 \times \text{Average7}) +
+                             (2 \times \text{Average14}) +
+                             \text{Average28}}
+                            {4 + 2 + 1}
+\end{align*}\]</p><p><strong>References</strong></p><ul><li><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator">StockCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L478-L507">source</a></section></article><pre><code class="language-julia-repl">julia&gt; ultimateoscillator(ohlc)
+500×1 TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-03 to 2001-12-31
+│            │ uo      │
+├────────────┼─────────┤
+│ 2000-01-03 │ NaN     │
+│ 2000-01-04 │ NaN     │
+│ 2000-01-05 │ NaN     │
+│ 2000-01-06 │ NaN     │
+│ 2000-01-07 │ NaN     │
+│ 2000-01-10 │ NaN     │
+│ 2000-01-11 │ NaN     │
+│ 2000-01-12 │ NaN     │
+│ 2000-01-13 │ NaN     │
+   ⋮
+│ 2001-12-19 │ 55.608  │
+│ 2001-12-20 │ 54.0184 │
+│ 2001-12-21 │ 53.3897 │
+│ 2001-12-24 │ 54.2227 │
+│ 2001-12-26 │ 51.4817 │
+│ 2001-12-27 │ 53.8899 │
+│ 2001-12-28 │ 50.9802 │
+│ 2001-12-31 │ 41.8256 │</code></pre><h2 id="Vortex-Indicator"><a class="docs-heading-anchor" href="#Vortex-Indicator">Vortex Indicator</a><a id="Vortex-Indicator-1"></a><a class="docs-heading-anchor-permalink" href="#Vortex-Indicator" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.vortex" href="#MarketTechnicals.vortex"><code>MarketTechnicals.vortex</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">vortex(ohlc::TimeArray, n = 14; h = :High, l = :Low, c = :Close)</code></pre><p>Vortex Indicator</p><p>It consists of two oscillators that capture positive and negative trend movement. A bullish signal triggers when the positive trend indicator crosses above the negative trend indicator or a key level.</p><p><strong>References</strong></p><ul><li><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:vortex_indicator">StockCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L254-L267">source</a></section></article><pre><code class="language-julia-repl">julia&gt; vortex(ohlc)
+487×2 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-21 to 2001-12-31
+│            │ v_plus │ v_minus │
+├────────────┼────────┼─────────┤
+│ 2000-01-21 │ 0.9583 │ 0.8832  │
+│ 2000-01-24 │ 0.8821 │ 0.9427  │
+│ 2000-01-25 │ 0.8742 │ 0.9348  │
+│ 2000-01-26 │ 0.9237 │ 0.9271  │
+│ 2000-01-27 │ 0.9685 │ 0.9009  │
+│ 2000-01-28 │ 0.9124 │ 0.8744  │
+│ 2000-01-31 │ 0.8665 │ 0.9493  │
+│ 2000-02-01 │ 0.9508 │ 0.911   │
+│ 2000-02-02 │ 0.9585 │ 0.8983  │
+   ⋮
+│ 2001-12-19 │ 0.9847 │ 0.9045  │
+│ 2001-12-20 │ 0.9807 │ 0.9549  │
+│ 2001-12-21 │ 0.963  │ 0.9337  │
+│ 2001-12-24 │ 0.9583 │ 1.0229  │
+│ 2001-12-26 │ 0.8679 │ 1.0693  │
+│ 2001-12-27 │ 0.9089 │ 1.0498  │
+│ 2001-12-28 │ 0.9557 │ 0.9366  │
+│ 2001-12-31 │ 0.9286 │ 0.9841  │</code></pre><h2 id="Williams-%R"><a class="docs-heading-anchor" href="#Williams-%R">Williams %R</a><a id="Williams-%R-1"></a><a class="docs-heading-anchor-permalink" href="#Williams-%R" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.williamsr" href="#MarketTechnicals.williamsr"><code>MarketTechnicals.williamsr</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">williamsr(ohlc::TimeArray, n = 14; c = :Close, h = :High, l = :Low)</code></pre><p>Williams %R</p><p>Developed by Larry Williams, Williams %R is a momentum indicator that is the inverse of the Fast Stochastic Oscillator. Also referred to as %R, Williams %R reflects the level of the close relative to the highest high for the look-back period. In contrast, the Stochastic Oscillator reflects the level of the close relative to the lowest low. %R corrects for the inversion by multiplying the raw value by -100. As a result, the Fast Stochastic Oscillator and Williams %R produce the exact same lines, only the scaling is different. Williams %R oscillates from 0 to -100 [1].</p><p>Readings from 0 to -20 are considered overbought. Readings from -80 to -100 are considered oversold.</p><p>Unsurprisingly, signals derived from the Stochastic Oscillator are also applicable to Williams %R.</p><p class="math-container">\[\text{%R} = \frac{\text{Highest High} - P^\text{Close}}
+                 {\text{Highest High} - \text{Lowest Low}}
+                 \times -100\]</p><p>Lowest Low = lowest low for the look-back period.</p><p>Highest High = highest high for the look-back period.</p><p>%R is multiplied by -100 correct the inversion and move the decimal.</p><p>The Williams %R oscillates from 0 to -100. When the indicator produces readings from 0 to -20, this indicates overbought market conditions. When readings are -80 to -100, it indicates oversold market conditions [2].</p><p><strong>References</strong></p><ol><li><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:williams_r">StockCharts</a></li><li><a href="https://www.investopedia.com/terms/w/williamsr.asp">Investopedia</a></li></ol></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/momentum.jl#L531-L572">source</a></section></article><pre><code class="language-julia-repl">julia&gt; williamsr(ohlc)
+487×1 TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-21 to 2001-12-31
+│            │ wr       │
+├────────────┼──────────┤
+│ 2000-01-21 │ -29.1143 │
+│ 2000-01-24 │ -43.5714 │
+│ 2000-01-25 │ -26.4286 │
+│ 2000-01-26 │ -32.3143 │
+│ 2000-01-27 │ -32.8571 │
+│ 2000-01-28 │ -56.8    │
+│ 2000-01-31 │ -50.7143 │
+│ 2000-02-01 │ -60.7143 │
+│ 2000-02-02 │ -78.2414 │
+   ⋮
+│ 2001-12-19 │ -61.1675 │
+│ 2001-12-20 │ -85.2792 │
+│ 2001-12-21 │ -76.9036 │
+│ 2001-12-24 │ -67.7665 │
+│ 2001-12-26 │ -58.9443 │
+│ 2001-12-27 │ -31.7241 │
+│ 2001-12-28 │ -19.5876 │
+│ 2001-12-31 │ -37.8007 │</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../levels/">« Trade levels</a><a class="docs-footer-nextpage" href="../volatility/">Volatility »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Sunday 4 April 2021 17:10">Sunday 4 April 2021</span>. Using Julia version 1.5.4.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

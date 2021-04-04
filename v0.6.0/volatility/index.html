@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Volatility · MarketTechnicals.jl</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit">MarketTechnicals.jl</span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">MarketTechnicals Overview</a></li><li><a class="tocitem" href="../getting_started/">Getting Started</a></li><li><a class="tocitem" href="../ma/">Moving Averages</a></li><li><a class="tocitem" href="../levels/">Trade levels</a></li><li><a class="tocitem" href="../momentum/">Momentum</a></li><li class="is-active"><a class="tocitem" href>Volatility</a><ul class="internal"><li><a class="tocitem" href="#ATR"><span>ATR</span></a></li><li><a class="tocitem" href="#Bollinger-Bands"><span>Bollinger Bands</span></a></li><li><a class="tocitem" href="#Chaikin-Volatility"><span>Chaikin Volatility</span></a></li><li><a class="tocitem" href="#Donchian-Channels"><span>Donchian Channels</span></a></li><li><a class="tocitem" href="#Keltner-Bands"><span>Keltner Bands</span></a></li><li><a class="tocitem" href="#TR"><span>TR</span></a></li></ul></li><li><a class="tocitem" href="../volume/">Volume</a></li><li><a class="tocitem" href="../candlesticks/">Candlesticks</a></li><li><a class="tocitem" href="../utils/">Utilities</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Volatility</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Volatility</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/master/docs/src/volatility.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Volatility"><a class="docs-heading-anchor" href="#Volatility">Volatility</a><a id="Volatility-1"></a><a class="docs-heading-anchor-permalink" href="#Volatility" title="Permalink"></a></h1><h2 id="ATR"><a class="docs-heading-anchor" href="#ATR">ATR</a><a id="ATR-1"></a><a class="docs-heading-anchor-permalink" href="#ATR" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.atr" href="#MarketTechnicals.atr"><code>MarketTechnicals.atr</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">atr(ohlc::TimeArray, n = 14; h= :High, l= :Low, c = :Close)</code></pre><p>Average True Range</p><p>It&#39;s the exponential moving average of <a href="#MarketTechnicals.truerange"><code>truerange</code></a></p><p><strong>Formula</strong></p><p class="math-container">\[\text{ATR} = \text{EMA}(\text{TR}, n)\]</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/volatility.jl#L71-L83">source</a></section></article><pre><code class="language-julia-repl">julia&gt; atr(ohlc)
+486×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-24 to 2001-12-31
+│            │ atr    │
+├────────────┼────────┤
+│ 2000-01-24 │ 8.3436 │
+│ 2000-01-25 │ 8.5147 │
+│ 2000-01-26 │ 8.2237 │
+│ 2000-01-27 │ 8.0649 │
+│ 2000-01-28 │ 8.2217 │
+│ 2000-01-31 │ 8.3044 │
+│ 2000-02-01 │ 8.0684 │
+│ 2000-02-02 │ 7.8578 │
+│ 2000-02-03 │ 7.6851 │
+   ⋮
+│ 2001-12-19 │ 1.02   │
+│ 2001-12-20 │ 1.0185 │
+│ 2001-12-21 │ 1.0079 │
+│ 2001-12-24 │ 0.9752 │
+│ 2001-12-26 │ 0.9884 │
+│ 2001-12-27 │ 0.9721 │
+│ 2001-12-28 │ 0.977  │
+│ 2001-12-31 │ 0.9665 │</code></pre><h2 id="Bollinger-Bands"><a class="docs-heading-anchor" href="#Bollinger-Bands">Bollinger Bands</a><a id="Bollinger-Bands-1"></a><a class="docs-heading-anchor-permalink" href="#Bollinger-Bands" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.bollingerbands" href="#MarketTechnicals.bollingerbands"><code>MarketTechnicals.bollingerbands</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">bollingerbands(ta::TimeArray, ma=20, width=2.0)</code></pre><p>Bollinger Bands</p><p><strong>Formula</strong></p><p class="math-container">\[\begin{align*}
+  \text{Up}   &amp; = \text{SMA} + \text{width} \times \sigma(P) \\
+  \text{Mean} &amp; = \text{SMA} \\
+  \text{Down} &amp; = \text{SMA} - \text{width} \times \sigma(P)
+\end{align*}\]</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/volatility.jl#L1-L15">source</a></section></article><pre><code class="language-julia-repl">julia&gt; bollingerbands(cl)
+481×3 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
+│            │ up       │ down    │ mean     │
+├────────────┼──────────┼─────────┼──────────┤
+│ 2000-01-31 │ 117.3251 │ 89.3939 │ 103.3595 │
+│ 2000-02-01 │ 116.2242 │ 89.3258 │ 102.775  │
+│ 2000-02-02 │ 116.1505 │ 89.0305 │ 102.5905 │
+│ 2000-02-03 │ 116.105  │ 89.007  │ 102.556  │
+│ 2000-02-04 │ 116.4873 │ 89.9247 │ 103.206  │
+│ 2000-02-07 │ 117.9014 │ 89.9666 │ 103.934  │
+│ 2000-02-08 │ 119.2289 │ 90.3521 │ 104.7905 │
+│ 2000-02-09 │ 119.4875 │ 92.0805 │ 105.784  │
+│ 2000-02-10 │ 118.2181 │ 95.9809 │ 107.0995 │
+   ⋮
+│ 2001-12-19 │ 23.3847  │ 19.3273 │ 21.356   │
+│ 2001-12-20 │ 23.3129  │ 19.4981 │ 21.4055  │
+│ 2001-12-21 │ 23.2433  │ 19.6837 │ 21.4635  │
+│ 2001-12-24 │ 23.2429  │ 19.6831 │ 21.463   │
+│ 2001-12-26 │ 23.2546  │ 19.7204 │ 21.4875  │
+│ 2001-12-27 │ 23.2918  │ 19.8372 │ 21.5645  │
+│ 2001-12-28 │ 23.3476  │ 19.9824 │ 21.665   │
+│ 2001-12-31 │ 23.3718  │ 20.0182 │ 21.695   │</code></pre><h2 id="Chaikin-Volatility"><a class="docs-heading-anchor" href="#Chaikin-Volatility">Chaikin Volatility</a><a id="Chaikin-Volatility-1"></a><a class="docs-heading-anchor-permalink" href="#Chaikin-Volatility" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.chaikinvolatility" href="#MarketTechnicals.chaikinvolatility"><code>MarketTechnicals.chaikinvolatility</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">chaikinvolatility(ta, n = 10, p = 10; h = High, l = :Low)</code></pre><p>Chaikin Volatility</p><p><strong>Arguments</strong></p><ul><li><code>n</code> is the smooth period</li><li><code>p</code> is the previous period</li></ul><p><strong>Formula</strong></p><p class="math-container">\[\text{Chaikin Vola} =
+  \frac{\text{EMA}(P^\text{High}_t - P^\text{Low}_t, n) - \text{EMA}(P^\text{High}_{t-p} - P^\text{Low}_{t-p}, n)}
+       {\text{EMA}(P^\text{High}_{t-p} - P^\text{Low}_{t-p}, n)}
+  \times 100\]</p><p><strong>References</strong></p><ul><li><a href="https://www.incrediblecharts.com/indicators/chaikin_volatility.php">IncredibleCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/volatility.jl#L127-L150">source</a></section></article><pre><code class="language-julia-repl">julia&gt; chaikinvolatility(ohlc)
+481×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
+│            │ chaikinvolatility │
+├────────────┼───────────────────┤
+│ 2000-01-31 │ -2.2401           │
+│ 2000-02-01 │ -3.2901           │
+│ 2000-02-02 │ -3.4767           │
+│ 2000-02-03 │ -12.7455          │
+│ 2000-02-04 │ -5.0588           │
+│ 2000-02-07 │ -2.2411           │
+│ 2000-02-08 │ -15.7427          │
+│ 2000-02-09 │ -13.3072          │
+│ 2000-02-10 │ -16.8273          │
+   ⋮
+│ 2001-12-19 │ -14.5449          │
+│ 2001-12-20 │ -19.2088          │
+│ 2001-12-21 │ -16.5194          │
+│ 2001-12-24 │ -17.97            │
+│ 2001-12-26 │ -15.0247          │
+│ 2001-12-27 │ -13.2106          │
+│ 2001-12-28 │ -10.9081          │
+│ 2001-12-31 │ -7.6953           │</code></pre><h2 id="Donchian-Channels"><a class="docs-heading-anchor" href="#Donchian-Channels">Donchian Channels</a><a id="Donchian-Channels-1"></a><a class="docs-heading-anchor-permalink" href="#Donchian-Channels" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.donchianchannels" href="#MarketTechnicals.donchianchannels"><code>MarketTechnicals.donchianchannels</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">donchianchannels(ohlc::TimeArray, n = 20; h = :High, l = :Low)</code></pre><p>Donchian Channels</p><p><strong>Formula</strong></p><p class="math-container">\[\begin{align*}
+  \text{Up}   &amp; = \max(P_1^\text{High}, \dots, P_t^\text{High}) \\
+  \text{Mid}  &amp; = \frac{\text{Up} + \text{Down}}{2} \\
+  \text{Down} &amp; = \min(P_1^\text{Low}, \dots, P_t^\text{Low})
+\end{align*}\]</p><p><strong>References</strong></p><ul><li><a href="https://www.tradingview.com/wiki/Donchian_Channels_(DC)">TradingView Wiki</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/volatility.jl#L24-L43">source</a></section></article><pre><code class="language-julia-repl">julia&gt; donchianchannels(ohlc)
+481×3 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-31 to 2001-12-31
+│            │ up    │ mid    │ down  │
+├────────────┼───────┼────────┼───────┤
+│ 2000-01-31 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-01 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-02 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-03 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-04 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-07 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-08 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-09 │ 121.5 │ 104.0  │ 86.5  │
+│ 2000-02-10 │ 121.5 │ 107.0  │ 92.5  │
+   ⋮
+│ 2001-12-19 │ 24.03 │ 21.645 │ 19.26 │
+│ 2001-12-20 │ 24.03 │ 21.8   │ 19.57 │
+│ 2001-12-21 │ 24.03 │ 21.955 │ 19.88 │
+│ 2001-12-24 │ 24.03 │ 22.06  │ 20.09 │
+│ 2001-12-26 │ 24.03 │ 22.06  │ 20.09 │
+│ 2001-12-27 │ 24.03 │ 22.06  │ 20.09 │
+│ 2001-12-28 │ 24.03 │ 22.06  │ 20.09 │
+│ 2001-12-31 │ 24.03 │ 22.06  │ 20.09 │</code></pre><h2 id="Keltner-Bands"><a class="docs-heading-anchor" href="#Keltner-Bands">Keltner Bands</a><a id="Keltner-Bands-1"></a><a class="docs-heading-anchor-permalink" href="#Keltner-Bands" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.keltnerbands" href="#MarketTechnicals.keltnerbands"><code>MarketTechnicals.keltnerbands</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">keltnerbands(ohlc, n = 20, w = 2; h = :High, l = :Low, c = :Close)</code></pre><p>Keltner Channels</p><p>Linda Bradford Raschke introduced the newer version of Keltner Channels in the 1980s. We implement the newer version.</p><p><strong>Formula</strong></p><p class="math-container">\[\begin{align*}
+  \text{Up}   &amp; = \text{Mid} + w \times \text{ATR}(n) \\
+  \text{Mid}  &amp; = \text{EMA}(P^{typical}, n) \\
+  \text{Down} &amp; = \text{Mid} - w \times \text{ATR}(n)
+\end{align*}\]</p><p><strong>References</strong></p><ul><li><p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels">StockCharts</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Keltner_channel">Wikipedia</a></p></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/volatility.jl#L90-L115">source</a></section></article><pre><code class="language-julia-repl">julia&gt; keltnerbands(ohlc)
+480×3 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-02-01 to 2001-12-31
+│            │ kup      │ kma      │ kdn     │
+├────────────┼──────────┼──────────┼─────────┤
+│ 2000-02-01 │ 119.9312 │ 103.6682 │ 87.4052 │
+│ 2000-02-02 │ 119.215  │ 103.2532 │ 87.2913 │
+│ 2000-02-03 │ 118.899  │ 103.1913 │ 87.4835 │
+│ 2000-02-04 │ 119.1651 │ 103.5737 │ 87.9823 │
+│ 2000-02-07 │ 119.9635 │ 104.3207 │ 88.6779 │
+│ 2000-02-08 │ 120.5981 │ 105.2504 │ 89.9028 │
+│ 2000-02-09 │ 121.1377 │ 106.0894 │ 91.0412 │
+│ 2000-02-10 │ 121.38   │ 106.6962 │ 92.0123 │
+│ 2000-02-11 │ 121.583  │ 107.0464 │ 92.5097 │
+   ⋮
+│ 2001-12-19 │ 23.0157  │ 20.9971  │ 18.9785 │
+│ 2001-12-20 │ 23.0074  │ 20.9898  │ 18.9721 │
+│ 2001-12-21 │ 23.0053  │ 21.0015  │ 18.9978 │
+│ 2001-12-24 │ 22.9825  │ 21.0239  │ 19.0653 │
+│ 2001-12-26 │ 23.0596  │ 21.0829  │ 19.1063 │
+│ 2001-12-27 │ 23.1209  │ 21.1671  │ 19.2133 │
+│ 2001-12-28 │ 23.2507  │ 21.2905  │ 19.3304 │
+│ 2001-12-31 │ 23.3156  │ 21.3705  │ 19.4254 │</code></pre><h2 id="TR"><a class="docs-heading-anchor" href="#TR">TR</a><a id="TR-1"></a><a class="docs-heading-anchor-permalink" href="#TR" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.truerange" href="#MarketTechnicals.truerange"><code>MarketTechnicals.truerange</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">truerange(ohlc::TimeArray; h = :High, l = :Low, c = :Close)</code></pre><p>True Range</p><p><strong>Formula</strong></p><p class="math-container">\[\text{TR} = \max (P_t^\text{High}, P_{t-1}^\text{Close}) -
+            \min (P_t^\text{Low},  P_{t-1}^\text{Close})\]</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/volatility.jl#L51-L62">source</a></section></article><pre><code class="language-julia-repl">julia&gt; truerange(ohlc)
+499×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-04 to 2001-12-31
+│            │ tr    │
+├────────────┼───────┤
+│ 2000-01-04 │ 10.75 │
+│ 2000-01-05 │ 8.06  │
+│ 2000-01-06 │ 12.0  │
+│ 2000-01-07 │ 6.0   │
+│ 2000-01-10 │ 7.5   │
+│ 2000-01-11 │ 8.88  │
+│ 2000-01-12 │ 9.0   │
+│ 2000-01-13 │ 11.56 │
+│ 2000-01-14 │ 5.5   │
+   ⋮
+│ 2001-12-19 │ 1.21  │
+│ 2001-12-20 │ 1.0   │
+│ 2001-12-21 │ 0.87  │
+│ 2001-12-24 │ 0.55  │
+│ 2001-12-26 │ 1.16  │
+│ 2001-12-27 │ 0.76  │
+│ 2001-12-28 │ 1.04  │
+│ 2001-12-31 │ 0.83  │</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../momentum/">« Momentum</a><a class="docs-footer-nextpage" href="../volume/">Volume »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Sunday 4 April 2021 17:10">Sunday 4 April 2021</span>. Using Julia version 1.5.4.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Moving Averages · MarketTechnicals.jl</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit">MarketTechnicals.jl</span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">MarketTechnicals Overview</a></li><li><a class="tocitem" href="../getting_started/">Getting Started</a></li><li class="is-active"><a class="tocitem" href>Moving Averages</a><ul class="internal"><li><a class="tocitem" href="#Exponential-Moving-Average"><span>Exponential Moving Average</span></a></li><li><a class="tocitem" href="#Kaufman&#39;s-Adaptive-Moving-Average"><span>Kaufman&#39;s Adaptive Moving Average</span></a></li><li><a class="tocitem" href="#Moving-Average-Envelope"><span>Moving Average Envelope</span></a></li><li><a class="tocitem" href="#Simple-Moving-Average"><span>Simple Moving Average</span></a></li></ul></li><li><a class="tocitem" href="../levels/">Trade levels</a></li><li><a class="tocitem" href="../momentum/">Momentum</a></li><li><a class="tocitem" href="../volatility/">Volatility</a></li><li><a class="tocitem" href="../volume/">Volume</a></li><li><a class="tocitem" href="../candlesticks/">Candlesticks</a></li><li><a class="tocitem" href="../utils/">Utilities</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Moving Averages</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Moving Averages</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/master/docs/src/ma.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Moving-Averages"><a class="docs-heading-anchor" href="#Moving-Averages">Moving Averages</a><a id="Moving-Averages-1"></a><a class="docs-heading-anchor-permalink" href="#Moving-Averages" title="Permalink"></a></h1><h2 id="Exponential-Moving-Average"><a class="docs-heading-anchor" href="#Exponential-Moving-Average">Exponential Moving Average</a><a id="Exponential-Moving-Average-1"></a><a class="docs-heading-anchor-permalink" href="#Exponential-Moving-Average" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.ema" href="#MarketTechnicals.ema"><code>MarketTechnicals.ema</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">ema(ta::TimeArray, n, wilder = false)
+ema(A::Array, n, wilder = false)</code></pre><p>Exponemtial Moving Average</p><p>A.k.a. exponentially weighted moving average (EWMA)</p><p><strong>Formula</strong></p><p>Let <span>$k$</span> denote the degree of weighting decrease.</p><p>If parameter <code>wilder</code> is <code>true</code>, <span>$k = \frac{1}{n}$</span>, else <span>$k = \frac{2}{n + 1}$</span>.</p><p class="math-container">\[\text{EMA}_t = k \times P_t + (1 - k) \times \text{EMA}_{t - 1}\]</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/movingaverages.jl#L156-L174">source</a></section></article><pre><code class="language-julia-repl">julia&gt; ema(cl, 10, wilder=true)
+491×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-14 to 2001-12-31
+│            │ Close_ema_10 │
+├────────────┼──────────────┤
+│ 2000-01-14 │ 98.782       │
+│ 2000-01-18 │ 99.2978      │
+│ 2000-01-19 │ 100.024      │
+│ 2000-01-20 │ 101.3716     │
+│ 2000-01-21 │ 102.3655     │
+│ 2000-01-24 │ 102.7539     │
+│ 2000-01-25 │ 103.7035     │
+│ 2000-01-26 │ 104.3522     │
+│ 2000-01-27 │ 104.917      │
+   ⋮
+│ 2001-12-19 │ 21.1125      │
+│ 2001-12-20 │ 21.0683      │
+│ 2001-12-21 │ 21.0615      │
+│ 2001-12-24 │ 21.0913      │
+│ 2001-12-26 │ 21.1312      │
+│ 2001-12-27 │ 21.2251      │
+│ 2001-12-28 │ 21.3456      │
+│ 2001-12-31 │ 21.401       │</code></pre><h2 id="Kaufman&#39;s-Adaptive-Moving-Average"><a class="docs-heading-anchor" href="#Kaufman&#39;s-Adaptive-Moving-Average">Kaufman&#39;s Adaptive Moving Average</a><a id="Kaufman&#39;s-Adaptive-Moving-Average-1"></a><a class="docs-heading-anchor-permalink" href="#Kaufman&#39;s-Adaptive-Moving-Average" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.kama" href="#MarketTechnicals.kama"><code>MarketTechnicals.kama</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">kama(ta::TimeArray, n = 10, fn = 2, sn = 30)</code></pre><p>Kaufman&#39;s Adaptive Moving Average</p><p><strong>Arguments</strong></p><ul><li><p><code>n</code>: period</p></li><li><p><code>fn</code>: the fastest EMA constant</p></li><li><p><code>sn</code>: the slowest EMA constant</p></li></ul><p><strong>Formula</strong></p><p class="math-container">\[\begin{align*}
+  \text{KAMA}_t     &amp; = \text{KAMA}_{t-1} + \text{SC} \times (\text{Price} - \text{KAMA}_{t-1}) \\
+  \text{SC}         &amp; = (\text{ER} \times (\frac{2}{fn + 1} - \frac{2}{sn + 1}) + \frac{2}{sn + 1})^2 \\
+  \text{ER}         &amp; = \frac{Change}{Volatility} \\
+  \text{Change}     &amp; = | \text{Price} - \text{Price}_{t-n} | \\
+  \text{Volatility} &amp; = \sum_{i}^{n} | \text{Price}_i - \text{Price}_{i - 1} |
+\end{align*}\]</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/movingaverages.jl#L177-L201">source</a></section></article><pre><code class="language-julia-repl">julia&gt; kama(cl)
+490×1 TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-18 to 2001-12-31
+│            │ kama     │
+├────────────┼──────────┤
+│ 2000-01-18 │ 98.9052  │
+│ 2000-01-19 │ 99.0098  │
+│ 2000-01-20 │ 99.4499  │
+│ 2000-01-21 │ 100.3882 │
+│ 2000-01-24 │ 100.5256 │
+│ 2000-01-25 │ 101.1938 │
+│ 2000-01-26 │ 101.9353 │
+│ 2000-01-27 │ 103.181  │
+│ 2000-01-28 │ 103.1519 │
+   ⋮
+│ 2001-12-19 │ 21.1539  │
+│ 2001-12-20 │ 21.0972  │
+│ 2001-12-21 │ 21.0904  │
+│ 2001-12-24 │ 21.1019  │
+│ 2001-12-26 │ 21.1061  │
+│ 2001-12-27 │ 21.1247  │
+│ 2001-12-28 │ 21.2088  │
+│ 2001-12-31 │ 21.2584  │</code></pre><h2 id="Moving-Average-Envelope"><a class="docs-heading-anchor" href="#Moving-Average-Envelope">Moving Average Envelope</a><a id="Moving-Average-Envelope-1"></a><a class="docs-heading-anchor-permalink" href="#Moving-Average-Envelope" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.env" href="#MarketTechnicals.env"><code>MarketTechnicals.env</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">env(ta::TimeArray, n; e = 0.1)
+env(A::AbstractArray, n; e = 0.1)</code></pre><p>Moving Average Envelope</p><p class="math-container">\[\begin{align*}
+  \text{Upper Envelope} &amp; = \text{SMA}(n) \times (1 + e) \\
+  \text{Lower Envelope} &amp; = \text{SMA}(n) \times (1 - e)
+\end{align*}\]</p><p><strong>Arguments</strong></p><ul><li><code>e</code>: the envelope, <code>0.1</code> implies the <code>10%</code> envelope.</li></ul><p><strong>References</strong></p><ul><li><a href="https://www.tradingview.com/wiki/Envelope_(ENV)">TradingView</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/movingaverages.jl#L204-L224">source</a></section></article><pre><code class="language-julia-repl">julia&gt; env(cl, 5)
+496×2 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-07 to 2001-12-31
+│            │ Close_env_5_low │ Close_env_5_up │
+├────────────┼─────────────────┼────────────────┤
+│ 2000-01-07 │ 92.3292         │ 112.8468       │
+│ 2000-01-10 │ 89.775          │ 109.725        │
+│ 2000-01-11 │ 88.02           │ 107.58         │
+│ 2000-01-12 │ 84.9942         │ 103.8818       │
+│ 2000-01-13 │ 85.3092         │ 104.2668       │
+│ 2000-01-14 │ 85.4784         │ 104.4736       │
+│ 2000-01-18 │ 86.5926         │ 105.8354       │
+│ 2000-01-19 │ 89.0784         │ 108.8736       │
+│ 2000-01-20 │ 93.8142         │ 114.6618       │
+   ⋮
+│ 2001-12-19 │ 18.8352         │ 23.0208        │
+│ 2001-12-20 │ 18.7758         │ 22.9482        │
+│ 2001-12-21 │ 18.8856         │ 23.0824        │
+│ 2001-12-24 │ 19.0188         │ 23.2452        │
+│ 2001-12-26 │ 19.1052         │ 23.3508        │
+│ 2001-12-27 │ 19.1862         │ 23.4498        │
+│ 2001-12-28 │ 19.503          │ 23.837         │
+│ 2001-12-31 │ 19.665          │ 24.035         │</code></pre><h2 id="Simple-Moving-Average"><a class="docs-heading-anchor" href="#Simple-Moving-Average">Simple Moving Average</a><a id="Simple-Moving-Average-1"></a><a class="docs-heading-anchor-permalink" href="#Simple-Moving-Average" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.sma" href="#MarketTechnicals.sma"><code>MarketTechnicals.sma</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">sma(ta::TimeArray, n)
+sma(A::Array, n)</code></pre><p>Simple Moving Average</p><p><strong>Formula</strong></p><p class="math-container">\[\text{SMA} = \frac{\sum_i^n{P_i}}{n}\]</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/fe748a6d9a310b2b590af59c05b9feb4fc1f8189/src/movingaverages.jl#L142-L153">source</a></section></article><pre><code class="language-julia-repl">julia&gt; sma(cl, 5)
+496×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-07 to 2001-12-31
+│            │ Close_sma_5 │
+├────────────┼─────────────┤
+│ 2000-01-07 │ 102.588     │
+│ 2000-01-10 │ 99.75       │
+│ 2000-01-11 │ 97.8        │
+│ 2000-01-12 │ 94.438      │
+│ 2000-01-13 │ 94.788      │
+│ 2000-01-14 │ 94.976      │
+│ 2000-01-18 │ 96.214      │
+│ 2000-01-19 │ 98.976      │
+│ 2000-01-20 │ 104.238     │
+   ⋮
+│ 2001-12-19 │ 20.928      │
+│ 2001-12-20 │ 20.862      │
+│ 2001-12-21 │ 20.984      │
+│ 2001-12-24 │ 21.132      │
+│ 2001-12-26 │ 21.228      │
+│ 2001-12-27 │ 21.318      │
+│ 2001-12-28 │ 21.67       │
+│ 2001-12-31 │ 21.85       │</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../getting_started/">« Getting Started</a><a class="docs-footer-nextpage" href="../levels/">Trade levels »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Sunday 4 April 2021 17:10">Sunday 4 April 2021</span>. Using Julia version 1.5.4.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
