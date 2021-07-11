@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Volume · MarketTechnicals.jl</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit">MarketTechnicals.jl</span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">MarketTechnicals Overview</a></li><li><a class="tocitem" href="../getting_started/">Getting Started</a></li><li><a class="tocitem" href="../ma/">Moving Averages</a></li><li><a class="tocitem" href="../levels/">Trade levels</a></li><li><a class="tocitem" href="../momentum/">Momentum</a></li><li><a class="tocitem" href="../volatility/">Volatility</a></li><li class="is-active"><a class="tocitem" href>Volume</a><ul class="internal"><li><a class="tocitem" href="#ADL"><span>ADL</span></a></li><li><a class="tocitem" href="#OBV"><span>OBV</span></a></li><li><a class="tocitem" href="#VWAP"><span>VWAP</span></a></li></ul></li><li><a class="tocitem" href="../candlesticks/">Candlesticks</a></li><li><a class="tocitem" href="../utils/">Utilities</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Volume</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Volume</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/master/docs/src/volume.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Volume"><a class="docs-heading-anchor" href="#Volume">Volume</a><a id="Volume-1"></a><a class="docs-heading-anchor-permalink" href="#Volume" title="Permalink"></a></h1><h2 id="ADL"><a class="docs-heading-anchor" href="#ADL">ADL</a><a id="ADL-1"></a><a class="docs-heading-anchor-permalink" href="#ADL" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.adl" href="#MarketTechnicals.adl"><code>MarketTechnicals.adl</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">adl(ohlcv; h = :High, l = :Low, c = :Close, v = :Volume)</code></pre><p>Accumulation/Distribution Line</p><p>Developed by Marc Chaikin.</p><p><strong>Formula</strong></p><p class="math-container">\[ADL_t = ADL_{t-1} +
+    &#39;frac{(Close_t - Low_t) - (High_t - Close_t)}{High_t - Low_t}&#39;
+    &#39;times Volume_t&#39;\]</p><p><strong>References</strong></p><ul><li><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line">StockCharts</a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/c46ebbd91535e456963f50c6b7c58be98ea56cd9/src/volume.jl#L80-L99">source</a></section></article><pre><code class="language-julia-repl">julia&gt; adl(ohlcv)
+500×1 TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-03 to 2001-12-31
+│            │ adl               │
+├────────────┼───────────────────┤
+│ 2000-01-03 │ 4.2882507863e6    │
+│ 2000-01-04 │ 984498.0822       │
+│ 2000-01-05 │ -4.1263627644e6   │
+│ 2000-01-06 │ -1.09832627644e7  │
+│ 2000-01-07 │ -9.113399128e6    │
+│ 2000-01-10 │ -1.0015299128e7   │
+│ 2000-01-11 │ -1.19598612902e7  │
+│ 2000-01-12 │ -1.93384766235e7  │
+│ ⋮          │ ⋮                 │
+│ 2001-12-20 │ -1.430557822699e8 │
+│ 2001-12-21 │ -1.451589119997e8 │
+│ 2001-12-24 │ -1.445506992724e8 │
+│ 2001-12-26 │ -1.455874044448e8 │
+│ 2001-12-27 │ -1.440051089224e8 │
+│ 2001-12-28 │ -1.445187146916e8 │
+│ 2001-12-31 │ -1.465641074627e8 │</code></pre><h2 id="OBV"><a class="docs-heading-anchor" href="#OBV">OBV</a><a id="OBV-1"></a><a class="docs-heading-anchor-permalink" href="#OBV" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.obv" href="#MarketTechnicals.obv"><code>MarketTechnicals.obv</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">obv(ohlcv; price = :Close, v = :Volume)</code></pre><p>On Balance Volume</p><p><strong>Formula</strong></p><p class="math-container">\[\begin{align*}
+\text{OBV}_t = \text{OBV_{t - 1} +
+  \begin{cases}
+    \text{volume}  &amp; \text{if} P^\text{Close}_t &gt; P^\text{Close}_{t-1} \\
+      0            &amp; \text{if} P^\text{Close}_t = P^\text{Close}_{t-1} \\
+    -\text{volume} &amp; \text{if} P^\text{Close}_t &lt; P^\text{Close}_{t-1}
+  \end{cases}
+\end{align*}\]</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/c46ebbd91535e456963f50c6b7c58be98ea56cd9/src/volume.jl#L1-L18">source</a></section></article><pre><code class="language-julia-repl">julia&gt; obv(ohlcv)
+500×1 TimeArray{Float64,2,Date,Array{Float64,2}} 2000-01-03 to 2001-12-31
+│            │ obv        │
+├────────────┼────────────┤
+│ 2000-01-03 │ 4.7839e6   │
+│ 2000-01-04 │ 209100.0   │
+│ 2000-01-05 │ 7.1584e6   │
+│ 2000-01-06 │ 301500.0   │
+│ 2000-01-07 │ 4.4152e6   │
+│ 2000-01-10 │ -94300.0   │
+│ 2000-01-11 │ -4.0367e6  │
+│ 2000-01-12 │ -1.27516e7 │
+│ ⋮          │ ⋮          │
+│ 2001-12-20 │ -9.73905e7 │
+│ 2001-12-21 │ -9.28131e7 │
+│ 2001-12-24 │ -9.1909e7  │
+│ 2001-12-26 │ -8.92947e7 │
+│ 2001-12-27 │ -8.58749e7 │
+│ 2001-12-28 │ -8.05334e7 │
+│ 2001-12-31 │ -8.29938e7 │</code></pre><h2 id="VWAP"><a class="docs-heading-anchor" href="#VWAP">VWAP</a><a id="VWAP-1"></a><a class="docs-heading-anchor-permalink" href="#VWAP" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="MarketTechnicals.vwap" href="#MarketTechnicals.vwap"><code>MarketTechnicals.vwap</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">vwap(ohlcv, n = 10; price = :Close, v = :Volume)</code></pre><p>Volume Weight-Adjusted Price</p><p><strong>Formula</strong></p><p class="math-container">\[P = \frac{\sum_j P_j V_j}{\sum_j V_j}\]</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaQuant/MarketTechnicals.jl/blob/c46ebbd91535e456963f50c6b7c58be98ea56cd9/src/volume.jl#L47-L57">source</a></section></article><pre><code class="language-julia-repl">julia&gt; vwap(ohlcv)
+491×1 TimeArray{Float64,1,Date,Array{Float64,1}} 2000-01-14 to 2001-12-31
+│            │ vwap     │
+├────────────┼──────────┤
+│ 2000-01-14 │ 97.9215  │
+│ 2000-01-18 │ 97.1709  │
+│ 2000-01-19 │ 97.6203  │
+│ 2000-01-20 │ 100.8515 │
+│ 2000-01-21 │ 102.1978 │
+│ 2000-01-24 │ 102.6203 │
+│ 2000-01-25 │ 103.6321 │
+│ 2000-01-26 │ 104.6497 │
+│ ⋮          │ ⋮        │
+│ 2001-12-20 │ 21.3642  │
+│ 2001-12-21 │ 21.2082  │
+│ 2001-12-24 │ 21.0995  │
+│ 2001-12-26 │ 21.0572  │
+│ 2001-12-27 │ 21.1139  │
+│ 2001-12-28 │ 21.3165  │
+│ 2001-12-31 │ 21.4446  │</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../volatility/">« Volatility</a><a class="docs-footer-nextpage" href="../candlesticks/">Candlesticks »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Sunday 11 July 2021 00:42">Sunday 11 July 2021</span>. Using Julia version 1.5.4.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
