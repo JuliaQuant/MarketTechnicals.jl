@@ -95,6 +95,18 @@ function lagfill(ta::TimeArray, r1::Integer, fill::AbstractFloat)
   TimeArray(timestamp(ta), _lta_values, colnames(ta))
 end
 
+function lagfill(ta::TimeArray, r1::Integer, fill::AbstractMatrix{T}) where T<:AbstractFloat
+  @assert size(fill, 2) == size(ta, 2)
+  _lta = lag(ta, r1, padding = true)
+  _lta_values = values(_lta)
+
+  for i in 1:r1
+    _lta_values[i, :] = fill
+  end
+
+  TimeArray(timestamp(ta), _lta_values, colnames(ta))
+end
+
 _nanmean(x) = mean(filter(!isnan, x))
 nanmean(x; dims = 1) = ndims(x) > 1 ? mapslices(_nanmean, x, dims = dims) : _nanmean(x)
 
